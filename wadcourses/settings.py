@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'guardian',
+    'reportlab',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +50,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # debug_toolbar_MIDDDLEWARE
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'wadcourses.middleware.HttpPostTunnelingMiddleware'
+
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 ROOT_URLCONF = 'wadcourses.urls'
 
@@ -75,11 +87,12 @@ WSGI_APPLICATION = 'wadcourses.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lms_db',
+        'USER': 'root',
+        'PASSWORD': '1234',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -118,3 +131,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# debug_toolbar_IPS
+INTERNAL_IPS = ['127.0.0.1']

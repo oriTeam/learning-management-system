@@ -22,6 +22,8 @@
         
         $ pip3 install django-guardian
         
+        $ pip3 install reportlab
+
     4. Mở terminal (cmd) tại thư mục chính (chứa file manage.py) và chạy:
         
         $ python manage.py makemigrations
@@ -30,7 +32,7 @@
         
     5. Và chạy thôi :)) 
         
-        $ python manage.py runserver
+        $ python3 manage.py runserver
         
 ## Contributors
     Updating ...
