@@ -1,3 +1,4 @@
 *.sql
 *.pyc
 node_modules
+static/bundles

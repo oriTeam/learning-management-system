@@ -4,9 +4,9 @@ var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
     context: __dirname,
-    entry: './assets/js/index.js',
+    entry: './lms-frontend/main.js',
     output: {
-        path: path.resolve('./assets/bundles/'),
+        path: path.resolve('./static/bundles/'),
         filename: 'app.js'
     },
 
