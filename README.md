@@ -8,31 +8,45 @@
 ## Sử dụng:
     1. Cài đặt python 3.x, pip, Django 2.1.
     
-    2. Download file zip hoặc clone repo này về máy.
+    2. Download file zip hoặc clone repo này về máy, mở cmd (terminal) tại thư mục chính (chứa file manage.py).
     
-    3. Cài đặt một số package phải dùng:
+    3. Cài đặt một số package python phải dùng:
+    Cách 1: AIO:
         
-        $ pip3 install django-debug-toolbar
+        $ pip install -r requirements.txt
+    
+    Cách 2: Cài từng package:
+    
+        $ pip install django-debug-toolbar
+
+        $ pip install django-webpack-loader
         
-        $ pip3 install mysql-python
+        $ pip install django-guardian
+        
+        $ pip install reportlab
+
+        $ pip install mysql-python
         
         hoặc nếu không được: 
         
-        $ pip install mysqlclient.
+        $ pip install mysqlclient
         
-        $ pip3 install django-guardian
-        
-        $ pip3 install reportlab
 
-    4. Mở terminal (cmd) tại thư mục chính (chứa file manage.py) và chạy:
+    4. Cài các node modules(phải cài npm trước):
+        
+        $ npm i -D
+
+        $ ./node_modules/.bin/webpack
+    
+    5. Migrate:
         
         $ python manage.py makemigrations
         
-        $ python3 manage.py migrate
+        $ python manage.py migrate
         
-    5. Và chạy thôi :)) 
+    6. Và chạy thôi :)) 
         
-        $ python3 manage.py runserver
+        $ python manage.py runserver
         
 ## Contributors
     Updating ...

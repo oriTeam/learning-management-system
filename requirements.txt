@@ -1,0 +1,7 @@
+Django==2.1
+django-debug-toolbar
+django-guardian
+reportlab
+django-webpack-loader
+mysql-python
+mysqlclient
