@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,11 @@ INSTALLED_APPS = [
     'guardian',
     'reportlab',
     'webpack_loader',
+    'api',
+    'course',
+    'document',
+    'faculty',
+    'semester'
 
 ]
 
@@ -90,7 +96,7 @@ WSGI_APPLICATION = 'wadcourses.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lms_db',
+        'NAME': 'lms',
         'USER': 'root',
         'PASSWORD': '1234',
     }
@@ -137,6 +143,9 @@ STATIC_URL = '/static/'
 # debug_toolbar_IPS
 INTERNAL_IPS = ['127.0.0.1']
 
+
+#Extened User Model
+AUTH_USER_MODEL = 'core.User'
 
 
 STATICFILES_DIRS = (

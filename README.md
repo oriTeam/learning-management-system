@@ -11,6 +11,13 @@
     2. Download file zip hoặc clone repo này về máy, mở cmd (terminal) tại thư mục chính (chứa file manage.py).
     
     3. Cài đặt một số package python phải dùng:
+
+    Note: Gỡ Pillow bản cũ và cài bản 5.0.0:
+	
+	$ pip remove Pillow
+
+	$ pip install Pillow==5.0.0
+	
     Cách 1: AIO:
         
         $ pip install -r requirements.txt
