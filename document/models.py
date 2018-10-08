@@ -7,9 +7,11 @@ from django.conf import settings
 
 class Document(models.Model):
     name = models.CharField(max_length=50, verbose_name=_("Document's Name"))
+    content = models.FileField(null=True, verbose_name=_("Content"))
     description = models.TextField(null=True, verbose_name=_("Document's Description"))
     type = models.CharField(max_length=10, verbose_name=_("Document's Type"))
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='document_set', null=True, verbose_name=_('Author'))
+
 
     class Meta:
         db_table = 'document'
