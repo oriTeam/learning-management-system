@@ -2,27 +2,26 @@
 
 > Hệ thống quản lý môn học 
 
-> Sử dụng framework [Django] v2.1
-
 
 ## Sử dụng:
-    1. Cài đặt python 3.x, pip, Django 2.1.
+
+  1. Cài đặt python 3.x, pip, Django 2.1.
     
-    2. Download file zip hoặc clone repo này về máy, mở cmd (terminal) tại thư mục chính (chứa file manage.py).
+  2. Download file zip hoặc clone repo này về máy, mở cmd (terminal) tại thư mục chính (chứa file manage.py).
     
-    3. Cài đặt một số package python phải dùng:
+  3. Cài đặt một số package python phải dùng:
 
     Note: Gỡ Pillow bản cũ và cài bản 5.0.0:
 	
-	$ pip remove Pillow
+    $ pip remove Pillow
 
 	$ pip install Pillow==5.0.0
 	
-    Cách 1: AIO:
+  -- Cách 1: AIO:
         
         $ pip install -r requirements.txt
     
-    Cách 2: Cài từng package:
+  -- Cách 2: Cài từng package:
     
         $ pip install django-debug-toolbar
 
@@ -39,24 +38,30 @@
         $ pip install mysqlclient
         
 
-    4. Cài các node modules(phải cài npm trước):
+   
+  5. Migrate:
         
-        $ npm i -D
-
-        $ ./node_modules/.bin/webpack
-    
-    5. Migrate:
+    $ python manage.py makemigrations
         
-        $ python manage.py makemigrations
+    $ python manage.py migrate
         
-        $ python manage.py migrate
         
-    6. Và chạy thôi :)) 
+  6. Và chạy thôi :)) 
         
-        $ python manage.py runserver
+    $ python manage.py runserver
         
 ## Contributors
-    Updating ...
-    
+
+   1. vantrong291
+   2. Chikyuu
+   3. tuanhah
+   4. LeCongThuong
+   5. lethithanhhoa
+   6. bogianoithonda
+   
+## Công nghệ sử dụng
+
+   1. Backend: Django, Mysql, ...
+   2. Frontend: VueJs, Bootstrapv4, ...    
 
 [Django]: <https://docs.djangoproject.com/en/2.1/>
