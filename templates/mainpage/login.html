@@ -1,0 +1,90 @@
+{% extends 'basepage/mainbase.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+<style>
+    #login-background {
+        background-image: url("../../static/images/login.jpg");
+    }
+</style>
+{% endblock %}
+{% block bodycontent %}
+<div class="m-grid m-grid--hor m-grid--root m-page">
+    <div id="login-background"
+         class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2">
+        <div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
+            {% if user.is_authenticated %}
+                <a href="/account/logout">Đăng xuất</a>
+            {% else %}
+            <div class="m-login__container">
+                <div class="m-login__logo">
+                    <a href="#">
+                        <img src="">
+                    </a>
+                </div>
+                <div class="m-login__signin">
+                    <div class="m-login__head">
+                        <h3 class="m-login__title">Đăng nhập vào hệ thống</h3>
+                    </div>
+                    <form id="login-form" class="m-login__form m-form" action="">
+                        {% csrf_token %}
+                        <div class="alert alert-danger d-none" role="alert" id="login_errors"></div>
+                        <div class="form-group m-form__group">
+                            <input class="form-control m-input" type="text" placeholder="Tên tài khoản" name="username"
+                                   autocomplete="off">
+                        </div>
+                        <div class="form-group m-form__group">
+                            <input class="form-control m-input m-login__form-input--last" type="password"
+                                   placeholder="Mật khẩu" name="password">
+                        </div>
+                        <div class="row m-login__form-sub">
+                            <div class="col m--align-left m-login__form-left">
+                                <label class="m-checkbox  m-checkbox--focus">
+                                    <input type="checkbox" name="remember"> Ghi nhớ đăng nhập
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="col m--align-right m-login__form-right">
+                                <a href="javascript:;" id="m_login_forget_password" class="m-link">Quên mật khẩu ?</a>
+                            </div>
+                        </div>
+                        <div class="m-login__form-action">
+                            <button type="submit" id="m_login_signin_submit"
+                                    class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                Đăng nhập
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="m-login__forget-password">
+                    <div class="m-login__head">
+                        <h3 class="m-login__title">Quên mật khẩu ?</h3>
+                        <div class="m-login__desc">Nhập email sinh viên/ cán bộ của bạn:</div>
+                    </div>
+                    <form class="m-login__form m-form" action="">
+                        <div class="form-group m-form__group">
+                            <input class="form-control m-input" type="text" placeholder="Email sinh viên/cán bộ" name="email"
+                                   id="m_email" autocomplete="off">
+                        </div>
+                        <div class="m-login__form-action">
+                            <button id="m_login_forget_password_submit"
+                                    class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primaryr">
+                                Yêu cầu reset mật khẩu
+                            </button>&nbsp;&nbsp;
+                            <button id="m_login_forget_password_cancel"
+                                    class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom m-login__btn">Hủy bỏ
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+{% block javascripts %}
+    <script type="text/javascript" src="{% static 'javascripts/login.js'%}"></script>
+
+{% endblock %}

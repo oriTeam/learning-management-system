@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import include, path  # For django versions from 2.0 and up
 
 from django.conf import settings
-
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('course/', include('course.urls')),
+    path('api/', include("api.urls")),
+    path('account/', include("django.contrib.auth.urls")),
+    path('', views.index, name='homepage'),
+    path('login/', views.login, name='login'),
 ]
 
 # debug_toolbar_URL

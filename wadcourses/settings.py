@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'guardian',
     'reportlab',
-    'webpack_loader',
     'api',
     'course',
     'document',
@@ -74,7 +73,7 @@ ROOT_URLCONF = 'wadcourses.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "lms-frontend/templates")],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -161,3 +160,5 @@ STATICFILES_DIRS = (
 # }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Uploads')
+
+LOGOUT_REDIRECT_URL = 'homepage'
