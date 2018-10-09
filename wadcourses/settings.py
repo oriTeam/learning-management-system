@@ -159,3 +159,5 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     }
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Uploads')

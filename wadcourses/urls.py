@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('courses/', include('courses.urls')),
+    path('course/', include('course.urls')),
 ]
 
 # debug_toolbar_URL

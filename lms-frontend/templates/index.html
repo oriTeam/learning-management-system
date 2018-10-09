@@ -1,13 +1,76 @@
-{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Django Vue</title>
+	<title> Thế giới bóng đá || Đồng hành cùng World Cup 2018 </title>
+	<meta charset="utf-8">
+	{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/font-awesome.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/main.css'%}">
+	<script type="text/javascript" src="{% static 'vendor/js/vue.js'%}"></script>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <script type="text/javascript" src="vendor/bootstrap.js"></script> -->
+	<!--&lt;!&ndash; <script type="text/javascript" src="1.js"></script> &ndash;&gt;-->
+	<!--<link rel="stylesheet" href="vendor/css/font-awesome.css">-->
+	<!--<link rel="stylesheet" href="vendor/css/bootstrap.min.css">-->
+	<!--<link rel="stylesheet" href="vendor/css/main.css">-->
+	<!--<script src="vendor/js/vue.js" type="text/javascript" charset="utf-8"></script>-->
+	
 </head>
-<body>
-    <div id="app">
-        <demo></demo>
-    </div>
-    {% render_bundle 'main' %}
+<body >
+	<nav class="navbar navbar-dark bg-success">
+        <!-- <div class="row justify-content-center"> -->
+        	<div class="container">
+          		<a class="font-weight-bold navbar-brand" href="index.html"><i class="fa fa-soccer-ball-o"></i> Thế Giới Bóng Đá</a>
+        	</div>
+        <!-- </div> -->
+	</nav>
+	<div class="container">
+		<div class="row">
+			<h4 class="font-weight-bold mx-3 mt-4"><i class="fa fa-signal"></i> Chủ đề nổi bật</h4>
+		</div>
+		<div class="row justify-content-center my-4" id="trending-tag">
+			<div class="col-lg-2 my-2" v-for="tag in tags">
+				<a @click="selectTag" class="btn tag-btn w-100" :title="tag.title" :tag="tag.tag">[[ tag.name ]]</a>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9" id="news">
+				<div class="row">
+					<h4 class="font-weight-bold mx-3 mt-4"><i class="fa fa-newspaper-o"></i> Tin nóng bóng đá</h4>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 px-0 lastest-news" v-for="nw in lastestNews" v-show="nw.show" :key="nw.key">
+						<a href="#" class="card m-3">
+							<img class="card-img-top" :src="nw.img_src" :alt="nw.alt" :tag="nw.tag">
+							<div class="card-body p-2">
+								<p class="card-text">[[ nw.text ]]</p>
+							</div>
+						</a>
+					</div>
+				</div>		
+			</div>
+			<div class="col-lg-3" id="result">
+				<div class="row justify-content-center mx-0">
+					<h4 class="font-weight-bold m-3 mt-4"><i class="fa fa-info"></i> Kết quả, lịch thi đấu</h4>
+				</div>
+				<div class="row justify-content-center border-left my-4" v-for="result in results">
+					<div class="col-12 font-weight-bold text-left my-1">[[ result.day ]]</div>
+					<div class="col-12 text-center my-1" v-for="match in result.match">[[match]]</div>
+					<hr>
+				</div>
+			</div>
+		</div>
+		<div class="row">	
+		</div>
+	</div>
+
+	<script type="text/javascript" src="{% static 'vendor/js/vue-practice.js'%}"></script>
+
+	<!--<script src="vendor/js/vue-practice.js" type="text/javascript" charset="utf-8"></script>-->
 </body>
 </html>
