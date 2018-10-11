@@ -1,3 +1,8 @@
+django-mptt
+django-haystack
+markdown2
+django-widget-tweaks
+django-machina
 django-debug-toolbar
 django-guardian
 reportlab

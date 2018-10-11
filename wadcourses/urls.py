@@ -18,6 +18,8 @@ from django.urls import include, path  # For django versions from 2.0 and up
 
 from django.conf import settings
 from . import views
+from django.conf.urls.static import static
+from machina.app import board
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +27,7 @@ urlpatterns = [
     path('account/', include("django.contrib.auth.urls")),
     path('', views.index, name='homepage'),
     path('login/', views.login, name='login'),
+    path('forum/v1/', include(board.urls)),
 ]
 
 # debug_toolbar_URL
@@ -37,3 +40,4 @@ if settings.DEBUG:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
 
     ] + urlpatterns
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

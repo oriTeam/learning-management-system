@@ -22,6 +22,18 @@
         $ pip install -r requirements.txt
     
   -- Cách 2: Cài từng package:
+        
+        $ pip install django-mptt
+        
+        $ pip install django-haystack
+        
+        $ pip install markdown2
+        
+        $ pip install django-widget-tweaks
+        
+        $ pip install django-machina
+        
+        **sudo rm -rf /usr/local/lib/python3.6/dist-packages/haystack/
     
         $ pip install django-debug-toolbar
 
