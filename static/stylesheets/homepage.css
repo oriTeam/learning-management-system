@@ -1,0 +1,49 @@
+@media (min-width: 768px) {
+    .landing-background {
+        height: 768px;
+    }
+}
+@media (min-width: 1200px) {
+    .section--header {
+        padding-top: 14rem;
+    }
+}
+.section--header {
+    height: 95%;
+    position: relative;
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    background: url(../images/tmp.jpg);
+    background-position-x: center;
+    background-position-y: top;
+    background-size: initial;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: fixed;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    background-attachment: fixed;
+}
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 70px;
+}
+.section .intro__title {
+    padding: 20px 0;
+    font-size: 32px !important;
+    line-height: 35px;
+    font-weight: 400;
+}
+.section .intro_text {
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+    text-align: center;
+}
+.section .intro__description {
+    font-size: 18px;
+}

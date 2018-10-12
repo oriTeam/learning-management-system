@@ -14,14 +14,163 @@
     {% block stylesheets %}
     {% endblock %}
 </head>
-<body>
+<body class="m-content--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside--offcanvas-default">
+<div class="m-grid m-grid--hor m-grid--root m-page">
+    <div class="navbar-container">
+        <nav class="navbar navbar-expand-xl navbar-light fixed-top" id="navi-bar">
+            <div class="container px-3">
+                <a class="navbar-brand" href="/">
+                    <strong>
+                        <i class="fa fa-chalkboard" style="font-size: 30px"></i> UET Courses</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                        aria-controls="navbarCollapse"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li data-toggle="tooltip" data-placement="bottom" title="Trang chủ"
+                            class="nav-item {% block home %} {% endblock %}">
+                            <a class="nav-link" href="/">Trang chủ</a>
+                        </li>
+
+                        <li class="nav-item m-dropdown m-dropdown--inline m-dropdown--arrow" m-dropdown-toggle="hover"
+                            aria-expanded="true">
+                            <a href="#" class="nav-link m-dropdown__toggle dropdown-toggle">
+                                Khóa học
+                            </a>
+                            <div class="m-dropdown__wrapper" style="z-index: 101;">
+                                <span class="m-dropdown__arrow m-dropdown__arrow--left"></span>
+                                <div class="m-dropdown__inner">
+                                    <div class="m-dropdown__body">
+                                        <div class="m-dropdown__content">
+                                            <ul class="m-nav">
+                                                <!--<li class="m-nav__section m-nav__section&#45;&#45;first">-->
+                                                <!--<span class="m-nav__section-text">Section</span>-->
+                                                <!--</li>-->
+                                                <li class="m-nav__item">
+                                                    <a href="" class="m-nav__link">
+                                                        <i class="m-nav__link-icon flaticon-share"></i>
+                                                        <span class="m-nav__link-text">Khóa học của tôi</span>
+                                                    </a>
+                                                </li>
+                                                <li class="m-nav__item">
+                                                    <a href="" class="m-nav__link">
+                                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                        <span class="m-nav__link-text">Tất cả khóa học</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item {% block contact %} {% endblock %}" data-toggle="tooltip"
+                            data-placement="bottom" title="Liên hệ, phản hồi">
+                            <a href="/contact" class="nav-link">Liên hệ</a>
+                        </li>
+                        <li class="nav-item {% block help %} {% endblock %}" data-toggle="tooltip"
+                            data-placement="bottom" title="Trợ giúp">
+                            <a class="nav-link" href="/help">Trợ giúp</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+
+                        <li class="m-nav__item m-topbar__user-profile m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+                            m-dropdown-toggle="click" aria-expanded="true">
+                            <!--{ include 'share/_user.html' %}-->
+                            <div class="btn-group">
+                                <a href="#" class="m-nav__link m-dropdown__toggle">
+                                    <button id="user-menu" user-id="{{ user.id }}" type="button"
+                                            class="btn btn-accent">
+                                        <span>
+                                            <i class="fa fa-user"></i> &nbsp; Xin chào, {{ user }}
+                                        </span>
+                                        <span>
+                                            <i class="m-menu__ver-arrow la la-angle-down" style="font-size:1rem"></i>
+                                        </span>
+                                    </button>
+                                </a>
+                                <div class="m-dropdown__wrapper" style="z-index: 101;">
+                                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"
+                                          style="left: auto; right: 12.5px;"></span>
+                                    <div class="m-dropdown__inner">
+                                        <div class="m-dropdown__header m--align-center">
+                                            <div class="m-card-user m-card-user--skin-light">
+                                                <div class="m-card-user__pic">
+                                                    <img src="" class="m--img-rounded m--marginless" alt="">
+                                                </div>
+                                                <div class="m-card-user__details">
+                                                    <span class="m-card-user__name m--font-weight-500">Tài khoản: {{ user }}</span>
+                                                    <a href="" class="m-card-user__email m--font-weight-300 m-link">{{ user.email|default:_("Bạn chưa cập nhật email") }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="m-dropdown__body">
+                                            <div class="m-dropdown__content">
+                                                <ul class="m-nav m-nav--skin-light">
+                                                    <li class="m-nav__section m--hide">
+                                                        <span class="m-nav__section-text">Menu</span>
+                                                    </li>
+                                                    {% if user.is_superuser %}
+                                                    <li class="m-nav__item">
+                                                        <a href="/admin" class="m-nav__link">
+                                                            <i class="m-nav__link-icon flaticon-profile-1"></i>
+                                                            <span class="m-nav__link-text">Quản lý UniRanking</span>
+                                                        </a>
+                                                    </li>
+                                                    {% endif %}
+                                                    <li class="m-nav__item">
+                                                        <a href="#" class="m-nav__link">
+                                                            <i class="m-nav__link-icon flaticon-profile"></i>
+                                                            <span class="m-nav__link-text">Trang cá nhân</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="m-nav__item">
+                                                        <a href="/account/password_change" class="m-nav__link">
+                                                            <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                            <span class="m-nav__link-text">Đổi mật khẩu</span>
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="m-nav__separator m-nav__separator--fit">
+                                                    </li>
+                                                    <li class="m-nav__item">
+                                                        <a href="/account/logout"
+                                                           class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Đăng
+                                                            xuất</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom"
+                            title="Đăng nhập">
+                            <a href="/login" class="nav-link">
+                                <i class="fa fa-sign-in-alt"></i> &nbsp; Đăng nhập</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
     {% block bodycontent %}
 
     {% endblock %}
-    <script type="text/javascript" src="{% static 'javascripts/vendors.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'javascripts/scripts.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'javascripts/base.js'%}"></script>
-    {% block javascripts %}
-    {% endblock %}
+</div>
+<script type="text/javascript" src="{% static 'javascripts/vendors.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/scripts.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/base.js'%}"></script>
+{% block javascripts %}
+{% endblock %}
 </body>
 </html>

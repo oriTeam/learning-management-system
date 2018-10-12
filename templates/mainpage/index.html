@@ -1,2 +1,31 @@
 {% extends 'basepage/mainbase.html' %}
 {% load staticfiles %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'stylesheets/homepage.css'%}"/>
+{% endblock %}
+
+{% block bodycontent %}
+<div class="landing-background">
+    <div class="section section--header">
+        <div class="container">
+            <div class="intro">
+                <!--                <img src="../../assets/images/logos/logo-1.png" alt="">-->
+                <div class="intro_text">
+                    <h2 class="intro__title">Hệ thống quản lý môn học</h2>
+                    <p class="intro__description">Đại Học Công Nghệ - Đại Học Quốc Gia Hà Nội</p>
+                </div>
+                <div class="intro__buttons my-4">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="/login" class="btn m-btn--pill btn-outline-light m-btn--air m-btn--hover-accent btn-lg">Đăng nhập ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{% static 'javascripts/homepage.js'%}"></script>
+{% endblock %}
