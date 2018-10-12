@@ -6,5 +6,5 @@ django-machina
 django-debug-toolbar
 django-guardian
 reportlab
-mysql-python
 mysqlclient
+mysql-python
