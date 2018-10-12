@@ -3,7 +3,10 @@
 {% load i18n %}
 {% load forum_permission_tags %}
 
-{% block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; {% block sub_title %}{% endblock sub_title %}{% endblock title %}
+<!--{ block title %}{{ MACHINA_FORUM_NAME|default:"Forum" }} &mdash; { block sub_title %}{ endblock sub_title %}{ endblock title %}-->
+
+{% block title %} LMS &mdash; {% block sub_title %}{% endblock sub_title %}{% endblock title %}
+
 
 {% block css %}
 {{ block.super }}
@@ -23,7 +26,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">{% block brand %}{{ MACHINA_FORUM_NAME|default:"My forum" }}{% endblock %}</a>
+      <!--<a class="navbar-brand" href="/">{ block brand %}{{ MACHINA_FORUM_NAME|default:"My forum" }}{ endblock %}</a>-->
+      <a class="navbar-brand" href="/">{% block brand %}Diễn đàn học tập{% endblock %}</a>
     </div>
     <div class="collapse navbar-collapse">
       {% block header_collapse %}

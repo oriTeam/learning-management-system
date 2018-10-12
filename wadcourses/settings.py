@@ -126,9 +126,12 @@ WSGI_APPLICATION = 'wadcourses.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lms',
+        'NAME': 'lmsv2',
         'USER': 'root',
         'PASSWORD': '1234',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        }
     }
 }
 
