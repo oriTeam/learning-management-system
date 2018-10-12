@@ -1,0 +1,12 @@
+.m-content.w-100{
+    padding: 0 !important;
+}
+.m-aside-left{
+    width: 308px !important;
+}
+.m-card-profile .m-card-profile__pic{
+    height: 170px;
+}
+.m-card-profile{
+    height: 230px;
+}
