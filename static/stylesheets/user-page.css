@@ -10,3 +10,10 @@
 .m-card-profile{
     height: 230px;
 }
+#m_aside_left{
+    /* display: block !important;  */
+    /* position: fixed !important; */
+}
+.m-content.w-100{
+    /* float: right; */
+}
