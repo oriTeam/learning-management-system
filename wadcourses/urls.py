@@ -28,6 +28,7 @@ urlpatterns = [
     path('', views.index, name='homepage'),
     path('login/', views.login, name='login'),
     path('forum/v1/', include(board.urls)),
+    path('user',views.user,name = 'user'),
 ]
 
 # debug_toolbar_URL
