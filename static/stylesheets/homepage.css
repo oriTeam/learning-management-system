@@ -13,7 +13,7 @@
     position: relative;
     padding-top: 10rem;
     padding-bottom: 5rem;
-    background: url(../images/tmp.jpg);
+    background: url(../images/code.jpg);
     background-position-x: center;
     background-position-y: top;
     background-size: initial;
@@ -28,9 +28,9 @@
 .intro {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: center;
-    padding-top: 70px;
+    padding-top: 30px;
 }
 .section .intro__title {
     padding: 20px 0;
@@ -42,7 +42,7 @@
     color: #fff;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.11);
-    text-align: center;
+    /*text-align: center;*/
 }
 .section .intro__description {
     font-size: 18px;
