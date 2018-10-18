@@ -63,9 +63,7 @@ INSTALLED_APPS = [
     'core',
     'api',
     'course',
-    'document',
-    'faculty',
-    'semester'
+    'syllabus'
 ]
 
 MIDDLEWARE = [
