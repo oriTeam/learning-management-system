@@ -30,6 +30,9 @@
 
         <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light " m-menu-vertical="1"
             m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+            <div id = "ext">
+                <ex2></ex2>
+            </div>
             <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
                 <li class="m-menu__section m-menu__section--first">
                     <h4 class="m-menu__section-text">My profile</h4>
@@ -58,7 +61,7 @@
                         <i class="m-menu__link-icon flaticon-alert"></i>
                         <span class="m-menu__link-title">
                             <span class="m-menu__link-wrap">
-                                <span class="m-menu__link-text">Đang tham gia</span>
+                                <span class="m-menu__link-text">Đang diễn ra</span>
                                 <span class="m-menu__link-badge">
                                     <span class="m-badge m-badge--danger">6</span>
                                 </span>
@@ -120,12 +123,12 @@
                             </li>
                             <li class="nav-item m-tabs__item">
                                 <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
-                                    Học bổng
+                                    Quá trình học tập
                                 </a>
                             </li>
                             <li class="nav-item m-tabs__item">
                                 <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
-                                    Settings
+                                    Thành tích
                                 </a>
                             </li>
                         </ul>
@@ -135,41 +138,55 @@
                     <div class="tab-pane active" id="m_user_profile_tab_1">
                         <form class="m-form m-form--fit m-form--label-align-right">
                             <div class="m-portlet__body">
-                                <div class="form-group m-form__group m--margin-top-10 m--hide">
-                                    <div class="alert m-alert m-alert--default" role="alert">
-                                        The example form below demonstrates common HTML form elements that receive updated styles from Bootstrap with additional
-                                        classes.
+                                
+
+                                <div class="form-group m-form__group row">
+                                    <div class="col-10">
+                                        <h3 class="m-form__section">1. Thông tin cá nhân</h3>
                                     </div>
                                 </div>
 
                                 <div class="form-group m-form__group row">
-                                    <div class="col-10 ml-auto">
-                                        <h3 class="m-form__section">1. Personal Details</h3>
-                                    </div>
-                                </div>
-
-                                <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Full Name</label>
+                                    <label for="example-text-input" class="col-2 col-form-label">Họ và tên</label>
                                     <div class="col-7">
                                         <input class="form-control m-input" type="text" value="Mark Andre">
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Occupation</label>
+                                    <label for="example-text-input" class="col-2 col-form-label">Trường học</label>
                                     <div class="col-7">
                                         <input class="form-control m-input" type="text" value="CTO">
                                     </div>
                                 </div>
+
                                 <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Company Name</label>
+                                    <label for="example-text-input" class="col-2 col-form-label">Khoa</label>
                                     <div class="col-7">
-                                        <input class="form-control m-input" type="text" value="Keenthemes">
-                                        <span class="m-form__help">If you want your invoices addressed to a company. Leave blank to use your full name.
-                                        </span>
+                                        <input class="form-control m-input" type="text" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Ngành</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Phone No.</label>
+                                    <label for="example-text-input" class="col-2 col-form-label">Lớp học</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Mã số sinh viên</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" value="">
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Số điện thoại</label>
                                     <div class="col-7">
                                         <input class="form-control m-input" type="text" value="+456669067890">
                                     </div>
@@ -178,41 +195,8 @@
                                 <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
 
                                 <div class="form-group m-form__group row">
-                                    <div class="col-10 ml-auto">
-                                        <h3 class="m-form__section">2. Address</h3>
-                                    </div>
-                                </div>
-
-                                <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Address</label>
-                                    <div class="col-7">
-                                        <input class="form-control m-input" type="text" value="L-12-20 Vertex, Cybersquare">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">City</label>
-                                    <div class="col-7">
-                                        <input class="form-control m-input" type="text" value="San Francisco">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">State</label>
-                                    <div class="col-7">
-                                        <input class="form-control m-input" type="text" value="California">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Postcode</label>
-                                    <div class="col-7">
-                                        <input class="form-control m-input" type="text" value="45000">
-                                    </div>
-                                </div>
-
-                                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-
-                                <div class="form-group m-form__group row">
-                                    <div class="col-10 ml-auto">
-                                        <h3 class="m-form__section">3. Social Links</h3>
+                                    <div class="col-10">
+                                        <h3 class="m-form__section">2. Liên kết</h3>
                                     </div>
                                 </div>
 
@@ -229,7 +213,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
-                                    <label for="example-text-input" class="col-2 col-form-label">Twitter</label>
+                                    <label for="example-text-input" class="col-2 col-form-label">Github</label>
                                     <div class="col-7">
                                         <input class="form-control m-input" type="text" value="www.twitter.com/Mark.Andre">
                                     </div>
@@ -272,4 +256,9 @@
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'javascripts/vue.js'%}"></script>
+    <script type="text/javascript" src="{% static 'javascripts/userpage/user-page.js'%}"></script>
 {% endblock %}

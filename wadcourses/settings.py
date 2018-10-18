@@ -63,9 +63,7 @@ INSTALLED_APPS = [
     'core',
     'api',
     'course',
-    'document',
-    'faculty',
-    'semester'
+    'syllabus'
 ]
 
 MIDDLEWARE = [
@@ -128,7 +126,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lmsv2',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': 'root',
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
