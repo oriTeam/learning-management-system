@@ -27,8 +27,13 @@ urlpatterns = [
     path('account/', include("django.contrib.auth.urls")),
     path('', views.index, name='homepage'),
     path('login/', views.login, name='login'),
+    path('my-course/', views.my_course, name='my_course'),
+    path('course/', views.all_course, name='all_course'),
+    path('contact/', views.contact, name='contact'),
+    path('help/', views.help, name='help'),
     path('forum/v1/', include(board.urls)),
     path('user',views.user,name = 'user'),
+
 ]
 
 # debug_toolbar_URL

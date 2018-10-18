@@ -1,7 +1,13 @@
-{% extends 'basepage/mainbase.html' %} {% load staticfiles %} {% block title %} Trang cá nhân | Hệ thống quản lý môn học
-LMS {% endblock %} {% block bodycontent %} {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'stylesheets/user-page.css'%}" /> {% endblock %}
+{% extends 'basepage/mainbase.html' %}
+{% load staticfiles %}
+{% block navisize %} container-fluid {% endblock %}
+{% block title %} Trang cá nhân | Hệ thống quản lý môn học LMS {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'stylesheets/user-page.css'%}" />
+{% endblock %}
+
+{% block bodycontent %}
 <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body row">
 
     <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light col-sm-3">
@@ -124,7 +130,6 @@ LMS {% endblock %} {% block bodycontent %} {% block stylesheets %}
                             </li>
                         </ul>
                     </div>
-
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="m_user_profile_tab_1">

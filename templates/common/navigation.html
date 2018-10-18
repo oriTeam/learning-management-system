@@ -1,6 +1,6 @@
 <div class="navbar-container">
         <nav class="navbar navbar-expand-xl navbar-light fixed-top" id="navi-bar">
-            <div class="container px-3">
+            <div class="{% block navisize %} container {% endblock %} px-3">
                 <a class="navbar-brand" href="/">
                     <strong>
                         <i class="fa fa-chalkboard" style="font-size: 30px"></i> UET Courses</strong>
@@ -34,13 +34,13 @@
                                                 <!--<span class="m-nav__section-text">Section</span>-->
                                                 <!--</li>-->
                                                 <li class="m-nav__item">
-                                                    <a href="" class="m-nav__link">
+                                                    <a href="/my-course" class="m-nav__link">
                                                         <i class="m-nav__link-icon flaticon-share"></i>
                                                         <span class="m-nav__link-text">Khóa học của tôi</span>
                                                     </a>
                                                 </li>
                                                 <li class="m-nav__item">
-                                                    <a href="" class="m-nav__link">
+                                                    <a href="/course" class="m-nav__link">
                                                         <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                         <span class="m-nav__link-text">Tất cả khóa học</span>
                                                     </a>
@@ -109,7 +109,7 @@
                                                     </li>
                                                     {% endif %}
                                                     <li class="m-nav__item">
-                                                        <a href="#" class="m-nav__link">
+                                                        <a href="/user" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-profile"></i>
                                                             <span class="m-nav__link-text">Trang cá nhân</span>
                                                         </a>

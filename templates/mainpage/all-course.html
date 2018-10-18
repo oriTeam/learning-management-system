@@ -1,0 +1,22 @@
+{% extends 'basepage/mainbase.html' %}
+{% load staticfiles %}
+{% block navisize %} container-fluid {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'stylesheets/all-course.css'%}"/>
+<style>
+    #login-background {
+        background-image: url("../../static/images/login.jpg");
+    }
+</style>
+{% endblock %}
+{% block bodycontent %}
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{% static 'javascripts/login.js'%}"></script>
+
+{% endblock %}
