@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 # Create your models here.
 class Syllabus(models.Model):
-    name = models.TextField(unique = True, verbose_name = _("Syllabus"))
+    name = models.CharField(max_length = 255, verbose_name = _("Syllabus"))
     
 
     class Meta:
@@ -14,9 +14,9 @@ class Syllabus(models.Model):
         return "Syllabus : {}".format(self.name)
 
 class Material(models.Model):
-    name = models.TextField(verbose_name = _("Material's Name"))
+    name = models.CharField(max_length = 255,verbose_name = _("Material's Name"))
     syllabus_id = models.ForeignKey(Syllabus,on_delete = models.CASCADE , verbose_name = _("Syllabus"))
-    material_type = models.TextField(verbose_name =_("Material's Type")) 
+    material_type = models.CharField(max_length=255,verbose_name =_("Material's Type")) 
     
     class Meta:
         db_table = "material"

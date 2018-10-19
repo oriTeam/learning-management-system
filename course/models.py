@@ -6,7 +6,7 @@ from syllabus.models import Syllabus,Material
 # Create your models here.
 
 class Course(models.Model):
-    name = models.TextField(unique = True,verbose_name= _("Course's Name"))
+    name = models.CharField(max_length= 255,verbose_name= _("Course's Name"))
 
     class Meta :
         db_table = 'courses'
@@ -17,7 +17,7 @@ class Course(models.Model):
         return "courses_name : {}".format(self.course_name)
 
 class Class(models.Model):
-    name = models.TextField(unique = True, verbose_name=_("Class's Name"))
+    name = models.CharField(max_length =255, verbose_name=_("Class's Name"))
     time_start = models.DateTimeField(verbose_name = _("Class's start time"))
     time_end = models.DateTimeField(verbose_name= _("Class's end time"))
     course_id = models.ForeignKey(Course,on_delete = models.CASCADE , verbose_name=_("Course"))
