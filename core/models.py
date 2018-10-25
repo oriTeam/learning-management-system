@@ -7,10 +7,11 @@ class User(AbstractUser):
     code = models.CharField(max_length=15, unique=True, null=True, verbose_name=_('Code'))
     avatar = models.ImageField(null=True, blank=True, verbose_name=_('Avatar'))
     phone_number = models.CharField(max_length=20, null=True, blank=True, verbose_name=_('Phone Number'))
-    unit = models.TextField(blank=True, null=True)
-    role = models.CharField(max_length=2)
+    gender = models.BooleanField(null=True, verbose_name=_('Gender'))
+    unit = models.CharField(max_length=20,blank=True, null=True, verbose_name=_('Unit'))
+    role = models.CharField(max_length=2, verbose_name=_("User's role"))
     # 0. Student account
-    # 1. Teachet account
+    # 1. Lecturer account
     # 2. Admin account
 
     class Meta:
@@ -19,6 +20,14 @@ class User(AbstractUser):
         verbose_name = _("User")
         verbose_name_plural = _("Users")
 
-
+    def __str__(self):
+        user = ''
+        if self.role == '0':
+            user = 'Student'
+        elif self.role == '1':
+            user = 'Lecturer'
+        elif self.role == '2':
+            user = 'Admin'
+        return "{}: {}".format(user, self.username)
 
 # Create your models here.
