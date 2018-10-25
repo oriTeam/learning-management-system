@@ -9,5 +9,5 @@ from .forms import UserForm
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
 	form = UserForm
-	list_display = ('id', 'code', 'role', 'unit')
+	list_display = ('id', 'username', 'code', 'role', 'unit')
 

@@ -64,7 +64,7 @@ class ClassLecturer(models.Model):
 
 class ClassStudent(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_("Class"))
-    Student_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("Student"))
+    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("Student"))
 
     class Meta:
         db_table = 'class_student'
