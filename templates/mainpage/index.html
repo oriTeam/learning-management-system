@@ -7,9 +7,12 @@
 {% block bodycontent %}
 <div class="landing-background">
     <div class="section section--header">
+        <div class="section-shape">
+            <img src="{% static 'images/waves-shape.svg'%}" alt="shape image">
+        </div>
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-lg-5">
+                <div class="col-sm-12 col-lg-6">
                     <div class="intro">
                         <!--<img src="../../static/images/uet.jpg" alt="" width=20% class="m&#45;&#45;img-rounded" style="margin-bottom: 40px">-->
                         <div class="intro_text">
@@ -21,7 +24,8 @@
                                 <div class="col-sm-6">
                                     {% if user.is_authenticated %}
                                     <a href="#"
-                                       class="btn m-btn--pill btn-outline-light m-btn--air m-btn--hover-accent btn-lg">Khóa học của tôi</a>
+                                       class="btn m-btn--pill btn-outline-light m-btn--air m-btn--hover-accent btn-lg">Khóa
+                                        học của tôi</a>
                                     {% else %}
                                     <a href="/login"
                                        class="btn m-btn--pill btn-outline-light m-btn--air m-btn--hover-accent btn-lg">Đăng
@@ -32,10 +36,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6 animated bounceInRight hide-sm">
+                    <img src="{% static 'images/study.svg'%}" alt="" width="500vw">
+                </div>
             </div>
+        </div>
+        <div class="shape shape-style-1 shape-primary">
+            <span class="circle-150"></span>
+            <span class="circle-50"></span>
+            <span class="circle-50"></span>
+            <span class="circle-75"></span>
+            <span class="circle-100"></span>
+            <span class="circle-150"></span>
         </div>
     </div>
 </div>
+
 {% endblock %}
 {% block javascripts %}
 <script type="text/javascript" src="{% static 'javascripts/homepage.js'%}"></script>

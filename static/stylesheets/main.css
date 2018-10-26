@@ -17,29 +17,38 @@ body, button, a.btn {
 .navbar-brand {
     font-size: 26px !important;
     padding-top: 0 !important;
-    color: #00b04c !important;
+    color: #fff !important;
 }
 .navbar-nav {
     margin: 8px;
     z-index: 8;
 }
+
+
 .navbar .navbar-nav>.active>a {
     opacity: 1;
     padding-left: 10px;
     padding-right: 10px;
-    color: rgba(6, 90, 250, 1) !important;
+    color: #0627a0 !important;
     z-index: 8;
     border-radius: 4px;
 }
 .navbar .navbar-nav .nav-link {
-    color: #333333;
+    color: #fff;
     font-size: 16px !important;
+    font-weight: bold;
 }
+
+.navbar .navbar-nav .nav-link:hover {
+    color: #0627a0 !important;
+    border-bottom: 2px solid;
+}
+
 ul.navbar-nav li {
     margin-left: 8px;
     margin-right: 8px;
 }
 .navbar__over {
-    background-color: #fff;
-    box-shadow: 0px 0px 10px #d8d8d8;
+    box-shadow: 0px 0px 10px #408492;
+    background: linear-gradient(to right, #1ba6de 0%, #e7ecec 100%);
 }
