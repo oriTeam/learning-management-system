@@ -18,6 +18,7 @@ body, button, a.btn {
     font-size: 26px !important;
     padding-top: 0 !important;
     color: #fff !important;
+    margin-right: 40px;
 }
 .navbar-nav {
     margin: 8px;
@@ -49,6 +50,7 @@ ul.navbar-nav li {
     margin-left: 8px;
     margin-right: 8px;
 }
+
 .navbar__over {
     box-shadow: 0px 0px 10px #408492;
     background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);

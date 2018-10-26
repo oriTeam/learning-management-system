@@ -14,12 +14,33 @@
 {% endblock %}
 {% block courses %} active {% endblock %}
 {% block bodycontent %}
+<div class="container-fluid" id="all-course-body">
+    <div class="row mx-0">
+        <div class="col-lg-8">
+            <breadcrumb></breadcrumb>
+        </div>
+        <div class="col-lg-4">
+            <search></search>
+        </div>
+    </div>
+    <div class="row mx-0">
+        <div class="col-lg-9">
+            <div class="row">
+                <!--<h2>Danh sách Khóa học đang diễn ra</h2>-->
 
 
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{% static 'javascripts/login.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/all-course.js'%}"></script>
 
 {% endblock %}
