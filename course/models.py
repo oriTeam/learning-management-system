@@ -8,13 +8,13 @@ class Course(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Course's Name"))
 
     class Meta:
-        db_table = 'courses'
+        db_table = 'course'
         ordering = ['id']
         verbose_name = _("Course")
         verbose_name_plural = _("Courses")
 
     def __str__(self):
-        return "courses_name : {}".format(self.course_name)
+        return "Course : {}".format(self.name)
 
 
 class Class(models.Model):
@@ -73,7 +73,7 @@ class ClassStudent(models.Model):
         verbose_name_plural = _("Classes - Students")
 
     def __str__(self):
-        return "Class : {} | User : {}".format(self.class_id.name, self.user_id.code)
+        return "Class : {} | User : {}".format(self.class_id.name, self.student_id.username)
 
 
 class EnrollRequest(models.Model):

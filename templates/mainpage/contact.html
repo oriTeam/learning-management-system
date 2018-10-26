@@ -1,5 +1,8 @@
 {% extends 'basepage/mainbase.html' %}
 {% load staticfiles %}
+
+{% block title %} Liên hệ | Hệ thống quản lý môn học {% endblock %}
+
 {% block navisize %} container-fluid {% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'stylesheets/contact.css'%}"/>
@@ -9,6 +12,8 @@
     }
 </style>
 {% endblock %}
+{% block contact %} active {% endblock %}
+
 {% block bodycontent %}
 
 

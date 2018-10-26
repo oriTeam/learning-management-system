@@ -1,6 +1,8 @@
 {% extends 'basepage/mainbase.html' %}
 {% load staticfiles %}
 
+{% block title %} Đăng nhập | Hệ thống quản lý môn học {% endblock %}
+
 {% block stylesheets %}
 <style>
     #login-background {
@@ -8,6 +10,8 @@
     }
 </style>
 {% endblock %}
+{% block course %} active {% endblock %}
+
 {% block bodycontent %}
 <div class="m-grid m-grid--hor m-grid--root m-page">
     <div id="login-background"

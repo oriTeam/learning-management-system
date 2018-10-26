@@ -2,6 +2,8 @@
 {% load staticfiles %}
 {% block navisize %} container-fluid {% endblock %}
 
+{% block title %} Tất cả khóa học | Hệ thống quản lý môn học {% endblock %}
+
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'stylesheets/all-course.css'%}"/>
 <style>
@@ -10,6 +12,7 @@
     }
 </style>
 {% endblock %}
+{% block courses %} active {% endblock %}
 {% block bodycontent %}
 
 

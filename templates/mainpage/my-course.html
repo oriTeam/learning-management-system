@@ -1,5 +1,8 @@
 {% extends 'basepage/mainbase.html' %}
 {% load staticfiles %}
+
+{% block title %} Khóa học của tôi | Hệ thống quản lý môn học {% endblock %}
+
 {% block navisize %} container-fluid {% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'stylesheets/all-course.css'%}"/>
@@ -9,6 +12,7 @@
     }
 </style>
 {% endblock %}
+{% block course %} active {% endblock %}
 {% block bodycontent %}
 
 

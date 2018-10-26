@@ -38,7 +38,7 @@
                             <a class="nav-link" href="/">Trang chủ</a>
                         </li>
 
-                        <li class="nav-item m-dropdown m-dropdown--inline m-dropdown--arrow" m-dropdown-toggle="hover"
+                        <li class="nav-item m-dropdown m-dropdown--inline m-dropdown--arrow {% block course %} {% endblock %}" m-dropdown-toggle="hover"
                             aria-expanded="true">
                             <a href="#" class="nav-link m-dropdown__toggle dropdown-toggle">
                                 Khóa học
@@ -89,7 +89,7 @@
                             <div class="btn-group">
                                 <a href="#" class="m-nav__link m-dropdown__toggle">
                                     <button id="user-menu" user-id="{{ user.id }}" type="button"
-                                            class="btn btn-accent">
+                                            class="btn btn-light">
                                         <span>
                                             <i class="fa fa-user"></i> &nbsp; Xin chào, {{ user }}
                                         </span>
