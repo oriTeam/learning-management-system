@@ -93,7 +93,7 @@
 }
 
 .inner-form .input-field {
-    height: 40px;
+    height: 50px;
     width: 100%;
     position: relative;
     float: right;
@@ -112,16 +112,12 @@
     border: 0;
     padding: 0;
     cursor: pointer;
-    display: flex;
     -ms-flex-pack: center;
     justify-content: center;
-    align-items: center;
 }
 
 .inner-form .input-field input {
     height: 100%;
-    background: transparent;
-    border: 0;
     background: #fff;
     display: block;
     width: 100%;
@@ -129,4 +125,114 @@
     font-size: 14px;
     color: #666;
     border-radius: 34px;
+    border: 1px solid #dbe2e8;
+    box-shadow: 5px 5px 25px 0px #2e3d4933;
 }
+
+/*@media (min-width: 1025px) {*/
+    /*.m-aside-left {*/
+        /*margin-right: 0px !important;*/
+    /*}*/
+/*}*/
+
+.course-pic {
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.mb25 {
+    margin-bottom: 25px;
+}
+
+.relative-position {
+    position: relative;
+}
+
+.course-pic img {
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+    width: 100%;
+}
+
+.course-meta {
+    display: inline-block;
+    width: 100%;
+}
+
+.course-meta .course-category a, .latest-events .course-meta .course-author{
+    color: #17d0cf !important;
+}
+
+.course-meta span {
+    float: left;
+    font-size: 14px;
+    margin-right: 24px;
+    position: relative;
+}
+
+.bold-font {
+    font-weight: 700;
+}
+
+.course-meta .course-author {
+    color: #333333;
+}
+
+.course-meta span:after {
+    top: 2px;
+    width: 1px;
+    content: '';
+    height: 15px;
+    right: -14px;
+    position: absolute;
+    background-color: #989898;
+}
+
+.course-meta span:last-child:after {
+    content: none;
+    width:0;
+}
+
+.ul-li ul {
+    margin: 0;
+    padding: 0;
+}
+
+.ul-li ul li {
+    list-style: none;
+    display: inline-block;
+}
+
+.course-title h3 {
+    color: #333333;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 30px;
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+}
+
+.course-title h3 span {
+    top: -6px;
+    color: #fff;
+    padding: 5px;
+    font-size: 11px;
+    border-radius: 3px;
+    position: relative;
+    background-color: #ff5c26;
+}
+
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+
+.course-viewer li {
+    color: #989898;
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    background-color: #f7f7f7;
+}
+
