@@ -18,7 +18,7 @@ class Course(models.Model):
 
 
 class Class(models.Model):
-    code = models.CharField(max_length=10, verbose_name=_("Class's Code"))
+    code = models.CharField(max_length=10, default='', verbose_name=_("Class's Code"))
     name = models.CharField(max_length=255, verbose_name=_("Class's Name"))
     description = models.TextField(null=True, verbose_name=_('Description'))
     time_start = models.DateTimeField(verbose_name=_("Class's start time"))

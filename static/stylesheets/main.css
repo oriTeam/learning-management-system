@@ -3,7 +3,7 @@
 body, button, a.btn {
 	font-family: 'Muli', sans-serif !important;
 	/*font-size: 16px;*/
-    background-color: #eef9fb;
+    /*background-color: #eef9fb;*/
 }
 #navi-bar {
 	transition: 0.4s;
