@@ -16,23 +16,13 @@
             
 {% block bodycontent %}
             
-    <div class="container-fluid m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-body">
-      <div class="nav bg-secondary">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link pt-3 pb-3" href="/">Trang chủ</a>
-                </li>
-                <li>
-                    <span class="fa fa-chevron-right pt-3 pb-3"></span>
-                </li>
-                <li class="nav-item">
-                    <a class=" nav-link disabled pt-3 pb-3">Liên hệ</a>
-                </li>
-            </ul>
+    <div id="contact-body" class="container-fluid">
+        <div class="row mx-3">
+            <breadcrumb></breadcrumb>
         </div>
 
-        <div class="mt-5 container-fluid row mx-0">
-            <div class="col-lg-4 col-sm-12 d-none d-sm-block" >
+        <div class="mt-5 row mx-0">
+            <div class="col-lg-4 col-md-4 col-sm-12 d-none d-sm-block" >
                 <div class="h-100 mr-5 bg-white"> 
                     <div class="mr-3 ml-3">
                         <div class="pt-3">Địa chỉ liên hệ</div>
@@ -42,41 +32,45 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-sm-12 bg-white">
-                <div class="pt-3">Phản hồi</div>
-                <hr>
-                <div class="m-5 bg-white"> 
-                    
-                    <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-3 col-form-label">Tên người dùng</label>
-                         <div class="col-8">
-                            <input class="form-control m-input" type="text">
-                        </div>
-                    </div>
 
-                    <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-3 col-form-label">Email</label>
-                        <div class="col-8">
-                            <input class="form-control m-input" type="text">
-                        </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="col-10 h-100 bg-white">
+                            <div class="pt-3">Phản hồi</div>
+                            <hr>
+                            <div class="m-5 bg-white"> 
+                                
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-3 col-form-label">Tên người dùng</label>
+                                     <div class="col-8">
+                                        <input class="form-control m-input" type="text">
+                                    </div>
+                                </div>
+            
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-3 col-form-label">Email</label>
+                                    <div class="col-8">
+                                        <input class="form-control m-input" type="text">
+                                    </div>
+                                </div>
+            
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-3 col-form-label">Nội dung</label>
+                                    <div class="col-8">
+                                        <textarea class="form-control m-input" type="text" rows="9"></textarea>
+                                    </div>
+                                </div>  
+                                
+                                <div class="mt-5 row">
+                                    <div class="col-3"></div>
+                                    <div class="col-8">
+                                        <button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">Gửi phản hồi</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Hủy bỏ</button>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-
-                    <div class="form-group m-form__group row">
-                        <label for="example-text-input" class="col-3 col-form-label">Nội dung</label>
-                        <div class="col-8">
-                            <textarea class="form-control m-input" type="text" rows="9"></textarea>
-                        </div>
-                    </div>  
-                    
-                    <div class="mt-5 row">
-                        <div class="col-3"></div>
-                        <div class="col-8">
-                            <button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">Gửi phản hồi</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Hủy bỏ</button>
-                        </div>
-                    </div>
-                </div>
+                    <div class="col-2"></div>
             </div>
         </div>
     

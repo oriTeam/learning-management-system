@@ -1,3 +1,14 @@
+let breadcrumb = '<ul class="bread-crumb px-0">\n' +
+    '  <li><a href="/"><span class="fa fa-home"> </span> Trang chủ</a></li>\n' +
+    '  <li><a href="/contact">Liên hệ</a></li>\n' +
+    '  </ul>';
+
+Vue.component('breadcrumb', {template: breadcrumb });
+
+new Vue({
+    el: '#contact-body',
+})
+
 $(document).ready(function(){
     $(".m-input").focus(function(){
         $(this).css("background-color", "#E6E6E6");
