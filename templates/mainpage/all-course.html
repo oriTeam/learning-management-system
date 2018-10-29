@@ -6,11 +6,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{% static 'stylesheets/all-course.css'%}"/>
-<style>
-    #login-background {
-        background-image: url("../../static/images/login.jpg");
-    }
-</style>
+
 {% endblock %}
 {% block courses %} active {% endblock %}
 {% block bodycontent %}
@@ -23,22 +19,13 @@
     </div>
     <div class="row mx-0 my-4">
         <div class="col-lg-3 col-sm-12 pr-3">
-            <!--<div class="row">-->
-            <!--<div class="col-12">-->
-            <!--<h4>Chọn theo Khóa học </h4>-->
-            <!--</div>-->
-            <!--<div class="col-12">-->
-            <!--<p>Toán học</p>-->
-            <!--<p>Ngoại ngữ</p>-->
-            <!--</div>-->
-            <!--</div>-->
             <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light w-100">
                 <!-- BEGIN: Aside Menu -->
                 <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light "
                      m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
                     <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
                         <li class="m-menu__section m-menu__section--first">
-                            <h4 class="m-menu__section-text">Departments</h4>
+                            <h4 class="m-menu__section-text m--regular-font-size-lg2">Danh sách môn học</h4>
                             <i class="m-menu__section-icon flaticon-more-v3"></i>
                         </li>
                         <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true"
