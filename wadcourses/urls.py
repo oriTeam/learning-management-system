@@ -33,6 +33,7 @@ urlpatterns = [
     path('help/', views.help, name='help'),
     path('forum/v1/', include(board.urls)),
     path('user',views.user,name = 'user'),
+    path('course/1', views.inner_course, name='inner_course'),
 
 ]
 
