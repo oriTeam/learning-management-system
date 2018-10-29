@@ -53,4 +53,17 @@ $(document).ready(function(){
 	// 		}
 	// 	});
 	// });
+
+
+	$(document).on('click touch',"#test",function(){
+		let data = {};
+		let url = '/api/course';
+		ajax_request(false,true,"GET","json",url,null,data,success_callback,error_callback);
+	});
+	function success_callback(){
+		alert("OK!");
+	}
+	function error_callback(){
+		alert("Failed!");
+	}
 });
