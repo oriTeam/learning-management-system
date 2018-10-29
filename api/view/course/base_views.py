@@ -12,7 +12,7 @@ class Course_():
         data["id"] = course["id"]
         data["name"] = course["name"]
         
-        return JsonResponse({})
+        return JsonResponse(data)
     def get_all_courses(self):
         datas = []
         courses =Course.objects.all()

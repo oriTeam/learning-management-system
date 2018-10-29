@@ -56,8 +56,10 @@ $(document).ready(function(){
 
 
 	$(document).on('click touch',"#test",function(){
-		let data = {};
-		let url = '/api/course';
+		let data = {
+			"course_id" : "1",
+		};
+		let url = '/api/course/course_info';
 		ajax_request(false,true,"GET","json",url,null,data,success_callback,error_callback);
 	});
 	function success_callback(){
