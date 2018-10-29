@@ -3,8 +3,11 @@
 body, button, a.btn {
 	font-family: 'Muli', sans-serif !important;
 	/*font-size: 16px;*/
-    /*background-color: #eef9fb;*/
 }
+body {
+    background-color: #f3f8f9;
+}
+
 #navi-bar {
 	transition: 0.4s;
 }
@@ -142,4 +145,8 @@ ul.navbar-nav li {
 }
 .bread-crumb li a:active:after {
   border-left-color: #16a085;
+}
+
+.bread-crumb {
+    padding-top: 1rem!important;
 }
