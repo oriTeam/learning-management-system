@@ -18,7 +18,7 @@ app_name = "api"
 
 course_url_patterns= [
     path('',course_base_views.Course_.get_all_courses),
-    path('course_info',course_base_views.Course_.get_course_info),
+    path('course_info', course_base_views.Course_.as_view()),
 ]
 syllabus_url_patterns= []
 user_url_patterns=[]

@@ -17,6 +17,7 @@ class BaseManageView(View):
             return self.VIEWS_BY_METHOD[request.method](request, *args, **kwargs)
         return JsonResponse({},status = 405)
 
+
     def json_error(self, field, code):
         default_errors = self.error_messages[field]
         errors = []
