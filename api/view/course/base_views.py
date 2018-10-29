@@ -17,7 +17,7 @@ class Course_(BaseManageView):
         }
 
     def get_course_info(self, request):
-        request_data = request.GET
+        request_data =   request.GET
         course_id = request_data.get('course_id')
         data = {}
         try:
@@ -26,8 +26,8 @@ class Course_(BaseManageView):
             # return JsonResponse({"invalid": "This course_id is invalid"})
             return self.json_error(field = 'Course', code = "invalid")
         else:
-            data["id"] = course["id"]
-            data["name"] = course["name"]
+            data["id"] = course.id
+            data["name"] = course.name
         
         return JsonResponse(data)
 
