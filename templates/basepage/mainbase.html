@@ -81,6 +81,7 @@
                     </ul>
 
                     <ul class="navbar-nav navbar-right">
+
                         {% if user.is_authenticated %}
 
                         <li class="m-nav__item m-topbar__user-profile m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light mr-0"
@@ -157,7 +158,7 @@
                         {% else %}
                         <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom"
                             title="Đăng nhập">
-                            <a href="/login" class="btn m-btn--pill m-btn m-btn--gradient-from-accent m-btn--gradient-to-brand">
+                            <a href="/login" class="btn m-btn--pill btn-light">
                                 <i class="fa fa-sign-in-alt"></i> &nbsp; Đăng nhập</a>
                         </li>
                         {% endif %}

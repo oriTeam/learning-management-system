@@ -42,7 +42,7 @@ function login_success_redirect(response) {
     console.log(response);
     let login_error_dom = $("#login_errors");
 	if (response.success == true) {
-		window.location.href = "http://127.0.0.1:8000/admin";
+		window.location.href = "http://127.0.0.1:8000";
 	} else {
 		let list_error = message_to_html(response);
 		login_error_dom.append(list_error);

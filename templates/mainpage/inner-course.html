@@ -1,40 +1,29 @@
 {% extends 'basepage/mainbase.html' %}
 {% load staticfiles %}
 
-{% block title %} Khóa học của tôi | Hệ thống quản lý môn học {% endblock %}
+{% block title %} Môn học | Hệ thống quản lý môn học {% endblock %}
 
 {% block navisize %} container-fluid {% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static 'stylesheets/my-course.css'%}"/>
+<link rel="stylesheet" href="{% static 'stylesheets/inner-course.css'%}"/>
 
 {% endblock %}
 {% block course %} active {% endblock %}
+
 {% block bodycontent %}
-<div class="container-fluid" id="my-course-body">
+<div class="container-fluid" id="inner-course-body">
     <div class="row mx-3">
         <breadcrumb></breadcrumb>
     </div>
-    <div class="row mx-3 m--margin-bottom-80-desktop m--margin-bottom-40-mobile justify-content-center">
-        <search></search>
-    </div>
     <div class="row mx-0 my-4">
         <div class="col-lg-3 col-sm-12 pr-3">
-            <!--<div class="row">-->
-            <!--<div class="col-12">-->
-            <!--<h4>Chọn theo Khóa học </h4>-->
-            <!--</div>-->
-            <!--<div class="col-12">-->
-            <!--<p>Toán học</p>-->
-            <!--<p>Ngoại ngữ</p>-->
-            <!--</div>-->
-            <!--</div>-->
             <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light w-100 h-100">
                 <!-- BEGIN: Aside Menu -->
                 <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light "
                      m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
                     <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
                         <li class="m-menu__section m-menu__section--first">
-                            <h4 class="m-menu__section-text">Departments</h4>
+                            <h4 class="m-menu__section-text m--regular-font-size-lg2">Danh sách môn học</h4>
                             <i class="m-menu__section-icon flaticon-more-v3"></i>
                         </li>
                         <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true"
@@ -220,70 +209,35 @@
                 <!-- END: Aside Menu -->
             </div>
         </div>
-        <div class="col-lg-9 px-3">
-            <div class="m-grid__item m-grid__item--fluid m-wrapper">
-                <div class="row mx-0">
-                    <div class="col-12 text-right px-lg-2 px-0">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary m-btn--pill m-btn-air dropdown-toggle" type="button"
-                                    id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sắp xếp theo
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="top-start"
-                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
-                                <a class="dropdown-item" href="#" data-toggle="m-tooltip" title="" data-placement="left"
-                                   data-original-title="Tooltip title">Phổ biến nhất</a>
-                                <a class="dropdown-item" href="#" data-toggle="m-tooltip" title="" data-placement="left"
-                                   data-original-title="Tooltip title">Mới nhất</a>
-                            </div>
-                        </div>
+        <div class="col-lg-9">
+            <div class="m-portlet p-4">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12">
+                        <img src="{% static 'images/code.jpg'%}" alt="" width="100%">
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <h2 class="course-title m--margin-top-10-mobile">Phát triển Ứng dụng Web</h2>
+                        <p class="m--regular-font-size-lg2"><i class="fa fa-user"></i> Giảng viên: <a href="#">Hoàng
+                            Xuân Tùng</a></p>
+                        <p class="m--regular-font-size-lg2"><i class="fa fa-qrcode"></i> Mã lớp học: INT3306 4</p>
+                        <p class="m--regular-font-size-lg2"><i class="fa fa-tag"></i> Môn học: <a href="#">CNTT</a></p>
+                        <button class="btn m-btn btn-success">Tham gia Khóa học</button>
                     </div>
                 </div>
-                <div class="row py-4 mx-0">
-                    {% for i in '0123456789' %}
-                    <div class="col-lg-4 p-0">
-                        <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded-force p-3 mx-lg-2">
-                            <div class="course-item-pic-text">
-                                <div class="course-pic relative-position m--margin-bottom-25">
-                                    <img src="{% static 'images/code.jpg'%}" alt="">
-                                </div>
-                                <div class="course-item-text">
-                                    <div class="course-meta">
-                                        <span class="course-category bold-font"><a href="#">CNTT</a></span>
-                                        <span class="course-author bold-font"><a href="#">Hoàng Xuân Tùng</a></span>
-                                        <span class="mr-0"><p class="font-weight-bold">INT3306 4</p></span>
-                                    </div>
-                                    <div class="course-title m--padding-top-10 headline m--padding-bottom-15 relative-position">
-                                        <h3>
-                                            Phát triển ứng dụng Web
-                                            <!--<span class="trend-badge text-uppercase bold-font"><i class="fas fa-bolt"></i> TRENDING</span>-->
-                                        </h3>
-                                        <a class="m--pull-right m--margin-bottom-20 mt-1" href="/course/1"><em>Xem khóa học &nbsp; <i class="fa fa-arrow-right"></i></em></a>
-                                    </div>
-                                    <div class="course-viewer ul-li d-inline-block">
-                                        <ul>
-                                            <li><p class="m-0"><i class="fas fa-user"></i> 1.220</p></li>
-                                            <!--<li><p><i class="fas fa-comment-dots"></i> 1.015</p></li>-->
-                                            <li><p class="m-0">125k Unrolled</p></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+                <hr/>
+                <div class="row">
 
+                </div>
             </div>
         </div>
     </div>
+
+
 </div>
 
 
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{% static 'javascripts/my-course.js'%}"></script>
-
+<script type="text/javascript" src="{% static 'javascripts/inner-course.js'%}"></script>
 {% endblock %}

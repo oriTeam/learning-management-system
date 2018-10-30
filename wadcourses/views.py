@@ -15,3 +15,5 @@ def help(request):
     return render(request, 'mainpage/help.html')
 def user(request):
     return render(request,'userpage/user-page.html')
+def inner_course(request):
+    return render(request,'mainpage/inner-course.html')
