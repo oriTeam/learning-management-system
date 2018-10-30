@@ -34,6 +34,42 @@
     justify-content: center;
     padding-top: 30px;
 }
+h2{
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.bg-light{
+    background-color: 	#f2f2f2;
+}
+.bg-grey{
+    background-color: #e6e6e6;
+}
+.bg-white{
+    background-color: #fff;
+}
+.row-my{
+   margin-bottom: 1rem;
+}
+.border-right-rem{
+    border-right-color: #f2f2f2;
+    border-right-width: 2rem;
+}
+.border-left-rem{
+    border-left-color: #f2f2f2;
+    border-left-width: 2rem;
+}
+h4{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+}
+h5{
+    padding-left: 3rem;
+    padding-right: 1rem;
+    }
+p{
+    padding-left: 1rem;;
+}
 .section .intro__title {
     padding: 20px 0;
     font-size: 32px !important;
