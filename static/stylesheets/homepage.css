@@ -1,6 +1,6 @@
 @media (min-width: 768px) {
     .landing-background {
-        height: 700px;
+        height: 640px;
     }
 }
 @media (min-width: 1200px) {
@@ -9,7 +9,7 @@
     }
 }
 .section--header {
-    height: 95%;
+    height: 100%;
     position: relative;
     padding-top: 10rem;
     padding-bottom: 5rem;
@@ -34,7 +34,7 @@
     justify-content: center;
     padding-top: 30px;
 }
-h2{
+intro-section h2, func-section h2 {
     margin-top: 4rem;
     margin-bottom: 4rem;
 }

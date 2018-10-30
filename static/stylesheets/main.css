@@ -150,3 +150,77 @@ ul.navbar-nav li {
 .bread-crumb {
     padding-top: 1rem!important;
 }
+
+#gotop {
+    float: right;
+    position: fixed;
+    bottom: 25px;
+    right: 30px;
+    display: none;
+    z-index: 8;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+@media (max-width: 992px) {
+    .hide-sm {
+        display: none;
+    }
+}
+
+.footer-section {
+    position: relative;
+    display: block;
+    z-index: 1;
+    background-color: #fff !important;
+
+}
+
+.footer-social-list {
+    margin: 15px 0;
+}
+
+.footer-social-list ul li a {
+    display: block;
+    border: 1px solid #f9f9f9;
+    border-radius: 100%;
+    transition: all 0.3s ease-in;
+    background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);
+    -webkit-box-shadow: 0 1px 2px rgba(212, 212, 212, 0.35);
+    box-shadow: 0 1px 2px rgba(212, 212, 212, 0.35);
+}
+
+.footer-social-list ul li a i {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    /*background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);*/
+    background: #fff;
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: all 0.3s ease-in;
+}
+
+/*.footer-social-list ul li a:hover {*/
+    /*background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);*/
+/*}*/
+
+/*.footer-social-list ul li a:hover i {*/
+    /*color: #fff;*/
+/*}*/
+
+.list-inline>li {
+    display: inline-block;
+}
+
+.footer-brand {
+    font-size: 30px;
+    color: #1ba6de;
+}
+
+.footer-brand:hover {
+    text-decoration: none;
+}

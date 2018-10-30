@@ -23,8 +23,8 @@
                 <a class="navbar-brand" href="/">
                     <strong>
                         <i class="fa fa-chalkboard" style="font-size: 30px"></i> PyEdu</strong>
-                        <!--<img src="../../static/images/uet.jpg" alt="" class="m&#45;&#45;img-rounded m&#45;&#45;marginless" width="16%">-->
-                        <!--UET Courses</strong>-->
+                    <!--<img src="../../static/images/uet.jpg" alt="" class="m&#45;&#45;img-rounded m&#45;&#45;marginless" width="16%">-->
+                    <!--UET Courses</strong>-->
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                         aria-controls="navbarCollapse"
@@ -38,7 +38,8 @@
                             <a class="nav-link" href="/">Trang chủ</a>
                         </li>
 
-                        <li class="nav-item m-dropdown m-dropdown--inline m-dropdown--arrow {% block course %} {% endblock %}" m-dropdown-toggle="hover"
+                        <li class="nav-item m-dropdown m-dropdown--inline m-dropdown--arrow {% block course %} {% endblock %}"
+                            m-dropdown-toggle="hover"
                             aria-expanded="true">
                             <a href="#" class="nav-link m-dropdown__toggle dropdown-toggle">
                                 Khóa học
@@ -92,7 +93,7 @@
                                     <button id="user-menu" user-id="{{ user.id }}" type="button"
                                             class="btn btn-light">
                                         <span>
-                                            <i class="fa fa-user"></i> &nbsp; Xin chào, {{ user }}
+                                            <i class="fa fa-user"></i> &nbsp; Xin chào, {{ user.username }}
                                         </span>
                                         <span>
                                             <i class="m-menu__ver-arrow la la-angle-down" style="font-size:1rem"></i>
@@ -110,11 +111,12 @@
                                                 </div>
                                                 <div class="m-card-user__details">
                                                     <span class="m-card-user__name m--font-weight-500">Tài khoản: {{ user }}</span>
-                                                    <a href="" class="m-card-user__email m--font-weight-300 m-link">{{ user.email|default:_("Bạn chưa cập nhật email") }}</a>
+                                                    <a href="" class="m-card-user__email m--font-weight-300 m-link">{{
+                                                        user.email|default:_("Bạn chưa cập nhật email") }}</a>
                                                 </div>
                                             </div>
                                         </div>
-                                         <div class="m-dropdown__body">
+                                        <div class="m-dropdown__body">
                                             <div class="m-dropdown__content">
                                                 <ul class="m-nav m-nav--skin-light">
                                                     <li class="m-nav__section m--hide">
@@ -171,6 +173,41 @@
     {% block bodycontent %}
 
     {% endblock %}
+    <footer class="footer-section m--padding-top-40 m--padding-bottom-40">
+        <div class="footer-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-single-col text-center">
+                            <a class="footer-brand" href="/">
+                                <strong>
+                                    PyEdu</strong></a>
+                            <div class="footer-social-list">
+                                <ul class="list-inline">
+                                    <li><a href="#"> <i class="fab fa-facebook"></i></a></li>
+                                    <li><a href="#"> <i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"> <i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="#"> <i class="fab fa-google-plus"></i></a></li>
+                                    <li><a href="#"> <i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="copyright-text">
+                                <p>© copyright <a href="#">PyEdu</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div>
+        <button class="btn btn-lg btn-info animated bounceInUp" data-toggle="tooltip" data-placement="left" id="gotop"
+                title="Lên trên cùng">
+            <i class="fa fa-angle-double-up m--regular-font-size-lg4"></i>
+        </button>
+    </div>
 </div>
 <script type="text/javascript" src="{% static 'javascripts/vue.js'%}"></script>
 <script type="text/javascript" src="{% static 'javascripts/vendors.bundle.js'%}"></script>
