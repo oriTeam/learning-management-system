@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Syllabus, Material, SyllabusTemplate, ClassSyllabus
+from .models import Syllabus, Material, SyllabusTemplate
 # Register your models here.
 
 @admin.register(Syllabus)
@@ -10,9 +10,9 @@ class SyllsbusAdmin(admin.ModelAdmin):
 class MaterialAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'material_type', 'syllabus_id', 'file')
 
-@admin.register(ClassSyllabus)
-class ClassSyllabusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'class_id', 'syllabus_id')
+# @admin.register(ClassSyllabus)
+# class ClassSyllabusAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'class_id', 'syllabus_id')
 
 @admin.register(SyllabusTemplate)
 class SyllabusTemplateAdmin(admin.ModelAdmin):

@@ -50,26 +50,27 @@ class Material(models.Model):
             "id" : self.id,
             "name" : self.name,
             "syllabus_id" : self.syllabus_id,
-            "material_type" : self.material_type
+            "material_type" : self.material_type,
+            "file" : self.file
         }
         return data
 
-class ClassSyllabus(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_("Class"))
-    syllabus_id = models.ForeignKey(Syllabus, on_delete=models.CASCADE, verbose_name=_("Syllabus"))
+# class ClassSyllabus(models.Model):
+#     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_("Class"))
+#     syllabus_id = models.ForeignKey(Syllabus, on_delete=models.CASCADE, verbose_name=_("Syllabus"))
 
-    class Meta:
-        db_table = 'class_syllabus'
-        ordering = ["id"]
-        verbose_name = _("Class - Syllasbus")
-        verbose_name_plural = _("Classes - Syllabus")
+#     class Meta:
+#         db_table = 'class_syllabus'
+#         ordering = ["id"]
+#         verbose_name = _("Class - Syllasbus")
+#         verbose_name_plural = _("Classes - Syllabus")
 
-    def __str__(self):
-        return "Class : {} | Syllabus : {}".format(self.class_id.name, self.syllabus_id.name)
+#     def __str__(self):
+#         return "Class : {} | Syllabus : {}".format(self.class_id.name, self.syllabus_id.name)
 
 class SyllabusTemplate(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_('Class'))
-
+    
     class Meta:
         db_table = 'syllbus_template'
         ordering = ['id']
