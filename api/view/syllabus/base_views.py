@@ -24,7 +24,8 @@ class _Material(BaseManageView):
 
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
-            
+            "GET" : self.get_material_info,
+            "GET" : self.get_syllabus_material,   
         }
     
     def get_material_info(self,request):
@@ -70,6 +71,7 @@ class _Syllabus(BaseManageView):
 
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
+            "GET" : self.get_class_syllabus,
             
         }
     def get_class_syllabus(self,request):
@@ -100,6 +102,8 @@ class _Template(BaseManageView):
     }
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
+            "GET" : self.get_syllabus_template,
+            "GET" : self.get_syllabus_template_info,
             
         }
     def get_syllabus_template(self,request):
