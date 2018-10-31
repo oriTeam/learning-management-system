@@ -5,7 +5,7 @@ from api.functions import string_to_boolean
 from api.base import BaseManageView
 import datetime
 
-class Course_(BaseManageView):
+class _Course(BaseManageView):
 
     error_messages = {
         "Course": {
@@ -60,7 +60,7 @@ class Course_(BaseManageView):
 
     
 
-class Class_(BaseManageView):
+class _Class(BaseManageView):
     error_messages = {
         "Class": {
             "invalid": "This class_id is invalid",
@@ -173,6 +173,20 @@ class Class_(BaseManageView):
                 student = User.objects.get(pk = class_student.student_id)
             except User.DoesNotExist:
                 return json_error(field = "User",code ="invalid")
+            else :
+                students.append(student.parse_data())
+        return JsonResponse({students})
+
+    def get_enroll_request(self,request):
+        request_data = request.GET
+        class_id = request_data.get('class_id')
+        enroll_request_by_class_id =  EnrollRequest.objects.filter(class_id = class_id)
+        students=[]
+        for item in enroll_request_by_class_id :
+            try :
+                student = User.objects.get(pk = item.student_id)
+            except User.DoesNotExist :
+                return json_error(field = "User",code = "invalid")
             else :
                 students.append(student.parse_data())
         return JsonResponse({students})

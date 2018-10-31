@@ -17,8 +17,8 @@ from .view.user import (
 app_name = "api"
 
 course_url_patterns= [
-    path('',course_base_views.Course_.get_courses),
-    path('course_info', course_base_views.Course_.as_view()),
+    path('',course_base_views._Course.get_courses),
+    path('course_info', course_base_views._Course.as_view()),
 ]
 syllabus_url_patterns= []
 user_url_patterns=[]
