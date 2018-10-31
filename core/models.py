@@ -29,5 +29,21 @@ class User(AbstractUser):
         elif self.role == '2':
             user = 'Admin'
         return "{}: {}".format(user, self.username)
-
+    def parse_data(self):
+        data={
+        "id" : self.id,
+        "code" : self.code,
+        "avatar" : self.avatar,
+        "phone_number" : self.phone_number,
+        "gender" : self.phone_number,
+        "unit" : self.unit,
+        "role" : self.role
+        }
+        return data
+    def is_Admin(self):
+        return True if self.role == '2' else False
+    def is_Student(self):
+        return True if self.role == '0' else False
+    def is_Lecturer(self):
+        return True if self.role =='1' else False
 # Create your models here.

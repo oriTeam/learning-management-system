@@ -15,6 +15,12 @@ class Course(models.Model):
 
     def __str__(self):
         return "Course : {}".format(self.name)
+    def parse_data(self):
+        data = {
+            "id" : self.id,
+            "name" : self.name
+        }
+        return data
 
 
 class Class(models.Model):
@@ -33,8 +39,17 @@ class Class(models.Model):
 
     def __str__(self):
         return "Course : {} | Class : {}".format(self.course_id.name, self.name)
-
-
+    def parse_data(self):
+        data = {
+            "id" : self.id,
+            "code" : self.code,
+            "name" : self.name,
+            "description" : self.description,
+            "time_start" : self.time_start,
+            "time_end" : self.time_end,
+            "course_id" : self.course_id
+        }
+        return data
 class Schedule(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_('Class'))
     day_of_week = models.CharField(max_length=5, verbose_name=_('Day Of Week'))
@@ -47,7 +62,14 @@ class Schedule(models.Model):
 
     def __str__(self):
         return "Class: {} | Encoded Session: {}".format(self.class_id.name, self.encoded_session)
-
+    def parse_data(self):
+        data = {
+            "id" : self.id,
+            "class_id" : self.class_id,
+            "day_of_week" : self.day_of_week,
+            "encoded_session" : self.encoded_session
+        }
+        return data
 
 class ClassLecturer(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_("Class"))

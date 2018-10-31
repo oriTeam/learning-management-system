@@ -18,6 +18,17 @@ class Syllabus(models.Model):
     def __str__(self):
         return "Syllabus : {}".format(self.name)
 
+    def parse_data(self):
+        data = {
+            "id" : self.id,
+            "title" : self.title,
+            "content" : self.content,
+            "class_id" : self.class_id,
+            "week" : self.week
+            
+        }
+        return data
+
 
 class Material(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Material's Name"))
@@ -33,6 +44,15 @@ class Material(models.Model):
 
     def __str__(self):
         return "Material : {}".format(self.name)
+
+    def parse_data(self):
+        data ={
+            "id" : self.id,
+            "name" : self.name,
+            "syllabus_id" : self.syllabus_id,
+            "material_type" : self.material_type
+        }
+        return data
 
 class ClassSyllabus(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_("Class"))
