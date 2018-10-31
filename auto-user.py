@@ -11,6 +11,7 @@ User = get_user_model()
 while True:
     start = input("Start at (student' code) : ")
     end = input("End at (student' code) : ")
+    role = input("Role : ")
     if start.isdigit() or end.isdigit():
         start = int(start)
         end = int(end)
@@ -19,8 +20,9 @@ while True:
 for code in range(start, end):
     try:
         email = str(code) + '@vnu.edu.vn'
+        role = str(role);
         print('Creating user {0}.'.format(code))
-        user = User.objects.create_user(username=code, email=email)
+        user = User.objects.create_user(username=code, email=email, role=role)
         user.set_password(code)
         user.save()
 
