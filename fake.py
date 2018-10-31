@@ -83,6 +83,7 @@ while True:
 #     except:
 #         print('There was a problem creating the user: {0}.  Error: {1}.' \
 #             .format(course, sys.exc_info()[1]))
+
 def get_random_student():
     students_id = []
     students_queryset = User.objects.filter(role = '0')

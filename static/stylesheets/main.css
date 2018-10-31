@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
 @import url('https://fonts.googleapis.com/css?family=Cabin');
-body, button, a.btn, .m-portlet__head-text {
+body, button, .btn, a.btn, .m-portlet__head-text {
 	font-family: 'Muli', sans-serif !important;
 	/*font-size: 16px;*/
 }
@@ -148,7 +148,7 @@ ul.navbar-nav li {
 }
 
 .bread-crumb {
-    padding-top: 1rem!important;
+    padding-top: 0.25rem!important;
 }
 
 #gotop {

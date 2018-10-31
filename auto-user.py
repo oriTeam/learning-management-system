@@ -20,7 +20,7 @@ while True:
 for code in range(start, end):
     try:
         email = str(code) + '@vnu.edu.vn'
-        role = str(role);
+        role = str(role)
         print('Creating user {0}.'.format(code))
         user = User.objects.create_user(username=code, email=email, role=role)
         user.set_password(code)

@@ -170,6 +170,233 @@ p{
     background: rgba(255, 255, 255, .1);
 }
 
+.section-title .subtitle:after {
+    right: -28px;
+    left: inherit;
+}
+
+.section-title h2 {
+    color: #36a3f7;
+}
+
+.teacher-img-content {
+    background-color: #0a4a78;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.teacher-img-content .teacher-social-name {
+    float: left;
+    max-width: 65px;
+}
+
+.teacher-social-name i {
+    color: #36a3f7;
+}
+
+.teacher-img-content .teacher-social-name ul {
+    margin-bottom: 10px !important;
+}
+
+.ul-li-block ul {
+    margin: 0;
+    padding: 0;
+}
+.teacher-img-content .teacher-social-name li {
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    text-align: center;
+    color: #adb8bf;
+    line-height: 35px;
+    margin-bottom: 5px;
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+    background-color: #fff;
+}
+.ul-li-block ul li {
+    list-style: none;
+    display: block;
+}
+
+.teacher-img-content .teacher-social-name .teacher-name span {
+    font-weight: 700;
+    color: #fff;
+    font-size: 18px;
+}
+
+.teacher-img-content .teacher-img {
+    height: 150px;
+    width: 150px;
+    display: inline-block;
+    position: relative;
+    right: -35px;
+    top: -35px;
+}
+.teacher-img-content .teacher-img img {
+    border-radius: 4px;
+}
 
 
+.teacher-img-content .teacher-img .course-price {
+    font-weight: 400;
+    top: auto;
+    bottom: 20px;
+    font-size: 12px;
+    left: 45px;
+    opacity: 0;
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+    visibility: hidden;
+}
+.course-price {
+    top: 20px;
+    left: 20px;
+    font-weight: 700;
+    padding: 5px 15px;
+    border-radius: 4px;
+    position: absolute;
+}
+.gradient-bg, .modal-body .nws-button button, .teacher-pic-content .teacher-img-content:after, .course-details-category li:hover {
+    background: #17d0cf;
+    background: -moz-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #4eb3bf), color-stop(51%, #17d0cf), color-stop(100%, #4eb3bf));
+    background: -webkit-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #0071b0 100%);
+    background: -o-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: -ms-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#01a6fd), color-stop(51%, #17d0cf), to(#01a6fd));
+    background: -webkit-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: linear-gradient(to right, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background-size: 200% auto;
+    -webkit-transition: background 1s ease-out;
+    -moz-transition: background 1s ease-out;
+    -o-transition: background 1s ease-out;
+    transition: background 1s ease-out;
+}
+.teacher-img-content .teacher-img:after {
+    content: '';
+    height: 2px;
+    width: 50px;
+    left: -25px;
+    bottom: 30px;
+    position: absolute;
+    background-color: #17d0cf;
+}
+.course-price span {
+    color: #fff;
+}
+.teacher-img-content .teacher-category {
+    position: relative;
+    top: -5px;
+}
 
+.teacher-img-content .teacher-category .st-name {
+    font-size: 13px;
+    color: #fff;
+}
+.teacher-img-content .teacher-social-name li:hover {
+    background-color: #fff;
+    color: #176299;
+}
+
+.course-teacher-section {
+    background-color: #fff;
+}
+
+
+.course-category-section {
+    background-color: #f7f7f7;
+    padding: 50px 0px 125px;
+}
+
+.category-icon-title {
+    background-color: #fff;
+    padding: 35px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+    position: relative;
+    height: 90%;
+}
+.category-icon {
+    position: relative;
+    z-index: 1;
+}
+
+.category-icon-title:hover {
+    -webkit-box-shadow: 0px 10px 15px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 15px 2px rgba(0, 0, 0, 0.1);
+}
+
+.category-icon-title:hover .category-icon i {
+    color: #fff;
+    -webkit-text-fill-color: inherit;
+}
+.category-icon i {
+    font-size: 60px;
+}
+.text-gradiant {
+    background: -moz-linear-gradient(left, #01a6fd 0%, #17d0cf 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #01a6fd), color-stop(100%, #17d0cf));
+    background: -webkit-linear-gradient(left, #01a6fd 0%, #17d0cf 100%);
+    background: -o-linear-gradient(left, #01a6fd 0%, #17d0cf 100%);
+    background: -ms-linear-gradient(left, #01a6fd 0%, #17d0cf 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.category-title {
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.category-icon-title:hover .category-title h4 {
+    color: #fff;
+}
+.category-title h4 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.category-icon-title:hover::after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+.category-icon-title:after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: #17d0cf;
+    background: -moz-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #4eb3bf), color-stop(51%, #17d0cf), color-stop(100%, #4eb3bf));
+    background: -webkit-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #0071b0 100%);
+    background: -o-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: -ms-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#01a6fd), color-stop(51%, #17d0cf), to(#01a6fd));
+    background: -webkit-linear-gradient(left, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background: linear-gradient(to right, #01a6fd 0%, #17d0cf 51%, #01a6fd 100%);
+    background-size: 200% auto;
+    -webkit-transition: .3s all ease-in-out;
+    -o-transition: .3s all ease-in-out;
+    transition: .3s all ease-in-out;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    opacity: 0;
+    border-radius: 4px;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
