@@ -20,6 +20,7 @@ class _Course(BaseManageView):
         self.VIEWS_BY_METHOD = {
             'GET' : self.get_course_info,
             'GET' : self.get_courses,
+            'GET' : self.get_course_class,
         }
 
     def get_course_info(self, request):
@@ -51,10 +52,13 @@ class _Course(BaseManageView):
         request_data = request.GET
         course_id = request_data.get('course_id')
         all_class = Class.objects.filter(course_id = course_id)
-        result=[]
-        for item in all_class :
-            result.append(item.parse_data())
-        return JsonResponse({result})
+        if len(all_class) == 0 :
+            return self.json_error(field="Course",code="invalid")
+        else :
+            result=[]
+            for item in all_class :
+                result.append(item.parse_data())
+            return JsonResponse({result})
 
 
 
@@ -83,13 +87,14 @@ class _Class(BaseManageView):
             "GET" : self.get_current_class,
             "GET" : self.get_past_class,
             "GET" : self.get_student,
+            "GET" : self.get_enroll_request,
         }
     def get_class_info(self,request):
         request_data = request.GET
         class_id = request_data.get('class_id')
         item = Class.objects.filter(pk = class_id)
         # except item.DoesNotExist :
-        if item is null :
+        if len(item) == 0:
             return self.json_error(field = "Class", code = "invalid")
         else :
             data = {"class" :item.parse_data()}
@@ -167,29 +172,35 @@ class _Class(BaseManageView):
         request_data = request.GET
         class_id = request_data.get("class_id")
         class_students = ClassStudent.objects.filter(class_id = class_id)
-        students=[]
-        for class_student in class_students:
-            try :
-                student = User.objects.get(pk = class_student.student_id)
-            except User.DoesNotExist:
-                return json_error(field = "User",code ="invalid")
-            else :
-                students.append(student.parse_data())
-        return JsonResponse({students})
+        if len(class_students) == 0 :
+            return self.json_error(field="Class",code="invalid")
+        else : 
+            students=[]
+            for class_student in class_students:
+                try :
+                    student = User.objects.get(pk = class_student.student_id)
+                except User.DoesNotExist:
+                    return self.json_error(field = "User",code ="invalid")
+                else :
+                    students.append(student.parse_data())
+            return JsonResponse({students})
 
     def get_enroll_request(self,request):
         request_data = request.GET
         class_id = request_data.get('class_id')
         enroll_request_by_class_id =  EnrollRequest.objects.filter(class_id = class_id)
-        students=[]
-        for item in enroll_request_by_class_id :
-            try :
-                student = User.objects.get(pk = item.student_id)
-            except User.DoesNotExist :
-                return json_error(field = "User",code = "invalid")
-            else :
-                students.append(student.parse_data())
-        return JsonResponse({students})
+        if len(enroll_request_by_class_id) == 0 :
+            return self.json_error(field= "Class", code = "invalid")
+        else :
+            students=[]
+            for item in enroll_request_by_class_id :
+                try :
+                    student = User.objects.get(pk = item.student_id)
+                except User.DoesNotExist :
+                    return self.json_error(field = "User",code = "invalid")
+                else :
+                    students.append(student.parse_data())
+            return JsonResponse({students})
 
 
                          
