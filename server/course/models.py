@@ -15,6 +15,7 @@ class Course(models.Model):
 
     def __str__(self):
         return "Course : {}".format(self.name)
+
     def parse_data(self):
         data = {
             "id" : self.id,

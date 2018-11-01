@@ -5,7 +5,7 @@
 {% endblock %}
 {% block home %} active {% endblock %}
 {% block bodycontent %}
-<div class="landing-background">
+<section class="landing-background">
     <div class="section section--header">
         <div class="section-shape">
             <img src="{% static 'images/waves-shape.svg'%}" alt="shape image">
@@ -55,8 +55,8 @@
             <span class="circle-150"></span>
         </div>
     </div>
-</div>
-<div class="intro-section bg-white pt-5">
+</section>
+<section class="intro-section bg-white pt-5">
     <div class="container">
         <div class="row mx-0 my-5">
             <h2><strong>PyEdu mang lại những gì?</strong></h2>
@@ -64,7 +64,7 @@
         <div class="row row-my">
             <div class="col-lg-4 my-1">
                 <div class="row">
-                    <img class="mx-auto d-block" src="../../static/images/upload.png" alt="Hình ảnh bị lỗi"
+                    <img class="mx-auto d-block" src="{% static 'images/upload.png'%}" alt="Hình ảnh bị lỗi"
                          width="200px" height="200px">
                 </div>
                 <div class="row justify-content-center text-center">
@@ -73,7 +73,7 @@
             </div>
             <div class="col-lg-4 my-1">
                 <div class="row">
-                    <img class="mx-auto d-block" src="../../static/images/search.png" alt="Hình ảnh bị lỗi"
+                    <img class="mx-auto d-block" src="{% static 'images/search.png'%}" alt="Hình ảnh bị lỗi"
                          width="200px" height="200px">
                 </div>
                 <div class="row justify-content-center text-center">
@@ -82,7 +82,7 @@
             </div>
             <div class="col-lg-4 my-1">
                 <div class="row">
-                    <img class="mx-auto d-block" src="../../static/images/manage.png" alt="Hình ảnh bị lỗi"
+                    <img class="mx-auto d-block" src="{% static 'images/manage.png'%}" alt="Hình ảnh bị lỗi"
                          width="200px" height="200px">
                 </div>
                 <div class="row justify-content-center text-center">
@@ -93,7 +93,7 @@
         <div class="row row-my">
             <div class="col-lg-4 my-1">
                 <div class="row">
-                    <img class="mx-auto d-block rounded-circle" src="../../static/images/follow.png"
+                    <img class="mx-auto d-block rounded-circle" src="{% static 'images/follow.png'%}"
                          alt="Hình ảnh bị lỗi" width="200px" height="200px">
                 </div>
                 <div class="row justify-content-center text-center">
@@ -102,7 +102,7 @@
             </div>
             <div class="col-lg-4 my-1">
                 <div class="row">
-                    <img class="mx-auto d-block rounded-circle" src="../../static/images/submit.png"
+                    <img class="mx-auto d-block rounded-circle" src="{% static 'images/submit.png'%}"
                          alt="Hình ảnh bị lỗi" width="200px" height="200px">
                 </div>
                 <div class="row justify-content-center text-center">
@@ -111,7 +111,7 @@
             </div>
             <div class="col-lg-4 my-1">
                 <div class="row">
-                    <img class="mx-auto d-block rounded-circle" src="../../static/images/tuongtac.png"
+                    <img class="mx-auto d-block rounded-circle" src="{% static 'images/tuongtac.png'%}"
                          alt="Hình ảnh bị lỗi" width="200px" height="200px">
                 </div>
                 <div class="row justify-content-center text-center">
@@ -120,8 +120,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="func-section pt-5">
+</section>
+<section class="func-section pt-5">
     <div class="container">
         <div class="row mx-0">
             <h2><strong>Bạn là ai?</strong></h2>
@@ -155,8 +155,164 @@
             </div>
         </div>
     </div>
-</div>
+</section>
+<section id="course-teacher" class="course-teacher-section">
+    <div class="jarallax" data-jarallax-original-styles="null"
+         style="position: relative; z-index: 0; background-image: none; background-attachment: scroll; background-size: auto;">
+        <div class="container">
+            <div class="section-title m--margin-bottom-20 m--margin-top-40 headline text-center">
+                <h2 class="font-weight-bold">Gương mặt giảng viên tiêu biểu</h2>
+            </div>
 
+            <div class="teacher-list m--margin-top-50">
+                <div class="row justify-content-center">
+                    {% for i in '1234567' %}
+                    <div class="col-md-3">
+                        <div class="teacher-img-content ">
+                            <div class="teacher-cntent">
+                                <div class="teacher-social-name ul-li-block">
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    </ul>
+                                    <div class="teacher-name">
+                                        <span>Hoàng Xuân Tùng</span>
+                                    </div>
+                                </div>
+                                <div class="teacher-img-category">
+                                    <div class="teacher-img">
+                                        <img src="{% static 'images/james.jpg' %}" alt="">
+                                        <div class="course-price text-uppercase text-center gradient-bg">
+                                            <span>Featured</span>
+                                        </div>
+                                    </div>
+                                    <div class="teacher-category float-right">
+                                        <span class="st-name">Phát triển Ứng dụng Web</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!--<div class="row justify-content-center">-->
+                <!--<div class="btn btn-info m-btn&#45;&#45;pill">-->
+                <!--<a href="#">All teacher <i class="fas fa-caret-right"></i></a>-->
+                <!--</div>-->
+                <!--</div>-->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="course-category" class="course-category-section">
+			<div class="container">
+				<div class="section-title m--margin-bottom-45 headline text-center ">
+					<h2 class="font-weight-bold">Các chủ đề chính</h2>
+				</div>
+				<div class="category-item">
+					<div class="row">
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fa fa-code"></i>
+								</div>
+								<div class="category-title">
+									<h4>Công nghệ thông tin</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fab fa-connectdevelop"></i>
+								</div>
+								<div class="category-title">
+									<h4>Điện tử viễn thông</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fa fa-cogs"></i>
+								</div>
+								<div class="category-title">
+									<h4>Cơ học kỹ thuật & tự động hóa</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fab fa-cloudversify"></i>
+								</div>
+								<div class="category-title">
+									<h4>Vật lý kỹ thuật & CN Nano</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fab fa-rocketchat"></i>
+								</div>
+								<div class="category-title">
+									<h4>Ngoại ngữ</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fa fa-book"></i>
+								</div>
+								<div class="category-title">
+									<h4>Chính trị</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fa fa-calculator"></i>
+								</div>
+								<div class="category-title">
+									<h4>Toán</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+
+						<div class="col-md-3 m--margin-bottom-15">
+							<div class="category-icon-title text-center ">
+								<div class="category-icon">
+									<i class="text-gradiant fa fa-plug"></i>
+								</div>
+								<div class="category-title">
+									<h4>Vật lý</h4>
+								</div>
+							</div>
+						</div>
+						<!-- /category -->
+					</div>
+				</div>
+			</div>
+		</section>
 
 {% endblock %}
 {% block javascripts %}
