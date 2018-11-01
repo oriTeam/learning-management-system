@@ -45,9 +45,9 @@ class Class(models.Model):
             "code" : self.code,
             "name" : self.name,
             "description" : self.description,
-            "time_start" : self.time_start,
-            "time_end" : self.time_end,
-            "course_id" : self.course_id
+            "time_start" : str(self.time_start),
+            "time_end" : str(self.time_end),
+            "course_id" : self.course_id.id
         }
         return data
 class Schedule(models.Model):
