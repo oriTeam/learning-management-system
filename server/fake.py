@@ -10,9 +10,10 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wadcourses.settings")
 django.setup()
 User = get_user_model()
 from course.models import Course, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest
-from syllabus.models import Syllabus, SyllabusTemplate, ClassSyllabus
+from syllabus.models import Syllabus, SyllabusTemplate
 
-courses = ['CNTT', 'Ngoại Ngữ', 'Toán', 'Kỹ năng mềm', 'Vật lý']
+courses = ['CNTT', 'Ngoại Ngữ', 'Toán', 'Chính trị', 'Vật lý', 'Điện tử viễn thông', 'Cơ học kỹ thuật & tự động hóa', 'Vật lý kỹ thuật & CN Nano']
+
 classes = [{"name": "Quản lý dự án phần mềm ", "id": "INT3111 21"}, {"name": "Xử lý ảnh ", "id": "INT3404"},
            {"name": "Thị giác máy ", "id": "INT3412"}, {"name": "Cơ sở dữ liệu ", "id": "INT2207 1"},
            {"name": "Nguyên lý hệ điều hành ", "id": "INT 2206 1"},
@@ -72,17 +73,20 @@ while True:
         # class_num = int(class_num)
         break
 
-# for course in courses:
-#     try:
-#         name = course
-#         print('Creating  {0}.'.format(course))
-#         course = Course.objects.create(name=course)
-#         course.save()
-#         print('User {0} successfully created.'.format(course))
-#
-#     except:
-#         print('There was a problem creating the user: {0}.  Error: {1}.' \
-#             .format(course, sys.exc_info()[1]))
+for course in courses:
+    try:
+        name = course
+        check_course = Course.objects.filter(name = course)
+        if len(check_course) == 0:
+            print('Creating  {0}.'.format(course))
+            course = Course.objects.create(name=course)
+            course.save()
+            print('User {0} successfully created.'.format(course))
+        else:
+            print('Course {0} has existed'.format(course))
+    except:
+        print('There was a problem creating the user: {0}.  Error: {1}.' \
+            .format(course, sys.exc_info()[1]))
 
 def get_random_student():
     students_id = []
@@ -128,6 +132,25 @@ for _class in classes:
                 class_student_.save()
             print('Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
 
+        for i in range(0, 15):
+            title = "Tuần " + str(i + 1)
+            content = "Nột dung tuần " + str(i + 1)
+            f_class = class_
+            week = i + 1
+            syllabus = Syllabus.objects.create(title=title, content=content, class_id=f_class, week=week)
+            syllabus.save()
+            print('Class {0} | Syllabus {1} successfully created'.format(_class['name'], title))
+
+        for i in range(0, 10):
+            student_id = get_random_student();
+            student = User.objects.get(pk=student_id)
+            enroll_request = EnrollRequest.objects.filter(student_id = student_id)
+            class_student = ClassStudent.objects.filter(student_id=student_id)
+
+            if len(enroll_request) == 0:
+                enroll_request_ = EnrollRequest.objects.create(class_id = class_, student_id = student)
+                enroll_request_.save()
+                print('Enroll Request: Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
 
     except:
         print('There was a problem creating the class in course: {0}.  Error: {1}.' \

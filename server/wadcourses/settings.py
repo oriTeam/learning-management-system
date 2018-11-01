@@ -93,8 +93,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, "templates"),
-            os.path.join(BASE_DIR, "templates/forum")
+            os.path.join(BASE_DIR, "../client/templates"),
+            os.path.join(BASE_DIR, "../client/templates/forum")
         ],
         # 'APP_DIRS': True,
         'OPTIONS': {
@@ -169,7 +169,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/client/static/'
 
 # debug_toolbar_IPS
 INTERNAL_IPS = ['127.0.0.1']
@@ -181,13 +181,13 @@ AUTH_USER_MODEL = 'core.User'
 from machina import MACHINA_MAIN_STATIC_DIR
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, '../client/static'),
     MACHINA_MAIN_STATIC_DIR,
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'Uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../server/Uploads')
 
-MEDIA_URL = '/Uploads/'
+MEDIA_URL = '/server/Uploads/'
 
 LOGOUT_REDIRECT_URL = 'homepage'
 
