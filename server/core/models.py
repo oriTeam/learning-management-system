@@ -33,7 +33,7 @@ class User(AbstractUser):
         data={
         "id" : self.id,
         "code" : self.code,
-        "avatar" : self.avatar,
+        # "avatar" : self.avatar,
         "phone_number" : self.phone_number,
         "gender" : self.phone_number,
         "unit" : self.unit,

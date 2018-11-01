@@ -57,7 +57,7 @@ $(document).ready(function(){
 
 	$(document).on('click touch',"#test",function(){
 		let data = {
-			"user_id" : "222",
+			"class_id" : "545",
 		};
 		let url = '/api/course/class_info';
 		ajax_request(false,true,"GET","json",url,null,data,success_callback,error_callback);

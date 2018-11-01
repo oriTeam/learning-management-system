@@ -92,9 +92,9 @@ class _Class(BaseManageView):
         self.VIEWS_BY_METHOD = {
             # "GET" : self.get_all_class,
             # "GET" : self.get_class_info,
-            "GET" : self.get_current_class,
+            # "GET" : self.get_current_class,
             # "GET" : self.get_past_class,
-            # "GET" : self.get_student,
+            "GET" : self.get_student,
             # "GET" : self.get_enroll_request,
         }
     def get_class_info(self,request):
@@ -186,19 +186,19 @@ class _Class(BaseManageView):
     def get_student(self,request):
         request_data = request.GET
         class_id = request_data.get("class_id")
-        class_students = ClassStudent.objects.filter(class_id = class_id)
+        class_students = ClassStudent.objects.filter(class_id__id = class_id)
         if len(class_students) == 0 :
             return self.json_error(field="Class",code="invalid")
         else : 
             students=[]
             for class_student in class_students:
                 try :
-                    student = User.objects.get(pk = class_student.student_id)
+                    student = User.objects.get(pk = class_student.student_id.id)
                 except User.DoesNotExist:
                     return self.json_error(field = "User",code ="invalid")
                 else :
                     students.append(student.parse_data())
-            return JsonResponse({students})
+            return JsonResponse({"data" : students})
 
     def get_enroll_request(self,request):
         request_data = request.GET
