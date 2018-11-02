@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %} Trang chủ | Hệ thống quản lý môn học LMS {% endblock %}</title>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'stylesheets/vendors.bundle.css'%}"/>
-    <link rel="stylesheet" href="{% static 'stylesheets/style.bundle.css'%}"/>
-    <link rel="stylesheet" href="{% static 'stylesheets/main.css'%}"/>
+    <link rel="stylesheet" href="{% static 'stylesheets/lib/vendors.bundle.css'%}"/>
+    <link rel="stylesheet" href="{% static 'stylesheets/lib/style.bundle.css'%}"/>
+    <link rel="stylesheet" href="{% static 'stylesheets/custom/main.css'%}"/>
 
     {% block stylesheets %}
     {% endblock %}
@@ -209,10 +209,10 @@
         </button>
     </div>
 </div>
-<script type="text/javascript" src="{% static 'javascripts/vue.js'%}"></script>
-<script type="text/javascript" src="{% static 'javascripts/vendors.bundle.js'%}"></script>
-<script type="text/javascript" src="{% static 'javascripts/scripts.bundle.js'%}"></script>
-<script type="text/javascript" src="{% static 'javascripts/base.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/lib/vue.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/lib/vendors.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/lib/scripts.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'javascripts/custom/base.js'%}"></script>
 {% block javascripts %}
 {% endblock %}
 </body>

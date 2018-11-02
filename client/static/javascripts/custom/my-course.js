@@ -1,3 +1,6 @@
+// var breadcrum = require('./contact')
+
+
 let breadcrumb = '<ul class="bread-crumb px-0">\n' +
     '  <li><a href="/"><span class="fa fa-home"> </span> Trang chủ</a></li>\n' +
     '  <li><a href="/my-course">Khóa học của tôi</a></li>\n' +
@@ -28,4 +31,8 @@ Vue.component('search', {template: search });
 
 new Vue({
     el: '#my-course-body',
+    // components: {
+    //     'breadcrumb': breadcrumb,
+    //     'search': search
+    // }
 })
