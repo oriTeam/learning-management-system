@@ -6,3 +6,14 @@ django-machina
 django-debug-toolbar
 django-guardian
 reportlab
+djangorestframework
+
+dj-database-url==0.3.0
+dj-static==0.0.6
+gunicorn==19.6.0
+Unipath==1.0
+python-decouple==3
+Pillow==5.0.0
+Markdown==2.6.6
+bleach==1.4.3
+whitenoise==3.2

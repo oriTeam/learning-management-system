@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -84,6 +85,10 @@ MIDDLEWARE = [
 
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+
+    #Whitenoise
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -189,6 +194,8 @@ STATICFILES_DIRS = (
     MACHINA_MAIN_STATIC_DIR,
 )
 
+STATIC_ROOT = os.path.join(BASE_DIR, '..client/staticfiles')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, '../server/uploads')
 
 MEDIA_URL = '/server/uploads/'
@@ -217,4 +224,16 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+import dj_database_url
+from decouple import config
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('CLEARDB_DATABASE_URL')
+    )
 }
