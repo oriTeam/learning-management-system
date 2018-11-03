@@ -232,6 +232,15 @@ import dj_database_url
 from decouple import config
 # SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
+
+# mysql://b1d9b9e2c747e3:1e808974@us-cdbr-iron-east-01.cleardb.net/heroku_d8c1c07035d581a?reconnect=true
 DATABASES = {
-    'default': 'mysql://b1d9b9e2c747e3:1e808974@us-cdbr-iron-east-01.cleardb.net/heroku_d8c1c07035d581a?reconnect=true'
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'heroku_d8c1c07035d581a',
+        'USER': 'b1d9b9e2c747e3',
+        'PASSWORD': '1e808974',
+        'HOST': 'us-cdbr-iron-east-01.cleardb.net',
+        'PORT': '',
+    }
 }
