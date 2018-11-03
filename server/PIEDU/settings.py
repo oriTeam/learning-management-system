@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'haystack',
     'widget_tweaks',
 
-    'webpack_loader',
-    
+    #
+    'rest_framework',
+
     #
     'machina',
     'machina.apps.forum',
@@ -129,7 +130,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lmsv2',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '1234',
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
@@ -208,4 +209,12 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }

@@ -34,6 +34,7 @@ urlpatterns = [
     path('forum/v1/', include(board.urls)),
     path('user',views.user,name = 'user'),
     path('course/1', views.inner_course, name='inner_course'),
+    # path('restapi/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
 
