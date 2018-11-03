@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'api',
     'course',
     'syllabus',
-    # 'PIEDU'
+    'PIEDU'
 ]
 
 MIDDLEWARE = [
