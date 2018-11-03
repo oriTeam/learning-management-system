@@ -1,1 +1,1 @@
-web: gunicorn piedu.wsgi --log-file -
+web: gunicorn server.PIEDU.wsgi --log-file -
