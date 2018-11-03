@@ -8,6 +8,7 @@ django-guardian
 reportlab
 djangorestframework
 
+mysqlclient
 dj-database-url==0.3.0
 dj-static==0.0.6
 gunicorn==19.6.0
