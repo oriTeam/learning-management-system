@@ -237,10 +237,17 @@ from decouple import config
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_d8c1c07035d581a',
-        'USER': 'b1d9b9e2c747e3',
-        'PASSWORD': '1e808974',
-        'HOST': 'us-cdbr-iron-east-01.cleardb.net',
-        'PORT': '',
+        # 'NAME': 'heroku_d8c1c07035d581a',
+        # 'USER': 'b1d9b9e2c747e3',
+        # 'PASSWORD': '1e808974',
+        # 'HOST': 'us-cdbr-iron-east-01.cleardb.net',
+        # 'PORT': '',
+        ##
+        'NAME': 'sql12264035',
+        'USER': 'sql12264035',
+        'PASSWORD': 'dgv4jMDekg',
+        'HOST': 'sql12.freemysqlhosting.net',
+        'PORT': '3306',
+
     }
 }
