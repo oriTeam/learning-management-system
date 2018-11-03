@@ -7,7 +7,7 @@ class User(AbstractUser):
     code = models.CharField(max_length=15, unique=True, null=True, verbose_name=_('Code'))
     avatar = models.ImageField(null=True, blank=True, verbose_name=_('Avatar'))
     phone_number = models.CharField(max_length=20, null=True, blank=True, verbose_name=_('Phone Number'))
-    gender = models.BooleanField(default="", verbose_name=_('Gender'))
+    gender = models.BooleanField(default=True, verbose_name=_('Gender'))
     unit = models.CharField(max_length=20,blank=True, null=True, verbose_name=_('Unit'))
     role = models.CharField(max_length=2, verbose_name=_("User's role"))
     # 0. Student account
