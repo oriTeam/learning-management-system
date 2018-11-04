@@ -3,7 +3,7 @@
 
 body, button, .btn, a.btn, .m-portlet__head-text {
     font-family: 'Muli', sans-serif !important;
-    /*font-size: 16px;*/
+    font-size: 15px;
 }
 
 body {

@@ -2,7 +2,83 @@
     box-shadow: 0px 0px 10px #408492;
     background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);
 }
+
+body {
+    background-color: #fff;
+}
+
 #contact-body {
     padding-top: 80px;
-  }
+}
 
+.section-heading {
+    margin-bottom: 50px;
+}
+
+.section-heading h3 {
+    font-weight: 700;
+}
+
+.section-heading p {
+    max-width: 650px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    margin-top: 20px;
+}
+
+.footer-address {
+    margin-bottom: 20px;
+}
+
+.footer-address h6, .contact-us-form h6 {
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.footer-address p {
+    margin-bottom: 15px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-address ul li i {
+    color: #2cabde;
+    margin-right: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.contact-us-form .form-group .form-control {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #f9f9f9;
+    border-radius: 0;
+    background: #f9f9f9;
+}
+
+.form-control {
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.softo-solid-btn {
+    padding: 5px 30px;
+    border: 2px solid #2cabde;
+    background-color: #2cabde;
+    color: #fff;
+    font: 600 14px/30px 'Montserrat', sans-serif;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    letter-spacing: 0.5px;
+}
