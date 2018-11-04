@@ -22,11 +22,11 @@ for code in range(start, end):
         email = str(code) + '@vnu.edu.vn'
         role = str(role)
         print('Creating user {0}.'.format(code))
-        user = User.objects.create_user(username=code, email=email, role=role)
-        user.set_password(code)
+        user = User.objects.create_user(username=str(code), email=email, role=str(role))
+        user.set_password(str(code))
         user.save()
 
-        assert authenticate(username=code, password=code)
+        assert authenticate(username=str(code), password=str(code))
         print('User {0} successfully created.'.format(code))
 
     except:

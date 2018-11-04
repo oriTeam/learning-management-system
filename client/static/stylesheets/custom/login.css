@@ -1,0 +1,25 @@
+#navi-bar {
+    box-shadow: 0px 0px 10px #408492;
+    background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);
+}
+
+#login-background {
+    background-image: url("../../../static/images/login.jpg");
+}
+
+.footer-section {
+    background-color: rgba(0,0,0,0);
+}
+
+.m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-form__group .form-control {
+    border-radius: 6px;
+    box-shadow: 12px 15px 20px rgba(0, 0, 0, 0.1);
+}
+
+#m_login_signin_submit {
+    background: linear-gradient(to right, #a4d6e7 0%, #1ba6de 100%);
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 12px 15px 20px rgba(0, 0, 0, 0.1) !important;
+}

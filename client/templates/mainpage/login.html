@@ -4,16 +4,9 @@
 {% block title %} Đăng nhập | Hệ thống quản lý môn học {% endblock %}
 
 {% block stylesheets %}
-<style>
-    #login-background {
-        background-image: url("../../static/images/login.jpg");
-    }
-</style>
+    <link rel="stylesheet" href="{% static 'stylesheets/custom/login.css' %}">
 {% endblock %}
-{% block course %} active {% endblock %}
-
 {% block bodycontent %}
-<div class="m-grid m-grid--hor m-grid--root m-page">
     <div id="login-background"
          class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2">
         <div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
@@ -54,7 +47,7 @@
                         </div>
                         <div class="m-login__form-action">
                             <button type="submit" id="m_login_signin_submit"
-                                    class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                    class="btn m-btn--custom m-btn--air m-login__btn m-login__btn--primary w-100    ">
                                 Đăng nhập
                             </button>
                         </div>
@@ -86,7 +79,6 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock%}
 {% block javascripts %}
     <script type="text/javascript" src="{% static 'javascripts/custom/login.js'%}"></script>
