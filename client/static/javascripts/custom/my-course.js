@@ -15,7 +15,7 @@ let search = '<div class="col-12 pb-3">\n' +
     '                        <div class="inner-form">\n' +
     '                            <div class="input-field">\n' +
     '                                <button type="button" class="btn-search"><i class="fa fa-search"></i></button>\n' +
-    '                                <input id="search" type="text" placeholder="" value="Tìm kiếm khóa học ..."\n' +
+    '                                <input id="search" type="text" placeholder="Tìm kiếm khóa học ..."\n' +
     '                                       class="form-control"></div>\n' +
     '                        </div>\n' +
     '                    </form>\n' +

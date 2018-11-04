@@ -2,7 +2,7 @@ from django.db import models, connection
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import Group, Permission
-
+# from guardian.shortcuts import assign_perm
 
 class User(AbstractUser):
     code = models.CharField(max_length=15, unique=True, null=True, verbose_name=_('Code'))
@@ -61,32 +61,23 @@ class User(AbstractUser):
                 user.is_admin = True
                 user.is_superuser = True
                 user.save()
-        else:
+        elif self.role == '1':
             if self.is_superuser:
                 user = User.objects.get(pk=self.id)
                 user.is_staff = False
                 user.is_admin = False
                 user.is_superuser = False
                 user.save()
+
     def remove_user_from_group(self):
         for group in Group.objects.all():
             group.user_set.remove(self)
 
     def update_user_group(self):
-        user_group = 'user_groups'
-        with connection.cursor() as cursor:
-            cursor.execute('INSERT INTO {0} SET user_id = {1}, group_id = {2}'.format(
-                user_group, self.id, '3')
-            )
-
-
-
-
-
-        # self.groups.clear()
-        # group = Group.objects.get(pk=3)
-        # group.user_set.add(self)
-
+        self.groups.clear()
+        group = Group.objects.get(pk=3)
+        group.user_set.add(self)
+        print('534')
 
 
         # group = Group.objects.get(pk=3)

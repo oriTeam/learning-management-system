@@ -8,11 +8,12 @@ User = get_user_model()
 # from django.conf import settings
 # User = settings.AUTH_USER_MODEL
 
-@receiver([post_save, ], sender=User)
-def update_role_from_attr(sender, instance, **kwargs):
-    instance.update_user_role()
-
-
-# @receiver([post_save, ], sender = User)
+# @receiver([post_save, ], sender=User)
 # def update_role_from_attr(sender, instance, **kwargs):
-#     # instance.update_user_group()
+#     instance.update_user_role()
+
+
+@receiver([post_save, ], sender = User)
+def update_role_from_attr(sender, instance, **kwargs):
+    if kwargs['created']:
+        instance.update_user_group()
