@@ -1,6 +1,7 @@
 #navi-bar {
     box-shadow: 0px 0px 10px #408492;
     background: linear-gradient(to right, #1ba6de 0%, #a4d6e7 100%);
+    padding: 0.5rem 0;
 }
 #help-body {
   padding-top: 80px;

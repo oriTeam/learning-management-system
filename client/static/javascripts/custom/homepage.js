@@ -1,71 +1,112 @@
-$.fn.isOnViewport = function() {
-	let wind = $(window);
-	let viewport = {
-		top : wind.scrollTop(),
-		left : wind.scrollLeft()
-	};
-	viewport.right = viewport.left + wind.width();
-	viewport.bottom = viewport.top + wind.height();
+/*
 
-	let bounds = this.offset();
-	bounds.right = bounds.left + this.outerWidth();
-	bounds.bottom = bounds.top + this.outerHeight();
+Style   : MobApp Script JS
+Version : 1.0
+Author  : Surjith S M
+URI     : https://surjithctly.in/
 
-	return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
-};
+Copyright © All rights Reserved 
 
-$(document).ready(function(){
+*/
 
-    $('.navbar-toggler').click(function() {
-    	if(!$(window).scrollTop()) {
-    		$('#navi-bar').toggleClass('navbar__over');
-    	}
+$(function() {
+    "use strict";
+
+    /*-----------------------------------
+     * FIXED  MENU - HEADER
+     *-----------------------------------*/
+    function menuscroll() {
+        var $navmenu = $('.nav-menu');
+        if ($(window).scrollTop() > 50) {
+            $navmenu.addClass('is-scrolling');
+        } else {
+            $navmenu.removeClass("is-scrolling");
+        }
+    }
+    menuscroll();
+    $(window).on('scroll', function() {
+        menuscroll();
     });
+    /*-----------------------------------
+     * NAVBAR CLOSE ON CLICK
+     *-----------------------------------*/
 
-	// $(window).resize(function(){
-	// 	let height = $(window).height() - $('#navibar').height();
-	// 	$('.home__view').css({'height': height});
-	// });
-	$(window).on('scroll', function() {
-		if($(window).scrollTop()) {
-			$('#navi-bar').addClass('navbar__over');
-		}
-		else {
-			$('#navi-bar').removeClass('navbar__over');
-		};
-		// if($('.showlater').isOnViewport()) {
-		// 	$('.showlater').show().addClass('animated bounceInRight');
-		// };
-		// if($('#carousel-id').isOnViewport()) {
-		// 	$('#carousel-id').addClass('animated bounceInLeft');
-		// };
-		// if($('.main-function').isOnViewport()) {
-		// 	$('.main-function').addClass('animated flipInX');
-		// };
-		// if($('.count').isOnViewport()){}
+    // $('.navbar-nav > li:not(.dropdown) > a').on('click', function() {
+    //     $('.navbar-collapse').collapse('hide');
+    // });
+    /* 
+     * NAVBAR TOGGLE BG
+     *-----------------*/
+    var siteNav = $('#navbar');
+    siteNav.on('show.bs.collapse', function(e) {
+        $(this).parents('.nav-menu').addClass('menu-is-open');
+    })
+    siteNav.on('hide.bs.collapse', function(e) {
+        $(this).parents('.nav-menu').removeClass('menu-is-open');
+    })
 
-	});
+    /*-----------------------------------
+     * ONE PAGE SCROLLING
+     *-----------------------------------*/
+    // Select all links with hashes
+    $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').not('[data-toggle="tab"]').on('click', function(event) {
+        // On-page links
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            // Figure out element to scroll to
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            // Does a scroll target exist?
+            if (target.length) {
+                // Only prevent default if animation is actually gonna happen
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 1000, function() {
+                    // Callback after animation
+                    // Must change focus!
+                    var $target = $(target);
+                    $target.focus();
+                    if ($target.is(":focus")) { // Checking if the target was focused
+                        return false;
+                    } else {
+                        $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+                        $target.focus(); // Set focus again
+                    };
+                });
+            }
+        }
+    });
+    /*-----------------------------------
+     * OWL CAROUSEL
+     *-----------------------------------*/
+    var $testimonialsDiv = $('.testimonials');
+    if ($testimonialsDiv.length && $.fn.owlCarousel) {
+        $testimonialsDiv.owlCarousel({
+            items: 1,
+            nav: true,
+            dots: false,
+            navText: ['<span class="ti-arrow-left"></span>', '<span class="ti-arrow-right"></span>']
+        });
+    }
 
-	// $('.count').each(function() {
-	// 	$(this).prop('Counter', 0).animate({
-	// 		counter: $(this).text()}, {duration: 10000, easing:'swing',step: function(now) {
-	// 			$(this).text(Math.ceil(now));
-	// 		}
-	// 	});
-	// });
+    var $galleryDiv = $('.img-gallery');
+    if ($galleryDiv.length && $.fn.owlCarousel) {
+        $galleryDiv.owlCarousel({
+            nav: false,
+            center: true,
+            loop: true,
+            autoplay: true,
+            dots: true,
+            navText: ['<span class="ti-arrow-left"></span>', '<span class="ti-arrow-right"></span>'],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 3
+                }
+            }
+        });
+    }
 
-
-	$(document).on('click touch',"#test",function(){
-		let data = {
-			"class_id" : "545",
-		};
-		let url = '/api/course/class_info';
-		ajax_request(false,true,"GET","json",url,null,data,success_callback,error_callback);
-	});
-	function success_callback(){
-		alert("OK!");
-	}
-	function error_callback(){
-		alert("Failed!");
-	}
-});
+}); /* End Fn */
