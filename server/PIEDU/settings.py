@@ -133,7 +133,7 @@ WSGI_APPLICATION = 'PIEDU.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lmsv2',
+        'NAME': 'lmsv3'   ,
         'USER': 'root',
         'PASSWORD': '1234',
         'OPTIONS': {

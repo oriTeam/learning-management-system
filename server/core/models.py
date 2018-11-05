@@ -10,11 +10,8 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=20, null=True, blank=True, verbose_name=_('Phone Number'))
     gender = models.BooleanField(default=True, verbose_name=_('Gender'))
     unit = models.CharField(max_length=20, blank=True, null=True, verbose_name=_('Unit'))
-    role = models.CharField(max_length=2, verbose_name=_("User's role"))
-
-    # 0. Student account
-    # 1. Lecturer account
-    # 2. Admin account
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True, related_name='group')
+    # groups = models.ManyToManyField(Group, related_name='groups')
 
     class Meta:
         db_table = 'user'
@@ -23,12 +20,12 @@ class User(AbstractUser):
         verbose_name_plural = _("Users")
 
     def __str__(self):
-        user = ''
-        if self.role == '0':
+        user_group = ''
+        if 'student' in self.group.name:
             user = 'Student'
-        elif self.role == '1':
+        elif 'lecturer' in self.group.name:
             user = 'Lecturer'
-        elif self.role == '2':
+        elif 'admin' in self.group.name:
             user = 'Admin'
         return "{}: {}".format(user, self.username)
 
@@ -40,78 +37,35 @@ class User(AbstractUser):
             "phone_number": self.phone_number,
             "gender": self.phone_number,
             "unit": self.unit,
-            "role": self.role
+            "group": self.group.name
         }
         return data
 
-    def is_Admin(self):
-        return True if self.role == '2' else False
+    def is_admin(self):
+        return True if 'admin' in self.group.name else False
 
-    def is_Student(self):
-        return True if self.role == '0' else False
+    def is_student(self):
+        return True if 'student' in self.group.name else False
 
-    def is_Lecturer(self):
-        return True if self.role == '1' else False
+    def is_lecturer(self):
+        return True if 'lecturer' in self.group.name else False
 
     def update_user_role(self):
-        if self.role == '2':
+        if self.is_admin():
             if not self.is_superuser:
-                user = User.objects.get(pk=self.id)
-                user.is_staff = True
-                user.is_admin = True
-                user.is_superuser = True
-                user.save()
-        elif self.role == '1':
-            if self.is_superuser:
-                user = User.objects.get(pk=self.id)
-                user.is_staff = False
-                user.is_admin = False
-                user.is_superuser = False
-                user.save()
+                self.is_staff = True
+                self.is_superuser = True
+                self.save()
 
-    def remove_user_from_group(self):
-        for group in Group.objects.all():
-            group.user_set.remove(self)
+        elif self.is_lecturer():
+            if not self.is_staff or self.is_superuser:
+                self.is_staff = True
+                self.is_superuser = False
+                self.save()
 
-    def update_user_group(self):
-        self.groups.clear()
-        group = Group.objects.get(pk=3)
-        group.user_set.add(self)
-        print('534')
+        elif self.is_student():
+            if self.is_staff or self.is_superuser:
+                self.is_staff = False
+                self.is_superuser = False
+                self.save()
 
-
-        # group = Group.objects.get(pk=3)
-        # group.user_set.add(User.objects.get(pk=self.id))
-        # group.save()
-        # # if self.role == '2':
-        #     user = User.objects.get(pk=self.id)
-        #     group = Group.objects.get(name='admin_group')
-        #     group.user_set.add(user)
-        #             # user.save()
-        #     print(user.groups.all())
-        #             # group.save()
-        #
-        # elif self.role == '1':
-        #     try:
-        #         group = Group.objects.get(name='lecturer_group')
-        #     except Group.DoesNotExist:
-        #         print("Lectuter Group Does Not Exist")
-        #     else:
-        #         if self not in group.user_set.all():
-        #             self.groups.clear()
-        #             group.user_set.add(self)
-        # elif self.role == '0':
-        #     try:
-        #         group = Group.objects.get(name='student_group')
-        #     except Group.DoesNotExist:
-        #         print("Student Group Does Not Exist")
-        #     else:
-        #         if self not in group.user_set.all():
-        #             self.groups.clear()
-        #             group.user_set.add(self)
-        # # pass
-
-
-
-
-# Create your models here.

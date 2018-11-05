@@ -1,3 +1,20 @@
+(function($) {
+	"use strict"
+
+	// Preloader
+	$(window).on('load', function() {
+		$("#preloader").delay(600).fadeOut();
+	});
+
+	// Mobile Toggle Btn
+	$('.navbar-toggle').on('click',function(){
+	    $('#navbar').removeClass('collapse')
+		$('#navi-bar').toggleClass('nav-collapser');
+	});
+
+})(jQuery);
+
+
 function ajax_request(cache_, async_, type_, data_type_, url_, headers_, data_, success_, error_) {
     return $.ajax({
         cache: cache_,

@@ -129,7 +129,7 @@ class _Class(BaseManageView):
             return self.json_error(field = "User" , code = "invalid")
         else :
             all_class =[]
-            if user.is_Student :
+            if user.is_student :
                 class_students = ClassStudent.objects.filter(student_id= user_id)
                 if len(class_students) == 0 :
                     return self.json_error(field = "ClassStudent" ,code = "invalid")
@@ -143,7 +143,7 @@ class _Class(BaseManageView):
                         else :
                              all_class.append(item)
                 
-            elif user.is_Lecturer :
+            elif user.is_lecturer :
                 class_lecturers = ClassLecturer.objects.filter(lecturer_id = user_id)
                 if len(class_lecturers) == 0 :
                     return self.json_error(field = "ClassLecturer",code ="invalid")

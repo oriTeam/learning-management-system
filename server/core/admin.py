@@ -12,7 +12,7 @@ from .forms import UserForm
 # class UserAdmin(GuardedModelAdmin):
 class UserAdmin(admin.ModelAdmin):
 	form = UserForm
-	list_display = ('id', 'username', 'code', 'role', 'unit')
+	list_display = ('id', 'username', 'code', 'unit', 'group')
 
 # class AuthorAdmin(GuardedModelAdmin):
 #     pass
