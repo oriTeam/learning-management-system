@@ -21,13 +21,13 @@ class User(AbstractUser):
 
     def __str__(self):
         user_group = ''
-        if 'student' in self.group.name:
-            user = 'Student'
-        elif 'lecturer' in self.group.name:
-            user = 'Lecturer'
-        elif 'admin' in self.group.name:
-            user = 'Admin'
-        return "{}: {}".format(user, self.username)
+        if self.is_student():
+            user_group = 'Student'
+        elif self.is_lecturer():
+            user_group = 'Lecturer'
+        elif self.is_admin():
+            user_group = 'Admin'
+        return "{}: {}".format(user_group, self.username)
 
     def parse_data(self):
         data = {
@@ -42,13 +42,13 @@ class User(AbstractUser):
         return data
 
     def is_admin(self):
-        return True if 'admin' in self.group.name else False
+        return True if 'admin' in str(self.group) else False
 
     def is_student(self):
-        return True if 'student' in self.group.name else False
+        return True if 'student' in str(self.group) else False
 
     def is_lecturer(self):
-        return True if 'lecturer' in self.group.name else False
+        return True if 'lecturer' in str(self.group) else False
 
     def update_user_role(self):
         if self.is_admin():
