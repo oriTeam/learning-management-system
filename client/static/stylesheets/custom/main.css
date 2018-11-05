@@ -14,6 +14,22 @@ body {
     position: relative;
 }
 
+a {
+    color: #374050;
+    font-weight: 700;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #26aade;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 12px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
 
 
 /*h1 {*/
@@ -116,7 +132,7 @@ body {
 
 
 .light-bg {
-    background-color: #faf6fb;
+    background-color: #f6fafb;
 }
 
 .section {

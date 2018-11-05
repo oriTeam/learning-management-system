@@ -1,13 +1,3 @@
-/*
-
-Style   : MobApp Script JS
-Version : 1.0
-Author  : Surjith S M
-URI     : https://surjithctly.in/
-
-Copyright © All rights Reserved 
-
-*/
 
 $(function() {
     "use strict";
@@ -27,14 +17,7 @@ $(function() {
     $(window).on('scroll', function() {
         menuscroll();
     });
-    /*-----------------------------------
-     * NAVBAR CLOSE ON CLICK
-     *-----------------------------------*/
-
-    // $('.navbar-nav > li:not(.dropdown) > a').on('click', function() {
-    //     $('.navbar-collapse').collapse('hide');
-    // });
-    /* 
+    /*
      * NAVBAR TOGGLE BG
      *-----------------*/
     var siteNav = $('#navbar');
@@ -110,3 +93,13 @@ $(function() {
     }
 
 }); /* End Fn */
+
+$(document).ready(function () {
+    $('.count').each(function() {
+		$(this).prop('Counter', 0).animate({
+			counter: $(this).text()}, {duration: 10000, easing:'swing',step: function(now) {
+				$(this).text(Math.ceil(now));
+			}
+		});
+	});
+})
