@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 animated bounceInRight hide-sm">
-                        <img src="{% static 'images/study.svg' %}" alt="" width="500vw">
+                        <img src="{% static 'images/girl-with-comp.svg' %}" alt="" width="500vw">
                     </div>
                 </div>
 
@@ -98,38 +98,28 @@
                         <img src="{% static 'images/about.png' %}" alt="">
                     </div>
                 </div>
-
             </div>
-            <!-- row -->
-
         </div>
-        <!-- container -->
     </div>
 
     <div class="section light-bg" id="features">
-
-
         <div class="container">
-
             <div class="section-title">
-                <small>HIGHLIGHTS</small>
-                <h3>Features you love</h3>
+                <h3>Thống kê hệ thống</h3>
             </div>
-
-
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
-                                <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
+                                <span class="fa fa-user-graduate gradient-fill statistic-icon mx-3"></span>
                                 <div class="media-body">
                                     <h4 class="card-title">
-                                        <span class="count">80</span>
-                                        <span> +</span>
+                                        <span class="count">70</span>
+                                        <span><span class="fa fa-plus pb-2 vertical-align-top mt-2"></span><span
+                                                class="fa fa-plus pb-2 vertical-align-top mt-2"></span></span>
+                                        <span class="statistic-text"> giảng viên</span>
                                     </h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Integer rutrum, urna eu pellentesque </p>
                                 </div>
                             </div>
                         </div>
@@ -139,14 +129,14 @@
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
-                                <span class="ti-settings gradient-fill ti-3x mr-3"></span>
+                                <span class="fa fa-users gradient-fill statistic-icon mx-3"></span>
                                 <div class="media-body">
                                     <h4 class="card-title">
                                         <span class="count">1000</span>
-                                        <span> +</span>
+                                        <span><span class="fa fa-plus pb-2 vertical-align-top mt-2"></span><span
+                                                class="fa fa-plus pb-2 vertical-align-top mt-2"></span></span>
+                                        <span class="statistic-text"> sinh viên</span>
                                     </h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Integer rutrum, urna eu pellentesque </p>
                                 </div>
                             </div>
                         </div>
@@ -156,14 +146,14 @@
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
-                                <span class="ti-lock gradient-fill ti-3x mr-3"></span>
+                                <span class="fa fa-file-alt gradient-fill statistic-icon mx-3"></span>
                                 <div class="media-body">
                                     <h4 class="card-title">
                                         <span class="count">200</span>
-                                        <span> +</span>
+                                        <span><span class="fa fa-plus pb-2 vertical-align-top mt-2"></span><span
+                                                class="fa fa-plus pb-2 vertical-align-top mt-2"></span></span>
+                                        <span class="statistic-text"> tài liệu</span>
                                     </h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Integer rutrum, urna eu pellentesque </p>
                                 </div>
                             </div>
                         </div>
@@ -172,13 +162,36 @@
             </div>
         </div>
     </div>
+        <div class="section" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h3>Các Khóa học</h3>
+            </div>
+            <div class="img-gallery owl-carousel owl-theme">
+                {% for i in '12345' %}
+                <div class="w-100">
+                    <div class="category-icon-title text-center ">
+                        <div class="category-icon">
+                            <i class="text-gradiant fa fa-calculator"></i>
+                        </div>
+                        <div class="category-title">
+                            <h4>Toán</h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- // end .section -->
 
-    <div id="courses" class="section">
+
+    <div id="courses" class="section light-bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="section-header text-center">
-                    <h2>Explore Courses</h2>
-                    <p class="lead">Libris vivendo eloquentiam ex ius, nec id splendide abhorreant.</p>
+                    <h2>Khám phá lớp học</h2>
+                    <p class="lead">Các môn học bắt buộc, bổ trợ, chuyên ngành, ...</p>
                 </div>
             </div>
             <div id="courses-wrapper">
@@ -190,11 +203,10 @@
                                     <img src="{% static 'images/code.jpg' %}" alt="">
                                     <i class="course-link-icon fa fa-link"></i>
                                 </a>
-                                <a class="course-title" href="#">Beginner to Pro in Excel: Financial Modeling and
-                                    Valuation</a>
+                                <a class="course-title" href="#">Nhập môn an toàn thông tin</a>
                                 <div class="course-details">
-                                    <span class="course-category">Business</span>
-                                    <span class="course-price course-free">Free</span>
+                                    <span class="course-category">CNTT</span>
+                                    <span class="course-price course-free">TS. Nguyễn Đại Thọ</span>
                                 </div>
                             </div>
                         </div>
@@ -203,146 +215,61 @@
             </div>
             <div class="row justify-content-center m--margin-top-30">
                 <div class="center-btn">
-                    <a class="main-button icon-button" href="#">More Courses</a>
+                    <a class="main-button icon-button" href="#">Xem thêm lớp học ...</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="section light-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="images/dualphone.png" alt="dual phone" class="img-fluid">
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                    <div>
-                        <div class="box-icon"><span class="ti-rocket gradient-fill ti-3x"></span></div>
-                        <h2>Launch your App</h2>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel
-                            exercitationem eveniet vero maxime ratione </p>
-                        <a href="#" class="btn btn-primary">Read more</a></div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <!-- // end .section -->
-
-
     <div class="section">
         <div class="container">
+            <div class="row mb-4 justify-content-center">
+                <div class="section-header text-center">
+                    <h2>Bắt đầu với hệ thống ...</h2>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-md-8 d-flex align-items-center">
+                <div class="col-md-7 d-flex align-items-center">
                     <ul class="list-unstyled ui-steps">
                         <li class="media">
                             <div class="circle-icon mr-4">1</div>
                             <div class="media-body">
-                                <h5>Create an Account</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
-                                    pellentesque pretium obcaecati vel exercitationem </p>
+                                <h5>Đăng nhập bằng tài khoản sinh viên/ giảng viên</h5>
+                                <p class="mb-0">Tài khoản và mật khẩu mặc định là mã sinh viên/ mã giảng viên</p>
+                                <a href="/login" class="m--regular  -font-size-lg1"> <i
+                                        class="fa fa-angle-double-right"></i> &nbsp;<em>Đăng nhập ngay</em> </a>
                             </div>
                         </li>
                         <li class="media my-4">
                             <div class="circle-icon mr-4">2</div>
                             <div class="media-body">
-                                <h5>Share with friends</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
-                                    pellentesque pretium obcaecati vel exercitationem eveniet</p>
+                                <h5>Thay đổi thông tin tài khoản</h5>
+                                <p>Bao gồm việc thay đổi mật khẩu và các thông tin cá nhân như email, số điện thoại, ảnh
+                                    đại diện, ... </p>
                             </div>
                         </li>
                         <li class="media">
                             <div class="circle-icon mr-4">3</div>
                             <div class="media-body">
-                                <h5>Enjoy your life</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu
-                                    pellentesque pretium obcaecati vel exercitationem </p>
+                                <h5>Khám phá hệ thống</h5>
+                                <p>Khám phá và tham gia các khóa học đói với sinh viên <br> Tạo mới các khóa học và chấp
+                                    nhận yêu cầu tham gia của sinh viên đối với giảng viên </p>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <img src="images/iphonex.png" alt="iphone" class="img-fluid">
+                <div class="col-md-5 py-lg-5">
+                    <img src="{% static 'images/study.svg' %}" alt="iphone" class="img-fluid mt-lg-5">
                 </div>
 
             </div>
-
         </div>
-
     </div>
-    <!-- // end .section -->
-
-
-    <div class="section light-bg">
-        <div class="container">
-            <div class="section-title">
-                <small>TESTIMONIALS</small>
-                <h3>What our Customers Says</h3>
-            </div>
-
-            <div class="testimonials owl-carousel">
-                <div class="testimonials-single">
-                    <img src="images/client.png" alt="client" class="client-img">
-                    <blockquote class="blockquote">Uniquely streamline highly efficient scenarios and 24/7 initiatives.
-                        Conveniently embrace multifunctional ideas through proactive customer service. Distinctively
-                        conceptualize 2.0 intellectual capital via user-centric partnerships.
-                    </blockquote>
-                    <h5 class="mt-4 mb-2">Crystal Gordon</h5>
-                    <p class="text-primary">United States</p>
-                </div>
-                <div class="testimonials-single">
-                    <img src="images/client.png" alt="client" class="client-img">
-                    <blockquote class="blockquote">Uniquely streamline highly efficient scenarios and 24/7 initiatives.
-                        Conveniently embrace multifunctional ideas through proactive customer service. Distinctively
-                        conceptualize 2.0 intellectual capital via user-centric partnerships.
-                    </blockquote>
-                    <h5 class="mt-4 mb-2">Crystal Gordon</h5>
-                    <p class="text-primary">United States</p>
-                </div>
-                <div class="testimonials-single">
-                    <img src="images/client.png" alt="client" class="client-img">
-                    <blockquote class="blockquote">Uniquely streamline highly efficient scenarios and 24/7 initiatives.
-                        Conveniently embrace multifunctional ideas through proactive customer service. Distinctively
-                        conceptualize 2.0 intellectual capital via user-centric partnerships.
-                    </blockquote>
-                    <h5 class="mt-4 mb-2">Crystal Gordon</h5>
-                    <p class="text-primary">United States</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <!-- // end .section -->
-
-
-    <div class="section" id="gallery">
-        <div class="container">
-            <div class="section-title">
-                <small>GALLERY</small>
-                <h3>App Screenshots</h3>
-            </div>
-
-            <div class="img-gallery owl-carousel owl-theme">
-                <img src="images/screen1.jpg" alt="image">
-                <img src="images/screen2.jpg" alt="image">
-                <img src="images/screen3.jpg" alt="image">
-                <img src="images/screen1.jpg" alt="image">
-            </div>
-
-        </div>
-
-    </div>
-    <!-- // end .section -->
-
     <div class="section light-bg">
         <div class="container">
             <div class="section-title">
                 <small>FAQ</small>
                 <h3>Frequently Asked Questions</h3>
             </div>
-
             <div class="row pt-4">
                 <div class="col-md-6">
                     <h4 class="mb-3">Can I try before I buy?</h4>
@@ -353,7 +280,6 @@
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum,
                         urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                         Vestibulum sit amet mattis ante. </p>
-
                 </div>
                 <div class="col-md-6">
                     <h4 class="mb-3">Can I change my plan later?</h4>
@@ -364,7 +290,6 @@
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum,
                         urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien.
                         Vestibulum sit amet mattis ante. </p>
-
                 </div>
             </div>
             <div class="row justify-content-center m--margin-top-50">
@@ -373,342 +298,24 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- // end .section -->
-
-
-
-    <div class="section bg-gradient">
+    <div class="section">
         <div class="container">
-            <div class="call-to-action">
-
-                <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
-                <h2>Download Anywhere</h2>
-                <p class="tagline">Available for all major mobile and desktop platforms. Rapidiously visualize optimal
-                    ROI rather than enterprise-wide methods of empowerment. </p>
-                <div class="my-4">
-
-                    <a href="#" class="btn btn-light"><img src="images/appleicon.png" alt="icon"> App Store</a>
-                    <a href="#" class="btn btn-light"><img src="images/playicon.png" alt="icon"> Google play</a>
+            <div class="row">
+                <div class="col-md-6 px-5">
+                    <img src="{% static 'images/envelope.svg' %}" alt="dual phone" class="img-fluid">
                 </div>
-                <p class="text-primary">
-                    <small><i>*Works on iOS 10.0.5+, Android Kitkat and above. </i></small>
-                </p>
+                <div class="col-md-6 d-flex align-items-center">
+                    <div>
+                        <h2>Bạn có phản hồi, thắc mắc khác ?</h2>
+                        <p class="mb-4">Chúng tôi luôn sẵn sàng lắng nghe mọi ý kiến đóng góp của các bạn. Điều này giúp
+                            chúng tôi cải thiện hệ thống để đem lại trải nghiệm tốt hơn cho cả Giảng viên và các sinh
+                            viên </p>
+                        <a href="/contact" class="btn btn-primary">Liên hệ</a></div>
+                </div>
             </div>
         </div>
-
     </div>
-
-
-    {#<section class="landing-background">#}
-    {#    <div class="section section--header">#}
-    {#        <div class="section-shape">#}
-    {#            <img src="{% static 'images/waves-shape.svg'%}" alt="shape image">#}
-    {#        </div>#}
-    {#        <div class="container">#}
-    {#            <div class="row">#}
-    {#                <div class="col-sm-12 col-lg-6">#}
-    {#                    <div class="intro">#}
-    {#                        <!--<img src="../../static/images/uet.jpg" alt="" width=20% class="m&#45;&#45;img-rounded" style="margin-bottom: 40px">-->#}
-    {#                        <div class="intro_text">#}
-    {#                            <h2 class="intro__title">Hệ thống quản lý môn học</h2>#}
-    {#                            <p class="intro__description">Đại Học Công Nghệ - Đại Học Quốc Gia Hà Nội</p>#}
-    {#                        </div>#}
-    {#                        <div class="intro__buttons my-4">#}
-    {#                            <div class="row">#}
-    {#                                <div class="col-sm-6">#}
-    {#                                    {% if user.is_authenticated %}#}
-    {##}
-    {#                                    <button class="btn btn-primary" id="test">TEST PLeaSe DONT DELETE</button>#}
-    {##}
-    {#                                    <a href="#"#}
-    {#                                       class="btn m-btn--pill btn-outline-light m-btn--air m-btn--hover-light btn-lg">Khóa#}
-    {#                                        học của tôi</a>#}
-    {##}
-    {#                                    {% else %}#}
-    {#                                    <a href="/login"#}
-    {#                                       class="btn m-btn--pill btn-outline-light m-btn--air m-btn--hover-light btn-lg">Đăng#}
-    {#                                        nhập ngay</a>#}
-    {#                                    {% endif %}#}
-    {#                                </div>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#                <div class="col-lg-6 animated bounceInRight hide-sm">#}
-    {#                    <img src="{% static 'images/study.svg'%}" alt="" width="500vw">#}
-    {#                </div>#}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {#        <div class="shape shape-style-1 shape-primary">#}
-    {#            <span class="circle-150"></span>#}
-    {#            <span class="circle-50"></span>#}
-    {#            <span class="circle-50"></span>#}
-    {#            <span class="circle-75"></span>#}
-    {#            <span class="circle-100"></span>#}
-    {#            <span class="circle-150"></span>#}
-    {#        </div>#}
-    {#    </div>#}
-    {#</section>#}
-    {#<section class="intro-section bg-white pt-5">#}
-    {#    <div class="container">#}
-    {#        <div class="row mx-0 my-5">#}
-    {#            <h2><strong>PyEdu mang lại những gì?</strong></h2>#}
-    {#        </div>#}
-    {#        <div class="row row-my">#}
-    {#            <div class="col-lg-4 my-1">#}
-    {#                <div class="row">#}
-    {#                    <img class="mx-auto d-block" src="{% static 'images/upload.png'%}" alt="Hình ảnh bị lỗi"#}
-    {#                         width="200px" height="200px">#}
-    {#                </div>#}
-    {#                <div class="row justify-content-center text-center">#}
-    {#                    <h4>Cập nhật tài liệu dễ dàng hơn</h4>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#            <div class="col-lg-4 my-1">#}
-    {#                <div class="row">#}
-    {#                    <img class="mx-auto d-block" src="{% static 'images/search.png'%}" alt="Hình ảnh bị lỗi"#}
-    {#                         width="200px" height="200px">#}
-    {#                </div>#}
-    {#                <div class="row justify-content-center text-center">#}
-    {#                    <h4>Tìm kiếm khóa học với thông tin đầy đủ nhất</h4>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#            <div class="col-lg-4 my-1">#}
-    {#                <div class="row">#}
-    {#                    <img class="mx-auto d-block" src="{% static 'images/manage.png'%}" alt="Hình ảnh bị lỗi"#}
-    {#                         width="200px" height="200px">#}
-    {#                </div>#}
-    {#                <div class="row justify-content-center text-center">#}
-    {#                    <h4>Quản lí lớp học hiệu quả</h4>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#        <div class="row row-my">#}
-    {#            <div class="col-lg-4 my-1">#}
-    {#                <div class="row">#}
-    {#                    <img class="mx-auto d-block rounded-circle" src="{% static 'images/follow.png'%}"#}
-    {#                         alt="Hình ảnh bị lỗi" width="200px" height="200px">#}
-    {#                </div>#}
-    {#                <div class="row justify-content-center text-center">#}
-    {#                    <h4>Xem bài giảng và thông báo sớm nhất</h4>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#            <div class="col-lg-4 my-1">#}
-    {#                <div class="row">#}
-    {#                    <img class="mx-auto d-block rounded-circle" src="{% static 'images/submit.png'%}"#}
-    {#                         alt="Hình ảnh bị lỗi" width="200px" height="200px">#}
-    {#                </div>#}
-    {#                <div class="row justify-content-center text-center">#}
-    {#                    <h4>Nộp bài tập với thao tác đơn giản</h4>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#            <div class="col-lg-4 my-1">#}
-    {#                <div class="row">#}
-    {#                    <img class="mx-auto d-block rounded-circle" src="{% static 'images/tuongtac.png'%}"#}
-    {#                         alt="Hình ảnh bị lỗi" width="200px" height="200px">#}
-    {#                </div>#}
-    {#                <div class="row justify-content-center text-center">#}
-    {#                    <h4>Cầu nối tương tác giữa sinh viên và giảng viên</h4>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-    {#</section>#}
-    {#<section class="func-section pt-5">#}
-    {#    <div class="container">#}
-    {#        <div class="row mx-0">#}
-    {#            <h2><strong>Bạn là ai?</strong></h2>#}
-    {#        </div>#}
-    {#        <div class="row mx-0 row-my">#}
-    {#            <div class="col-lg-6 my-5">#}
-    {#                <div class="bg-white mr-1 px-3 py-3">#}
-    {#                    <h4><b> Giảng viên</b></h4>#}
-    {#                    <hr>#}
-    {#                    <p><i class="fa fa-list-ul"></i> PyEdu cho phép bạn:</p>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Tạo khóa học</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Upload tài liệu và bài giảng</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Đăng thông báo</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Đánh giá và tự động gửi kết quả cho sinh#}
-    {#                        viên</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Tạo diễn đàn và trao đổi với sinh viên</h5>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#            <div class="col-lg-6 my-5">#}
-    {#                <div class="bg-white ml-1 px-3 py-3">#}
-    {#                    <h4><b>Sinh viên</b></h4>#}
-    {#                    <hr>#}
-    {#                    <p><i class="fa fa-list-ul"></i> PyEdu cho phép bạn:</p>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Tìm kiếm khóa học</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Đăng kí khóa học phù hợp</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Theo dõi bài giảng và tài liệu</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Nộp bài tập trực tuyến</h5>#}
-    {#                    <h5><i class="fa fa-hand-point-right text-success"></i> Tương tác với giảng viên và sinh viên khác#}
-    {#                    </h5>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-    {#</section>#}
-    {#<section id="course-teacher" class="course-teacher-section">#}
-    {#    <div class="jarallax" data-jarallax-original-styles="null"#}
-    {#         style="position: relative; z-index: 0; background-image: none; background-attachment: scroll; background-size: auto;">#}
-    {#        <div class="container">#}
-    {#            <div class="section-title m--margin-bottom-20 m--margin-top-40 headline text-center">#}
-    {#                <h2 class="font-weight-bold">Gương mặt giảng viên tiêu biểu</h2>#}
-    {#            </div>#}
-    {##}
-    {#            <div class="teacher-list m--margin-top-50">#}
-    {#                <div class="row justify-content-center">#}
-    {#                    {% for i in '1234567' %}#}
-    {#                    <div class="col-md-3">#}
-    {#                        <div class="teacher-img-content ">#}
-    {#                            <div class="teacher-cntent">#}
-    {#                                <div class="teacher-social-name ul-li-block">#}
-    {#                                    <ul>#}
-    {#                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>#}
-    {#                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>#}
-    {#                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>#}
-    {#                                    </ul>#}
-    {#                                    <div class="teacher-name">#}
-    {#                                        <span>Hoàng Xuân Tùng</span>#}
-    {#                                    </div>#}
-    {#                                </div>#}
-    {#                                <div class="teacher-img-category">#}
-    {#                                    <div class="teacher-img">#}
-    {#                                        <img src="{% static 'images/james.jpg' %}" alt="">#}
-    {#                                        <div class="course-price text-uppercase text-center gradient-bg">#}
-    {#                                            <span>Featured</span>#}
-    {#                                        </div>#}
-    {#                                    </div>#}
-    {#                                    <div class="teacher-category float-right">#}
-    {#                                        <span class="st-name">Phát triển Ứng dụng Web</span>#}
-    {#                                    </div>#}
-    {#                                </div>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                    {% endfor %}#}
-    {#                </div>#}
-    {#                <!--<div class="row justify-content-center">-->#}
-    {#                <!--<div class="btn btn-info m-btn&#45;&#45;pill">-->#}
-    {#                <!--<a href="#">All teacher <i class="fas fa-caret-right"></i></a>-->#}
-    {#                <!--</div>-->#}
-    {#                <!--</div>-->#}
-    {##}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {#    </div>#}
-    {#</section>#}
-    {#<section id="course-category" class="course-category-section">#}
-    {#			<div class="container">#}
-    {#				<div class="section-title m--margin-bottom-45 headline text-center ">#}
-    {#					<h2 class="font-weight-bold">Các chủ đề chính</h2>#}
-    {#				</div>#}
-    {#				<div class="category-item">#}
-    {#					<div class="row">#}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fa fa-code"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Công nghệ thông tin</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fab fa-connectdevelop"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Điện tử viễn thông</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fa fa-cogs"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Cơ học kỹ thuật & tự động hóa</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fab fa-cloudversify"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Vật lý kỹ thuật & CN Nano</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fab fa-rocketchat"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Ngoại ngữ</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fa fa-book"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Chính trị</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fa fa-calculator"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Toán</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {##}
-    {#						<div class="col-md-3 m--margin-bottom-15">#}
-    {#							<div class="category-icon-title text-center ">#}
-    {#								<div class="category-icon">#}
-    {#									<i class="text-gradiant fa fa-plug"></i>#}
-    {#								</div>#}
-    {#								<div class="category-title">#}
-    {#									<h4>Vật lý</h4>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- /category -->#}
-    {#					</div>#}
-    {#				</div>#}
-    {#			</div>#}
-    {#		</section>#}
 
 {% endblock %}
 {% block javascripts %}

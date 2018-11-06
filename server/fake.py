@@ -90,7 +90,8 @@ for course in courses:
 
 def get_random_student():
     students_id = []
-    students_queryset = User.objects.filter(role = '0')
+    students_queryset = User.objects.filter(group__name__contains='student')
+    # students_queryset = User.objects.filter(group__pk=3)
     for student in students_queryset:
         students_id.append(student.id)
     random_student_id = choice(students_id)
@@ -98,7 +99,7 @@ def get_random_student():
 
 def get_random_lecturer():
     lecturers_id = []
-    lecturer_queryset = User.objects.filter(role = '1')
+    lecturer_queryset = User.objects.filter(group__name__contains='lecturer')
     for lecturer in lecturer_queryset:
         lecturers_id.append(lecturer.id)
     random_lecturer_id = choice(lecturers_id)

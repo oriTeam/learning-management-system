@@ -7,11 +7,15 @@ from django.contrib.auth import get_user_model
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PIEDU.settings")
 django.setup()
 User = get_user_model()
-
+from django.contrib.auth.models import Group, Permission
 while True:
-    start = input("Start at (student' code) : ")
-    end = input("End at (student' code) : ")
-    role = input("Role : ")
+    start = input("----- Start at (student' code) : ")
+    end = input("----- End at (student' code) : ")
+    group = input("Group id : \n"
+                  "1: Admin \n"
+                  "2: Lecturer \n"
+                  "3: Student \n"
+                  "----- Select group id: ")
     if start.isdigit() or end.isdigit():
         start = int(start)
         end = int(end)
@@ -20,9 +24,9 @@ while True:
 for code in range(start, end):
     try:
         email = str(code) + '@vnu.edu.vn'
-        role = str(role)
+        group = str(group)
         print('Creating user {0}.'.format(code))
-        user = User.objects.create_user(username=str(code), email=email, role=str(role))
+        user = User.objects.create_user(username=str(code), email=email, group=Group.objects.get(pk=group))
         user.set_password(str(code))
         user.save()
 
