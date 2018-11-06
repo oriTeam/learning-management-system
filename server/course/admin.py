@@ -1,15 +1,19 @@
 from django.contrib import admin
-from .models import Course, Class, ClassLecturer, ClassStudent, EnrollRequest, Schedule
+from .models import CourseCategory, Class, ClassLecturer, ClassStudent, EnrollRequest, Schedule, Subject
 
 # Register your models here.
 
-@admin.register(Course)
+@admin.register(CourseCategory)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
+@admin.register(Subject)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'avatar')
+
 @admin.register(Class)
 class ClasAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'course_id', 'time_start', 'time_end')
+    list_display = ('id', 'name', 'category', 'time_start', 'time_end')
 
 @admin.register(ClassStudent)
 class ClassStudentAdmin(admin.ModelAdmin):

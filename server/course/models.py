@@ -2,26 +2,41 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django.conf import settings
 
+
 # Create your models here.
 
-class Course(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_("Course's Name"))
+class CourseCategory(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_("Course Category"))
 
     class Meta:
-        db_table = 'course'
+        db_table = 'course_category'
         ordering = ['id']
-        verbose_name = _("Course")
-        verbose_name_plural = _("Courses")
+        verbose_name = _("Catergory")
+        verbose_name_plural = _("Categories")
 
     def __str__(self):
-        return "Course : {}".format(self.name)
+        return "Category : {}".format(self.name)
 
     def parse_data(self):
         data = {
-            "id" : self.id,
-            "name" : self.name
+            "id": self.id,
+            "name": self.name
         }
         return data
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_("Subject"))
+    avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
+
+    class Meta:
+        db_table = 'subject'
+        ordering = ['id']
+        verbose_name = _("Subject")
+        verbose_name_plural = _("Subjects")
+
+    def __str__(self):
+        return "Subject : {}".format(self.name)
 
 
 class Class(models.Model):
@@ -30,7 +45,8 @@ class Class(models.Model):
     description = models.TextField(null=True, verbose_name=_('Description'))
     time_start = models.DateTimeField(verbose_name=_("Class's start time"))
     time_end = models.DateTimeField(verbose_name=_("Class's end time"))
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name=_("Course"))
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE, verbose_name=_("Course Category"))
+    subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE, verbose_name=_('Subject'))
 
     class Meta:
         db_table = 'class'
@@ -39,18 +55,21 @@ class Class(models.Model):
         verbose_name_plural = _("Classes")
 
     def __str__(self):
-        return "Course : {} | Class : {}".format(self.course_id.name, self.name)
+        return "Class : {}".format(self.name)
+
     def parse_data(self):
         data = {
-            "id" : self.id,
-            "code" : self.code,
-            "name" : self.name,
-            "description" : self.description,
-            "time_start" : str(self.time_start),
-            "time_end" : str(self.time_end),
-            "course_id" : self.course_id.id
+            "id": self.id,
+            "code": self.code,
+            "name": self.name,
+            "description": self.description,
+            "time_start": str(self.time_start),
+            "time_end": str(self.time_end),
+            "category": self.category.name
         }
         return data
+
+
 class Schedule(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_('Class'))
     day_of_week = models.CharField(max_length=5, verbose_name=_('Day Of Week'))
@@ -63,14 +82,16 @@ class Schedule(models.Model):
 
     def __str__(self):
         return "Class: {} | Encoded Session: {}".format(self.class_id.name, self.encoded_session)
+
     def parse_data(self):
         data = {
-            "id" : self.id,
-            "class_id" : self.class_id,
-            "day_of_week" : self.day_of_week,
-            "encoded_session" : self.encoded_session
+            "id": self.id,
+            "class_id": self.class_id,
+            "day_of_week": self.day_of_week,
+            "encoded_session": self.encoded_session
         }
         return data
+
 
 class ClassLecturer(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_("Class"))

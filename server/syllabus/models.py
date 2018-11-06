@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from course.models import Class
-
+from django.conf import settings
 
 class Syllabus(models.Model):
     title = models.CharField(max_length=100, default="", verbose_name=_("Syllabus's title"))
@@ -16,7 +16,7 @@ class Syllabus(models.Model):
         verbose_name_plural = _("Syllabus")
 
     def __str__(self):
-        return "Syllabus : {}".format(self.name)
+        return "Syllabus : {}".format(self.title)
 
     def parse_data(self):
         data = {
@@ -55,22 +55,10 @@ class Material(models.Model):
         }
         return data
 
-# class ClassSyllabus(models.Model):
-#     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_("Class"))
-#     syllabus_id = models.ForeignKey(Syllabus, on_delete=models.CASCADE, verbose_name=_("Syllabus"))
-
-#     class Meta:
-#         db_table = 'class_syllabus'
-#         ordering = ["id"]
-#         verbose_name = _("Class - Syllasbus")
-#         verbose_name_plural = _("Classes - Syllabus")
-
-#     def __str__(self):
-#         return "Class : {} | Syllabus : {}".format(self.class_id.name, self.syllabus_id.name)
-
 class SyllabusTemplate(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_('Class'))
-    
+    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, verbose_name=_('Class'))
+    lecturer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, verbose_name=_('Lecturer'))
+
     class Meta:
         db_table = 'syllbus_template'
         ordering = ['id']

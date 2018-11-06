@@ -1,4 +1,4 @@
-from course.models import Course,Class,Schedule,ClassLecturer,ClassStudent,EnrollRequest
+from course.models import CourseCategory, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest, Subject
 from core.models import User
 from django.http import JsonResponse
 from api.functions import string_to_boolean
