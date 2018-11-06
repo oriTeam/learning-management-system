@@ -6,9 +6,9 @@ def index(request):
 def login(request):
     return render(request, 'mainpage/login.html')
 def my_course(request):
-    return render(request, 'mainpage/my-course.html')
+    return render(request, 'mainpage/my-class.html')
 def all_course(request):
-    return render(request, 'mainpage/all-course.html')
+    return render(request, 'mainpage/all-class.html')
 def contact(request):
     return render(request, 'mainpage/contact.html')
 def help(request):
@@ -16,4 +16,4 @@ def help(request):
 def user(request):
     return render(request,'userpage/user-page.html')
 def inner_course(request):
-    return render(request,'mainpage/inner-course.html')
+    return render(request, 'mainpage/inner-class.html')
