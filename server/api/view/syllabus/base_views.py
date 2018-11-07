@@ -6,7 +6,7 @@ from api.functions import string_to_boolean
 from api.base import BaseManageView
 
 
-class _Material(BaseManageView):
+class GetMaterialInfo(BaseManageView):
     error_messages = {
         "Class": {
             "invalid": "This class_id is invalid",
@@ -25,7 +25,7 @@ class _Material(BaseManageView):
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
             "GET" : self.get_material_info,
-            "GET" : self.get_syllabus_material,   
+               
         }
     
     def get_material_info(self,request):
@@ -40,6 +40,31 @@ class _Material(BaseManageView):
     
     
     
+    
+class GetSyllabusMaterial(BaseManageView):
+    error_messages = {
+        "Class": {
+            "invalid": "This class_id is invalid",
+        },
+        "User" : {
+            "invalid" : "This user_id is invalid",
+        },
+        "Material" : {
+            "invalid" : "This material is invalid",
+        },
+        "Syllabus" : {
+            "invalid" : "This syllabus is invalid",
+        }
+    }
+
+    def __init__(self, *args, **kwargs):
+        self.VIEWS_BY_METHOD = {
+            
+            "GET" : self.get_syllabus_material,   
+        }
+    
+    
+    
     def get_syllabus_material(self,request):
         request_data = request.GET
         syllabus_id = request_data.get("syllabus_id")
@@ -51,9 +76,9 @@ class _Material(BaseManageView):
             result = []
             for item in all_material:
                 result.append(item.parse_data)
-            return JsonResponse({result})
+            return JsonResponse({ "data" :result})
     
-class _Syllabus(BaseManageView):
+class GetClassSyllabus(BaseManageView):
     error_messages = {
         "Class": {
             "invalid": "This class_id is invalid",
@@ -84,8 +109,8 @@ class _Syllabus(BaseManageView):
             result = []
             for item in all_syllabus:
                 result.append(item.parse_data())
-            return JsonResponse({result})
-class _Template(BaseManageView):
+            return JsonResponse({"data" : result})
+class GetSyllabusTemplateInfo(BaseManageView):
     error_messages = {
         "Class": {
             "invalid": "This class_id is invalid",
@@ -102,25 +127,11 @@ class _Template(BaseManageView):
     }
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
-            "GET" : self.get_syllabus_template,
+            
             "GET" : self.get_syllabus_template_info,
             
         }
-    def get_syllabus_template(self,request):
-        all_syllabus_template = SyllabusTemplate.objects.all()
-        result=[]
-        if len(all_syllabus_template) == 0 :
-            return JsonResponse({"Sucess" : False, "Code" : "Syllabus Template is empty!"})
-        else :
-            for syllabus_template in all_syllabus_template :
-                class_id = syllabus_template.class_id
-                try :
-                    item = Class.objects.get(pk = class_id)
-                except Class.DoesNotExist :
-                    return self.json_error(field = "Class",code = "invalid")
-                else :
-                    result.append(item.parse_data())
-        return JsonResponse({result})
+    
     
     def get_syllabus_template_info(self,request):
         request_data = request.GET
@@ -140,9 +151,46 @@ class _Template(BaseManageView):
                     all_material_in_item = Material.objects.filter(syllabus_id = item.syllabus_id)
                     for material in all_material_in_item :
                         result.append(material.parse_data())
-                return JsonResponse({result})
+                return JsonResponse({"data" :result})
 
-
+class GetSyllabusTemplate(BaseManageView):
+    error_messages = {
+        "Class": {
+            "invalid": "This class_id is invalid",
+        },
+        "User" : {
+            "invalid" : "This user_id is invalid",
+        },
+        "Material" : {
+            "invalid" : "This material is invalid",
+        },
+        "Syllabus" : {
+            "invalid" : "This syllabus is invalid",
+        }
+    }
+    def __init__(self, *args, **kwargs):
+        self.VIEWS_BY_METHOD = {
+            "GET" : self.get_syllabus_template,
+           
+            
+        }
+    def get_syllabus_template(self,request):
+        all_syllabus_template = SyllabusTemplate.objects.all()
+        result=[]
+        if len(all_syllabus_template) == 0 :
+            return JsonResponse({"Sucess" : False, "Code" : "Syllabus Template is empty!"})
+        else :
+            for syllabus_template in all_syllabus_template :
+                class_id = syllabus_template.class_id
+                try :
+                    item = Class.objects.get(pk = class_id)
+                except Class.DoesNotExist :
+                    return self.json_error(field = "Class",code = "invalid")
+                else :
+                    result.append(item.parse_data())
+        return JsonResponse({"data" :result})
+    
+    
                     
 
     
