@@ -29,8 +29,9 @@ for code in range(start, end):
         print('Creating user {0}.'.format(code))
         user = User.objects.create_user(username=str(code), email=email, group=Group.objects.get(pk=group))
         user.set_password(str(code))
+        
         user.save()
-
+        
         assert authenticate(username=str(code), password=str(code))
         print('User {0} successfully created.'.format(code))
 
