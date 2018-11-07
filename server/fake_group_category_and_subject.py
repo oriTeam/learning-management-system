@@ -11,6 +11,9 @@ django.setup()
 User = get_user_model()
 from course.models import CourseCategory, Subject, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest
 from syllabus.models import Syllabus, SyllabusTemplate
+from django.contrib.auth.models import Group, Permission
+
+groups = ['admin_group', 'lecturer_group', 'student_group']
 
 categories = ['CNTT', 'Ngoại Ngữ', 'Toán', 'Chính trị', 'Vật lý', 'Điện tử viễn thông', 'Cơ học kỹ thuật & tự động hóa',
               'Vật lý kỹ thuật & CN Nano']
@@ -44,6 +47,23 @@ subjects = [{"name": "Quản lý dự án phần mềm "},
             {"name": "Thực hành hệ điều hành mạng "},
             {"name": "Các thiết bị mạng và môi trường truyền "},
             ]
+
+for group in groups:
+    try:
+        name = group
+        checker = Group.objects.filter(name=name)
+        if len(checker) == 0:
+            print('Creating  {0}.'.format(name))
+            new_group = Group.objects.create(name=name)
+            new_group.save()
+            print('Group {0} successfully created.'.format(name))
+        else:
+            print('Group {0} has existed'.format(name))
+    except:
+        print('There was a problem creating the Course Category: {0}.  Error: {1}.' \
+          .format(name, sys.exc_info()[1]))
+
+print('========================================')
 
 for category in categories:
     try:

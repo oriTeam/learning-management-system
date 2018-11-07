@@ -7,7 +7,7 @@ import datetime
 import json
 import pytz
 
-class GetCourseInfo(BaseManageView):
+class GetCourseCategoryInfo(BaseManageView):
 
     error_messages = {
         "Course": {
@@ -20,18 +20,17 @@ class GetCourseInfo(BaseManageView):
 
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
-            'GET' : self.get_course_info,
+            'GET' : self.get_course_category_info,
            
         }
     
-    def get_course_info(self, request):
+    def get_course_category_info(self, request):
         request_data = request.GET
-        course_id = request_data.get('course_id')
+        category_id = request_data.get('category_id')
         data = {}
         try:
-            course = Course.objects.get(pk=course_id)
-        except Course.DoesNotExist:
-            # return JsonResponse({"invalid": "This course_id is invalid"})
+            course = CourseCategory.objects.get(pk=category_id)
+        except CourseCategory.DoesNotExist:
             return self.json_error(field = 'Course', code = "invalid")
         else:
             data = course.parse_data()

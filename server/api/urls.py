@@ -4,7 +4,7 @@ from . import views
 
 from rest_framework import routers
 
-from .view.course.views import CourseListCreateAPIView, CourseDetailUpdateAPIView
+from .view.course.viewsets import CourseCategoryListCreateAPIView, CourseCategoryDetailUpdateAPIView, SubjectDetailUpdateAPIView, SubjectListCreateAPIView, ClassDetailUpdateAPIView, ClassListCreateAPIView
 
 from .view.course import (
     base_views as course_base_views,
@@ -19,10 +19,12 @@ from .view.user import (
 app_name = "api"
 
 router = routers.SimpleRouter()
-router.register(r'courses', CourseListCreateAPIView, base_name="Courses")
-router.register(r'courses', CourseDetailUpdateAPIView, base_name="Courses")
-
-
+router.register(r'courses', CourseCategoryListCreateAPIView, base_name="Courses")
+router.register(r'courses', CourseCategoryDetailUpdateAPIView, base_name="Courses")
+router.register(r'subjects', SubjectDetailUpdateAPIView, base_name="Subjects")
+router.register(r'subjects', SubjectListCreateAPIView, base_name="Subjects")
+router.register(r'classes', ClassDetailUpdateAPIView, base_name="Subjects")
+router.register(r'classes', ClassListCreateAPIView, base_name="Subjects")
 
 
 course_url_patterns= [
