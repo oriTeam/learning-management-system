@@ -45,8 +45,8 @@ class Class(models.Model):
     description = models.TextField(null=True, verbose_name=_('Description'))
     time_start = models.DateTimeField(verbose_name=_("Class's start time"))
     time_end = models.DateTimeField(verbose_name=_("Class's end time"))
-    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE, verbose_name=_("Course Category"))
-    subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE, verbose_name=_('Subject'))
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_("Course Category"))
+    subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_('Subject'))
 
     class Meta:
         db_table = 'class'
@@ -55,7 +55,7 @@ class Class(models.Model):
         verbose_name_plural = _("Classes")
 
     def __str__(self):
-        return "Class : {}".format(self.name)
+        return "Class : {0} {1}".format(self.name, self.code)
 
     def parse_data(self):
         data = {
@@ -68,10 +68,11 @@ class Class(models.Model):
             "category": self.category.name
         }
         return data
-
+    def parse_full_info(self):
+        pass
 
 class Schedule(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_('Class'))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set', verbose_name=_('Class'))
     day_of_week = models.CharField(max_length=5, verbose_name=_('Day Of Week'))
     encoded_session = models.CharField(max_length=20, verbose_name=_('Encoded Session'))
 
@@ -94,8 +95,8 @@ class Schedule(models.Model):
 
 
 class ClassLecturer(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_("Class"))
-    lecturer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("User"))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='lecturers_set', verbose_name=_("Class"))
+    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='own_classes_set', verbose_name=_("User"))
 
     class Meta:
         db_table = 'class_lecturer'
@@ -104,12 +105,12 @@ class ClassLecturer(models.Model):
         verbose_name_plural = _("Classes - Lecturers")
 
     def __str__(self):
-        return "Class : {} | Lecturer : {}".format(self.class_id.name, self.lecturer_id.username)
+        return "Class : {} | Lecturer : {}".format(self.own_class.name, self.lecturer.username)
 
 
 class ClassStudent(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_("Class"))
-    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("Student"))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE,null=True, related_name='students_set', verbose_name=_("Class"))
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True, related_name='classes_set', verbose_name=_("Student"))
 
     class Meta:
         db_table = 'class_student'
@@ -118,12 +119,12 @@ class ClassStudent(models.Model):
         verbose_name_plural = _("Classes - Students")
 
     def __str__(self):
-        return "Class : {} | User : {}".format(self.class_id.name, self.student_id.username)
+        return "Class : {} | User : {}".format(self.own_class.name, self.student.username)
 
 
 class EnrollRequest(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, verbose_name=_('Class'))
-    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Student'))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='wait_students_set', verbose_name=_('Class'))
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='wait_classes_set', verbose_name=_('Student'))
 
     class Meta:
         db_table = 'enroll_request'
@@ -132,4 +133,4 @@ class EnrollRequest(models.Model):
         verbose_name_plural = _('Enroll Requests')
 
     def __str__(self):
-        return "Class: {} | Student: {}".format(self.class_id.name, self.class_id.name)
+        return "Class: {} | Student: {}".format(self.own_class.name, self.own_class.name)

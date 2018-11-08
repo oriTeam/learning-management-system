@@ -6,7 +6,7 @@ from django.conf import settings
 class Syllabus(models.Model):
     title = models.CharField(max_length=100, default="", verbose_name=_("Syllabus's title"))
     content = models.TextField(default="",verbose_name=_("Syllabus's content"))
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="", verbose_name=_('Class'))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='syllabuses_set', verbose_name=_('Class'))
     week = models.CharField(max_length=10, default="", verbose_name=_('Week'))
 
     class Meta:
@@ -23,7 +23,7 @@ class Syllabus(models.Model):
             "id" : self.id,
             "title" : self.title,
             "content" : self.content,
-            "class_id" : self.class_id,
+            "class_id" : self.own_class,
             "week" : self.week
             
         }
@@ -32,7 +32,7 @@ class Syllabus(models.Model):
 
 class Material(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Material's Name"))
-    syllabus_id = models.ForeignKey(Syllabus, on_delete=models.CASCADE, verbose_name=_("Syllabus"))
+    syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, related_name='materials_set', verbose_name=_("Syllabus"))
     material_type = models.CharField(max_length=255, verbose_name=_("Material's Type"))
     file = models.FileField(blank=False, null=True)
 
@@ -49,21 +49,21 @@ class Material(models.Model):
         data ={
             "id" : self.id,
             "name" : self.name,
-            "syllabus_id" : self.syllabus_id,
+            "syllabus_id" : self.syllabus,
             "material_type" : self.material_type,
             "file" : self.file
         }
         return data
 
 class SyllabusTemplate(models.Model):
-    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, verbose_name=_('Class'))
-    lecturer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, verbose_name=_('Lecturer'))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='lecturers_in_template_set', verbose_name=_('Class'))
+    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='classes_in_template_set', verbose_name=_('Lecturer'))
 
     class Meta:
-        db_table = 'syllbus_template'
+        db_table = 'syllabus_template'
         ordering = ['id']
         verbose_name = _('Syllabus Template')
         verbose_name_plural = _('Syllabus Templates')
 
     def __str__(self):
-        return "Syllabus Template: {}".format(self.class_id.name)
+        return "Syllabus Template: {}".format(self.own_class.name)

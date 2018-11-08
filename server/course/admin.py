@@ -17,16 +17,16 @@ class ClasAdmin(admin.ModelAdmin):
 
 @admin.register(ClassStudent)
 class ClassStudentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'class_id', 'student_id')
+    list_display = ('id', 'own_class', 'student')
 
 @admin.register(ClassLecturer)
 class ClassLecturerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'class_id', 'lecturer_id')
+    list_display = ('id', 'own_class', 'lecturer')
 
 @admin.register(EnrollRequest)
 class EnrollRequestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'class_id', 'student_id')
+    list_display = ('id', 'own_class', 'student')
 
 @admin.register(Schedule)
 class ScheduleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'class_id', 'day_of_week', 'encoded_session')
+    list_display = ('id', 'own_class', 'day_of_week', 'encoded_session')

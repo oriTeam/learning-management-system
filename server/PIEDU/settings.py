@@ -16,7 +16,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'ky13zdk^(*z8r0hmybft9q=(#!_h$pbhbf!77ecg9l==ikjbvg'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -86,13 +84,13 @@ MIDDLEWARE = [
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 
-    #Whitenoise
+    # Whitenoise
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # this is default
+    'django.contrib.auth.backends.ModelBackend',  # this is default
     # 'guardian.backends.ObjectPermissionBackend',
 )
 
@@ -126,14 +124,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PIEDU.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lmsv3'   ,
+        'NAME': 'lmsv3',
         'USER': 'root',
         'PASSWORD': '1234',
         'OPTIONS': {
@@ -160,7 +157,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -174,7 +170,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -183,8 +178,7 @@ STATIC_URL = '/client/static/'
 # debug_toolbar_IPS
 INTERNAL_IPS = ['127.0.0.1']
 
-
-#Extened User Model
+# Extened User Model
 AUTH_USER_MODEL = 'core.User'
 
 from machina import MACHINA_MAIN_STATIC_DIR
@@ -224,14 +218,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
 
-
-
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
 
 # SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
@@ -254,4 +249,3 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 #
 #     }
 # }
-
