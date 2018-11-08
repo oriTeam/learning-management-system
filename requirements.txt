@@ -1,14 +1,14 @@
 django-mptt
 django-haystack
 markdown2
+django-debug-toolbar
 django-widget-tweaks
 django-machina
-django-debug-toolbar
 django-guardian
-reportlab
+reportlab0
 djangorestframework
 
-django==2.0.8
+dj0ango==2.0.8
 mysqlclient
 dj-database-url==0.3.0
 dj-static==0.0.6
