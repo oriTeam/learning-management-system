@@ -1,0 +1,1 @@
+from .viewsets import CourseCategoryCreateView, CourseCategoryListView, CourseCategoryDetailView, CourseCayegoryUpdateView, CourseCategoryDeleteView
