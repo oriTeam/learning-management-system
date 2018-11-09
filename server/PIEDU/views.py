@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from course.models import CourseCategory
-
+from course.models import Subject
 # Create your views here.
 def index(request):
     categories = CourseCategory.objects.all()
@@ -11,7 +11,9 @@ def login(request):
 def my_course(request):
     return render(request, 'mainpage/my-class.html')
 def all_course(request):
-    return render(request, 'mainpage/all-class.html')
+    subjects = Subject.objects.all()
+    print(subjects)
+    return render(request, 'mainpage/all-class.html', {'subjects': subjects})
 def contact(request):
     return render(request, 'mainpage/contact.html')
 def help(request):
