@@ -18,6 +18,9 @@
 --
 -- Table structure for table `auth_group`
 --
+DROP DATABASE IF EXISTS lmsv3;
+CREATE DATABASE lmsv3;
+USE lmsv3;
 
 DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
