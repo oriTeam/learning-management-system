@@ -168,14 +168,14 @@
                 <h3>Các Khóa học</h3>
             </div>
             <div class="img-gallery owl-carousel owl-theme">
-                {% for i in '12345' %}
+                {% for i in categories %}
                 <div class="w-100">
                     <div class="category-icon-title text-center ">
                         <div class="category-icon">
                             <i class="text-gradiant fa fa-calculator"></i>
                         </div>
                         <div class="category-title">
-                            <h4>Toán</h4>
+                            <h4>{{ i.name }}</h4>
                         </div>
                     </div>
                 </div>

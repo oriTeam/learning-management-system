@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from course.models import CourseCategory
 
 # Create your views here.
 def index(request):
-    return render(request, 'mainpage/index.html')
+    categories = CourseCategory.objects.all()
+    print(categories)
+    return render(request, 'mainpage/index.html', {'categories': categories})
 def login(request):
     return render(request, 'mainpage/login.html')
 def my_course(request):
