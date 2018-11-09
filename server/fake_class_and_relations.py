@@ -95,18 +95,18 @@ else:
             for i in range(0, 2):
                 lecturer_id = get_random_lecturer();
                 lecturer = User.objects.get(pk=lecturer_id)
-                class_lecturer = ClassLecturer.objects.filter(lecturer_id=lecturer)
+                class_lecturer = ClassLecturer.objects.filter(lecturer=lecturer)
                 if len(class_lecturer) == 0:
-                    class_lecturer_ = ClassLecturer.objects.create(class_id=new_class, lecturer_id=lecturer)
+                    class_lecturer_ = ClassLecturer.objects.create(own_class=new_class, lecturer=lecturer)
                     class_lecturer_.save()
                 print('Class {0} | Lecturer {1} successfully created'.format(_class['name'], lecturer.username))
 
             for i in range(0, 40):
                 student_id = get_random_student();
                 student = User.objects.get(pk=student_id)
-                class_student = ClassStudent.objects.filter(student_id = student_id)
+                class_student = ClassStudent.objects.filter(student = student_id)
                 if len(class_student) == 0:
-                    class_student_ = ClassStudent.objects.create(class_id = new_class, student_id = student)
+                    class_student_ = ClassStudent.objects.create(own_class = new_class, student = student)
                     class_student_.save()
                 print('Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
 
@@ -115,18 +115,18 @@ else:
                 content = "Nột dung tuần " + str(i + 1)
                 f_class = new_class
                 week = i + 1
-                syllabus = Syllabus.objects.create(title=title, content=content, class_id=f_class, week=week)
+                syllabus = Syllabus.objects.create(title=title, content=content, own_class=f_class, week=week)
                 syllabus.save()
                 print('Class {0} | Syllabus {1} successfully created'.format(_class['name'], title))
 
             for i in range(0, 10):
                 student_id = get_random_student();
                 student = User.objects.get(pk=student_id)
-                enroll_request = EnrollRequest.objects.filter(student_id = student_id)
-                class_student = ClassStudent.objects.filter(student_id=student_id)
+                enroll_request = EnrollRequest.objects.filter(student = student_id)
+                class_student = ClassStudent.objects.filter(student=student_id)
 
                 if len(enroll_request) == 0:
-                    enroll_request_ = EnrollRequest.objects.create(class_id = new_class, student_id = student)
+                    enroll_request_ = EnrollRequest.objects.create(own_class = new_class, student = student)
                     enroll_request_.save()
                     print('Enroll Request: Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
 
