@@ -289,12 +289,12 @@
                             </div>
                         </div>
                         <div class="row py-4 mx-0">
-                            {% for i in '0123456789' %}
+                            {% for subject in subjects %}
                                 <div class="col-lg-4 p-0">
                                     <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded-force p-3 mx-lg-2">
                                         <div class="course-item-pic-text">
                                             <div class="course-pic relative-position m--margin-bottom-25">
-                                                <img src="{% static 'images/code.jpg' %}" alt="">
+                                                <img src="{{subject.avatar.url}}" alt="" height = 280px>
                                             </div>
                                             <div class="course-item-text">
                                                 <div class="course-meta">
@@ -305,7 +305,7 @@
                                                 </div>
                                                 <div class="course-title m--padding-top-10 headline m--padding-bottom-15 relative-position">
                                                     <h3>
-                                                        Phát triển ứng dụng Web
+                                                        {{subject.name}};
                                                         <!--<span class="trend-badge text-uppercase bold-font"><i class="fas fa-bolt"></i> TRENDING</span>-->
                                                     </h3>
                                                     <a class="m--pull-right m--margin-bottom-20 mt-1"
