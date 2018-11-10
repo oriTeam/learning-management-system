@@ -1,13 +1,13 @@
-{% extends 'basepage/mainbase.html' %}
+{% extends 'basepage/classbase.html' %}
 {% load staticfiles %}
 
 {% block title %} Môn học | Hệ thống quản lý môn học {% endblock %}
 
 {% block navisize %} container-fluid {% endblock %}
-{% block stylesheets %}
+{% block class_stylesheets %}
     <link rel="stylesheet" href="{% static 'stylesheets/custom/inner-class.css' %}"/>
 
-{% endblock %}
+{% endblock class_stylesheets %}
 {% block course %} active {% endblock %}
 
 {% block bodycontent %}
@@ -352,6 +352,6 @@
 
 {% endblock %}
 
-{% block javascripts %}
+{% block class_javascripts %}
     <script type="text/javascript" src="{% static 'javascripts/custom/inner-class.js' %}"></script>
-{% endblock %}
+{% endblock class_javascripts %}

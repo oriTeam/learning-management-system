@@ -25,15 +25,20 @@
         <div class="{% block navisize %} container {% endblock %}">
             <div class="row mx-0">
                 <div class="col-md-12 px-0">
-                    <nav class="navbar navbar-dark navbar-expand-lg">
+                    <nav class="navbar navbar-dark navbar-expand-xl">
                         <a class="navbar-brand" href="/">
                             <strong style="font-size: 30px">
                         <i class="fa fa-chalkboard" style="font-size: 30px"></i> PIEdu</strong>
                         </a>
+                        <div>
+                        <button id="m_aside_left_offcanvas_toggle" class="m--visible-tablet-and-mobile-inline-block p-0">
+                             <span class="flaticon-squares-2" style="font-size: 30px; color: #fff"></span>
+                        </button>
                         <button class="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#navbar"
                                 aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
                             <span class="flaticon-squares-2" style="font-size: 30px; color: #fff"></span>
                         </button>
+                        </div>
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-5 mr-auto">
                                 <li data-toggle="tooltip" data-placement="bottom" title="Trang chủ"
@@ -45,7 +50,7 @@
                                     m-dropdown-toggle="hover"
                                     aria-expanded="true">
                                     <a href="#" class="nav-link m-dropdown__toggle dropdown-toggle {% block course %} {% endblock %}">
-                                        KHÓA HỌC <span class="sr-only">(current)</span>
+                                        KHÓA HỌC <i class="fa fa-angle-down"></i> <span class="sr-only">(current)</span>
                                     </a>
                                     <div class="m-dropdown__wrapper" style="z-index: 101;">
                                         <span class="m-dropdown__arrow m-dropdown__arrow--left"></span>
@@ -248,7 +253,7 @@
 <script type="text/javascript" src="{% static 'javascripts/lib/vendors.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascripts/lib/scripts.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascripts/lib/owl.carousel.min.js' %}"></script>
-{#<script type="text/javascript" src="{% static 'javascripts/lib/script.js' %}"></script>#}
+<script type="text/javascript" src="{% static 'javascripts/lib/wizard.js' %}"></script>
 
 <script type="text/javascript" src="{% static 'javascripts/custom/base.js' %}"></script>
 {% block javascripts %}

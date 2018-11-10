@@ -147,3 +147,8 @@
     border-radius: 3px;
     background-color: #f7f7f7;
 }
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+}

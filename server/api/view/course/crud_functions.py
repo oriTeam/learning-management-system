@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import CourseCategorySerializer
+from course.serializers import CourseCategorySerializer
 from course.models import CourseCategory
 
 @api_view(["GET"])

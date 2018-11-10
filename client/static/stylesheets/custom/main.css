@@ -185,35 +185,39 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 1rem;
         padding-left: 1rem;
         font-size: 14px;
         font-weight: bold;
     }
-    .navbar-nav>.nav-item>.nav-link.active:after {
-        content: "";
-        border-bottom: 2px solid #fff;
-        left: 1rem;
-        right: 1rem;
-        bottom: 5px;
-        height: 1px;
-        position: absolute;
-    }
+
 }
 
-@media (max-width:991px) {
+@media (max-width: 1024px) {
     .navbar-nav.is-scrolling {
         padding-bottom: 1rem;
     }
     .navbar-nav .nav-item {
         margin-bottom: 10px;
     }
+
+}
+
+#m_aside_left_offcanvas_toggle{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
 }
 
 .navbar {
     padding: 0 !important;
+}
+
+.btn.dropdown-toggle:after, .nav-link.dropdown-toggle:after {
+    content: "";
+    display: none;
 }
 
 /* HERO
@@ -567,4 +571,14 @@ ul, ol {
     display: inline-block;
     margin: 0px 5px;
     color: rgba(235, 235, 235, 0.25);
+}
+
+/*ASIDE*/
+@media (max-width: 1024px) {
+    #m_aside_left {
+        z-index: 1031;
+    }
+    #m_aside_left_close_btn{
+        z-index: 1032;
+    }
 }

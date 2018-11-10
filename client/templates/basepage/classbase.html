@@ -1,0 +1,18 @@
+{% extends 'basepage/mainbase.html' %}
+{% load staticfiles %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'stylesheets/custom/classbase.css' %}">
+    {% block class_stylesheets %}
+    {% endblock class_stylesheets %}
+{% endblock %}
+{% block bodycontent %}
+
+{% endblock%}
+{% block javascripts %}
+    <script type="text/javascript" src="{% static 'javascripts/custom/classbase.js'%}"></script>
+    {% block class_javascripts %}
+    {% endblock class_javascripts %}
+
+{% endblock %}

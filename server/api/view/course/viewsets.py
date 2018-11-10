@@ -7,7 +7,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import serializers
 from course.models import CourseCategory, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest, Subject
-from .serializers import CourseCategorySerializer, SubjectSerializer, ClassSerializer, ClassLecturerSerializer, \
+from course.serializers import CourseCategorySerializer, SubjectSerializer, ClassSerializer, ClassLecturerSerializer, \
     ClassStudentSerializer, EnrollRequestSerializer, ScheduleSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -255,3 +255,4 @@ class EnrollRequestDeleteView(generics.DestroyAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+    

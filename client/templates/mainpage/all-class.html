@@ -1,14 +1,14 @@
-{% extends 'basepage/mainbase.html' %}
+{% extends 'basepage/classbase.html' %}
 {% load staticfiles %}
 {% block navisize %} container-fluid {% endblock %}
 
 {% block title %} Tất cả khóa học | Hệ thống quản lý môn học {% endblock %}
 
-{% block stylesheets %}
+{% block class_stylesheets %}
     <link rel="stylesheet" href="{% static 'stylesheets/custom/all-class.css' %}"/>
 
-{% endblock %}
-{% block courses %} active {% endblock %}
+{% endblock class_stylesheets %}
+{% block course %} active {% endblock %}
 {% block bodycontent %}
     <div id="all-course-body">
         <div class="hero-area section w-100">
@@ -335,7 +335,7 @@
 {% endblock %}
 {% block footer_size %} container-fluid {% endblock %}
 
-{% block javascripts %}
+{% block class_javascripts %}
     <script type="text/javascript" src="{% static 'javascripts/custom/all-class.js' %}"></script>
 
-{% endblock %}
+{% endblock class_javascripts %}
