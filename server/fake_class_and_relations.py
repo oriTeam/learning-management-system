@@ -47,10 +47,9 @@ start = ['2018-01-02', '2018-02-01', '2018-03-14', '2018-04-01', '2018-02-15', '
 end = ['2019-01-02', '2019-02-01', '2019-03-14', '2019-04-01', '2019-02-15', '2019-01-11', '2019-04-01', '2019-01-31', ]
 
 while True:
-    course_id = input("Course can fake: ")
-    if course_id.isdigit():
-        course = int(course_id)
-        # class_num = int(class_num)
+    subject_id = input("Subject id: ")
+    if subject_id.isdigit():
+        course = int(subject_id)\
         break
 
 
@@ -73,24 +72,24 @@ def get_random_lecturer():
     return random_lecturer_id
 
 try:
-    course_category = CourseCategory.objects.get(pk=course_id)
-except CourseCategory.DoesNotExist:
-    print('Course Category does not exist !!! Try another id ...')
+    subject = Subject.objects.get(pk=subject_id)
+except Subject.DoesNotExist:
+    print('Subject does not exist !!! Try another id ...')
 else:
     for _class in classes:
         try:
             start_date = choice(start)
             end_date = choice(end)
             new_class = Class.objects.create(code=_class['id'], name=_class['name'], description="", time_start=start_date,
-                                          time_end=end_date, category=course_category)
+                                          time_end=end_date)
             try:
-                subject = Subject.objects.get(name=_class['name'])
+                subject = Subject.objects.get(pk = subject_id)
             except Subject.DoesNotExist:
                 pass
             else:
                 new_class.subject = subject
             new_class.save()
-            print('Class {0} successfully created in {1}'.format(_class['name'], course_category))
+            print('Class {0} successfully created in {1}'.format(_class['name'], subject))
 
             for i in range(0, 2):
                 lecturer_id = get_random_lecturer();

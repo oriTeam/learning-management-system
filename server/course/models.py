@@ -28,7 +28,7 @@ class CourseCategory(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Subject"))
     avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
-
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_("Course Category"))
     class Meta:
         db_table = 'subject'
         ordering = ['id']
@@ -45,7 +45,6 @@ class Class(models.Model):
     description = models.TextField(null=True, verbose_name=_('Description'))
     time_start = models.DateTimeField(verbose_name=_("Class's start time"))
     time_end = models.DateTimeField(verbose_name=_("Class's end time"))
-    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_("Course Category"))
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_('Subject'))
 
     class Meta:

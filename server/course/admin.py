@@ -8,12 +8,12 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 @admin.register(Subject)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'avatar')
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category', 'avatar')
 
 @admin.register(Class)
-class ClasAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category', 'time_start', 'time_end')
+class ClassAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'subject', 'time_start', 'time_end')
 
 @admin.register(ClassStudent)
 class ClassStudentAdmin(admin.ModelAdmin):
