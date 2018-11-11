@@ -1,11 +1,10 @@
-// var breadcrum = require('./contact')
 
 
-let breadcrumb = '<ul class="bread-crumb px-0">\n' +
+var breadcrumb = '<ul class="bread-crumb px-0">\n' +
     '  <li><a href="/"><span class="fa fa-home"> </span> Trang chủ</a></li>\n' +
     '  <li><a href="/my-course">Khóa học của tôi</a></li>\n' +
     '  </ul>';
-let search = '<div class="col-12 pb-3">\n' +
+var search = '<div class="col-12 pb-3">\n' +
     '            <div class="row justify-content-center mx-0 text-center m--padding-top-30-desktop m--padding-top-20-mobile pb-4">\n' +
     '                <h2>Tìm kiếm khóa học của tôi</h2>\n' +
     '            </div>\n' +
@@ -22,12 +21,13 @@ let search = '<div class="col-12 pb-3">\n' +
     '                </div>\n' +
     '            </div>\n' +
     '        </div>';
-let innerContent = '';
-let menuSide = '';
-let mainContent = '';
 
-Vue.component('breadcrumb', {template: breadcrumb });
-Vue.component('search', {template: search });
+
+Vue.component('a-side', {template: aside });
+Vue.component('new-class-btn', {template: new_class_btn });
+Vue.component('new-class-modal', {template: new_class_modal });
+Vue.component('class-box', {template: class_box });
+
 
 new Vue({
     el: '#my-course-body',

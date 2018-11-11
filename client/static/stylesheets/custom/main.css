@@ -6,10 +6,10 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 
-body, button, .btn, a.btn, .m-portlet__head-text {
+body, button, .btn, a.btn, .m-portlet__head-text, .form-control {
     font-family: 'Muli', sans-serif !important;
 }
-body {
+body, .form-control {
     font-size: 15px;
     position: relative;
 }
@@ -218,6 +218,13 @@ h1, h2, h3, h4, h5, h6 {
 .btn.dropdown-toggle:after, .nav-link.dropdown-toggle:after {
     content: "";
     display: none;
+}
+
+@media (min-width: 1200px) {
+    .navbar-expand-xl .navbar-nav .nav-link {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
 }
 
 /* HERO

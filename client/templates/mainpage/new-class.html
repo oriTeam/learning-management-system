@@ -1,0 +1,693 @@
+{% extends 'basepage/classbase.html' %}
+{% load staticfiles %}
+{% block navisize %} container-fluid m--padding-left-25 m--padding-right-25{% endblock %}
+
+{% block title %} Tất cả khóa học | Hệ thống quản lý môn học {% endblock %}
+
+{% block class_stylesheets %}
+    <link rel="stylesheet" href="{% static 'stylesheets/custom/all-class.css' %}"/>
+
+{% endblock class_stylesheets %}
+{% block course %} active {% endblock %}
+{% block bodycontent %}
+    <div id="all-course-body">
+        <div class="hero-area section w-100">
+            <div class="bg-image bg-parallax overlay" style="background-image:url({% static 'images/br.jpg' %})"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 text-center">
+                        <ul class="hero-area-tree">
+                            <li><a href="/">Trang chủ</a></li>
+                            <li>Tất cả lớp học</li>
+                        </ul>
+                        <h1 class="white-text">Tất cả lớp học</h1>
+                    </div>
+                    {#                    <search></search>#}
+                </div>
+            </div>
+
+        </div>
+        <div class="container-fluid">
+            <div class="row mx-0 my-4">
+                <div class="col-lg-3 col-sm-12 pr-3">
+                    <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light w-100 h-100">
+                        <!-- BEGIN: Aside Menu -->
+                        <div id="m_ver_menu"
+                             class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light "
+                             m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+                            <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                                <li class="m-menu__section m-menu__section--first">
+                                    <h4 class="m-menu__section-text m--regular-font-size-lg2">Danh sách môn học</h4>
+                                    <i class="m-menu__section-icon flaticon-more-v3"></i>
+                                </li>
+                                <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true"
+                                    m-menu-submenu-toggle="hover"><a href="javascript:;"
+                                                                     class="m-menu__link m-menu__toggle"><i
+                                        class="m-menu__link-icon flaticon-layers"></i><span
+                                        class="m-menu__link-text">Resources</span><i
+                                        class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                                        <ul class="m-menu__subnav">
+                                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span
+                                                    class="m-menu__link"><span
+                                                    class="m-menu__link-text">Resources</span></span>
+                                            </li>
+                                            <li class="m-menu__item " aria-haspopup="true"><a href="inner.html"
+                                                                                              class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Timesheet</span></a></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Payroll</span></a></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Contacts</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-suitcase"></i><span
+                                        class="m-menu__link-text">Finance</span></a></li>
+                                <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true"
+                                    m-menu-submenu-toggle="hover" m-menu-link-redirect="1"><a href="javascript:;"
+                                                                                              class="m-menu__link m-menu__toggle"><i
+                                        class="m-menu__link-icon flaticon-graphic-1"></i><span
+                                        class="m-menu__link-title">  <span class="m-menu__link-wrap">      <span
+                                        class="m-menu__link-text">Support</span>      <span
+                                        class="m-menu__link-badge"><span
+                                        class="m-badge m-badge--accent">3</span></span>  </span></span><i
+                                        class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                                        <ul class="m-menu__subnav">
+                                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"
+                                                m-menu-link-redirect="1"><span class="m-menu__link"><span
+                                                    class="m-menu__link-title">  <span
+                                                    class="m-menu__link-wrap">      <span
+                                                    class="m-menu__link-text">Support</span>      <span
+                                                    class="m-menu__link-badge"><span
+                                                    class="m-badge m-badge--accent">3</span></span>  </span></span></span>
+                                            </li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><span
+                                                    class="m-menu__link-text">Reports</span></a>
+                                            </li>
+                                            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"
+                                                m-menu-submenu-toggle="hover" m-menu-link-redirect="1"><a
+                                                    href="javascript:;"
+                                                    class="m-menu__link m-menu__toggle"><span
+                                                    class="m-menu__link-text">Cases</span><i
+                                                    class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                                <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                                                    <ul class="m-menu__subnav">
+                                                        <li class="m-menu__item " aria-haspopup="true"
+                                                            m-menu-link-redirect="1">
+                                                            <a href="inner.html" class="m-menu__link "><span
+                                                                    class="m-menu__link-text">Pending</span></a></li>
+                                                        <li class="m-menu__item " aria-haspopup="true"
+                                                            m-menu-link-redirect="1">
+                                                            <a href="inner.html" class="m-menu__link "><span
+                                                                    class="m-menu__link-text">Urgent</span></a></li>
+                                                        <li class="m-menu__item " aria-haspopup="true"
+                                                            m-menu-link-redirect="1">
+                                                            <a href="inner.html" class="m-menu__link "><span
+                                                                    class="m-menu__link-text">Done</span></a></li>
+                                                        <li class="m-menu__item " aria-haspopup="true"
+                                                            m-menu-link-redirect="1">
+                                                            <a href="inner.html" class="m-menu__link "><span
+                                                                    class="m-menu__link-text">Archive</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><span
+                                                    class="m-menu__link-text">Clients</span></a>
+                                            </li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><span
+                                                    class="m-menu__link-text">Audit</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-light"></i><span class="m-menu__link-text">Administration</span></a>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-share"></i><span
+                                        class="m-menu__link-text">Management</span></a></li>
+                                <li class="m-menu__section ">
+                                    <h4 class="m-menu__section-text">Reports</h4>
+                                    <i class="m-menu__section-icon flaticon-more-v3"></i>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-graphic"></i><span class="m-menu__link-text">Accounting</span></a>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-network"></i><span
+                                        class="m-menu__link-text">Products</span></a></li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-network"></i><span
+                                        class="m-menu__link-text">Sales</span></a></li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-alert"></i><span
+                                        class="m-menu__link-title">  <span
+                                        class="m-menu__link-wrap">      <span
+                                        class="m-menu__link-text">Bills</span>      <span
+                                        class="m-menu__link-badge"><span
+                                        class="m-badge m-badge--danger">12</span></span>  </span></span></a></li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-technology"></i><span
+                                        class="m-menu__link-text">IPO</span></a></li>
+                                <li class="m-menu__section ">
+                                    <h4 class="m-menu__section-text">System</h4>
+                                    <i class="m-menu__section-icon flaticon-more-v3"></i>
+                                </li>
+                                <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"
+                                    m-menu-submenu-toggle="hover"><a href="javascript:;"
+                                                                     class="m-menu__link m-menu__toggle"><i
+                                        class="m-menu__link-icon flaticon-clipboard"></i><span
+                                        class="m-menu__link-text">Applications</span><i
+                                        class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                                        <ul class="m-menu__subnav">
+                                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span
+                                                    class="m-menu__link"><span
+                                                    class="m-menu__link-text">Applications</span></span></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Audit</span></a></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Notifications</span></a></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Messages</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"
+                                    m-menu-submenu-toggle="hover"><a href="javascript:;"
+                                                                     class="m-menu__link m-menu__toggle"><i
+                                        class="m-menu__link-icon flaticon-computer"></i><span
+                                        class="m-menu__link-text">Modules</span><i
+                                        class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                    <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                                        <ul class="m-menu__subnav">
+                                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span
+                                                    class="m-menu__link"><span
+                                                    class="m-menu__link-text">Modules</span></span>
+                                            </li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Logs</span></a></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Errors</span></a></li>
+                                            <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                                    href="inner.html" class="m-menu__link "><i
+                                                    class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+                                                    class="m-menu__link-text">Configuration</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-cogwheel"></i><span
+                                        class="m-menu__link-text">Files</span></a></li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-lifebuoy"></i><span
+                                        class="m-menu__link-text">Security</span></a></li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1"><a
+                                        href="inner.html"
+                                        class="m-menu__link "><i
+                                        class="m-menu__link-icon flaticon-settings"></i><span
+                                        class="m-menu__link-text">Options</span></a></li>
+                            </ul>
+                        </div>
+                        <!-- END: Aside Menu -->
+                    </div>
+                </div>
+                <div class="col-lg-9 px-3">
+                    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+                        <div class="row mx-0">
+                            <div class="col-lg-8 col-sm-12 px-lg-2 px-0 m--margin-bottom-10-tablet-and-mobile">
+                                <form action="">
+                                    <div class="inner-form">
+                                        <div class="input-field">
+                                            {#                                            <button type="button" class="btn-search"><i#}
+                                            {#                                                    class="fa fa-search"></i></button>#}
+                                            <input id="search" type="text" placeholder="Tìm kiếm khóa học ..."
+                                                   class="form-control"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4 col-sm-12 text-right px-lg-2 px-0">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle w-100"
+                                            type="button"
+                                            id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sắp xếp theo
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                         x-placement="top-start"
+                                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
+                                        <a class="dropdown-item" href="#" data-toggle="m-tooltip" title=""
+                                           data-placement="left"
+                                           data-original-title="Tooltip title">Phổ biến nhất</a>
+                                        <a class="dropdown-item" href="#" data-toggle="m-tooltip" title=""
+                                           data-placement="left"
+                                           data-original-title="Tooltip title">Mới nhất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row py-4 mx-0">
+                            <div class="m-portlet w-100">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Tạo lớp học mới
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__head-tools">
+                                        <ul class="m-portlet__nav">
+                                            <li class="m-portlet__nav-item">
+                                                <a href="#" data-toggle="m-tooltip"
+                                                   class="m-portlet__nav-link m-portlet__nav-link--icon"
+                                                   data-direction="left" data-width="auto" title=""
+                                                   data-original-title="Get help with filling up this form">
+                                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="m-wizard m-wizard--1 m-wizard--success m-wizard--step-first" id="m_wizard">
+                                    <div class="m-portlet__padding-x">
+                                    </div>
+                                    <div class="m-wizard__head m-portlet__padding-x">
+                                        <div class="m-wizard__progress">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="100"
+                                                     aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: calc(25% + 26px);"></div>
+                                            </div>
+                                        </div>
+                                        <div class="m-wizard__nav">
+                                            <div class="m-wizard__steps">
+                                                <div class="m-wizard__step m-wizard__step--current"
+                                                     m-wizard-target="m_wizard_form_step_1">
+                                                    <div class="m-wizard__step-info">
+                                                        <a href="#" class="m-wizard__step-number">
+                                                            <span>
+                                                                <span>1</span>
+                                                            </span>
+                                                        </a>
+                                                        <div class="m-wizard__step-line">
+                                                            <span></span>
+                                                        </div>
+                                                        <div class="m-wizard__step-label">
+                                                            Thông tin cơ bản
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
+                                                    <div class="m-wizard__step-info">
+                                                        <a href="#" class="m-wizard__step-number">
+                                                            <span>
+                                                                <span>2</span>
+                                                            </span>
+                                                        </a>
+                                                        <div class="m-wizard__step-line">
+                                                            <span></span>
+                                                        </div>
+                                                        <div class="m-wizard__step-label">
+                                                            Thời gian của lớp học
+                                                        </div>
+                                                    </div>
+                                                </div>
+{#                                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">#}
+{#                                                    <div class="m-wizard__step-info">#}
+{#                                                        <a href="#" class="m-wizard__step-number">#}
+{#																<span>#}
+{#																	<span>3</span>#}
+{#																</span>#}
+{#                                                        </a>#}
+{#                                                        <div class="m-wizard__step-line">#}
+{#                                                            <span></span>#}
+{#                                                        </div>#}
+{#                                                        <div class="m-wizard__step-label">#}
+{#                                                            Giáo trình#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+                                                <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_4">
+                                                    <div class="m-wizard__step-info">
+                                                        <a href="#" class="m-wizard__step-number">
+																<span>
+																	<span>3</span>
+																</span>
+                                                        </a>
+                                                        <div class="m-wizard__step-line">
+                                                            <span></span>
+                                                        </div>
+                                                        <div class="m-wizard__step-label">
+                                                            Xác nhận tạo lớp học
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-wizard__form">
+                                        <form class="m-form m-form--label-align-left m-form--state" id="m_form"
+                                              novalidate="novalidate">
+                                            <div class="m-portlet__body">
+                                                <div class="m-wizard__form-step m-wizard__form-step--current"
+                                                     id="m_wizard_form_step_1">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-xl-12">
+                                                            <div class="m-form__section m-form__section--first">
+                                                                <div class="m-form__heading">
+                                                                    <h3 class="m-form__heading-title">Thông tin cơ
+                                                                        bản</h3>
+                                                                </div>
+
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-xl-2 col-lg-2 col-form-label m--regular-font-size-lg2">
+                                                                        Thể loại
+                                                                    </label>
+                                                                    <div class="col-xl-10 col-lg-10">
+                                                                        <select name="country"
+                                                                                class="form-control m-input">
+                                                                            <option value="">Select</option>
+                                                                            <option value="AF">Toán</option>
+                                                                            <option value="ZW">CNTT</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-xl-2 col-lg-2 col-form-label m--regular-font-size-lg2">
+                                                                        Môn học
+                                                                    </label>
+                                                                    <div class="col-xl-10 col-lg-10">
+                                                                        <select name="country"
+                                                                                class="form-control m-input">
+                                                                            <option value="">Select</option>
+                                                                            <option value="AF">Phát triển Úng dụng Web
+                                                                            </option>
+                                                                            <option value="ZW">Phát triển Ứng dụng Di
+                                                                                Động
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-xl-2 col-lg-2 col-form-label m--regular-font-size-lg2">Tên
+                                                                        lớp học</label>
+                                                                    <div class="col-xl-10 col-lg-10">
+                                                                        <input type="text" name="name"
+                                                                               class="form-control m-input"
+                                                                               placeholder="">
+                                                                        {#                                                                        <span class="m-form__help">Please enter your first and last names</span>#}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-xl-2 col-lg-2 col-form-label m--regular-font-size-lg2">
+                                                                        Mã lớp học</label>
+                                                                    <div class="col-xl-10 col-lg-10">
+                                                                        <input type="text" name="email"
+                                                                               class="form-control m-input"
+                                                                               placeholder="">
+                                                                        {#                                                                        <span class="m-form__help">We'll never share your email with anyone else</span>#}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-xl-2 col-lg-2 col-form-label m--regular-font-size-lg2">
+                                                                        Mô tả</label>
+                                                                    <div class="col-xl-10 col-lg-10">
+                                                                        <textarea name="description" id=""
+                                                                                  class="form-control m-input w-100"
+                                                                                  rows="8"></textarea>
+                                                                        {#                                                                        <span class="m-form__help">Enter your valid phone in US phone format. E.g: 1-541-754-3010</span>#}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!--end: Form Wizard Step 1-->
+
+                                                <!--begin: Form Wizard Step 2-->
+                                                <div class="m-wizard__form-step" id="m_wizard_form_step_2">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-xl-12">
+                                                            <div class="m-form__section m-form__section--first">
+                                                                <div class="m-form__heading">
+                                                                    <h3 class="m-form__heading-title">Thời gian</h3>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-form-label col-lg-2 col-sm-12">Ngày
+                                                                        bắt đầu</label>
+                                                                    <div class="col-lg-10 col-sm-12">
+                                                                        <div class="input-group date">
+                                                                            <input type="text"
+                                                                                   class="form-control m-input"
+                                                                                   readonly="" value="09/20/2018"
+                                                                                   id="start_datepicker">
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="la la-calendar"></i>
+													                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        {#                                                                        <span class="m-form__help">Enable clear and today helper buttons</span>#}
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-form-label col-lg-2 col-sm-12">Ngày
+                                                                        kết thúc</label>
+                                                                    <div class="col-lg-10 col-sm-12">
+                                                                        <div class="input-group date">
+                                                                            <input type="text"
+                                                                                   class="form-control m-input"
+                                                                                   readonly="" value="05/01/2019"
+                                                                                   id="end_datepicker">
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text">
+                                                                                    <i class="la la-calendar"></i>
+													                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        {#                                                                        <span class="m-form__help">Enable clear and today helper buttons</span>#}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-form-label col-lg-2 col-sm-12">Giờ bắt đầu buổi học</label>
+                                                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                               id="session_start_timepicker" readonly=""
+                                                                               placeholder="Select time">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group row">
+                                                                    <label class="col-form-label col-lg-2 col-sm-12">Giờ Kết thúc buổi học</label>
+                                                                    <div class="col-lg-10 col-md-9 col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                               id="session_end_timepicker" readonly=""
+                                                                               placeholder="Select time">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--end: Form Wizard Step 2-->
+
+                                                <!--begin: Form Wizard Step 3-->
+{#                                                <div class="m-wizard__form-step" id="m_wizard_form_step_3">#}
+{#                                                    <div class="row justify-content-center">#}
+{#                                                        <div class="col-xl-12">#}
+{#                                                            <div class="m-form__section m-form__section--first">#}
+{#                                                                <div class="m-form__heading">#}
+{#                                                                    <h3 class="m-form__heading-title">Giáo trình</h3>#}
+{#                                                                </div>#}
+{##}
+{#                                                            </div>#}
+{##}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+
+                                                <!--end: Form Wizard Step 3-->
+
+                                                <!--begin: Form Wizard Step 4-->
+                                                <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-xl-12">
+{#                                                            <div class="m-accordion m-accordion--default"#}
+{#                                                                 id="m_accordion_1" role="tablist">#}
+{#                                                                <div class="m-accordion__item active">#}
+{#                                                                    <div class="m-accordion__item-head" role="tab"#}
+{#                                                                         id="m_accordion_1_item_1_head"#}
+{#                                                                         data-toggle="collapse"#}
+{#                                                                         href="#m_accordion_1_item_1_body"#}
+{#                                                                         aria-expanded="  false">#}
+{#																			<span class="m-accordion__item-icon">#}
+{#																				<i class="fa flaticon-user-ok"></i>#}
+{#																			</span>#}
+{#                                                                        <span class="m-accordion__item-title">1. Client Information</span>#}
+{#                                                                        <span class="m-accordion__item-mode"></span>#}
+{#                                                                    </div>#}
+{#                                                                    <div class="m-accordion__item-body collapse show"#}
+{#                                                                         id="m_accordion_1_item_1_body" role="tabpanel"#}
+{#                                                                         aria-labelledby="m_accordion_1_item_1_head"#}
+{#                                                                         data-parent="#m_accordion_1">#}
+{#                                                                        <div class="tab-content  m--padding-30">#}
+{#                                                                            <div class="m-form__section m-form__section--first">#}
+{#                                                                                <div class="m-form__heading">#}
+{#                                                                                    <h4 class="m-form__heading-title">#}
+{#                                                                                        Account Details</h4>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="form-group m-form__group m-form__group--sm row">#}
+{#                                                                                    <label class="col-xl-4 col-lg-4 col-form-label">URL:</label>#}
+{#                                                                                    <div class="col-xl-8 col-lg-8">#}
+{#                                                                                        <span class="m-form__control-static">sinortech.vertoffice.com</span>#}
+{#                                                                                    </div>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="form-group m-form__group m-form__group--sm row">#}
+{#                                                                                    <label class="col-xl-4 col-lg-4 col-form-label">Username:</label>#}
+{#                                                                                    <div class="col-xl-8 col-lg-8">#}
+{#                                                                                        <span class="m-form__control-static">sinortech.admin</span>#}
+{#                                                                                    </div>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="form-group m-form__group m-form__group--sm row">#}
+{#                                                                                    <label class="col-xl-4 col-lg-4 col-form-label">Password:</label>#}
+{#                                                                                    <div class="col-xl-8 col-lg-8">#}
+{#                                                                                        <span class="m-form__control-static">*********</span>#}
+{#                                                                                    </div>#}
+{#                                                                                </div>#}
+{#                                                                            </div>#}
+{#                                                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>#}
+{#                                                                            <div class="m-form__section">#}
+{#                                                                                <div class="m-form__heading">#}
+{#                                                                                    <h4 class="m-form__heading-title">#}
+{#                                                                                        Client Settings</h4>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="form-group m-form__group m-form__group--sm row">#}
+{#                                                                                    <label class="col-xl-4 col-lg-4 col-form-label">User#}
+{#                                                                                        Group:</label>#}
+{#                                                                                    <div class="col-xl-8 col-lg-8">#}
+{#                                                                                        <span class="m-form__control-static">Customer</span>#}
+{#                                                                                    </div>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="form-group m-form__group m-form__group--sm row">#}
+{#                                                                                    <label class="col-xl-4 col-lg-4 col-form-label">Communications:</label>#}
+{#                                                                                    <div class="col-xl-8 col-lg-8">#}
+{#                                                                                        <span class="m-form__control-static">Phone, Email</span>#}
+{#                                                                                    </div>#}
+{#                                                                                </div>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{##}
+{#                                                                        <!--end::Content-->#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{##}
+{#                                                                <!--end::Item-->#}
+{#                                                                <!--end::Item-->#}
+{#                                                            </div>#}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-portlet__foot m-portlet__foot--fit m--margin-top-40">
+                                                <div class="m-form__actions m-form__actions">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-sm-12 m--align-left my-2">
+                                                            <button class="btn btn-secondary m-btn m-btn--custom m-btn--icon"
+                                                                    data-wizard-action="prev">
+																	<span>
+																		<i class="la la-arrow-left"></i>&nbsp;&nbsp;
+																		<span>Quay lại</span>
+																	</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-lg-6 col-sm-12 m--align-right my-2">
+                                                            <button class="btn btn-primary m-btn m-btn--custom m-btn--icon"
+                                                                    data-wizard-action="submit">
+																	<span>
+																		<i class="la la-check"></i>&nbsp;&nbsp;
+																		<span>Tạo lớp học</span>
+																	</span>
+                                                            </button>
+                                                            <button class="btn btn-success m-btn m-btn--custom m-btn--icon"
+                                                                    data-wizard-action="next">
+																	<span>
+																		<span>Tiếp tục</span>&nbsp;&nbsp;
+																		<i class="la la-arrow-right"></i>
+																	</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-lg-2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--end: Form Actions -->
+                                        </form>
+                                    </div>
+
+                                    <!--end: Form Wizard Form-->
+                                </div>
+
+                                <!--end: Form Wizard-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer_size %} container-fluid {% endblock %}
+
+{% block class_javascripts %}
+    <script type="text/javascript" src="{% static 'javascripts/custom/all-class.js' %}"></script>
+
+{% endblock class_javascripts %}

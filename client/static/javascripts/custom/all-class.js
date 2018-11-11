@@ -19,11 +19,12 @@ let breadcrumb = '<ul class="bread-crumb px-0">\n' +
 //     '                </div>\n' +
 //     '            </div>\n' +
 //     '        </div>';
-let innerContent = '';
-let menuSide = '';
 
-Vue.component('breadcrumb', {template: breadcrumb });
-Vue.component('search', {template: search });
+
+Vue.component('a-side', {template: aside });
+Vue.component('new-class-btn', {template: new_class_btn });
+Vue.component('new-class-modal', {template: new_class_modal });
+Vue.component('class-box', {template: class_box });
 
 new Vue({
     el: '#all-course-body',

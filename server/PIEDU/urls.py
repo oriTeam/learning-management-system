@@ -27,14 +27,16 @@ urlpatterns = [
     path('account/', include("django.contrib.auth.urls")),
     path('', views.index, name='homepage'),
     path('login/', views.login, name='login'),
-    path('my-course/', views.my_course, name='my_course'),
-    path('course/', views.all_course, name='all_course'),
+    path('course/my', views.my_course, name='my_course'),
+    path('course/all', views.all_course, name='all_course'),
     path('contact/', views.contact, name='contact'),
     path('help/', views.help, name='help'),
     path('forum/v1/', include(board.urls)),
     path('user',views.user,name = 'user'),
     path('course/1', views.inner_course, name='inner_course'),
     # path('restapi/', include('rest_framework.urls', namespace='rest_framework')),
+
+    path('new/', views.new_class, name='newclass'),
 
 ]
 

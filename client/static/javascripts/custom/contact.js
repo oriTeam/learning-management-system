@@ -1,4 +1,4 @@
-let breadcrumb = '<ul class="bread-crumb px-0">\n' +
+var breadcrumb = '<ul class="bread-crumb px-0">\n' +
     '  <li><a href="/"><span class="fa fa-home"> </span> Trang chủ</a></li>\n' +
     '  <li><a href="/contact">Liên hệ</a></li>\n' +
     '  </ul>';

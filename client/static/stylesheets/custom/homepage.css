@@ -796,3 +796,7 @@ header {
     -ms-transform: scale(0);
     transform: scale(0);
 }
+
+#m_aside_left_offcanvas_toggle {
+    display: none !important;
+}

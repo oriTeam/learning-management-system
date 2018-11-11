@@ -1,8 +1,8 @@
-let breadcrumb = '<ul class="bread-crumb px-0">\n' +
+var breadcrumb = '<ul class="bread-crumb px-0">\n' +
     '  <li><a href="/"><span class="fa fa-home"> </span> Trang chủ</a></li>\n' +
     '  <li><a href="/help">Trợ giúp</a></li>\n' +
     '  </ul>';
-let search = '<form action="">\n' +
+var search = '<form action="">\n' +
     '                    <div class="inner-form">\n' +
     '                        <div class="input-field">\n' +
     '                            <button class="btn-search" type="button">\n' +
@@ -12,8 +12,8 @@ let search = '<form action="">\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                </form>\n';
-let innerContent = '';
-let menuSide = '';
+var innerContent = '';
+var menuSide = '';
 
 Vue.component('breadcrumb', {template: breadcrumb });
 Vue.component('search', {template: search });

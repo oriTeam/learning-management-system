@@ -79,3 +79,7 @@ ul {
     transition: all .3s ease-out;
     letter-spacing: 0.5px;
 }
+
+#m_aside_left_offcanvas_toggle {
+    display: none !important;
+}

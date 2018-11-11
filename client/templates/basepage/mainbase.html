@@ -31,12 +31,12 @@
                         <i class="fa fa-chalkboard" style="font-size: 30px"></i> PIEdu</strong>
                         </a>
                         <div>
-                        <button id="m_aside_left_offcanvas_toggle" class="m--visible-tablet-and-mobile-inline-block p-0">
-                             <span class="flaticon-squares-2" style="font-size: 30px; color: #fff"></span>
+                        <button id="m_aside_left_offcanvas_toggle" class="m--visible-tablet-and-mobile-inline-block p-0 mr-2">
+                             <span class="fa fa-align-right" style="font-size: 30px; color: #fff"></span>
                         </button>
                         <button class="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#navbar"
                                 aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
-                            <span class="flaticon-squares-2" style="font-size: 30px; color: #fff"></span>
+                            <span class="fa fa-align-justify" style="font-size: 30px; color: #fff"></span>
                         </button>
                         </div>
                         <div class="collapse navbar-collapse" id="navbar">
@@ -59,13 +59,13 @@
                                                 <div class="m-dropdown__content">
                                                     <ul class="m-nav">
                                                         <li class="m-nav__item">
-                                                            <a href="/my-course" class="m-nav__link">
+                                                            <a href="/course/my" class="m-nav__link">
                                                                 <i class="m-nav__link-icon flaticon-share"></i>
                                                                 <span class="m-nav__link-text">KHÓA HỌC CỦA TÔI</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a href="/course" class="m-nav__link">
+                                                            <a href="/course/all" class="m-nav__link">
                                                                 <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                                 <span class="m-nav__link-text">TẤT CẢ KHÓA HỌC</span>
                                                             </a>
@@ -181,25 +181,22 @@
 
     {% endblock %}
     <div id="contact-cta" class="section">
-			<!-- Backgound Image -->
-			<div class="bg-image bg-parallax overlay" style="background-image:url({% static 'images/cta2-background.jpg' %})"></div>
-			<!-- Backgound Image -->
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row justify-content-center">
-					<div class="col-md-8 text-center">
-						<h2 class="white-text">Đăng ký nhận Email thông báo </h2>
-						<p class="lead white-text">Mỗi khi có khóa học mới, chúng tôi sẽ email thông báo đến bạn</p>
-						<a class="main-button icon-button" href="#">Đăng ký ngay</a>
-					</div>
-				</div>
+        <div class="bg-image bg-parallax overlay"
+             style="background-image:url({% static 'images/cta2-background.jpg' %})"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2 class="white-text">Đăng ký nhận Email thông báo </h2>
+                    <p class="lead white-text">Mỗi khi có khóa học mới, chúng tôi sẽ email thông báo đến bạn</p>
+                    <a class="main-button icon-button" href="#">Đăng ký ngay</a>
+                </div>
+            </div>
 			</div>
-		</div>
+    </div>
 
     <footer id="footer" class="section">
 			<div class="container">
-				<!-- <div class="row">
+				<div class="row">
 					<div class="col-md-5">
 						<div class="footer-logo">
 							<a class="navbar-brand" href="index.html">
@@ -211,13 +208,13 @@
 					<div class="col-md-7">
 						<ul class="footer-nav">
 							<li><a href="/">TRANG CHỦ</a></li>
-							<li><a href="/my-course">KHÓA HỌC CỦA TÔI</a></li>
-							<li><a href="/course">TẤT CẢ KHÓA HỌC</a></li>
+							<li><a href="/course/my">KHÓA HỌC CỦA TÔI</a></li>
+							<li><a href="/course/all">TẤT CẢ KHÓA HỌC</a></li>
 							<li><a href="/contact">LIÊN HỆ</a></li>
 							<li><a href="/help">TRỢ GIÚP</a></li>
 						</ul>
 					</div>
-				</div> -->
+				</div>
 				<div id="bottom-footer" class="row">
                     <div class="col-md-8">
 						<div class="footer-copyright">
@@ -253,7 +250,7 @@
 <script type="text/javascript" src="{% static 'javascripts/lib/vendors.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascripts/lib/scripts.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascripts/lib/owl.carousel.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascripts/lib/wizard.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'javascripts/lib/wizard.js' %}"></script>#}
 
 <script type="text/javascript" src="{% static 'javascripts/custom/base.js' %}"></script>
 {% block javascripts %}

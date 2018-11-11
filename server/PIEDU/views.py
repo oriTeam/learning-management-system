@@ -22,3 +22,7 @@ def user(request):
     return render(request,'userpage/user-page.html')
 def inner_course(request):
     return render(request, 'mainpage/inner-class.html')
+
+# FOR TEST
+def new_class(request):
+    return render(request, 'mainpage/new-class.html')

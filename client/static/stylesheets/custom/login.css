@@ -24,3 +24,7 @@
     border-radius: 4px;
     box-shadow: 12px 15px 20px rgba(0, 0, 0, 0.1) !important;
 }
+
+#m_aside_left_offcanvas_toggle {
+    display: none !important;
+}
