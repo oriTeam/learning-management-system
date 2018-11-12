@@ -1,4 +1,4 @@
 *.pyc
-piedu-frontend/node_modules
-piedu-frontend/static/javascript/bundles
+node_modules
+bundles
 .idea
