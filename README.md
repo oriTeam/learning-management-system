@@ -19,7 +19,7 @@
 	
   -- Cách 1: AIO:
         
-        $ pip install -r requirements.txt
+        $ pip install -r piedu-backend/requirements.txt
     
   -- Cách 2: Cài từng package:
         
@@ -53,14 +53,14 @@
    
   5. Migrate:
         
-    $ python manage.py makemigrations
+    $ python piedu-backend/manage.py makemigrations
         
-    $ python manage.py migrate
+    $ python piedu-backend/manage.py migrate
         
         
   6. Và chạy thôi :)) 
         
-    $ python manage.py runserver
+    $ python piedu-backend/manage.py runserver
         
 ## Contributors
 
