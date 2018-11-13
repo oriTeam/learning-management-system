@@ -181,73 +181,9 @@
     {% block bodycontent %}
 
     {% endblock %}
-    <div id="contact-cta" class="section">
-        <div class="bg-image bg-parallax overlay"
-             style="background-image:url({% static 'images/cta2-background.jpg' %})"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <h2 class="white-text">Đăng ký nhận Email thông báo </h2>
-                    <p class="lead white-text">Mỗi khi có khóa học mới, chúng tôi sẽ email thông báo đến bạn</p>
-                    <a class="main-button icon-button" href="#">Đăng ký ngay</a>
-                </div>
-            </div>
-			</div>
-    </div>
-{#<div id="app">#}
-{#  <demo></demo>#}
-{#</div>#}
-    <footer id="footer" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5">
-						<div class="footer-logo">
-							<a class="navbar-brand" href="index.html">
-                                <strong style="font-size: 30px">
-                                    <i class="fa fa-chalkboard" style="font-size: 30px"></i> PIEdu</strong>
-							</a>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<ul class="footer-nav">
-							<li><a href="/">TRANG CHỦ</a></li>
-							<li><a href="/course/my">KHÓA HỌC CỦA TÔI</a></li>
-							<li><a href="/course/all">TẤT CẢ KHÓA HỌC</a></li>
-							<li><a href="/contact">LIÊN HỆ</a></li>
-							<li><a href="/help">TRỢ GIÚP</a></li>
-						</ul>
-					</div>
-				</div>
-				<div id="bottom-footer" class="row">
-                    <div class="col-md-8">
-						<div class="footer-copyright">
-							<span>© Copyright 2018. All Rights Reserved. | Team PIEdu - UET -VNU <i class="fa fa-heart" aria-hidden="true"></i></span>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<ul class="footer-social">
-							<li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" class="google-plus"><i class="fab fa-google-plus-g"></i></a></li>
-							<li><a href="#" class="instagram"><i class="fab fa-instagram"></i></a></li>
-							<li><a href="#" class="youtube"><i class="fab fa-youtube"></i></a></li>
-							<li><a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- row -->
 
-			</div>
-			<!-- /container -->
-
-		</footer>
-
-    <div>
-        <button class="btn btn-lg btn-info animated bounceInUp" data-toggle="tooltip" data-placement="left" id="gotop"
-                title="Lên trên cùng">
-            <i class="fa fa-angle-double-up m--regular-font-size-lg4"></i>
-        </button>
-    </div>
+    <pi-footer></pi-footer>
+    <go-top></go-top>
 </div>
 {#<script type="text/javascript" src="{% static 'javascripts/lib/vue.js' %}"></script>#}
 <script type="text/javascript" src="{% static 'javascripts/lib/vendors.bundle.js' %}"></script>

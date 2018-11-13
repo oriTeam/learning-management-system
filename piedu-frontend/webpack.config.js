@@ -7,7 +7,8 @@ module.exports = {
     entry: './main.js',
     output: {
         path: path.resolve('./static/javascripts/bundles/'),
-        filename: 'app.js'
+        filename: 'app.js',
+        publicPath: ''
     },
 
     plugins: [
@@ -28,7 +29,9 @@ module.exports = {
         ],
     },
     resolve: {
-        alias: {vue: 'vue/dist/vue.js'}
+        alias: {
+          vue: 'vue/dist/vue.js',
+        }
     },
 
 };

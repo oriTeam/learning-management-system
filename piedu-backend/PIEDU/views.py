@@ -4,7 +4,6 @@ from course.models import Subject
 # Create your views here.
 def index(request):
     categories = CourseCategory.objects.all()
-    print(categories)
     return render(request, 'mainpage/index.html', {'categories': categories})
 def login(request):
     return render(request, 'mainpage/login.html')
