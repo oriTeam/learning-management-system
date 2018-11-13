@@ -177,7 +177,6 @@
             </div>
         </div>
     </div>
-    <!--{ include 'common/navigation.html' %}-->
     {% block bodycontent %}
 
     {% endblock %}
@@ -185,12 +184,9 @@
     <pi-footer></pi-footer>
     <go-top></go-top>
 </div>
-{#<script type="text/javascript" src="{% static 'javascripts/lib/vue.js' %}"></script>#}
 <script type="text/javascript" src="{% static 'javascripts/lib/vendors.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascripts/lib/scripts.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascripts/lib/owl.carousel.min.js' %}"></script>
-{#<script type="text/javascript" src="{% static 'javascripts/lib/wizard.js' %}"></script>#}
-
 <script type="text/javascript" src="{% static 'javascripts/custom/base.js' %}"></script>
 {% render_bundle 'main' %}
 {% block javascripts %}

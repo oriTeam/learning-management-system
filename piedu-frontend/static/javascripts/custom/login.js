@@ -16,28 +16,7 @@ toastr.options = {
   "hideMethod": "fadeOut"
 };
 
-function login_success_redirect(response) {
-  if (response.success == true) {
-		window.location.href = 'http://' + response.redirectTo.toString();
-	} else {
-	    toastr.error("Bạn đã nhập sai tài khoản hoặc mật khẩu. Vui lòng kiểm tra lại ...");
-	}
-}
-
-
 $(document).ready(function () {
-    $('#login-form').submit(function (e) {
-        e.preventDefault();
-        let csrftoken = getCookie("csrftoken");
-		let data = $(this).serializeArray();
-		data.push({
-			name: "csrfmiddlewaretoken",
-			value: csrftoken
-		});
-		let url = "/api/auth";
-		ajax_request(false, true, "POST", "json", url, null, data, login_success_redirect, print_response);
-    });
-
     // TEST AJAX REST
     // $('#test').click(function (e) {
     //     e.preventDefault();

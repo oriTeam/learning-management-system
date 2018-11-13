@@ -1,18 +1,21 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
 from django.contrib.auth import login as auth, authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from rest_framework import permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.status import HTTP_401_UNAUTHORIZED
+from rest_framework.authtoken.models import Token
 
-
-# Create your views here.
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
 def login(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    user = authenticate(username=username, password=password)
+    if not user:
+        return Response({'success':'False',"error": "username or password is incorrect!"})
+    else:
+        auth(request, user)
+    # token, _ = Token.objects.get_or_create(user=user)
+    # return Response({"token": token.key})
     redirectTo = request.get_host()
-    form = AuthenticationForm(None, request.POST)
-    if request.method == "POST" and request.user.is_anonymous:
-        if form.is_valid():
-            auth(request, form.get_user())
-            # redirect('/')
-            return JsonResponse({'success' : True, "redirectTo" : redirectTo})
-
-    errors = form.errors.get_json_data()
-    return JsonResponse(errors)
+    return Response({'success' : True, "redirectTo" : redirectTo})
