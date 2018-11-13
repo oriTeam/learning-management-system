@@ -1,6 +1,7 @@
 <template>
   <div class="hero-area section w-100">
-    <div class="bg-image bg-parallax overlay" style="background-image:url({% static 'images/br.jpg' %})"></div>
+    <div class="bg-image bg-parallax overlay"
+         style="background-image:url(../../../piedu-frontend/static/images/br.jpg)"></div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-10 text-center">

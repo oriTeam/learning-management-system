@@ -3,7 +3,7 @@
     <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height m-portlet--rounded-force p-3 mx-lg-2">
       <div class="course-item-pic-text">
         <div class="course-pic relative-position m--margin-bottom-25">
-          <img src="{% static 'images/code.jpg' %}" alt="">
+          <img src='../../../piedu-frontend/static/images/cta2-background.jpg' alt="">
         </div>
         <div class="course-item-text">
           <div class="course-meta">
@@ -23,9 +23,9 @@
           </div>
           <div class="course-viewer ul-li d-inline-block">
             <ul>
-              <li><p class="m-0"><i class="fas fa-user"></i> 1.220</p></li>
+              <li><p class="m-0"><i class="fas fa-user"></i> 35</p></li>
               <!--<li><p><i class="fas fa-comment-dots"></i> 1.015</p></li>-->
-              <li><p class="m-0">125k Unrolled</p></li>
+              <li><p class="m-0">Tuần 8</p></li>
             </ul>
           </div>
         </div>
