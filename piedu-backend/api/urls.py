@@ -18,7 +18,7 @@ from .view.user import (
 
 # from .view.course import CourseCategoryDeleteView,CourseCayegoryUpdateView,CourseCategoryDetailView,CourseCategoryListView,CourseCategoryCreateView
 
-from .view.course import  viewsets
+from .view.course import  viewsets, crud_functions
 
 app_name = "api"
 
@@ -52,6 +52,9 @@ class_urlpatterns = [
     path('detail/<int:id>/', viewsets.ClassDetailView.as_view(), name="class_detail"),
     path('update/<int:id>/', viewsets.ClassUpdateView.as_view(), name="class_update"),
     path('delete/<int:id>/', viewsets.ClassDeleteView.as_view(), name="class_delete"),
+    path('info/all', crud_functions.get_all_class_info),
+    path('info/', crud_functions.get_full_class_info),
+    path('own_class/', crud_functions.get_own_class),
 ]
 
 class_lecturer_urlpatterns = [

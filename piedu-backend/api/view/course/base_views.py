@@ -33,7 +33,7 @@ class GetCourseCategoryInfo(BaseManageView):
         except CourseCategory.DoesNotExist:
             return self.json_error(field = 'Course', code = "invalid")
         else:
-            data = course.parse_data()
+            data = course.parse_info()
         
         return JsonResponse(data)
 
@@ -69,7 +69,7 @@ class GetCourses(BaseManageView):
             return self.json_error(field = "Course", code = "invalid")
         else :
             for course in courses :
-                data =course.parse_data()
+                data =course.parse_info()
                 datas.append(data)
             return JsonResponse({"data" :datas})
 
@@ -104,7 +104,7 @@ class GetCourseClass(BaseManageView):
             #     # result.append(item.parse_data())
             #     result.append(item.parse_data())
             # result = json.dumps(result,default=str)
-            result = [item.parse_data() for item in all_class]
+            result = [item.parse_info() for item in all_class]
             # result = json.dumps(result,default=str)
             
             return JsonResponse({"data " :result})
@@ -144,7 +144,7 @@ class GetClassInfo(BaseManageView):
         # if len(item) == 0:
         #     return self.json_error(field = "Class", code = "invalid")
         else :
-            data = {"class" :item.parse_data()}
+            data = {"class" :item.parse_info()}
             return JsonResponse(data)
 class GetAllClass(BaseManageView):
     error_messages = {
@@ -173,7 +173,7 @@ class GetAllClass(BaseManageView):
         all_class = Class.objects.all()
         datas =[]
         for item in all_class:
-            data = {"class" : item.parse_data()}
+            data = {"class" : item.parse_info()}
             datas.append(data)
         return JsonResponse({"data" : datas})
     
@@ -222,7 +222,7 @@ class GetStudent(BaseManageView):
                 except User.DoesNotExist:
                     return self.json_error(field = "User",code ="invalid")
                 else :
-                    students.append(student.parse_data())
+                    students.append(student.parse_info())
             return JsonResponse({"data" : students})
 
     
@@ -261,7 +261,7 @@ class GetEnrollRequest(BaseManageView):
                 except User.DoesNotExist :
                     return self.json_error(field = "User",code = "invalid")
                 else :
-                    students.append(student.parse_data())
+                    students.append(student.parse_info())
             return JsonResponse({"data" : students})
 class GetClassFromUserId(BaseManageView):
     error_messages = {
@@ -360,7 +360,7 @@ class GetCurrentClass():
         all_current_class =[]
         for item in all_class :
             if self.checktime(item.time_start,item.time_end,now) :
-                all_current_class.append(item.parse_data())
+                all_current_class.append(item.parse_info())
         return JsonResponse({"data" :all_current_class})
     
 class GetPastClass(GetClassFromUserId):
@@ -391,7 +391,7 @@ class GetPastClass(GetClassFromUserId):
         all_past_class = []
         for item in all_class :
             if self.checktime(item.time_start,item.time_end,now) == False :
-                all_past_class.append(item.parse_data())
+                all_past_class.append(item.parse_info())
         return JsonResponse({"data" :all_past_class})
     
     

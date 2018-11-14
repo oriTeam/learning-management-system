@@ -38,7 +38,7 @@ class GetMaterialInfo(BaseManageView):
         except Material.DoesNotExist:
             return self.json_error(field="Material", code="invalid")
         else:
-            return JsonResponse(material.parse_data)
+            return JsonResponse(material.parse_info)
 
 
 class GetSyllabusMaterial(BaseManageView):
@@ -73,7 +73,7 @@ class GetSyllabusMaterial(BaseManageView):
         else:
             result = []
             for item in all_material:
-                result.append(item.parse_data)
+                result.append(item.parse_info)
             return JsonResponse({"data": result})
 
 
@@ -108,7 +108,7 @@ class GetClassSyllabus(BaseManageView):
         else:
             result = []
             for item in all_syllabus:
-                result.append(item.parse_data())
+                result.append(item.parse_info())
             return JsonResponse({"data": result})
 
 
@@ -152,7 +152,7 @@ class GetSyllabusTemplateInfo(BaseManageView):
                 for item in all_syllabus:
                     all_material_in_item = Material.objects.filter(syllabus_id=item.syllabus_id)
                     for material in all_material_in_item:
-                        result.append(material.parse_data())
+                        result.append(material.parse_info())
                 return JsonResponse({"data": result})
 
 
@@ -191,5 +191,5 @@ class GetSyllabusTemplate(BaseManageView):
                 except Class.DoesNotExist:
                     return self.json_error(field="Class", code="invalid")
                 else:
-                    result.append(item.parse_data())
+                    result.append(item.parse_info())
         return JsonResponse({"data": result})
