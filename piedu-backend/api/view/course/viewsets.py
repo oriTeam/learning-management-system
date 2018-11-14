@@ -13,9 +13,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import permissions
 
-
-
 # COURSECATEGORY
+from rest_framework.views import APIView
+
 class CourseCategoryCreateView(generics.CreateAPIView):
     queryset = CourseCategory.objects.all()
     serializer_class = CourseCategorySerializer
@@ -102,7 +102,6 @@ class ClassCreateView(generics.CreateAPIView):
 class ClassListView(generics.ListAPIView):
     queryset = Class.objects.all()
     serializer_class = ClassSerializer
-
 
 class ClassDetailView(generics.RetrieveAPIView):
     queryset = Class.objects.all()

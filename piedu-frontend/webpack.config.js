@@ -8,7 +8,6 @@ module.exports = {
     output: {
         path: path.resolve('./static/javascripts/bundles/'),
         filename: 'app.js',
-        publicPath: ''
     },
 
     plugins: [

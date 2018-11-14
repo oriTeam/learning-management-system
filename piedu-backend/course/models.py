@@ -28,7 +28,8 @@ class CourseCategory(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Subject"))
     avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
-    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_("Course Category"))
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='classes_set', \
+                                                                                                   verbose_name=_("Course Category"))
     class Meta:
         db_table = 'subject'
         ordering = ['id']
@@ -56,19 +57,32 @@ class Class(models.Model):
     def __str__(self):
         return "Class : {0} {1}".format(self.name, self.code)
 
-    def parse_data(self):
+    def parse_basic_info(self):
         data = {
             "id": self.id,
             "code": self.code,
             "name": self.name,
-            "description": self.description,
-            "time_start": str(self.time_start),
-            "time_end": str(self.time_end),
-            "category": self.category.name
+            "subject": self.subject.name,
+            "students": len(self.students_set.all())
         }
         return data
+
+    def parse_info(self):
+        data = self.parse_basic_info()
+        data.update({
+            # "cat": self.subject.name,
+            "avatar_path": self.subject.avatar.url
+        })
+        return data
+
     def parse_full_info(self):
-        pass
+        data = self.parse_info()
+        data.update({
+            "time_start": str(self.time_start),
+            "time_end": str(self.time_end),
+            "description": self.description
+        })
+        return data
 
 class Schedule(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set', verbose_name=_('Class'))

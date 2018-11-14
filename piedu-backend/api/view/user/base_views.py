@@ -23,4 +23,4 @@ class _User(BaseManageView):
         except User.DoesNotExist:
             return self.json_error(field = "User", code = "invalid")
         else :
-            return JsonResponse(user.parse_data())
+            return JsonResponse(user.parse_info())

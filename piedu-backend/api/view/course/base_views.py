@@ -275,8 +275,6 @@ def get_past_class(request,id):
         now = datetime.datetime.now(tz = timezone.utc)
         print(user.is_student)
         if user.is_lecturer() :
-            
-            
             class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(Q(own_class__time_start__gte= now) | Q( own_class__time_end__lte=now))
             if len(class_lecturers) == 0 :
                 data = {

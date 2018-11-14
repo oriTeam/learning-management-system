@@ -18,7 +18,7 @@ from .view.user import (
 
 # from .view.course import CourseCategoryDeleteView,CourseCayegoryUpdateView,CourseCategoryDetailView,CourseCategoryListView,CourseCategoryCreateView
 
-from .view.course import  viewsets
+from .view.course import  viewsets, crud_functions
 
 app_name = "api"
 
@@ -102,9 +102,7 @@ schedule_urlpatterns = [
 
 
 course_url_patterns= [
-    # path('',course_base_views._Course.as_view()),
-    # path('course_info', course_base_views.GetCourses.as_view()),
-    # path('class_info',course_base_views._Class.as_view()),
+    
 ]
 
 syllabus_url_patterns= []

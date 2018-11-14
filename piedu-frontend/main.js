@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import Demo from './components/Demo.vue'
 import ASide from './components/class/ASide.vue'
 import Search from './components/class/Search.vue'
 import NewClass from './components/class/NewClass.vue'
@@ -23,7 +22,7 @@ new Vue({
     delimiters: ["[[", "]]"],
     // render: h => h(App)
     components: {
-        Demo, NewClass, ASide, Search, ClassBox,
+        NewClass, ASide, Search, ClassBox,
         'pi-footer': Footer,
         'go-top': GoTopBtn,
         'help-page': HelpPage,
@@ -34,6 +33,8 @@ new Vue({
     }
 
 });
+
+
 //
 // function formdata_to_dict(formdata) {
 //     let data = [];
