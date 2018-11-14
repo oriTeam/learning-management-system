@@ -13,9 +13,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import permissions
 
-# COURSECATEGORY
-from rest_framework.views import APIView
 
+
+# COURSECATEGORY
 class CourseCategoryCreateView(generics.CreateAPIView):
     queryset = CourseCategory.objects.all()
     serializer_class = CourseCategorySerializer
@@ -68,10 +68,10 @@ class SubjectListView(generics.ListAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
 
-class SubjectFromCourseListView(generics.ListAPIView):
-    queryset = Subject.objects.all()
-    serializer_class = SubjectSerializer
-    lookup_field = 'Category__id'
+# class SubjectFromCourseListView(generics.ListAPIView):
+#     queryset = Subject.objects.all()
+#     serializer_class = SubjectSerializer
+#     lookup_field = 'Category__id'
 class SubjectDetailView(generics.RetrieveAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
@@ -102,6 +102,7 @@ class ClassCreateView(generics.CreateAPIView):
 class ClassListView(generics.ListAPIView):
     queryset = Class.objects.all()
     serializer_class = ClassSerializer
+
 
 class ClassDetailView(generics.RetrieveAPIView):
     queryset = Class.objects.all()
