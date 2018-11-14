@@ -57,5 +57,7 @@ $(document).ready(function () {
 				$(this).text(Math.ceil(now));
 			}
 		});
-	});
+    });
+    
+    
 })
