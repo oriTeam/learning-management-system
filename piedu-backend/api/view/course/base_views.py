@@ -4,545 +4,317 @@ from django.http import JsonResponse
 from api.functions import string_to_boolean
 from api.base import BaseManageView
 import datetime
+from django.utils import timezone
 import json
 import pytz
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from course.serializers import CourseCategorySerializer,SubjectSerializer,ClassSerializer,ClassStudentSerializer
+from core.serializers import UserSerializer 
+from django.db.models import Q
 
-class GetCourseCategoryInfo(BaseManageView):
 
-    error_messages = {
-        "Course": {
-            "invalid": "This course_id is invalid",
-        },
-        "Class": {
-            "invalid": "This class_id is invalid",
+
+@api_view(['GET'])
+def test(request,id):
+    data = request.GET
+    id = data.get["id"]
+    print(id)
+
+# """ course_category """
+
+@api_view(['GET'])
+def course_category_list_view(request):
+    list_course_categorys = CourseCategory.objects.all()
+    if len(list_course_categorys) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "CourseCategorys are invalid"
         }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-            'GET' : self.get_course_category_info,
-           
-        }
-    
-    def get_course_category_info(self, request):
-        request_data = request.GET
-        category_id = request_data.get('category_id')
-        data = {}
-        try:
-            course = CourseCategory.objects.get(pk=category_id)
-        except CourseCategory.DoesNotExist:
-            return self.json_error(field = 'Course', code = "invalid")
-        else:
-            data = course.parse_data()
+        return Response(data)
+    else:
         
-        return JsonResponse(data)
-
-    
-
-class GetCourses(BaseManageView):
-
-    error_messages = {
-        "Course": {
-            "invalid": "This course_id is invalid",
-        },
-        "Class": {
-            "invalid": "This class_id is invalid",
+        serializer = CourseCategorySerializer(list_course_categorys,many = True)
+        return Response(serializer.data)
+@api_view(['GET'])
+def course_category_detail(request,id):
+    try:
+        course_category = CourseCategory.objects.get(pk=id)
+    except CourseCategory.DoesNotExist:
+        data = {
+                "success" : False,
+                "errors" : "CourseCategory is invalid"
         }
-    }
+        return Response(data)
+    else:
+        serializer = CourseCategorySerializer(course_category)
+        return Response(serializer.data)
 
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-           
-            'GET' : self.get_courses,
+@api_view(['GET'])
+def get_subject(request,id):
+    all_subject = Subject.objects.filter(category__id =id)
+    if len(all_subject) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "CourseCategory is invalid"
+        }
+        return Response(data) 
+    else :
+            
+            serializer = SubjectSerializer(all_subject,many = True)
+            return Response(serializer.data)
+
+
+# """ subject """
+
+@api_view(['GET'])
+def subject_list_view(request):
+    list_subjects = Subject.objects.all()
+    if len(list_subjects) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "Subjects are invalid"
+        }
+        return Response(data)
+    else:
         
+        serializer = SubjectSerializer(list_subjects,many = True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def subject_detail(request,id):
+    try:
+        subject = Subject.objects.get(pk=id)
+    except Subject.DoesNotExist:
+        
+        data = {
+                "success" : False,
+                "errors" : "Subject is invalid"
         }
-    
+        return Response(data)
+    else:
+        serializer = SubjectSerializer(subject)
+        
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def get_class(request,id):
+    all_class = Class.objects.filter(subject__id =id)
+    if len(all_class) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "Subject is invalid"
+        }
+        return Response(data) 
+    else :       
+            serializer = ClassSerializer(all_class,many = True)
+            return Response(serializer.data)
 
 
-    def get_courses(self, request):
-        datas = []
-        courses =Course.objects.all()
-        # if courses.DoesNotExist :
-        #     return JsonResponse({"success" : False ,"code" : "course does not exist"})
-        # else :
-        if len(courses) == 0 :
-            return self.json_error(field = "Course", code = "invalid")
+
+# """  class """
+
+@api_view(['GET'])
+def class_list_view(request):
+    list_class = Class.objects.all()
+    if len(list_class) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "Class are invalid"
+        }
+        return Response(data)
+    else:
+        
+        serializer = ClassSerializer(list_class,many = True)
+        return Response(serializer.data)
+@api_view(['GET'])
+def class_detail(request,id):
+    try:
+        class_detail = Class.objects.get(pk=id)
+    except Class.DoesNotExist:
+        
+        data = {
+                "success" : False,
+                "errors" : "Class is invalid"
+        }
+        return Response(data)
+    else:
+        serializer = ClassSerializer(class_detail)
+        
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def get_student(request,id):
+    class_students = ClassStudent.objects.select_related('student').filter(own_class__id = id)
+    if len(class_students) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "Class is invalid"
+        }
+        return Response(data) 
+    else :
+        students =[class_student.student for class_student in class_students if class_student.student is not None]        
+        # serializer = ClassStudentSerializer(class_students,many=True)
+        if len(students) == 0 :
+            data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+            }
+            return Response(data) 
         else :
-            for course in courses :
-                data =course.parse_data()
-                datas.append(data)
-            return JsonResponse({"data" :datas})
+            serializer = UserSerializer(students,many = True)
+            return Response(serializer.data)
 
-    
-class GetCourseClass(BaseManageView):
-
-    error_messages = {
-        "Course": {
-            "invalid": "This course_id is invalid",
-        },
-        "Class": {
-            "invalid": "This class_id is invalid",
+@api_view(['GET'])
+def get_enroll_request(request,id):
+    enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
+    if len(enroll_requests) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "Class is invalid"
         }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-             'GET' : self.get_course_class,
-        }
-    
-    
-    def get_course_class(self,request):
-        request_data = request.GET
-        course_id = request_data.get('course_id')
-        all_class = Class.objects.filter(course_id = course_id)
-        if len(all_class) == 0 :
-            return self.json_error(field="Course",code="invalid")
+        return Response(data) 
+    else :
+        students =[enroll_request.student for enroll_request in enroll_requests if enroll_request.student is not None]          
+        if len(students) == 0 :
+            data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+            }
+            return Response(data) 
         else :
-            # result=[]
+            serializer = UserSerializer(students,many = True)
+            return Response(serializer.data)
+
+@api_view(["GET"])
+def get_current_class(request,id):
+    try :
+        user = User.objects.get(pk = id)
+    except User.DoesNotExist :
+        data = {
+                "success" : False,
+                "errors" : "User is invalid"
+        }
+        return Response(data)
+    else :
+        now = datetime.datetime.now(tz = timezone.utc)
+        print(user.is_student)
+        if user.is_lecturer() :
             
-            # for item in all_class :
-            #     # result.append(item.parse_data())
-            #     result.append(item.parse_data())
-            # result = json.dumps(result,default=str)
-            result = [item.parse_data() for item in all_class]
-            # result = json.dumps(result,default=str)
             
-            return JsonResponse({"data " :result})
-
-
-    
-
-class GetClassInfo(BaseManageView):
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-            
-            "GET" : self.get_class_info,
-           
-        }
-    def get_class_info(self,request):
-        request_data = request.GET
-        class_id = request_data.get('class_id')
-        try :
-            item = Class.objects.get(pk=class_id)
-        except Class.DoesNotExist :
-            return self.json_error(field ="Class", code = "invalid")
-        # if len(item) == 0:
-        #     return self.json_error(field = "Class", code = "invalid")
-        else :
-            data = {"class" :item.parse_data()}
-            return JsonResponse(data)
-class GetAllClass(BaseManageView):
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-            "GET" : self.get_all_class,
-            
-        }
-    
-    def get_all_class(self,request):
-        request_data = request.GET
-        all_class = Class.objects.all()
-        datas =[]
-        for item in all_class:
-            data = {"class" : item.parse_data()}
-            datas.append(data)
-        return JsonResponse({"data" : datas})
-    
-    
-        
-   
-class GetStudent(BaseManageView):
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-        
-            "GET" : self.get_student,
-            
-        }
-    
-    
-    
-        
-    
-    
-    def get_student(self,request):
-        request_data = request.GET
-        class_id = request_data.get("class_id")
-        class_students = ClassStudent.objects.filter(class_id__id = class_id)
-        if len(class_students) == 0 :
-            return self.json_error(field="Class",code="invalid")
-        else : 
-            students=[]
-            for class_student in class_students:
-                try :
-                    student = User.objects.get(pk = class_student.student_id.id)
-                except User.DoesNotExist:
-                    return self.json_error(field = "User",code ="invalid")
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            if len(class_lecturers) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
                 else :
-                    students.append(student.parse_data())
-            return JsonResponse({"data" : students})
-
-    
-class GetEnrollRequest(BaseManageView):
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = { 
-            "GET" : self.get_enroll_request,
-        }
-    
-    def get_enroll_request(self,request):
-        request_data = request.GET
-        class_id = request_data.get('class_id')
-        enroll_request_by_class_id =  EnrollRequest.objects.filter(class_id = class_id)
-        if len(enroll_request_by_class_id) == 0 :
-            return self.json_error(field= "Class", code = "invalid")
-        else :
-            students=[]
-            for item in enroll_request_by_class_id :
-                try :
-                    student = User.objects.get(pk = item.student_id)
-                except User.DoesNotExist :
-                    return self.json_error(field = "User",code = "invalid")
-                else :
-                    students.append(student.parse_data())
-            return JsonResponse({"data" : students})
-class GetClassFromUserId(BaseManageView):
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    
-    
-        
-    def get_class_from_userId(self,request):
-        request_data = request.GET
-        user_id = request_data.get('user_id')
-        try :
-            user = User.objects.get(pk = user_id)
-        except User.DoesNotExist :
-            return self.json_error(field = "User" , code = "invalid")
-        else :
-            all_class =[]
-            if user.is_student :
-                class_students = ClassStudent.objects.filter(student_id= user_id)
-                if len(class_students) == 0 :
-                    return self.json_error(field = "ClassStudent" ,code = "invalid")
-                else :
-                    for class_student in class_students: 
-                        class_id = class_student.class_id.id
-                        try :
-                            item = Class.objects.get(pk=class_id)
-                        except Class.DoesNotExist :
-                            return self.json_error(field = "Class", code = "invalid")
-                        else :
-                             all_class.append(item)
-                
-            elif user.is_lecturer :
-                class_lecturers = ClassLecturer.objects.filter(lecturer_id = user_id)
-                if len(class_lecturers) == 0 :
-                    return self.json_error(field = "ClassLecturer",code ="invalid")
-                else :
-                    for class_lecturer in class_lecturers:
-                        class_id = class_lecturer.class_id.id
-                        try :
-                            item = Class.objects.get(pk = class_id)
-                        except Class.DoesNotExist :
-                            return self.json_error(field = "Class",code = "invalid")
-                        else :
-                            all_class.append(item)
-
-            return all_class
-    def checktime(self,time_start,time_end,now):
-        # return True if time_start <= now and time_end >= now else False
-        return True if time_start.replace(tzinfo=None) <= now.replace(tzinfo=None) <= time_end.replace(tzinfo=None) else False
-        # utc=pytz.UTC
-
-
-
-
-    
-class GetCurrentClass():
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-          
-            "GET" : self.get_current_class,
-          
-        }
-    
-
-
-    def get_current_class(self,request):
-        all_class = self.get_class_from_userId(request)
-        now = datetime.datetime.now()
-        all_current_class =[]
-        for item in all_class :
-            if self.checktime(item.time_start,item.time_end,now) :
-                all_current_class.append(item.parse_data())
-        return JsonResponse({"data" :all_current_class})
-    
-class GetPastClass(GetClassFromUserId):
-    error_messages = {
-        "Class": {
-            "invalid": "This class_id is invalid",
-        },
-        "User" : {
-            "invalid" : "This user_id is invalid",
-        },
-        "ClassLecturer" : {
-            "invalid" : "This Class_Lecturer is invalid",
-        },
-        "ClassStudent" : {
-            "invalid" : "This Class_Student is invalid",
-        }
-    }
-
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
+                    serializers = ClassSerializer(all_class,many = True)
+                    return Response(serializers.data)
+        elif user.is_student :
             
-            "GET" : self.get_past_class,
-            
+            class_students = ClassStudent.objects.filter(student__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            if len(class_students) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_students if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                else :
+                    serializers = ClassSerializer(all_class,many = True)
+                    return Response(serializers.data)
+@api_view(['GET'])
+def get_enroll_request(request,id):
+    enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
+    if len(enroll_requests) == 0 :
+        data = {
+                "success" : False,
+                "errors" : "Class is invalid"
         }
-    def get_past_class(self,request):
-        all_class = self.get_class_from_userId(request)
-        now = datetime.datetime.now()
-        all_past_class = []
-        for item in all_class :
-            if self.checktime(item.time_start,item.time_end,now) == False :
-                all_past_class.append(item.parse_data())
-        return JsonResponse({"data" :all_past_class})
-    
-    
-                         
-#template api before refactor
-# class _Class(BaseManageView):
-#     error_messages = {
-#         "Class": {
-#             "invalid": "This class_id is invalid",
-#         },
-#         "User" : {
-#             "invalid" : "This user_id is invalid",
-#         },
-#         "ClassLecturer" : {
-#             "invalid" : "This Class_Lecturer is invalid",
-#         },
-#         "ClassStudent" : {
-#             "invalid" : "This Class_Student is invalid",
-#         }
-#     }
+        return Response(data) 
+    else :
+        students =[enroll_request.student for enroll_request in enroll_requests if enroll_request.student is not None]          
+        if len(students) == 0 :
+            data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+            }
+            return Response(data) 
+        else :
+            serializer = UserSerializer(students,many = True)
+            return Response(serializer.data)
 
-#     def __init__(self, *args, **kwargs):
-#         self.VIEWS_BY_METHOD = {
-#             # "GET" : self.get_all_class,
-#             # "GET" : self.get_class_info,
-#             # "GET" : self.get_current_class,
-#             # "GET" : self.get_past_class,
-#             "GET" : self.get_student,
-#             # "GET" : self.get_enroll_request,
-#         }
-#     def get_class_info(self,request):
-#         request_data = request.GET
-#         class_id = request_data.get('class_id')
-#         try :
-#             item = Class.objects.get(pk=class_id)
-#         except Class.DoesNotExist :
-#             return self.json_error(field ="Class", code = "invalid")
-#         # if len(item) == 0:
-#         #     return self.json_error(field = "Class", code = "invalid")
-#         else :
-#             data = {"class" :item.parse_data()}
-#             return JsonResponse(data)
-#     def get_all_class(self,request):
-#         request_data = request.GET
-#         all_class = Class.objects.all()
-#         datas =[]
-#         for item in all_class:
-#             data = {"class" : item.parse_data()}
-#             datas.append(data)
-#         return JsonResponse({"data" : datas})
-    
-    
-        
-#     def get_class_from_userId(self,request):
-#         request_data = request.GET
-#         user_id = request_data.get('user_id')
-#         try :
-#             user = User.objects.get(pk = user_id)
-#         except User.DoesNotExist :
-#             return self.json_error(field = "User" , code = "invalid")
-#         else :
-#             all_class =[]
-#             if user.is_student :
-#                 class_students = ClassStudent.objects.filter(student_id= user_id)
-#                 if len(class_students) == 0 :
-#                     return self.json_error(field = "ClassStudent" ,code = "invalid")
-#                 else :
-#                     for class_student in class_students: 
-#                         class_id = class_student.class_id.id
-#                         try :
-#                             item = Class.objects.get(pk=class_id)
-#                         except Class.DoesNotExist :
-#                             return self.json_error(field = "Class", code = "invalid")
-#                         else :
-#                              all_class.append(item)
-                
-#             elif user.is_lecturer :
-#                 class_lecturers = ClassLecturer.objects.filter(lecturer_id = user_id)
-#                 if len(class_lecturers) == 0 :
-#                     return self.json_error(field = "ClassLecturer",code ="invalid")
-#                 else :
-#                     for class_lecturer in class_lecturers:
-#                         class_id = class_lecturer.class_id.id
-#                         try :
-#                             item = Class.objects.get(pk = class_id)
-#                         except Class.DoesNotExist :
-#                             return self.json_error(field = "Class",code = "invalid")
-#                         else :
-#                             all_class.append(item)
-
-#             return all_class
-#     def checktime(self,time_start,time_end,now):
-#         # return True if time_start <= now and time_end >= now else False
-#         return True if time_start.replace(tzinfo=None) <= now.replace(tzinfo=None) <= time_end.replace(tzinfo=None) else False
-#         # utc=pytz.UTC
+@api_view(["GET"])
+def get_past_class(request,id):
+    try :
+        user = User.objects.get(pk = id)
+    except User.DoesNotExist :
+        data = {
+                "success" : False,
+                "errors" : "User is invalid"
+        }
+        return Response(data)
+    else :
+        now = datetime.datetime.now(tz = timezone.utc)
+        print(user.is_student)
+        if user.is_lecturer() :
+            
+            
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(Q(own_class__time_start__gte= now) | Q( own_class__time_end__lte=now))
+            if len(class_lecturers) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                else :
+                    serializers = ClassSerializer(all_class,many = True)
+                    return Response(serializers.data)
+        elif user.is_student :
+            
+            class_students = ClassStudent.objects.filter(student__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            if len(class_students) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_students if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                else :
+                    serializers = ClassSerializer(all_class,many = True)
+                    return Response(serializers.data)
 
 
 
-
-#     def get_current_class(self,request):
-#         all_class = self.get_class_from_userId(request)
-#         now = datetime.datetime.now()
-#         all_current_class =[]
-#         for item in all_class :
-#             if self.checktime(item.time_start,item.time_end,now) :
-#                 all_current_class.append(item.parse_data())
-#         return JsonResponse({"data" :all_current_class})
-#     def get_past_class(self,request):
-#         all_class = self.get_class_from_userId(request)
-#         now = datetime.datetime.now()
-#         all_past_class = []
-#         for item in all_class :
-#             if self.checktime(item.time_start,item.time_end,now) == False :
-#                 all_past_class.append(item.parse_data())
-#         return JsonResponse({"data" :all_past_class})
-    
-#     def get_student(self,request):
-#         request_data = request.GET
-#         class_id = request_data.get("class_id")
-#         class_students = ClassStudent.objects.filter(class_id__id = class_id)
-#         if len(class_students) == 0 :
-#             return self.json_error(field="Class",code="invalid")
-#         else : 
-#             students=[]
-#             for class_student in class_students:
-#                 try :
-#                     student = User.objects.get(pk = class_student.student_id.id)
-#                 except User.DoesNotExist:
-#                     return self.json_error(field = "User",code ="invalid")
-#                 else :
-#                     students.append(student.parse_data())
-#             return JsonResponse({"data" : students})
-
-#     def get_enroll_request(self,request):
-#         request_data = request.GET
-#         class_id = request_data.get('class_id')
-#         enroll_request_by_class_id =  EnrollRequest.objects.filter(class_id = class_id)
-#         if len(enroll_request_by_class_id) == 0 :
-#             return self.json_error(field= "Class", code = "invalid")
-#         else :
-#             students=[]
-#             for item in enroll_request_by_class_id :
-#                 try :
-#                     student = User.objects.get(pk = item.student_id)
-#                 except User.DoesNotExist :
-#                     return self.json_error(field = "User",code = "invalid")
-#                 else :
-#                     students.append(student.parse_data())
-#             return JsonResponse({students})
-           
-        
-        
-
-    
