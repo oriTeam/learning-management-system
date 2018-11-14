@@ -60,16 +60,8 @@
                         csrftoken
                 );
                 let data = formdata_to_dict(formdata);
-                console.log(data);
-                // let config = {
-                //     headers: {
-                //         'X-CSRFToken': csrftoken,
-                //     }
-                // }
-                console.log(config);
                 this.axios.post('/api/auth', data)
                         .then(function (response) {
-                            console.log(response    );
                             if (response.data.success == true) {
                                 window.location.href = 'http://' + response.data.redirectTo.toString();
                             } else {

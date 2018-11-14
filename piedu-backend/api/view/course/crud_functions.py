@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from course.serializers import CourseCategorySerializer
-from course.models import CourseCategory
+from course.models import CourseCategory, Class
 
 @api_view(["GET"])
 def create_course_category(request):
@@ -22,3 +22,16 @@ def course_category_details(request, id):
     course_category = CourseCategory.objects.get(pk=id)
     serializer = CourseCategorySerializer(course_category)
     return Response(serializer.data)
+
+
+# @api_view(["POST"])
+# @permission_classes((permissions.AllowAny,))
+# def get_all_class_info(request):
+#     class_querysets = Class.objetcts.all()
+#     data = []
+#     for _class in class_querysets:
+#         data.append(_class)
+
+
+# @api_view(["POST"])
+# @permission_classes((permissions.AllowAny,))
