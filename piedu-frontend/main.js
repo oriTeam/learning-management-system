@@ -22,7 +22,7 @@ new Vue({
     delimiters: ["[[", "]]"],
     // render: h => h(App)
     components: {
-        Demo, NewClass, ASide, Search, ClassBox,
+        NewClass, ASide, Search, ClassBox,
         'pi-footer': Footer,
         'go-top': GoTopBtn,
         'help-page': HelpPage,

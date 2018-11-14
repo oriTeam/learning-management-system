@@ -1,24 +1,8 @@
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from .serializers import ClassInfoSerializer
+from course.serializers import CourseCategorySerializer
 from course.models import CourseCategory, Class
-
-# @api_view(["GET"])
-# def create_course_category(request):
-#     serializer = CourseCategorySerializer(request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response({"sucsess": True, "message": "Course Category created"})
-#     else:
-#         data = {
-#             "success" : False,
-#             "errors" : serializer.errors
-#         }
-#         return Response(data)
-#
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny,))
@@ -53,4 +37,10 @@ def get_own_class(request):
         data.append(own_class.parse_info())
 
     return Response(data)
+
+def course_category_details(request, id):
+    course_category = CourseCategory.objects.get(pk=id)
+    serializer = CourseCategorySerializer(course_category)
+    return Response(serializer.data)
+
 
