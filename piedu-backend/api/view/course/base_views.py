@@ -10,7 +10,7 @@ import pytz
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from course.serializers import CourseCategorySerializer,SubjectSerializer,ClassSerializer,ClassStudentSerializer
-from core.serializers import UserSerializer 
+from core.serializers import UserSerializerView 
 from django.db.models import Q
 
 
@@ -162,7 +162,7 @@ def get_student(request,id):
             }
             return Response(data) 
         else :
-            serializer = UserSerializer(students,many = True)
+            serializer = UserSerializerView(students,many = True)
             return Response(serializer.data)
 
 @api_view(['GET'])
@@ -183,7 +183,7 @@ def get_enroll_request(request,id):
             }
             return Response(data) 
         else :
-            serializer = UserSerializer(students,many = True)
+            serializer = UserSerializerView(students,many = True)
             return Response(serializer.data)
 
 @api_view(["GET"])
@@ -258,7 +258,7 @@ def get_enroll_request(request,id):
             }
             return Response(data) 
         else :
-            serializer = UserSerializer(students,many = True)
+            serializer = UserSerializerView(students,many = True)
             return Response(serializer.data)
 
 @api_view(["GET"])
@@ -273,7 +273,6 @@ def get_past_class(request,id):
         return Response(data)
     else :
         now = datetime.datetime.now(tz = timezone.utc)
-        print(user.is_student)
         if user.is_lecturer() :
             class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(Q(own_class__time_start__gte= now) | Q( own_class__time_end__lte=now))
             if len(class_lecturers) == 0 :
