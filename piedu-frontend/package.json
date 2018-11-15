@@ -44,6 +44,7 @@
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^14.2.2",
     "vue-template-compiler": "^2.0.0",
+    "vuejs-paginate": "^2.0.1",
     "webpack": "^2.6.1",
     "webpack-bundle-tracker": "^0.3.0"
   }

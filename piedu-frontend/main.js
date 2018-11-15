@@ -4,30 +4,28 @@ import VueAxios from 'vue-axios'
 import ASide from './components/class/ASide.vue'
 import Search from './components/class/Search.vue'
 import NewClass from './components/class/NewClass.vue'
-import ClassBox from './components/class/ClassBox.vue'
 import Footer from './components/shared/Footer.vue'
 import GoTopBtn from './components/shared/GoTopBtn.vue'
 
 import HelpPage from './components/help/Page.vue'
 import ContactPage from './components/contact/Page.vue'
 import LoginContainer from './components/login/LoginContainer.vue'
+import AllClass from './components/class/AllClass.vue'
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 Vue.use(VueAxios, axios)
 
-
 new Vue({
     el: '#main-app',
-    delimiters: ["[[", "]]"],
-    // render: h => h(App)
     components: {
-        NewClass, ASide, Search, ClassBox,
+        NewClass, ASide, Search,
         'pi-footer': Footer,
         'go-top': GoTopBtn,
         'help-page': HelpPage,
         'contact-page': ContactPage,
-        'login-container': LoginContainer
+        'login-container': LoginContainer,
+        'all-class': AllClass,
     },
     methods: {
     }

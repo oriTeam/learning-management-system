@@ -66,6 +66,9 @@ class_urlpatterns = [
     path('<int:id>/get_enroll_request',course_base_views.get_enroll_request),
     path('<int:id>/get_current_class',course_base_views.get_current_class),
     path('<int:id>/get_past_class',course_base_views.get_past_class),
+    path('all/', crud_functions.get_all_class_info),
+    path('info/', crud_functions.get_full_class_info),
+
 ]
 
 class_lecturer_urlpatterns = [
