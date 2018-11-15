@@ -22,6 +22,7 @@ new Vue({
         NewClass, ASide, Search,
         'pi-footer': Footer,
         'go-top': GoTopBtn,
+        // 'axios': axios,
         'help-page': HelpPage,
         'contact-page': ContactPage,
         'login-container': LoginContainer,

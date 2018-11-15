@@ -1,10 +1,10 @@
 <template>
-    <div class="col-lg-12 p-0">
+    <div class="col-lg-12 p-1">
         <div class="m-portlet m-portlet--bordered-semi m-portlet--rounded-force p-3 my-2">
             <div class="course-item-pic-text row">
                 <div class="course-pic relative-position col-md-4 col-sm-12">
                     <img :src="avatarPath" alt="" class=".img-thumbnail">
-        </div>
+                </div>
                 <div class="course-item-text col-md-8 col-sm-12">
                     <div class="course-title m--padding-top-10-tablet-and-mobile headline m--padding-bottom-15 relative-position">
                         <h2 class="mt-0">
@@ -30,18 +30,15 @@
                             <button class="btn btn-sm btn-info m--pull-right">Xem chi tiết</button>
                         </div>
                     </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
     export default {
         props: ['avatarPath', 'category', 'lecturer', 'code', 'className', 'shortDescription', 'studentCount'],
-        // data : {
-        //     avatarPath
-        // }
     }
 </script>
 

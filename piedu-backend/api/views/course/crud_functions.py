@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -8,6 +9,14 @@ from course.models import CourseCategory, Class
 @permission_classes((permissions.AllowAny,))
 def get_all_class_info(request):
     class_querysets = Class.objects.all()
+    paginator = Paginator(class_querysets, 10)
+    page = request.query_params.get('page')
+    try:
+        class_querysets = paginator.page(page)
+    except PageNotAnInteger:
+        class_querysets = paginator.page(1)
+    except EmptyPage:
+        class_querysets = paginator.page(paginator.num_pages)
     data = []
     for class_queryset in class_querysets:
         data.append(class_queryset.parse_info())
