@@ -1,6 +1,6 @@
 {% extends 'basepage/classbase.html' %}
 {% load staticfiles %}
-
+{#{% load render_bundle from webpack_loader %}#}
 {% block title %} Khóa học của tôi | Hệ thống quản lý môn học {% endblock %}
 
 {% block navisize %} container-fluid m--padding-left-25 m--padding-right-25{% endblock %}
@@ -26,36 +26,14 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row mx-0 my-4">
-                <div class="col-lg-3 col-sm-12 pr-3">
+        <div class="container-fluid pl-md-0">
+            <div class="row mx-0 mb-4">
+                <div class="col-lg-3 col-sm-12 pl-0 pr-3">
                     <a-side></a-side>
                 </div>
                 <div class="col-lg-9 px-3">
                     <div class="m-grid__item m-grid__item--fluid m-wrapper">
                         <div class="row mx-0">
-                            <div class="col-12 text-right px-lg-2 px-0">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary m-btn--pill m-btn-air dropdown-toggle"
-                                            type="button"
-                                            id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Sắp xếp theo
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                         x-placement="top-start"
-                                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
-                                        <a class="dropdown-item" href="#" data-toggle="m-tooltip" title=""
-                                           data-placement="left"
-                                           data-original-title="Tooltip title">Phổ biến nhất</a>
-                                        <a class="dropdown-item" href="#" data-toggle="m-tooltip" title=""
-                                           data-placement="left"
-                                           data-original-title="Tooltip title">Mới nhất</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row py-4 mx-0">
                             <all-class></all-class>
                         </div>
                     </div>
@@ -68,5 +46,6 @@
 {% block footer_size %} container-fluid {% endblock %}
 {% block class_javascripts %}
     <script type="text/javascript" src="{% static 'javascripts/custom/my-class.js' %}"></script>
+{#    {% render_bundle 'myClass' %}#}
 
 {% endblock class_javascripts %}

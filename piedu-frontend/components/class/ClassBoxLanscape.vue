@@ -27,7 +27,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 col-sm-12">
-                            <button class="btn btn-sm btn-info m--pull-right">Xem chi tiết</button>
+                            <button class="btn btn-sm btn-success m--pull-right">Xem chi tiết</button>
                         </div>
                     </div>
                 </div>
