@@ -16,10 +16,11 @@ from django.db.models import Q
 
 
 @api_view(['GET'])
-def test(request,id):
+def test(request):
     data = request.GET
-    id = data.get["id"]
+    id = data.get["subject_id"]
     print(id)
+    return Response(id)
 
 # """ course_category """
 

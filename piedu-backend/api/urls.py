@@ -63,7 +63,7 @@ class_urlpatterns = [
     # path('detail/<int:id>/', viewsets.ClassDetailView.as_view(), name="class_detail"),
     path('update/<int:id>/', course_viewsets.ClassUpdateView.as_view(), name="class_update"),
     path('delete/<int:id>/', course_viewsets.ClassDeleteView.as_view(), name="class_delete"),
-    path('<int:id>/a',course_base_views.test),
+    path('a',course_base_views.test),
     path('<int:id>/get_student',course_base_views.get_student),
     path('<int:id>/get_enroll_request',course_base_views.get_enroll_request),
     path('<int:id>/get_current_class',course_base_views.get_current_class),

@@ -49,8 +49,12 @@ $(function() {
     }
 
 }); /* End Fn */
+"use strict";
 
+const axios = require('axios');
+// import axios from 'axios';
 $(document).ready(function () {
+    
     $('.count').each(function() {
 		$(this).prop('Counter', 0).animate({
 			counter: $(this).text()}, {duration: 10000, easing:'swing',step: function(now) {
@@ -58,6 +62,15 @@ $(document).ready(function () {
 			}
 		});
     });
-    
+    $(document).on('click touch','#test',function(){
+        let subject_id = 10;
+        axios.get('/api/class/a'+subject_id)
+        .then(function(response){
+            console.log(response.data);
+        })
+        .catch(function(error){
+            alert(error);
+        });
+    })
     
 })
