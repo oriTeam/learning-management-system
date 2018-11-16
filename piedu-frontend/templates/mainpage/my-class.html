@@ -56,15 +56,7 @@
                             </div>
                         </div>
                         <div class="row py-4 mx-0">
-                            {% if not user.is_lecturer %}
-                                <new-class-btn></new-class-btn>
-                                <new-class-modal></new-class-modal>
-                            {% endif %}
-                        </div>
-                        <div class="row py-4 mx-0">
-                            {% for i in '0123456789' %}
-                                <class-box></class-box>
-                            {% endfor %}
+                            <all-class></all-class>
                         </div>
                     </div>
                 </div>

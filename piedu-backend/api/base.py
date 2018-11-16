@@ -5,7 +5,7 @@ from django.http import JsonResponse
 class BaseManageView(View):
     """
     The base class for ManageViews
-    A ManageView is a view which is used to dispatch the requests to the appropriate views
+    A ManageView is a views which is used to dispatch the requests to the appropriate views
     This is done so that we can use one URL with different methods (GET, PUT, etc)
     """
     error_messages = {}

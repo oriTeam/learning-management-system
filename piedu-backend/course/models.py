@@ -41,7 +41,7 @@ class Subject(models.Model):
 
 
 class Class(models.Model):
-    code = models.CharField(max_length=25, default='', verbose_name=_("Class's Code"))
+    code = models.CharField(max_length=25, unique=True, default='', verbose_name=_("Class's Code"))
     name = models.CharField(max_length=255, verbose_name=_("Class's Name"))
     description = models.TextField(null=True, verbose_name=_('Description'))
     time_start = models.DateTimeField(verbose_name=_("Class's start time"))
@@ -71,7 +71,8 @@ class Class(models.Model):
         data = self.parse_basic_info()
         data.update({
             # "cat": self.subject.name,
-            "avatar_path": self.subject.avatar.url
+            "avatar_path": self.subject.avatar.url,
+            "description": self.description
         })
         return data
 

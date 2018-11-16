@@ -1,26 +1,27 @@
 from django.urls import include, path
 from django.conf.urls import  url
-from . import views
-
+from . import auth_views
 from rest_framework import routers
 
-# from .view.course.viewsets import CourseCategoryCreateView, CourseCategoryDetailView, SubjectDetailUpdateAPIView, SubjectListCreateAPIView, ClassDetailUpdateAPIView, ClassListCreateAPIView
+from .views.course import crud_functions
 
-from .view.course import (
+# from .views.course.viewsets import CourseCategoryCreateView, CourseCategoryDetailView, SubjectDetailUpdateAPIView, SubjectListCreateAPIView, ClassDetailUpdateAPIView, ClassListCreateAPIView
+
+from .views.course import (
     base_views as course_base_views,
 )
-from .view.syllabus import (
+from .views.syllabus import (
     base_views as syllabus_base_views,
 )
-from .view.user import (
+from .views.user import (
     base_views as user_base_views,
 )
 
-# from .view.course import CourseCategoryDeleteView,CourseCayegoryUpdateView,CourseCategoryDetailView,CourseCategoryListView,CourseCategoryCreateView
+# from .views.course import CourseCategoryDeleteView,CourseCayegoryUpdateView,CourseCategoryDetailView,CourseCategoryListView,CourseCategoryCreateView
 
-from .view.course import  viewsets as course_viewsets
-from .view.user import viewsets as user_viewsets
-from .view.syllabus import viewsets as syllabus_viewsets
+from .views.course import  viewsets as course_viewsets
+from .views.user import viewsets as user_viewsets
+from .views.syllabus import viewsets as syllabus_viewsets
 
 app_name = "api"
 
@@ -68,6 +69,9 @@ class_urlpatterns = [
     path('<int:id>/get_enroll_request',course_base_views.get_enroll_request),
     path('<int:id>/get_current_class',course_base_views.get_current_class),
     path('<int:id>/get_past_class',course_base_views.get_past_class),
+    path('all/', crud_functions.get_all_class_info),
+    path('info/', crud_functions.get_full_class_info),
+
 ]
 
 class_lecturer_urlpatterns = [
@@ -123,12 +127,11 @@ user_url_patterns=[
 ]
 
 urlpatterns = [
-    path('auth',views.login, name="login"),
+    path('auth', auth_views.login, name="login"),
     # path('course/',include(course_url_patterns)),
     path('syllabus/',include(syllabus_url_patterns)),
     path('material/',include(material_url_patterns)), 
-    path('syllabus_template/',include(syllabus_template_url_patterns)),    
-    
+    path('syllabus_template/',include(syllabus_template_url_patterns)),
     path('user/',include(user_url_patterns)),
     # path('', include(router.urls)),
     path('course_category/', include(course_category_urlpatterns)),
