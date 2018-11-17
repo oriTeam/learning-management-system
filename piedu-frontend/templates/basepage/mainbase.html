@@ -9,11 +9,12 @@
     <title>{% block title %} Trang chủ | Hệ thống quản lý môn học LMS {% endblock %}</title>
     {% load staticfiles %}
     <link rel="shortcut icon" href="{% static 'images/pi.png' %}"/>
+    <link rel="stylesheet" href="{% static 'vuetify/dist/vuetify.min.css' %}"/>
+    <link href='https://fonts.googleapis.com/css?family=Muli:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
     <link rel="stylesheet" href="{% static 'stylesheets/lib/vendors.bundle.css' %}"/>
     <link rel="stylesheet" href="{% static 'stylesheets/lib/style.bundle.css' %}"/>
     <link rel="stylesheet" href="{% static 'stylesheets/lib/owl.carousel.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'stylesheets/lib/themify-icons.css' %}"/>
-    {#    <link rel="stylesheet" href="{% static 'stylesheets/custom/style.css'%}"/>#}
     <link rel="stylesheet" href="{% static 'stylesheets/custom/main.css' %}"/>
 
     {% block stylesheets %}

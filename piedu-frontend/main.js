@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuetify from 'vuetify'
 
 import ASideLecturer from './components/class/ASideLecturer.vue'
 import ASideStudent from './components/class/ASideStudent.vue'
@@ -16,6 +17,7 @@ import AllClass from './components/class/AllClass.vue'
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 Vue.use(VueAxios, axios)
+Vue.use(Vuetify)
 
 new Vue({
     el: '#main-app',

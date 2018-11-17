@@ -37,18 +37,16 @@
                                 :short-description="getShortDescription(class_obj.description)"
                                 :key="class_obj.code + ' 2'"></class-box-portrait>
         </transition-group>
-        <paginate
-                :container-class="'pagination'"
-                :page-count="20"
-                :prev-text="'Prev'"
-                :next-text="'Next'">
-        </paginate>
+        <v-pagination
+                v-model="pagination.page"
+                :length="pagination.pageTotal"
+                @input="next"
+        ></v-pagination>
     </div>
 </template>
 <script>
     import ClassBoxPortrait from './ClassBoxPortrait.vue'
     import ClassBoxLandscape from './ClassBoxLanscape.vue'
-    import Paginate from 'vuejs-paginate'
 
     export default {
         data() {
@@ -56,24 +54,30 @@
                 classList: [],
                 preloader: true,
                 classDisplay: false,
-                landscapeDisplay: true
+                landscapeDisplay: true,
+                pagination: {
+                    itemTotal: 0,
+                    page: 1,
+                    pageTotal: 0,
+                    itemPerPage: 6
+                }
             }
         },
         components: {
             'class-box-portrait': ClassBoxPortrait,
             'class-box-landscape': ClassBoxLandscape,
-            'paginate': Paginate
         },
         beforeCreate: function() {
-            this.axios.get('/api/class/all').then((response) => {
-                this.classList = response.data;
-                this.preloader = false;
-                this.classDisplay = true;
+            this.axios.get('/api/class/all?format=json').then((response) => {
+                this.pagination.itemTotal = response.data.length;
+                this.pagination.pageTotal = Math.round(this.pagination.itemTotal / this.pagination.itemPerPage);
+                console.log(this.pagination.pageTotal);
             }).catch((response) => {
                 console.log(response);
             })
         },
         mounted() {
+            this.getShowClass(1);
         },
         methods: {
             getShortDescription: function (description) {
@@ -82,13 +86,25 @@
                 }
                 return description;
             },
+            getShowClass: function(page) {
+                let self = this;
+                this.axios.get('/api/class/all?format=json&page=' + page).then((response) => {
+                    self.classList = response.data;
+                    self.preloader = false;
+                    self.classDisplay = true;
+
+                })
+            },
+            next: function (page) {
+                this.getShowClass(page);
+            }
         }
     }
 </script>
 <style lang="scss">
 
     .classbox-enter-active, .classbox-leave-active {
-        transition: opacity .5s;
+        transition: opacity .05s;
     }
 
     .classbox-enter, .classbox-leave-to {
