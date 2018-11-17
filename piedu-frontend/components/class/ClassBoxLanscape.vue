@@ -141,7 +141,7 @@
     .course-meta span:last-child {
         border-right: none !important;
     }
-    @media (min-width: 992px) {
+    @media (min-width: 767px) {
         .course-item-text {
             position: relative;
             .btn-row {

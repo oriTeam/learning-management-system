@@ -1,7 +1,6 @@
 <template>
     <div class="col-12 p-0">
-        <!--<button @click="landscapeDisplay = !landscapeDisplay" class="btn btn-outline-warning"></button>-->
-        <div class="row mt-3">
+        <div class="row mt-3 view-switch">
             <div class="col-md-8 col-sm-12"></div>
             <div class="col-md-4 col-sm-12">
                 <div class="onoffswitch m--pull-right">
@@ -173,5 +172,10 @@
 
     .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
         right: 0px;
+    }
+    @media (max-width: 992px) {
+        .view-switch {
+            display: none;
+        }
     }
 </style>
