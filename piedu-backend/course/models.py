@@ -28,7 +28,7 @@ class CourseCategory(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Subject"))
     avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
-    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='classes_set', \
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='subjects_set', \
                                                                                                    verbose_name=_("Course Category"))
     class Meta:
         db_table = 'subject'
@@ -86,19 +86,20 @@ class Class(models.Model):
         return data
 
 class Schedule(models.Model):
-    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set', verbose_name=_('Class'))
-    day_of_week = models.CharField(max_length=5, verbose_name=_('Day Of Week'))
-    # encoded_session = models.CharField(max_length=20, verbose_name=_('Encoded Session'))
-    session_start = models.CharField(max_length=2, null=True, verbose_name=_('Session Start'))
-    session_end = models.CharField(max_length=2, null=True, verbose_name=_('Session End'))
+    own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set',
+                                  verbose_name=_('Own Class'))
+    day_of_week = models.CharField(max_length=3, verbose_name=_('Day Of Week'))
+    session_start = models.CharField(max_length=3, null=True, verbose_name=_('Start Session'))
+    session_end = models.CharField(max_length=3, null=True, verbose_name=_('End Session'))
 
     class Meta:
         db_table = 'schedule'
         ordering = ['id']
         verbose_name = _('Schedule')
+        verbose_name_plural = _("Schedules")
 
     def __str__(self):
-        return "Class: {} | Encoded Session: {}".format(self.class_id.name, self.encoded_session)
+        return "Class: {} | Start Session: {} | End Session: {}".format(self.own_class.name, self.session_start, self.session_end)
 
     def parse_data(self):
         data = {

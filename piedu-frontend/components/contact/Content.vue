@@ -26,45 +26,49 @@
             <div class="col-md-7">
               <form action="#" method="post" class="contact-us-form" novalidate="novalidate">
                 <h6>Hoặc liên hệ ngay với chúng tôi:</h6>
-                <div class="row">
-                  <div class="col-lg-6 col-sm-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="name"
-                             placeholder="Tên của bạn ..." required="required">
+                <form id="contact-form" class="m-login__form m-form" action="">
+                <!--{% csrf_token %}-->
+                  <div class="alert alert-danger d-none" role="alert" id="contact_errors"></div>
+                  <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="name"
+                              placeholder="Tên của bạn ..." required="required">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                      <div class="form-group">
+                        <input type="email" class="form-control" id="email"
+                              placeholder="Địa chỉ Email ..." required="required">
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-sm-12">
-                    <div class="form-group">
-                      <input type="email" class="form-control" id="email"
-                             placeholder="Địa chỉ Email ..." required="required">
+                  <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                      <div class="form-group">
+                        <input type="number" name="phone" value="" class="form-control"
+                              id="phone" placeholder="Số điện thoại ...">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                      <div class="form-group">
+                        <input type="text" name="company" value="" size="40"
+                              class="form-control" id="company" placeholder="Đơn vị ...">
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 col-sm-12">
-                    <div class="form-group">
-                      <input type="number" name="phone" value="" class="form-control"
-                             id="phone" placeholder="Số điện thoại ...">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                                                  <textarea name="message" id="message" class="form-control" rows="10"
+                                                            cols="25" placeholder="Phản hồi của bạn ..."></textarea>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-sm-12">
-                    <div class="form-group">
-                      <input type="text" name="company" value="" size="40"
-                             class="form-control" id="company" placeholder="Đơn vị ...">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                                                <textarea name="message" id="message" class="form-control" rows="10"
-                                                          cols="25" placeholder="Phản hồi của bạn ..."></textarea>
-                    </div>
-                  </div>
-                </div>
+                </form>
                 <div class="row">
                   <div class="col-sm-12 m--margin-top-20 text-center">
-                    <button type="submit" class="btn softo-solid-btn" id="btnContactUs">
+                    <button @click="submit_form" type="button" class="btn softo-solid-btn" id="btnContactUs">
                       Gửi
                     </button>
                   </div>
@@ -77,3 +81,44 @@
     </section>
   </div>
 </template>
+
+<script>
+    function login_success_redirect(response) {
+        if (response.success == true) {
+            window.location.href = 'http://' + response.redirectTo.toString();
+        } else {
+            toastr.error("Bạn đã nhập sai. Vui lòng kiểm tra lại ...");
+        }
+    }
+
+    export default {
+        methods: {
+            submit_form: function () {
+                let csrftoken = getCookie("csrftoken");
+                let formdata = new FormData(document.querySelector('#contact-form'));
+                formdata.append(
+                        "csrfmiddlewaretoken",
+                        csrftoken
+                );
+                let data = formdata_to_dict(formdata);
+                // let config = {
+                //     headers: {
+                //         'X-CSRFToken': csrftoken,
+                //     }
+                // }
+                // console.log(config);
+                this.axios.get('/contact', data)
+                        .then(function (response) {
+                            if (response.data.success == true) {
+                                window.location.href = 'http://' + response.data.redirectTo.toString();
+                            } else {
+                                toastr.error("Bạn đã nhập sai. Vui lòng kiểm tra lại ...");
+                            }
+                        })
+                        .catch(function (response) {
+                            console.log(response.data);
+                        });
+            }
+        }
+    }
+</script>

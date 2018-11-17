@@ -18,16 +18,16 @@
                         </div>
                         <p class="m--margin-bottom-10">{{ shortDescription }}</p>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-12 course-viewer ul-li d-inline-block">
+                    <div class="row btn-row" >
+                        <div class="col-6 course-viewer ul-li d-inline-block">
                             <ul>
                                 <li><p class="m-0"><i class="fas fa-user"></i> Sĩ số: {{ studentCount }}</p></li>
                                 <!--<li><p><i class="fas fa-comment-dots"></i> 1.015</p></li>-->
                                 <!--<li><p class="m-0">Tuần 8</p></li>-->
                             </ul>
                         </div>
-                        <div class="col-lg-6 col-sm-12">
-                            <button class="btn btn-sm btn-info m--pull-right">Xem chi tiết</button>
+                        <div class="col-6">
+                            <button class="btn btn-sm btn-success m--pull-right">Xem chi tiết</button>
                         </div>
                     </div>
                 </div>
@@ -42,10 +42,12 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     .course-pic {
-        overflow: hidden;
         border-radius: 4px;
+        height: 200px;
+        overflow: hidden;
+        display: flex;
     }
 
     .relative-position {
@@ -139,4 +141,15 @@
     .course-meta span:last-child {
         border-right: none !important;
     }
+    @media (min-width: 767px) {
+        .course-item-text {
+            position: relative;
+            .btn-row {
+                position: absolute;
+                bottom: 0;
+                width: 100% !important;
+            }
+        }
+    }
+
 </style>

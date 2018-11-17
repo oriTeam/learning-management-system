@@ -27,3 +27,9 @@
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
 }
+
+@media (max-width: 1200px) {
+    .m--visible-tablet-and-mobile-inline-block {
+        display: inline-block !important;
+    }
+}

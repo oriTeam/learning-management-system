@@ -34,7 +34,6 @@ subjects = [{"name": "Quản lý dự án phần mềm "},
             {"name": "Kiến trúc máy tính "},
             {"name": "Hệ quản trị CSDL "},
             {"name": "Các vấn đề hiện đại CNTT "},
-            {"name": "Hệ quản trị CSDL "},
             {"name": "Phân tích thiết kế HTTT  "},
             {"name": "Lập trình mạng "},
             {"name": "Mạng không dây "},
@@ -82,13 +81,16 @@ for category in categories:
 
 print('=======================================')
 
+def check_subject_in_category(subject, category):
+    return True if len(category.subjects_set.filter(name=subject)) != 0 else False
+
 for subject in subjects:
     try:
-        name = subject['name']
-        checker = Subject.objects.filter(name=name)
-        if len(checker) == 0:
+        category = choice(CourseCategory.objects.all())
+        if not check_subject_in_category(subject['name'], category):
+            name = subject['name']
             print('Creating  {0}.'.format(name))
-            new_subject = Subject.objects.create(name=name)
+            new_subject = Subject.objects.create(name=name, category=category)
             new_subject.save()
             print('Subject {0} successfully created.'.format(name))
         else:

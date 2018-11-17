@@ -1,17 +1,16 @@
-import sys
 import os
-import django
-from random import randint, choice
-import datetime
-from django.contrib.auth import authenticate
+import sys
+from random import choice
+
 from django.contrib.auth import get_user_model
+
+import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PIEDU.settings")
 django.setup()
 User = get_user_model()
-from course.models import CourseCategory, Subject, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest
-from syllabus.models import Syllabus, SyllabusTemplate
-
+from course.models import Subject, Class, ClassLecturer, ClassStudent, EnrollRequest
+from syllabus.models import Syllabus
 
 classes = [{"name": "Quản lý dự án phần mềm ", "id": "INT3111 21"}, {"name": "Xử lý ảnh ", "id": "INT3404"},
            {"name": "Thị giác máy ", "id": "INT3412"}, {"name": "Cơ sở dữ liệu ", "id": "INT2207 1"},
@@ -62,6 +61,7 @@ def get_random_student():
     random_student_id = choice(students_id)
     return random_student_id
 
+
 def get_random_lecturer():
     lecturers_id = []
     lecturer_queryset = User.objects.filter(group__name__contains='lecturer')
@@ -71,23 +71,19 @@ def get_random_lecturer():
     random_lecturer_id = choice(lecturers_id)
     return random_lecturer_id
 
-try:
-    subject = Subject.objects.get(pk=subject_id)
-except Subject.DoesNotExist:
-    print('Subject does not exist !!! Try another id ...')
-else:
-    for _class in classes:
-        try:
+
+def check_class_in_subject(class_code, subject):
+    return True if len(subject.classes_set.filter(code=class_code)) != 0 else False
+
+for _class in classes:
+    try:
+        subject = choice(Subject.objects.all())
+        if not check_class_in_subject(_class['id'], subject):
             start_date = choice(start)
             end_date = choice(end)
             new_class = Class.objects.create(code=_class['id'], name=_class['name'], description="", time_start=start_date,
-                                          time_end=end_date)
-            try:
-                subject = Subject.objects.get(pk = subject_id)
-            except Subject.DoesNotExist:
-                pass
-            else:
-                new_class.subject = subject
+                                         time_end=end_date)
+            new_class.subject = subject
             new_class.save()
             print('Class {0} successfully created in {1}'.format(_class['name'], subject))
 
@@ -98,16 +94,16 @@ else:
                 if len(class_lecturer) == 0:
                     class_lecturer_ = ClassLecturer.objects.create(own_class=new_class, lecturer=lecturer)
                     class_lecturer_.save()
-                print('Class {0} | Lecturer {1} successfully created'.format(_class['name'], lecturer.username))
+                    print('Class {0} | Lecturer {1} successfully created'.format(_class['name'], lecturer.username))
 
             for i in range(0, 40):
                 student_id = get_random_student();
                 student = User.objects.get(pk=student_id)
-                class_student = ClassStudent.objects.filter(student = student_id)
+                class_student = ClassStudent.objects.filter(student=student_id)
                 if len(class_student) == 0:
-                    class_student_ = ClassStudent.objects.create(own_class = new_class, student = student)
+                    class_student_ = ClassStudent.objects.create(own_class=new_class, student=student)
                     class_student_.save()
-                print('Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
+                    print('Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
 
             for i in range(0, 15):
                 title = "Tuần " + str(i + 1)
@@ -121,14 +117,17 @@ else:
             for i in range(0, 10):
                 student_id = get_random_student();
                 student = User.objects.get(pk=student_id)
-                enroll_request = EnrollRequest.objects.filter(student = student_id)
+                enroll_request = EnrollRequest.objects.filter(student=student_id)
                 class_student = ClassStudent.objects.filter(student=student_id)
 
                 if len(enroll_request) == 0:
-                    enroll_request_ = EnrollRequest.objects.create(own_class = new_class, student = student)
+                    enroll_request_ = EnrollRequest.objects.create(own_class=new_class, student=student)
                     enroll_request_.save()
-                    print('Enroll Request: Class {0} | Student {1} successfully created'.format(_class['name'], student.username))
+                    print('Enroll Request: Class {0} | Student {1} successfully created'.format(_class['name'],
+                                                                                                    student.username))
+        else:
+            print('Class {0} have been existed in {1}'.format(_class['id'], subject))
 
-        except:
-            print('There was a problem creating the class in course: {0}.  Error: {1}.' \
-                  .format(course, sys.exc_info()[1]))
+    except:
+        print('There was a problem creating the class in course: {0}.  Error: {1}.' \
+      .format(course, sys.exc_info()[1]))
