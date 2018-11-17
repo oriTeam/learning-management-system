@@ -2,7 +2,7 @@
   <div>
     <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn"><i
       class="la la-close"></i></button>
-    <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light w-100 h-100">
+      <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light h-100">
       <!-- BEGIN: Aside Menu -->
       <div id="m_ver_menu"
            class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light "
@@ -45,8 +45,60 @@
   </div>
 </template>
 <script>
+    export default {
+        mounted() {
+            let el = document.getElementById('m_aside_left');
+            let rect = el.getBoundingClientRect();
+            let fixmeTop = rect.top + document.body.scrollTop;
+            window.addEventListener('scroll', function () {
+                let currentScroll = window.scrollY + 65;
+                let el = document.getElementById('m_aside_left');
+                if (currentScroll >= fixmeTop && Math.max(document.documentElement.clientWidth, window.innerWidth || 0) >= 1025) {
+                    if (el.classList)
+                        el.classList.add('fixed-aside');
+                    else
+                        el.className += ' ' + 'fixed-aside';
+                } else {
+                    if (el.classList)
+                        el.classList.remove('fixed-aside');
+                    else
+                        el.className = el.className.replace(new RegExp('(^|\\b)' + 'fixed-aside'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+                }
+            });
+        },
+        methods: {
+
+        }
+
+    }
 </script>
-
 <style lang="scss">
+    .fixed-aside {
+        position: fixed;
+        top: 65px;
+        left: 0;
+    }
 
+    #m_aside_left {
+        width: 23.5rem;
+    }
+
+    @media (max-width: 1280px) {
+        .m-aside-left {
+            display: block !important;
+            z-index: 1001;
+            position: fixed;
+            -webkit-overflow-scrolling: touch;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            -webkit-transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            width: 275px !important;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+            left: -285px;
+        }
+    }
 </style>
