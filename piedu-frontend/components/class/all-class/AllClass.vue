@@ -50,8 +50,8 @@
     </div>
 </template>
 <script>
-    import ClassBoxPortrait from './ClassBoxPortrait.vue'
-    import ClassBoxLandscape from './ClassBoxLanscape.vue'
+    import ClassBoxPortrait from '../share/ClassBoxPortrait.vue'
+    import ClassBoxLandscape from '../share/ClassBoxLanscape.vue'
 
     export default {
         data() {

@@ -19,6 +19,7 @@
   "dependencies": {
     "vue": "^2.5.11",
     "vue-clazy-load": "^0.4.2",
+    "vuelidate": "^0.7.4",
     "vuetify": "^1.3.8"
   },
   "browserslist": [

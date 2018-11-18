@@ -3,17 +3,17 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 
-import ASideLecturer from './components/class/ASideLecturer.vue'
-import ASideStudent from './components/class/ASideStudent.vue'
-import Search from './components/class/Search.vue'
-import NewClass from './components/class/NewClass.vue'
+import ASideLecturer from './components/class/share/ASideLecturer.vue'
+import ASideStudent from './components/class/share/ASideStudent.vue'
+import Search from './components/class/share/Search.vue'
+import NewClass from './components/class/new-class/NewClass.vue'
 import Footer from './components/shared/Footer.vue'
 import GoTopBtn from './components/shared/GoTopBtn.vue'
 import HelpPage from './components/help/Page.vue'
 import ContactPage from './components/contact/Page.vue'
 import LoginContainer from './components/login/LoginContainer.vue'
-import AllClass from './components/class/AllClass.vue'
-import MyClass from './components/class/MyClass.vue'
+import AllClass from './components/class/all-class/AllClass.vue'
+import MyClass from './components/class/my-class/MyClass.vue'
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
