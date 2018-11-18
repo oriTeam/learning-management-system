@@ -2,7 +2,7 @@
     <div style="padding: 2rem 3rem; text-align: left;">
         <v-layout row wrap>
             <v-flex lg6 sm12 px-3 my-sm-2>
-                <div class="field w-100">
+                <div class="field">
                     <label class="label">Thể loại</label>
                     <div class="control">
                         <div :class="['select', 'w-100', ($v.form.selected_category.$error) ? 'is-danger' : '']">
@@ -30,37 +30,46 @@
                 </div>
             </v-flex>
         </v-layout>
-        <!--<div class="field">-->
-        <!--<label class="label">Username</label>-->
-        <!--<div class="control">-->
-        <!--<input :class="['input', ($v.form.username.$error) ? 'is-danger' : '']" type="text" placeholder="Text input"-->
-        <!--v-model="form.username">-->
-        <!--</div>-->
-        <!--<p v-if="$v.form.username.$error" class="help is-danger">This username is invalid</p>-->
-        <!--</div>-->
-        <!--<div class="field">-->
-        <!--<label class="label">Email</label>-->
-        <!--<div class="control">-->
-        <!--<input :class="['input', ($v.form.demoEmail.$error) ? 'is-danger' : '']"  type="text" placeholder="Email input" v-model="form.demoEmail">-->
-        <!--</div>-->
-        <!--<p v-if="$v.form.demoEmail.$error" class="help is-danger">This email is invalid</p>-->
-        <!--</div>-->
-        <!--<div class="field">-->
-        <!--<label class="label">Message</label>-->
-        <!--<div class="control">-->
-        <!--<textarea :class="['textarea', ($v.form.message.$error) ? 'is-danger' : '']"  placeholder="Textarea" v-model="form.message"></textarea>-->
-        <!--</div>-->
-        <!-- </div> -->
+        <v-layout row wrap>
+            <v-flex lg7 sm12 px-3 my-2>
+                <div class="field">
+                    <label class="label">Tên lớp học</label>
+                    <div class="control">
+                        <input :class="['input', 'w-100', ($v.form.className.$error) ? 'is-danger' : '']" type="text"
+                               placeholder="Tên lớp học"
+                               v-model="form.className">
+                    </div>
+                    <p v-if="$v.form.className.$error" class="help is-danger">Không được để trống tên lớp học</p>
+                </div>
+            </v-flex>
+            <v-flex lg5 sm12 px-3 my-2>
+                <div class="field">
+                    <label class="label">Mã lớp học</label>
+                    <div class="control">
+                        <input :class="['input', 'w-100', ($v.form.classCode.$error) ? 'is-danger' : '']" type="text"
+                               placeholder="Mã lớp học" v-model="form.classCode">
+                    </div>
+                    <p v-if="$v.form.classCode.$error" class="help is-danger">Ma</p>
+                </div>
+            </v-flex>
+        </v-layout>
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+                <textarea :class="['textarea', ($v.form.message.$error) ? 'is-danger' : '']" placeholder="Textarea"
+                          v-model="form.message"></textarea>
+            </div>
+        </div>
     </div>
 </template>
 <style>
 </style>
 
 <script>
-import { validationMixin } from "vuelidate";
-import { required } from "vuelidate/lib/validators";
+    import {validationMixin} from "vuelidate";
+    import {required} from "vuelidate/lib/validators";
 
-export default {
+    export default {
   props: ["clickedNext", "currentStep"],
   mixins: [validationMixin],
   data() {
