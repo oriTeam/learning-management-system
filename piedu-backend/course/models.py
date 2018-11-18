@@ -28,6 +28,7 @@ class CourseCategory(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Subject"))
     avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
+    code = models.CharField(max_length=25, null=True, verbose_name=_("Class's Code"))
     category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='subjects_set', \
                                                                                                    verbose_name=_("Course Category"))
     class Meta:
@@ -41,11 +42,11 @@ class Subject(models.Model):
 
 
 class Class(models.Model):
-    code = models.CharField(max_length=25, unique=True, default='', verbose_name=_("Class's Code"))
-    name = models.CharField(max_length=255, verbose_name=_("Class's Name"))
+    code = models.CharField(max_length=25, blank=True, null=True, verbose_name=_("Code"))
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Name"))
     description = models.TextField(null=True, verbose_name=_('Description'))
-    time_start = models.DateTimeField(verbose_name=_("Class's start time"))
-    time_end = models.DateTimeField(verbose_name=_("Class's end time"))
+    time_start = models.DateTimeField(verbose_name=_("Start time"))
+    time_end = models.DateTimeField(verbose_name=_("End time"))
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_('Subject'))
 
     class Meta:
@@ -55,7 +56,15 @@ class Class(models.Model):
         verbose_name_plural = _("Classes")
 
     def __str__(self):
-        return "Class : {0} {1}".format(self.name, self.code)
+        return "Class : {0}".format(self.name)
+
+    def update_name_and_code(self):
+        code = str(self.subject.code) + " " + str(self.id)
+        name = str(self.subject.name) + " " + code
+        if self.name != name or self.code != code:
+            self.code = code
+            self.name = name
+            self.save()
 
     def parse_basic_info(self):
         data = {

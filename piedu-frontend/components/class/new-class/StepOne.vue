@@ -30,29 +30,7 @@
                 </div>
             </v-flex>
         </v-layout>
-        <v-layout row wrap>
-            <v-flex lg7 sm12 px-3 my-2>
-                <div class="field">
-                    <label class="label">Tên lớp học</label>
-                    <div class="control">
-                        <input :class="['input', 'w-100', ($v.form.className.$error) ? 'is-danger' : '']" type="text"
-                               placeholder="Tên lớp học"
-                               v-model="form.className">
-                    </div>
-                    <p v-if="$v.form.className.$error" class="help is-danger">Không được để trống tên lớp học</p>
-                </div>
-            </v-flex>
-            <v-flex lg5 sm12 px-3 my-2>
-                <div class="field">
-                    <label class="label">Mã lớp học</label>
-                    <div class="control">
-                        <input :class="['input', 'w-100', ($v.form.classCode.$error) ? 'is-danger' : '']" type="text"
-                               placeholder="Mã lớp học" v-model="form.classCode">
-                    </div>
-                    <p v-if="$v.form.classCode.$error" class="help is-danger">Ma</p>
-                </div>
-            </v-flex>
-        </v-layout>
+
         <div class="field">
             <label class="label">Message</label>
             <div class="control">
