@@ -273,3 +273,14 @@
     <!--end: Form Wizard-->
   </div>
 </template>
+<style>
+
+</style>
+<script>
+    import HorizontalStepper from 'vue-stepper';
+    export default {
+        components: {
+            'horizontal-stepper': HorizontalStepper,
+        }
+    }
+</script>
