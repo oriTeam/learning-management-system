@@ -6,9 +6,10 @@
                     <label class="label">Thể loại</label>
                     <div class="control">
                         <div :class="['select', 'w-100', ($v.form.selected_category.$error) ? 'is-danger' : '']">
-                            <select v-model="form.selected_category" class="w-100">
-                                <option value="1">Select dropdown</option>
-                                <option value="2">With options</option>
+                            <select v-model="form.selected_category" class="w-100" @change="getSubjects">
+                                <option v-for="category in form.categories" :value="category.id"
+                                        :key="category.id">{{ category.name }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -21,8 +22,9 @@
                     <div class="control">
                         <div :class="['select', 'w-100', ($v.form.selected_subject.$error) ? 'is-danger' : '']">
                             <select v-model="form.selected_subject" class="w-100">
-                                <option>Select dropdown</option>
-                                <option>With options</option>
+                                <option v-for="subject in form.subjects" :value="subject.id" :key="subject.id">{{
+                                    subject.name }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -30,14 +32,18 @@
                 </div>
             </v-flex>
         </v-layout>
-
-        <div class="field">
-            <label class="label">Message</label>
-            <div class="control">
-                <textarea :class="['textarea', ($v.form.message.$error) ? 'is-danger' : '']" placeholder="Textarea"
-                          v-model="form.message"></textarea>
-            </div>
-        </div>
+        <v-layout row wrap>
+            <v-flex xs12 px-3 my-2>
+                <div class="field">
+                    <label class="label">Mô tả</label>
+                    <div class="control">
+                        <textarea :class="['textarea', 'w-100', ($v.form.description.$error) ? 'is-danger' : '']"
+                                  placeholder="Mô tả lớp học"
+                                  v-model="form.description"></textarea>
+                    </div>
+                </div>
+            </v-flex>
+        </v-layout>
     </div>
 </template>
 <style>
@@ -48,75 +54,77 @@
     import {required} from "vuelidate/lib/validators";
 
     export default {
-  props: ["clickedNext", "currentStep"],
-  mixins: [validationMixin],
-  data() {
-    return {
-      form: {
-        categories: [],
-        selected_category: "",
-        subjects: ["Bạn phải chọn Loại lớp học trước"],
-        selected_subject: "",
-        className: "",
-        classCode: "",
-        description: ""
-      }
-    };
-  },
-  validations: {
-    form: {
-      selected_category: {
-        required
-      },
-      selected_subject: {
-        required
-      },
-      className: {
-        required
-      },
-      classCode: {
-        required
-      },
-      description: {
-        required
-      }
-    }
-  },
-  watch: {
-    $v: {
-      handler: function(val) {
-        if (!val.$invalid) {
-          this.$emit("can-continue", { value: true });
-        } else {
-          this.$emit("can-continue", { value: false });
+        props: ["clickedNext", "currentStep"],
+        mixins: [validationMixin],
+        data() {
+            return {
+                form: {
+                    categories: [],
+                    selected_category: "",
+                    subjects: ["Bạn phải chọn Loại lớp học trước"],
+                    selected_subject: "",
+                    description: ""
+                }
+            };
+        },
+        validations: {
+            form: {
+                selected_category: {
+                    required
+                },
+                selected_subject: {
+                    required
+                },
+                description: {
+                    required
+                }
+            }
+        },
+        watch: {
+            $v: {
+                handler: function (val) {
+                    if (!val.$invalid) {
+                        this.$emit("can-continue", {value: true});
+                    } else {
+                        this.$emit("can-continue", {value: false});
+                    }
+                },
+                deep: true
+            },
+            clickedNext(val) {
+                if (val === true) {
+                    this.$v.form.$touch();
+                }
+            }
+        },
+        mounted() {
+            if (!this.$v.$invalid) {
+                this.$emit("can-continue", {value: true});
+            } else {
+                this.$emit("can-continue", {value: false});
+            }
+        },
+        created() {
+            this.getAllCategory();
+        },
+        methods: {
+            getAllCategory: function () {
+                self = this;
+                this.axios.get('/api/course_category/list?format=json').then((response) => {
+                    self.form.categories = response.data;
+                }).catch((response) => {
+                    console.log(response);
+                })
+            },
+            getSubjects: function () {
+                self = this;
+                this.axios.get(`/api/course_category/${self.form.selected_category}/get_subject?format=json`).then((response) => {
+                    self.form.subjects = response.data;
+                }).catch((response) => {
+                    console.log(response);
+                })
+
+            }
         }
-      },
-      deep: true
-    },
-    clickedNext(val) {
-      if (val === true) {
-        this.$v.form.$touch();
-      }
-    }
-  },
-  mounted() {
-    if (!this.$v.$invalid) {
-      this.$emit("can-continue", { value: true });
-    } else {
-      this.$emit("can-continue", { value: false });
-    }
-  },
-  methods: {
-    updateCategory: function(e) {
-      if (e.target.options.selectedIndex > -1) {
-        console.log(e);
-      }
-    },
-    updateSuject: function(e) {
-      if (e.target.options.selectedIndex > -1) {
-        console.log(e);
-      }
-    }
-  }
-};
+    };
 </script>

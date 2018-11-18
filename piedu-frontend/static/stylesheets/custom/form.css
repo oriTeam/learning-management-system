@@ -8,6 +8,7 @@
   width: 100%;
 }
 
+
 .input::-moz-placeholder,
 .textarea::-moz-placeholder {
   color: rgba(54, 54, 54, 0.3);
@@ -1431,7 +1432,7 @@ fieldset[disabled] .select select:hover {
     -moz-appearance: none;
     -webkit-appearance: none;
     align-items: center;
-    border: 1px solid transparent;
+    border: 1px solid #dbdbdb;
     border-radius: 4px;
     box-shadow: none;
     display: inline-flex;

@@ -13,25 +13,34 @@
     import StepOne from './StepOne.vue'
     import StepTwo from './StepTwo.vue'
     import Review from './Review.vue'
+
     export default {
         data(){
             return {
                 newClassSteps: [
                     {
-                        icon: 'mail',
-                        name: 'first',
-                        title: 'Sample title 1',
-                        subtitle: 'Subtitle sample',
+                        icon: 'info',
+                        name: 'basic',
+                        title: 'Thông tin cơ bản',
+                        subtitle: '',
                         component: StepOne,
                         completed: false
 
                     },
                     {
-                        icon: 'report_problem',
-                        name: 'second',
-                        title: 'Sample title 2',
-                        subtitle: 'Subtitle sample',
+                        icon: 'alarm',
+                        name: 'time',
+                        title: 'Thời gian',
+                        subtitle: '',
                         component: StepTwo,
+                        completed: false
+                    },
+                    {
+                        icon: 'rate_review',
+                        name: 'review',
+                        title: 'Xác nhận tạo mới lớp học',
+                        subtitle: '',
+                        component: Review,
                         completed: false
                     }
                 ]
