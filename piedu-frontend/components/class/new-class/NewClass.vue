@@ -1,8 +1,8 @@
 <template>
     <div class="m-portlet w-100">
-        <horizontal-stepper :steps="demoSteps" @completed-step="completeStep"
+        <new-class-stepper :steps="newClassSteps" @completed-step="completeStep"
                             @active-step="isStepActive" @stepper-finished="alert">
-        </horizontal-stepper>
+        </new-class-stepper>
     </div>
 </template>
 <style>
@@ -16,7 +16,7 @@
     export default {
         data(){
             return {
-                demoSteps: [
+                newClassSteps: [
                     {
                         icon: 'mail',
                         name: 'first',
@@ -40,7 +40,7 @@
         methods: {
             // Executed when @completed-step event is triggered
             completeStep(payload) {
-                this.demoSteps.forEach((step) => {
+                this.newClassSteps.forEach((step) => {
                     if (step.name === payload.name) {
                         step.completed = true;
                     }
@@ -48,7 +48,7 @@
             },
             // Executed when @active-step event is triggered
             isStepActive(payload) {
-                this.demoSteps.forEach((step) => {
+                this.newClassSteps.forEach((step) => {
                     if (step.name === payload.name) {
                         if(step.completed === true) {
                             step.completed = false;
@@ -62,7 +62,7 @@
             }
         },
         components: {
-            'horizontal-stepper': HorizontalStepper,
+            'new-class-stepper': HorizontalStepper,
             'step-one': StepOne,
             'step-two': StepTwo,
             'review': Review,

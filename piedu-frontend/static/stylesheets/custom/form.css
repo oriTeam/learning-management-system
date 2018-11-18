@@ -327,7 +327,7 @@ fieldset[disabled]
 }
 
 .select:not(.is-multiple):not(.is-loading)::after {
-  border-color: #3273dc;
+  border-color: #3273dc !important;
   right: 1.125em;
   z-index: 4;
 }
@@ -1068,7 +1068,7 @@ fieldset[disabled] .select select:hover {
 .label {
   color: #363636;
   display: block;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
 }
 
@@ -1328,7 +1328,7 @@ fieldset[disabled] .select select:hover {
 .control {
   box-sizing: border-box;
   clear: both;
-  font-size: 1rem;
+  font-size: 1.15rem;
   position: relative;
   text-align: left;
 }
@@ -1413,8 +1413,8 @@ fieldset[disabled] .select select:hover {
 }
 
 .icon.is-small {
-  height: 1rem;
-  width: 1rem;
+  height: 1.15rem;
+  width: 1.15rem;
 }
 
 .icon.is-medium {
@@ -1425,4 +1425,52 @@ fieldset[disabled] .select select:hover {
 .icon.is-large {
   height: 3rem;
   width: 3rem;
+}
+
+.button, .file-cta, .file-name, .input, .pagination-ellipsis, .pagination-link, .pagination-next, .pagination-previous, .select select, .textarea {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1.15rem;
+    height: 2.25em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding-bottom: calc(.375em - 1px);
+    padding-left: calc(.625em - 1px);
+    padding-right: calc(.625em - 1px);
+    padding-top: calc(.375em - 1px);
+    position: relative;
+    vertical-align: top;
+}
+.select:not(.is-multiple):not(.is-loading)::after {
+    border: 3px solid transparent;
+    border-radius: 2px;
+    border-right: 0;
+    border-top: 0;
+    content: " ";
+    display: block;
+    height: .625em;
+    margin-top: -.4375em;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    width: .625em;
+}
+.select select {
+    background-color: #fff;
+    border-color: #dbdbdb;
+    color: #363636;
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    max-width: 100%;
+    outline: 0;
 }

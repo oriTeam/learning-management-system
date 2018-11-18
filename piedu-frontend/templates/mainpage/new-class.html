@@ -31,7 +31,11 @@
         <div class="container-fluid">
             <div class="row mx-0 my-4">
                 <div class="col-lg-3 col-sm-12 pr-3">
-                    <a-side></a-side>
+                    {% if user.is_lecturer %}
+                        <a-side-lecturer></a-side-lecturer>
+                    {% else %}
+                        <a-side-student></a-side-student>
+                    {% endif %}
                 </div>
                 <div class="col-lg-9 px-3">
                     <div class="m-grid__item m-grid__item--fluid m-wrapper">
