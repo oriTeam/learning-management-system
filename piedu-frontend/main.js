@@ -13,6 +13,8 @@ import HelpPage from './components/help/Page.vue'
 import ContactPage from './components/contact/Page.vue'
 import LoginContainer from './components/login/LoginContainer.vue'
 import AllClass from './components/class/AllClass.vue'
+import MyClass from './components/class/MyClass.vue'
+
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -29,6 +31,7 @@ new Vue({
         'contact-page': ContactPage,
         'login-container': LoginContainer,
         'all-class': AllClass,
+        'my-class': MyClass,
     },
     methods: {
     }
