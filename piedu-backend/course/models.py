@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
-from django.conf import settings
 
 
 # Create your models here.
@@ -28,9 +28,10 @@ class CourseCategory(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Subject"))
     avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
-    code = models.CharField(max_length=25, null=True, verbose_name=_("Class's Code"))
-    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='subjects_set', \
-                                                                                                   verbose_name=_("Course Category"))
+    code = models.CharField(max_length=25, null=True, verbose_name=_("Code"))
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE, related_name='subjects_set',
+                                 verbose_name=_("Course Category"))
+
     class Meta:
         db_table = 'subject'
         ordering = ['id']
@@ -79,7 +80,6 @@ class Class(models.Model):
     def parse_info(self):
         data = self.parse_basic_info()
         data.update({
-            # "cat": self.subject.name,
             "avatar_path": self.subject.avatar.url,
             "description": self.description
         })
@@ -96,7 +96,7 @@ class Class(models.Model):
 
 class Schedule(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set',
-                                  verbose_name=_('Own Class'))
+                                  verbose_name=_('Class'))
     day_of_week = models.CharField(max_length=3, verbose_name=_('Day Of Week'))
     session_start = models.CharField(max_length=3, null=True, verbose_name=_('Start Session'))
     session_end = models.CharField(max_length=3, null=True, verbose_name=_('End Session'))
@@ -122,7 +122,8 @@ class Schedule(models.Model):
 
 class ClassLecturer(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='lecturers_set', verbose_name=_("Class"))
-    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='own_classes_set', verbose_name=_("User"))
+    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,
+                                 related_name='own_classes_set', verbose_name=_("Lecturer"))
 
     class Meta:
         db_table = 'class_lecturer'
@@ -150,7 +151,8 @@ class ClassStudent(models.Model):
 
 class EnrollRequest(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='wait_students_set', verbose_name=_('Class'))
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='wait_classes_set', verbose_name=_('Student'))
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,
+                                related_name='wait_classes_set', verbose_name=_('Student'))
 
     class Meta:
         db_table = 'enroll_request'
