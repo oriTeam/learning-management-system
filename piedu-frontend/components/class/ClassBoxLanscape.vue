@@ -3,7 +3,14 @@
         <div class="m-portlet m-portlet--bordered-semi m-portlet--rounded-force p-3 my-2">
             <div class="course-item-pic-text row">
                 <div class="course-pic relative-position col-md-4 col-sm-12">
-                    <img :src="avatarPath" alt="" class=".img-thumbnail">
+
+                    <clazy-load :src="avatarPath">
+                        <img :src="avatarPath">
+                        <div class="preloader" slot="placeholder">
+                            Loading ...
+                        </div>
+                    </clazy-load>
+
                 </div>
                 <div class="course-item-text col-md-8 col-sm-12">
                     <div class="course-title m--padding-top-10-tablet-and-mobile headline m--padding-bottom-15 relative-position">
@@ -37,8 +44,13 @@
 </template>
 
 <script>
+    import {VueClazyLoad} from 'vue-clazy-load'
+
     export default {
         props: ['avatarPath', 'category', 'lecturer', 'code', 'className', 'shortDescription', 'studentCount'],
+        components: {
+            'clazy-load': VueClazyLoad
+        }
     }
 </script>
 
