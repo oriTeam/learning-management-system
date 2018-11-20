@@ -51,7 +51,7 @@ $(function() {
 }); /* End Fn */
 "use strict";
 
-const axios = require('axios');
+// const axios = require('axios');
 // import axios from 'axios';
 $(document).ready(function () {
     

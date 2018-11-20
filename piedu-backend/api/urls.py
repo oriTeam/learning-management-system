@@ -71,6 +71,7 @@ class_urlpatterns = [
     path('<int:id>/get_past_class',course_base_views.get_past_class),
     path('all/', crud_functions.get_all_class_info),
     path('info/', crud_functions.get_full_class_info),
+    path('<int:id>/get_syllabus',syllabus_base_views.get_class_syllabus),
 
 ]
 
@@ -84,6 +85,7 @@ class_student_urlpatterns = [
     path('create', course_viewsets.ClassStudentCreateView.as_view(), name="class_student_create"),
     path('update/<int:id>/', course_viewsets.ClassStudentUpdateView.as_view(), name="class_student_update"),
     path('delete/<int:id>/', course_viewsets.ClassStudentDeleteView.as_view(), name="class_student_delete"),
+    
 ]
 
 enroll_request_urlpatterns = [
@@ -107,16 +109,21 @@ syllabus_url_patterns= [
     path('create/<int:id>/', syllabus_viewsets.SyllabusCreateView.as_view(), name="syllabus_createl"),
     path('update/<int:id>/', syllabus_viewsets.SyllabusUpdateView.as_view(), name="syllabus_update"),
     path('delete/<int:id>/', syllabus_viewsets.SyllabusDeleteView.as_view(), name="syllabus_delete"),
+    path('<int:id>/get_material/',syllabus_base_views.get_syllabus_material),
 ]
 material_url_patterns=[
     path('create/<int:id>/', syllabus_viewsets.MaterialCreateView.as_view(), name="material_create"),
     path('update/<int:id>/', syllabus_viewsets.MaterialUpdateView.as_view(), name="material_update"),
     path('delete/<int:id>/', syllabus_viewsets.MaterialDeleteView.as_view(), name="material_delete"),
+    path('detail/<int:id>/',syllabus_base_views.get_material_info),
+    
 ]
 syllabus_template_url_patterns=[
     path('create/<int:id>/', syllabus_viewsets.SyllabusTemplateCreateView.as_view(), name="syllabus_template_create"),
     path('update/<int:id>/', syllabus_viewsets.SyllabusTemplateUpdateView.as_view(), name="syllabus_template_update"),
     path('delete/<int:id>/', syllabus_viewsets.SyllabusTemplateDeleteView.as_view(), name="syllabus_template_delete"),
+    path('<int:id>/get_template/',syllabus_base_views.get_syllabus_template),
+    path('get_all_template/',syllabus_base_views.get_syllabus_template),
 ]
 
 user_url_patterns=[

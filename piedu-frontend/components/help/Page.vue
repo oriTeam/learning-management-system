@@ -8,7 +8,7 @@
   import Hero from './Hero.vue';
   import Content from './Content.vue'
   export default {
-    components: {
+    components: { 
       'help-hero': Hero,
       'help-content': Content
     }
