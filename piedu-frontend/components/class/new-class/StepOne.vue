@@ -7,7 +7,7 @@
                     <div class="control">
                         <div :class="['select', 'w-100', ($v.form.selected_category.$error) ? 'is-danger' : '']">
                             <select v-model="form.selected_category" class="w-100" @change="getSubjects">
-                                <option v-for="category in form.categories" :value="category.id"
+                                <option v-for="category in categories" :value="category.id"
                                         :key="category.id">{{ category.name }}
                                 </option>
                             </select>
@@ -22,7 +22,7 @@
                     <div class="control">
                         <div :class="['select', 'w-100', ($v.form.selected_subject.$error) ? 'is-danger' : '']">
                             <select v-model="form.selected_subject" class="w-100">
-                                <option v-for="subject in form.subjects" :value="subject.id" :key="subject.id">{{
+                                <option v-for="subject in subjects" :value="subject.id" :key="subject.id">{{
                                     subject.name }}
                                 </option>
                             </select>
@@ -58,10 +58,10 @@
         mixins: [validationMixin],
         data() {
             return {
+                categories: [],
+                subjects: ["Bạn phải chọn Loại lớp học trước"],
                 form: {
-                    categories: [],
                     selected_category: "",
-                    subjects: ["Bạn phải chọn Loại lớp học trước"],
                     selected_subject: "",
                     description: ""
                 }
@@ -98,11 +98,7 @@
             },
             form: {
                 handler: function () {
-                    this.$emit("basicInfo", {
-                        category: this.form.selected_category,
-                        subject: this.form.selected_subject,
-                        description: this.form.description
-                    })
+                    this.$emit("form", this.form)
                 },
                 deep: true,
             }
@@ -121,7 +117,7 @@
             getAllCategory: function () {
                 self = this;
                 this.axios.get('/api/course_category/list?format=json').then((response) => {
-                    self.form.categories = response.data;
+                    self.categories = response.data;
                 }).catch((response) => {
                     console.log(response);
                 })
@@ -129,7 +125,7 @@
             getSubjects: function () {
                 self = this;
                 this.axios.get(`/api/course_category/${self.form.selected_category}/get_subject?format=json`).then((response) => {
-                    self.form.subjects = response.data;
+                    self.subjects = response.data;
                 }).catch((response) => {
                     console.log(response);
                 })

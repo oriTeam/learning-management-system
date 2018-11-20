@@ -4,14 +4,14 @@
             <v-flex lg6 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Ngày bắt đầu</label>
-                    <datetime class="col-12 px-0" input-class="input" v-model="start_date">
+                    <datetime class="col-12 px-0" input-class="input" v-model="form.start_date">
                     </datetime>
                 </div>
             </v-flex>
             <v-flex lg6 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Ngày kết thúc</label>
-                    <datetime class="col-12 px-0" input-class="input" v-model="end_date">
+                    <datetime class="col-12 px-0" input-class="input" v-model="form.end_date">
                     </datetime>
                 </div>
             </v-flex>
@@ -26,28 +26,32 @@
                 <div class="field">
                     <label class="label">Thứ trong tuần</label>
                     <div class="control">
-                        <div :class="['select', 'w-100', ($v.main_schedule.day_of_week.$error) ? 'is-danger' : '']">
-                            <select v-model="main_schedule.day_of_week" class="w-100">
+                        <div :class="['select', 'w-100', ($v.form.main_schedule.day_of_week.$error) ? 'is-danger' :
+                        '']">
+                            <select v-model="form.main_schedule.day_of_week" class="w-100">
                                 <option v-for="day in 6" :value="day + 1"
                                         :key="day">{{ day + 1 }}
                                 </option>
                             </select>
                         </div>
                     </div>
-                    <p v-if="$v.main_schedule.day_of_week.$error" class="help is-danger">Không được để trống Thứ</p>
+                    <p v-if="$v.form.main_schedule.day_of_week.$error" class="help is-danger">Không được để trống
+                        Thứ</p>
                 </div>
             </v-flex>
             <v-flex lg5 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Giờ bắt đầu</label>
-                    <datetime type="time" class="col-12 px-0" input-class="input" v-model="main_schedule.start_session">
+                    <datetime type="time" class="col-12 px-0" input-class="input"
+                              v-model="form.main_schedule.start_session">
                     </datetime>
                 </div>
             </v-flex>
             <v-flex lg5 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Giờ kết thúc</label>
-                    <datetime type="time" class="col-12 px-0" input-class="input" v-model="main_schedule.end_session">
+                    <datetime type="time" class="col-12 px-0" input-class="input"
+                              v-model="form.main_schedule.end_session">
                     </datetime>
                 </div>
             </v-flex>
@@ -78,7 +82,7 @@
                         <label class="label">Thứ trong tuần</label>
                         <div class="control">
                             <div :class="['select', 'w-100']">
-                                <select v-model="sub_schedule.day_of_week" class="w-100">
+                                <select v-model="form.sub_schedule.day_of_week" class="w-100">
                                     <option v-for="day in 6" :value="day + 1"
                                             :key="day">{{ day + 1 }}
                                     </option>
@@ -93,7 +97,7 @@
                     <div class="input-group date">
                         <label class="label col-12 px-0">Giờ bắt đầu</label>
                         <datetime type="time" class="col-12 px-0" input-class="input"
-                                  v-model="sub_schedule.start_session">
+                                  v-model="form.sub_schedule.start_session">
                         </datetime>
                     </div>
                 </v-flex>
@@ -101,7 +105,7 @@
                     <div class="input-group date">
                         <label class="label col-12 px-0">Giờ kết thúc</label>
                         <datetime type="time" class="col-12 px-0" input-class="input"
-                                  v-model="sub_schedule.end_session">
+                                  v-model="form.sub_schedule.end_session">
                         </datetime>
                     </div>
                 </v-flex>
@@ -127,43 +131,46 @@
         mixins: [validationMixin],
         data() {
             return {
-                start_date: '',
-                end_date: '',
                 subScheduleShow: false,
-                main_schedule: {
-                    day_of_week: '',
-                    start_session: '',
-                    end_session: ''
-                },
-                sub_schedule: {
-                    day_of_week: '',
-                    start_session: '',
-                    end_session: ''
-                },
+                form: {
+                    start_date: '',
+                    end_date: '',
+                    main_schedule: {
+                        day_of_week: '',
+                        start_session: '',
+                        end_session: ''
+                    },
+                    sub_schedule: {
+                        day_of_week: '',
+                        start_session: '',
+                        end_session: ''
+                    },
+                }
             }
         },
         components: {
             'datetime': Datetime
         },
         validations: {
-            start_date: {
-                required
-            },
-            end_date: {
-                required
-            },
-            main_schedule: {
-                day_of_week: {
+            form: {
+                start_date: {
                     required
                 },
-                start_session: {
+                end_date: {
                     required
                 },
-                end_session: {
-                    required
+                main_schedule: {
+                    day_of_week: {
+                        required
+                    },
+                    start_session: {
+                        required
+                    },
+                    end_session: {
+                        required
+                    }
                 }
             }
-
         },
         watch: {
             $v: {
@@ -176,11 +183,18 @@
                 },
                 deep: true
             },
+            form: {
+                handler: function () {
+                    this.$emit('form', this.form);
+                },
+                deep: true
+            },
             clickedNext(val) {
                 if (val === true) {
                     this.$v.$touch();
                 }
             }
+
         },
         mounted() {
             if (!this.$v.$invalid) {
@@ -192,9 +206,9 @@
         methods: {
             hideSubSchedule: function () {
                 this.subScheduleShow=false;
-                this.sub_schedule.day_of_week = '';
-                this.sub_schedule.start_session = '';
-                this.sub_schedule.end_session = '';
+                this.form.sub_schedule.day_of_week = '';
+                this.form.sub_schedule.start_session = '';
+                this.form.sub_schedule.end_session = '';
             }
         }
     }

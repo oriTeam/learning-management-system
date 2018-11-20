@@ -34,6 +34,7 @@
                 <keep-alive v-if="keepAliveData">
                     <component :is="steps[currentStep.index].component" :clickedNext="nextButton[currentStep.name]"
                                @can-continue="proceed" @change-next="changeNextBtnValue"
+                               @form="formChanged"
                                :current-step="currentStep"></component>
                 </keep-alive>
                 <!--If not show component and destroy it in each step change-->
@@ -213,6 +214,9 @@
                 this.steps.forEach(step => {
                     this.nextButton[step.name] = false;
                 });
+            },
+            formChanged: function (data) {
+                this.$emit('form', data)
             }
         },
 

@@ -1,6 +1,6 @@
 <template>
     <div class="m-portlet w-100">
-        <new-class-stepper locale="vi" :steps="newClassSteps"
+        <new-class-stepper locale="vi" @form="formData" :steps="newClassSteps"
                            @completed-step="completeStep"
                             @active-step="isStepActive" @stepper-finished="alert">
         </new-class-stepper>
@@ -45,6 +45,7 @@
                         completed: false
                     }
                 ],
+                form: {},
                 basic_info : {
                     category: '',
                     subject: '',
@@ -89,11 +90,8 @@
             alert(payload) {
                 alert('end')
             },
-            emitBasicInfo: function (e) {
-                console.log(e);
-                this.basic_info.category = e.category;
-                this.basic_info.subject = e.subject;
-                this.basic_info.description = e.description;
+            formData: function (e) {
+                this.form = e;
             }
 
         },
