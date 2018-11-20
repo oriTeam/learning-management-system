@@ -32,7 +32,22 @@
             <transition :enter-active-class="enterAnimation" :leave-active-class="leaveAnimation" mode="out-in">
                 <!--If keep alive-->
                 <keep-alive v-if="keepAliveData">
-                    <component :is="steps[currentStep.index].component" :clickedNext="nextButton[currentStep.name]"
+                    <component v-if="finalStep" :is="steps[currentStep.index].component"
+                               :clickedNext="nextButton[currentStep.name]"
+                               @can-continue="proceed" @change-next="changeNextBtnValue"
+                               @form="formChanged"
+                               :current-step="currentStep"
+                               :startDate="form.start_date"
+                               :endDate="form.end_date"
+                               :mainDayOfWeek="form.main_schedule.day_of_week"
+                               :mainStartSession="form.main_schedule.start_session"
+                               :mainEndSession="form.main_schedule.end_session"
+                               :subDayOfWeek="form.sub_schedule.day_of_week"
+                               :subStartSession="form.sub_schedule.start_session"
+                               :subEndSession="form.sub_schedule.end_session"></component>
+
+                    <component v-else :is="steps[currentStep.index].component"
+                               :clickedNext="nextButton[currentStep.name]"
                                @can-continue="proceed" @change-next="changeNextBtnValue"
                                @form="formChanged"
                                :current-step="currentStep"></component>
@@ -111,7 +126,8 @@
                 nextButton: {},
                 canContinue: false,
                 finalStep: false,
-                keepAliveData: this.keepAlive
+                keepAliveData: this.keepAlive,
+                form: {}
             };
         },
 
@@ -216,7 +232,8 @@
                 });
             },
             formChanged: function (data) {
-                this.$emit('form', data)
+                this.form = data;
+                this.$emit('form', data);
             }
         },
 

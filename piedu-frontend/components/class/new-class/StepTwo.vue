@@ -30,7 +30,7 @@
                         '']">
                             <select v-model="form.main_schedule.day_of_week" class="w-100">
                                 <option v-for="day in 6" :value="day + 1"
-                                        :key="day">{{ day + 1 }}
+                                        :key="day"> Thứ {{ day + 1 }}
                                 </option>
                             </select>
                         </div>
@@ -42,17 +42,42 @@
             <v-flex lg5 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Giờ bắt đầu</label>
-                    <datetime type="time" class="col-12 px-0" input-class="input"
-                              v-model="form.main_schedule.start_session">
-                    </datetime>
+                    <div class="control col-12">
+                        <div :class="['select', 'w-100', ($v.form.main_schedule.start_session.$error) ? 'is-danger' :
+                        '']">
+                            <select v-model="form.main_schedule.start_session" class="w-100">
+                                <option v-for="session in 12" :value="session"
+                                        :key="session">{{ session + 6 }}:00
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <p v-if="$v.form.main_schedule.start_session.$error" class="help is-danger">Không được để trống
+                        giờ bắt đầu buổi học</p>
+
+                    <!--<datetime type="time" class="col-12 px-0" input-class="input"-->
+                              <!--v-model="form.main_schedule.start_session">-->
+                    <!--</datetime>-->
                 </div>
             </v-flex>
             <v-flex lg5 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Giờ kết thúc</label>
-                    <datetime type="time" class="col-12 px-0" input-class="input"
-                              v-model="form.main_schedule.end_session">
-                    </datetime>
+                    <div class="control col-12">
+                        <div :class="['select', 'w-100', ($v.form.main_schedule.end_session.$error) ? 'is-danger' :
+                        '']">
+                            <select v-model="form.main_schedule.end_session" class="w-100">
+                                <option v-for="session in 12" :value="session"
+                                        :key="session">{{ session + 6 }}:50
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <p v-if="$v.form.main_schedule.end_session.$error" class="help is-danger">Không được để trống
+                        giờ kết thúc buổi học</p>
+                    <!--<datetime type="time" class="col-12 px-0" input-class="input"-->
+                    <!--v-model="form.main_schedule.end_session">-->
+                    <!--</datetime>-->
                 </div>
             </v-flex>
             <v-flex sm12 px-3 my-2>
@@ -84,7 +109,7 @@
                             <div :class="['select', 'w-100']">
                                 <select v-model="form.sub_schedule.day_of_week" class="w-100">
                                     <option v-for="day in 6" :value="day + 1"
-                                            :key="day">{{ day + 1 }}
+                                            :key="day">Thứ {{ day + 1 }}
                                     </option>
                                 </select>
                             </div>
@@ -96,17 +121,33 @@
                 <v-flex lg5 sm12 px-3 my-2>
                     <div class="input-group date">
                         <label class="label col-12 px-0">Giờ bắt đầu</label>
-                        <datetime type="time" class="col-12 px-0" input-class="input"
-                                  v-model="form.sub_schedule.start_session">
-                        </datetime>
+                        <div class="control col-12">
+                        <div :class="['select', 'w-100']">
+                            <select v-model="form.sub_schedule.start_session" class="w-100">
+                                <option v-for="session in 12" :value="session"
+                                        :key="session">{{ session + 6 }}:00
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                        <!--<datetime type="time" class="col-12 px-0" input-class="input"-->
+                                  <!--v-model="form.sub_schedule.start_session">-->
+                        <!--</datetime>-->
                     </div>
                 </v-flex>
                 <v-flex lg5 sm12 px-3 my-2>
                     <div class="input-group date">
                         <label class="label col-12 px-0">Giờ kết thúc</label>
-                        <datetime type="time" class="col-12 px-0" input-class="input"
-                                  v-model="form.sub_schedule.end_session">
-                        </datetime>
+                        <div :class="['select', 'w-100']">
+                            <select v-model="form.sub_schedule.end_session" class="w-100">
+                                <option v-for="session in 12" :value="session"
+                                        :key="session">{{ session + 6 }}:50
+                                </option>
+                            </select>
+                        </div>
+                        <!--<datetime type="time" class="col-12 px-0" input-class="input"-->
+                                  <!--v-model="form.sub_schedule.end_session">-->
+                        <!--</datetime>-->
                     </div>
                 </v-flex>
                 <v-flex sm12 px-3 my-2>

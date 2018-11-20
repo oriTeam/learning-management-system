@@ -46,25 +46,6 @@
                     }
                 ],
                 form: {},
-                basic_info : {
-                    category: '',
-                    subject: '',
-                    description: ''
-                },
-                time: {
-                    start_date: '',
-                    end_date: '',
-                    main_schedule: {
-                        day_of_week: '',
-                        start_session: '',
-                        end_session: ''
-                    },
-                    sub_schedule: {
-                        day_of_week: '',
-                        start_session: '',
-                        end_session: ''
-                    }
-                }
             }
         },
         methods: {
@@ -88,7 +69,7 @@
             },
             // Executed when @stepper-finished event is triggered
             alert(payload) {
-                alert('end')
+                // alert('end')
             },
             formData: function (e) {
                 this.form = e;
