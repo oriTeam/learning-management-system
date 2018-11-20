@@ -14,9 +14,15 @@ body, .form-control {
     position: relative;
 }
 
+.container {
+    padding: 0;
+}
+
 a {
     color: #374050;
     font-weight: 700;
+    font-family: Muli, sans-serif !important;
+
 }
 
 a:hover {
@@ -28,6 +34,11 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 12px;
     margin-bottom: 15px;
     font-weight: 600;
+    font-family: Muli, sans-serif !important;
+}
+p {
+    font-family: Muli, sans-serif !important;
+    font-size: 15px;
 }
 
 .light-font {

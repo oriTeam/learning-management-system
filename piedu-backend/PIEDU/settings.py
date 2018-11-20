@@ -188,6 +188,7 @@ from machina import MACHINA_MAIN_STATIC_DIR
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../piedu-frontend/static'),
+    os.path.join(BASE_DIR, '../piedu-frontend/node_modules/vuetify'),
     MACHINA_MAIN_STATIC_DIR,
 )
 

@@ -8,18 +8,24 @@ from course.models import CourseCategory, Class
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny,))
 def get_all_class_info(request):
-    class_querysets = Class.objects.all()
-    paginator = Paginator(class_querysets, 10)
-    page = request.query_params.get('page')
-    try:
-        class_querysets = paginator.page(page)
-    except PageNotAnInteger:
-        class_querysets = paginator.page(1)
-    except EmptyPage:
-        class_querysets = paginator.page(paginator.num_pages)
     data = []
-    for class_queryset in class_querysets:
-        data.append(class_queryset.parse_info())
+    if 'page' in request.GET:
+        class_querysets = Class.objects.all()
+        paginator = Paginator(class_querysets, 6)
+        page = request.query_params.get('page')
+        try:
+            class_querysets = paginator.page(page)
+        except PageNotAnInteger:
+            class_querysets = paginator.page(1)
+        except EmptyPage:
+            class_querysets = paginator.page(paginator.num_pages)
+            # class_querysets = Class.objects.all()
+
+        for class_queryset in class_querysets:
+            data.append(class_queryset.parse_info())
+    else:
+        for classo in Class.objects.all():
+            data.append({"class" : classo.name})
     # serializers = ClassInfoSerializer(class_querysets, many=True)
     return Response(data)
 

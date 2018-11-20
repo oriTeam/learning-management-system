@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
-from django.conf import settings
 
 
 # Create your models here.
@@ -28,8 +28,10 @@ class CourseCategory(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Subject"))
     avatar = models.ImageField(null=True, verbose_name=_('Avatar'))
-    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE,related_name='subjects_set', \
-                                                                                                   verbose_name=_("Course Category"))
+    code = models.CharField(max_length=25, null=True, verbose_name=_("Code"))
+    category = models.ForeignKey(CourseCategory, null=True, on_delete=models.CASCADE, related_name='subjects_set',
+                                 verbose_name=_("Course Category"))
+
     class Meta:
         db_table = 'subject'
         ordering = ['id']
@@ -41,11 +43,11 @@ class Subject(models.Model):
 
 
 class Class(models.Model):
-    code = models.CharField(max_length=25, unique=True, default='', verbose_name=_("Class's Code"))
-    name = models.CharField(max_length=255, verbose_name=_("Class's Name"))
+    code = models.CharField(max_length=25, blank=True, null=True, verbose_name=_("Code"))
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Name"))
     description = models.TextField(null=True, verbose_name=_('Description'))
-    time_start = models.DateTimeField(verbose_name=_("Class's start time"))
-    time_end = models.DateTimeField(verbose_name=_("Class's end time"))
+    time_start = models.DateTimeField(verbose_name=_("Start time"))
+    time_end = models.DateTimeField(verbose_name=_("End time"))
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_('Subject'))
 
     class Meta:
@@ -55,7 +57,15 @@ class Class(models.Model):
         verbose_name_plural = _("Classes")
 
     def __str__(self):
-        return "Class : {0} {1}".format(self.name, self.code)
+        return "Class : {0}".format(self.name)
+
+    def update_name_and_code(self):
+        code = str(self.subject.code) + " " + str(self.id)
+        name = str(self.subject.name) + " " + code
+        if self.name != name or self.code != code:
+            self.code = code
+            self.name = name
+            self.save()
 
     def parse_basic_info(self):
         data = {
@@ -70,7 +80,6 @@ class Class(models.Model):
     def parse_info(self):
         data = self.parse_basic_info()
         data.update({
-            # "cat": self.subject.name,
             "avatar_path": self.subject.avatar.url,
             "description": self.description
         })
@@ -87,7 +96,7 @@ class Class(models.Model):
 
 class Schedule(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set',
-                                  verbose_name=_('Own Class'))
+                                  verbose_name=_('Class'))
     day_of_week = models.CharField(max_length=3, verbose_name=_('Day Of Week'))
     session_start = models.CharField(max_length=3, null=True, verbose_name=_('Start Session'))
     session_end = models.CharField(max_length=3, null=True, verbose_name=_('End Session'))
@@ -113,7 +122,8 @@ class Schedule(models.Model):
 
 class ClassLecturer(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='lecturers_set', verbose_name=_("Class"))
-    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='own_classes_set', verbose_name=_("User"))
+    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,
+                                 related_name='own_classes_set', verbose_name=_("Lecturer"))
 
     class Meta:
         db_table = 'class_lecturer'
@@ -141,7 +151,8 @@ class ClassStudent(models.Model):
 
 class EnrollRequest(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='wait_students_set', verbose_name=_('Class'))
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='wait_classes_set', verbose_name=_('Student'))
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,
+                                related_name='wait_classes_set', verbose_name=_('Student'))
 
     class Meta:
         db_table = 'enroll_request'

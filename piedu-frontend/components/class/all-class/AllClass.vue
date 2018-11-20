@@ -18,7 +18,8 @@
                  style="width: 30px; display: inline-block;"></div>
         </div>
         <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
-            <class-box-landscape v-show="landscapeDisplay" v-for="class_obj in classList"
+            <class-box-landscape class="class-box" v-show="landscapeDisplay"
+                                 v-for="class_obj in classList"
                                  :avatar-path="class_obj.avatar_path"
                                  :category="class_obj.subject"
                                  lecturer="Hoàng Xuân Tùng"
@@ -37,18 +38,20 @@
                                 :short-description="getShortDescription(class_obj.description)"
                                 :key="class_obj.code + ' 2'"></class-box-portrait>
         </transition-group>
-        <paginate
-                :container-class="'pagination'"
-                :page-count="20"
-                :prev-text="'Prev'"
-                :next-text="'Next'">
-        </paginate>
+        <v-layout row wrap>
+            <v-flex xs12 class="text-xs-center">
+                <v-pagination
+                v-model="pagination.page"
+                :length="pagination.pageTotal"
+                @input="next"
+        ></v-pagination>
+            </v-flex>
+        </v-layout>
     </div>
 </template>
 <script>
-    import ClassBoxPortrait from './ClassBoxPortrait.vue'
-    import ClassBoxLandscape from './ClassBoxLanscape.vue'
-    import Paginate from 'vuejs-paginate'
+    import ClassBoxPortrait from '../share/ClassBoxPortrait.vue'
+    import ClassBoxLandscape from '../share/ClassBoxLanscape.vue'
 
     export default {
         data() {
@@ -56,24 +59,30 @@
                 classList: [],
                 preloader: true,
                 classDisplay: false,
-                landscapeDisplay: true
+                landscapeDisplay: true,
+                pagination: {
+                    itemTotal: 0,
+                    page: 1,
+                    pageTotal: 0,
+                    itemPerPage: 6
+                }
             }
         },
         components: {
             'class-box-portrait': ClassBoxPortrait,
             'class-box-landscape': ClassBoxLandscape,
-            'paginate': Paginate
         },
         beforeCreate: function() {
-            this.axios.get('/api/class/all').then((response) => {
-                this.classList = response.data;
-                this.preloader = false;
-                this.classDisplay = true;
+            this.axios.get('/api/class/all?format=json').then((response) => {
+                this.pagination.itemTotal = response.data.length;
+                this.pagination.pageTotal = Math.round(this.pagination.itemTotal / this.pagination.itemPerPage);
+                console.log(this.pagination.pageTotal);
             }).catch((response) => {
                 console.log(response);
             })
         },
         mounted() {
+            this.getShowClass(1);
         },
         methods: {
             getShortDescription: function (description) {
@@ -82,17 +91,63 @@
                 }
                 return description;
             },
+            getShowClass: function(page) {
+                let self = this;
+                this.axios.get('/api/class/all?format=json&page=' + page).then((response) => {
+                    self.classList = response.data;
+                    self.preloader = false;
+                    self.classDisplay = true;
+
+                })
+            },
+            next: function (page) {
+                this.getShowClass(page);
+            }
         }
     }
 </script>
 <style lang="scss">
 
-    .classbox-enter-active, .classbox-leave-active {
-        transition: opacity .5s;
+    /*.classbox-enter-active, .classbox-leave-active {*/
+    /*transition: opacity .05s;*/
+    /*}*/
+
+    /*.classbox-enter, .classbox-leave-to {*/
+    /*opacity: 0;*/
+    /*}*/
+
+    /* base */
+    .class-box {
+        backface-visibility: hidden;
+        z-index: 1;
     }
 
-    .classbox-enter, .classbox-leave-to {
+    /* moving */
+    .classbox-move {
+        transition: all 200ms ease-in-out 50ms;
+    }
+
+    /* appearing */
+    .classbox-enter-active {
+        transition: all 100ms ease-out;
+    }
+
+    /* disappearing */
+    .classbox-leave-active {
+        transition: all 50ms ease-in;
+        position: absolute;
+        z-index: 0;
+    }
+
+    /* appear at / disappear to */
+    .classbox-enter,
+    .classbox-leave-to {
         opacity: 0;
+    }
+
+    .theme--light.v-pagination .v-pagination__item--active {
+        color: #fff;
+        background-color: #36a3f7;
     }
 
     .onoffswitch {

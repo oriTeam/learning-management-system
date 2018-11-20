@@ -5,3 +5,6 @@ class CourseConfig(AppConfig):
     name = 'course'
     verbose_name = _('Course')
     verbose_name_plural = _('Courses')
+
+    def ready(self):
+        import course.signals
