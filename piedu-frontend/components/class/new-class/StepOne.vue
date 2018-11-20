@@ -95,6 +95,16 @@
                 if (val === true) {
                     this.$v.form.$touch();
                 }
+            },
+            form: {
+                handler: function () {
+                    this.$emit("basicInfo", {
+                        category: this.form.selected_category,
+                        subject: this.form.selected_subject,
+                        description: this.form.description
+                    })
+                },
+                deep: true,
             }
         },
         mounted() {

@@ -1,6 +1,7 @@
 <template>
     <div class="m-portlet w-100">
-        <new-class-stepper :steps="newClassSteps" @completed-step="completeStep"
+        <new-class-stepper locale="vi" :steps="newClassSteps"
+                           @completed-step="completeStep"
                             @active-step="isStepActive" @stepper-finished="alert">
         </new-class-stepper>
     </div>
@@ -9,7 +10,7 @@
 
 </style>
 <script>
-    import HorizontalStepper from 'vue-stepper';
+    import HorizontalStepper from './HorizontalStepper.vue';
     import StepOne from './StepOne.vue'
     import StepTwo from './StepTwo.vue'
     import Review from './Review.vue'
@@ -43,7 +44,26 @@
                         component: Review,
                         completed: false
                     }
-                ]
+                ],
+                basic_info : {
+                    category: '',
+                    subject: '',
+                    description: ''
+                },
+                time: {
+                    start_date: '',
+                    end_date: '',
+                    main_schedule: {
+                        day_of_week: '',
+                        start_session: '',
+                        end_session: ''
+                    },
+                    sub_schedule: {
+                        day_of_week: '',
+                        start_session: '',
+                        end_session: ''
+                    }
+                }
             }
         },
         methods: {
@@ -68,7 +88,14 @@
             // Executed when @stepper-finished event is triggered
             alert(payload) {
                 alert('end')
+            },
+            emitBasicInfo: function (e) {
+                console.log(e);
+                this.basic_info.category = e.category;
+                this.basic_info.subject = e.subject;
+                this.basic_info.description = e.description;
             }
+
         },
         components: {
             'new-class-stepper': HorizontalStepper,

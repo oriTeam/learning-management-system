@@ -44,7 +44,6 @@
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^14.2.2",
-    "vue-stepper": "^1.4.0",
     "vue-template-compiler": "^2.0.0",
     "vuejs-paginate": "^2.0.1",
     "webpack": "^2.6.1",
