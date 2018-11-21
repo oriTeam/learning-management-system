@@ -9,7 +9,7 @@ import json
 import pytz
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from course.serializers import CourseCategorySerializer,SubjectSerializer,ClassSerializer,ClassStudentSerializer
+from course.serializers import CourseCategorySerializer,SubjectSerializer,ClassSerializer,ClassStudentSerializer,ScheduleSerializer
 from core.serializers import UserSerializerView 
 from django.db.models import Q
 
@@ -199,7 +199,6 @@ def get_current_class(request,id):
         return Response(data)
     else :
         now = datetime.datetime.now(tz = timezone.utc)
-        print(user.is_student)
         if user.is_lecturer() :
             
             
@@ -241,26 +240,26 @@ def get_current_class(request,id):
                 else :
                     serializers = ClassSerializer(all_class,many = True)
                     return Response(serializers.data)
-@api_view(['GET'])
-def get_enroll_request(request,id):
-    enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
-    if len(enroll_requests) == 0 :
-        data = {
-                "success" : False,
-                "errors" : "Class is invalid"
-        }
-        return Response(data) 
-    else :
-        students =[enroll_request.student for enroll_request in enroll_requests if enroll_request.student is not None]          
-        if len(students) == 0 :
-            data = {
-                    "success" : False,
-                    "errors" : "Class is invalid"
-            }
-            return Response(data) 
-        else :
-            serializer = UserSerializerView(students,many = True)
-            return Response(serializer.data)
+# @api_view(['GET'])
+# def get_enroll_request(request,id):
+#     enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
+#     if len(enroll_requests) == 0 :
+#         data = {
+#                 "success" : False,
+#                 "errors" : "Class is invalid"
+#         }
+#         return Response(data) 
+#     else :
+#         students =[enroll_request.student for enroll_request in enroll_requests if enroll_request.student is not None]          
+#         if len(students) == 0 :
+#             data = {
+#                     "success" : False,
+#                     "errors" : "Class is invalid"
+#             }
+#             return Response(data) 
+#         else :
+#             serializer = UserSerializerView(students,many = True)
+#             return Response(serializer.data)
 
 @api_view(["GET"])
 def get_past_class(request,id):
@@ -313,6 +312,68 @@ def get_past_class(request,id):
                 else :
                     serializers = ClassSerializer(all_class,many = True)
                     return Response(serializers.data)
+
+@api_view(['GET'])
+def get_schedule(request,id):
+    try :
+        user = User.objects.get(pk = id)
+    except User.DoesNotExist :
+        data = {
+                "success" : False,
+                "errors" : "User is invalid"
+        }
+        return Response(data)
+    else :
+        now = datetime.datetime.now(tz = timezone.utc)
+        all_class=[]
+        if user.is_lecturer() : 
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            if len(class_lecturers) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                
+        elif user.is_student :
+            
+            class_students = ClassStudent.objects.filter(student__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            if len(class_students) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_students if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+
+        schedules = []
+        for item  in all_class:
+            rs = Schedule.objects.filter(own_class__id = item.id)
+            schedules.append({item.code : [schedule.parse_data() for schedule in rs]})
+        if len(schedules) == 0 :
+            data = {
+                        "success" : False,
+                        "errors" : "Schedules is invalid"
+                    }
+            return Response(data) 
+        else :
+            
+            return JsonResponse({"data" : schedules})
 
 
 

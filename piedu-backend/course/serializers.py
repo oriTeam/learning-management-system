@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from course.models import CourseCategory, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest, Subject
-
+from django.core.exceptions import ValidationError
 
 # COURSECATEGORY
 class CourseCategorySerializer(serializers.ModelSerializer):
@@ -20,10 +20,16 @@ class SubjectSerializer(serializers.ModelSerializer):
 
 # CLASS
 class ClassSerializer(serializers.ModelSerializer):
+    def check_date(self,data):
+        if data['time_start'] > data['time_end'] :
+            raise serializers.ValidationError("time start must be after time end")
+        return data
     class Meta:
         model = Class
         fields = '__all__'
         read_only_fields = ()
+    
+    
 
 
 # SCHEDULE

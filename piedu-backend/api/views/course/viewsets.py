@@ -169,7 +169,7 @@ class ScheduleDeleteView(generics.DestroyAPIView):
 
 class ClassLecturerCreateView(generics.CreateAPIView):
     queryset = ClassLecturer.objects.all()
-    serializer_class = ClassSerializer
+    serializer_class = ClassLecturerSerializer
 
 
 class ClassLecturerListView(generics.ListAPIView):

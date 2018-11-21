@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
 
 
 # Create your models here.
@@ -93,6 +94,7 @@ class Class(models.Model):
             "description": self.description
         })
         return data
+    
 
 class Schedule(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='schedules_set',
@@ -113,9 +115,10 @@ class Schedule(models.Model):
     def parse_data(self):
         data = {
             "id": self.id,
-            "class_id": self.class_id,
+            "class_id": self.own_class.id,
             "day_of_week": self.day_of_week,
-            "encoded_session": self.encoded_session
+            "session_start":self.session_start,
+            "session_end" : self.session_end, 
         }
         return data
 

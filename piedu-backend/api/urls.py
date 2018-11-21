@@ -67,8 +67,7 @@ class_urlpatterns = [
     path('a',course_base_views.test),
     path('<int:id>/get_student',course_base_views.get_student),
     path('<int:id>/get_enroll_request',course_base_views.get_enroll_request),
-    path('<int:id>/get_current_class',course_base_views.get_current_class),
-    path('<int:id>/get_past_class',course_base_views.get_past_class),
+    
     path('all/', crud_functions.get_all_class_info),
     path('info/', crud_functions.get_full_class_info),
     path('<int:id>/get_syllabus',syllabus_base_views.get_class_syllabus),
@@ -128,9 +127,12 @@ syllabus_template_url_patterns=[
 
 user_url_patterns=[
     path('detail/<int:id>/',user_base_views.get_user_detail_view),
+    path('<int:id>/get_current_class',course_base_views.get_current_class),
+    path('<int:id>/get_past_class',course_base_views.get_past_class),
     # path('create/<int:id>/', user_viewsets.UserCreateView.as_view(), name="user_detail"),
     # path('update/<int:id>/', user_viewsets.UserUpdateView.as_view(), name="user_update"),
     # path('delete/<int:id>/', user_viewsets.UserDeleteView.as_view(), name="user_delete"),
+    path('<int:id>/get_schedule',course_base_views.get_schedule),
 ]
 
 urlpatterns = [
