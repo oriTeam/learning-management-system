@@ -2,9 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
-
-# Create your models here.
 
 class CourseCategory(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Course Category"))
@@ -50,6 +49,9 @@ class Class(models.Model):
     time_start = models.DateTimeField(verbose_name=_("Start time"))
     time_end = models.DateTimeField(verbose_name=_("End time"))
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_('Subject'))
+
+    students = models.ManyToManyField('core.User', through='ClassStudent')
+
 
     class Meta:
         db_table = 'class'
