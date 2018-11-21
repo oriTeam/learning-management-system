@@ -231,6 +231,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework.permissions.DjangoModelPermissions',
         'api.permission.IsLecturer',
+        'api.permission.IsStudent',
+        'api.permission.IsAdmin',
+        'api.permission.IsMyOwnOrAdmin',
         
 
     ],

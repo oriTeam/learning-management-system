@@ -14,7 +14,7 @@ from core.serializers import UserSerializerView
 from django.db.models import Q
 from rest_framework import permissions 
 from rest_framework.permissions import AllowAny
-from api.permission import IsLecturer
+from api.permission import IsLecturer,IsAdmin,IsStudent,IsMyOwnOrAdmin
 
 
 
@@ -180,7 +180,7 @@ def get_student(request,id):
             return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes((IsLecturer,))
+@permission_classes((IsLecturer,IsMyOwnOrAdmin,))
 def get_enroll_request(request,id):
     enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
     if len(enroll_requests) == 0 :

@@ -25,6 +25,20 @@ class IsMyOwnOrAdmin(BasePermission):
         if request.user.is_authenticated  :
             if request.user.is_admin() :
                 return True
-            # if request.user.group_id == 3 :
-            #         class_student = ClassStudent.objects.        
+            if request.user.group_id == 3 :
+                try :
+                    class_student = ClassStudent.objects.get(student__id = request.user.id,own_class__id =1260)
+                except ClassStudent.DoesNotExist:
+                    return False
+                else : 
+                    return True 
+            if request.user.group_id == 2 :
+                try :
+                    class_lecturer = ClassLecturer.objects.get(lecturer__id = request.user.id,own_class__id =1270)
+                except ClassLecturer.DoesNotExist:
+                    return False
+                else : 
+                    print(request.user.id)
+                    print(class_lecturer)
+                    return True        
         return False
