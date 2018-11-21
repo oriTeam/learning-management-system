@@ -6,10 +6,12 @@ from api.base import BaseManageView
 from django.conf import settings
 from syllabus.serializers import MaterialSerializer,SyllabusSerializer,SyllabusTemplateSerializer
 User = settings.AUTH_USER_MODEL
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
+from rest_framework import permissions 
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def get_material_info(request,id):
     try:
         material = Material.objects.get(pk=id)
@@ -24,6 +26,7 @@ def get_material_info(request,id):
         return Response(serializers.data) 
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def get_syllabus_material(request,id):
     materials = Material.objects.filter(syllabus__id = id)
     if len(materials) == 0 :
@@ -37,6 +40,7 @@ def get_syllabus_material(request,id):
         return Response(serializers.data)
     
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def get_class_syllabus(request,id):
     all_syllabus =Syllabus.objects.filter(own_class__id = id) 
     if len(all_syllabus) == 0 :
@@ -50,6 +54,7 @@ def get_class_syllabus(request,id):
         return Response(serializers.data)                        
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def get_syllabus_template(request,id):
     all_syllabus = Syllabus.objects.filter(own_class__id=id)
     if len(all_syllabus) == 0:
@@ -63,6 +68,7 @@ def get_syllabus_template(request,id):
         return Response(serializers.data)
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def get_syllabus_template(request):
     all_syllabus_template = SyllabusTemplate.objects.all()
     if len(all_syllabus_template) ==0 :

@@ -7,11 +7,14 @@ import datetime
 from django.utils import timezone
 import json
 import pytz
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from course.serializers import CourseCategorySerializer,SubjectSerializer,ClassSerializer,ClassStudentSerializer,ScheduleSerializer
 from core.serializers import UserSerializerView 
 from django.db.models import Q
+from rest_framework import permissions 
+from rest_framework.permissions import AllowAny
+from api.permission import IsLecturer
 
 
 
@@ -25,6 +28,7 @@ def test(request):
 # """ course_category """
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def course_category_list_view(request):
     list_course_categorys = CourseCategory.objects.all()
     if len(list_course_categorys) == 0 :
@@ -38,6 +42,7 @@ def course_category_list_view(request):
         serializer = CourseCategorySerializer(list_course_categorys,many = True)
         return Response(serializer.data)
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def course_category_detail(request,id):
     try:
         course_category = CourseCategory.objects.get(pk=id)
@@ -52,6 +57,7 @@ def course_category_detail(request,id):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_subject(request,id):
     all_subject = Subject.objects.filter(category__id =id)
     if len(all_subject) == 0 :
@@ -69,6 +75,7 @@ def get_subject(request,id):
 # """ subject """
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def subject_list_view(request):
     list_subjects = Subject.objects.all()
     if len(list_subjects) == 0 :
@@ -83,6 +90,7 @@ def subject_list_view(request):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def subject_detail(request,id):
     try:
         subject = Subject.objects.get(pk=id)
@@ -99,6 +107,7 @@ def subject_detail(request,id):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_class(request,id):
     all_class = Class.objects.filter(subject__id =id)
     if len(all_class) == 0 :
@@ -115,7 +124,9 @@ def get_class(request,id):
 
 # """  class """
 
+
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def class_list_view(request):
     list_class = Class.objects.all()
     if len(list_class) == 0 :
@@ -129,6 +140,7 @@ def class_list_view(request):
         serializer = ClassSerializer(list_class,many = True)
         return Response(serializer.data)
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def class_detail(request,id):
     try:
         class_detail = Class.objects.get(pk=id)
@@ -145,6 +157,7 @@ def class_detail(request,id):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_student(request,id):
     class_students = ClassStudent.objects.select_related('student').filter(own_class__id = id)
     if len(class_students) == 0 :
@@ -167,6 +180,7 @@ def get_student(request,id):
             return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes((IsLecturer,))
 def get_enroll_request(request,id):
     enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
     if len(enroll_requests) == 0 :
@@ -188,6 +202,7 @@ def get_enroll_request(request,id):
             return Response(serializer.data)
 
 @api_view(["GET"])
+@permission_classes((permissions.IsAuthenticated,))
 def get_current_class(request,id):
     try :
         user = User.objects.get(pk = id)
@@ -262,6 +277,7 @@ def get_current_class(request,id):
 #             return Response(serializer.data)
 
 @api_view(["GET"])
+@permission_classes((permissions.IsAuthenticated,))
 def get_past_class(request,id):
     try :
         user = User.objects.get(pk = id)
@@ -314,6 +330,7 @@ def get_past_class(request,id):
                     return Response(serializers.data)
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticated,))
 def get_schedule(request,id):
     try :
         user = User.objects.get(pk = id)
