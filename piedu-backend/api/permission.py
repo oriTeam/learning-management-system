@@ -7,8 +7,12 @@ class IsLecturer(BasePermission):
     def has_permission(self,request,view):
         if request.user.is_authenticated and request.user.is_lecturer() :
             return True
+        # data ={
+        #     "success" : False,
+        #     "code"    : "Access denied"
+        # }
         return False
-
+        
 class IsStudent(BasePermission):
     def has_permission(self,request,view):
         if request.user.is_authenticated and request.user.is_student() :
@@ -27,14 +31,14 @@ class IsMyOwnOrAdmin(BasePermission):
                 return True
             if request.user.group_id == 3 :
                 try :
-                    class_student = ClassStudent.objects.get(student__id = request.user.id,own_class__id =1260)
+                    class_student = ClassStudent.objects.get(student__id = request.user.id,own_class__id =1126)
                 except ClassStudent.DoesNotExist:
                     return False
                 else : 
                     return True 
             if request.user.group_id == 2 :
                 try :
-                    class_lecturer = ClassLecturer.objects.get(lecturer__id = request.user.id,own_class__id =1270)
+                    class_lecturer = ClassLecturer.objects.get(lecturer__id = request.user.id,own_class__id =1126)
                 except ClassLecturer.DoesNotExist:
                     return False
                 else : 

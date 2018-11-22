@@ -157,7 +157,7 @@ def class_detail(request,id):
         return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+@permission_classes((IsMyOwnOrAdmin,))
 def get_student(request,id):
     class_students = ClassStudent.objects.select_related('student').filter(own_class__id = id)
     if len(class_students) == 0 :
@@ -202,7 +202,7 @@ def get_enroll_request(request,id):
             return Response(serializer.data)
 
 @api_view(["GET"])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsMyOwnOrAdmin,))
 def get_current_class(request,id):
     try :
         user = User.objects.get(pk = id)
@@ -277,7 +277,7 @@ def get_current_class(request,id):
 #             return Response(serializer.data)
 
 @api_view(["GET"])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsMyOwnOrAdmin,))
 def get_past_class(request,id):
     try :
         user = User.objects.get(pk = id)
