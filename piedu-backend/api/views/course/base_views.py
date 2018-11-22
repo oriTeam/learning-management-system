@@ -19,11 +19,12 @@ from api.permission import IsLecturer,IsAdmin,IsStudent,IsMyOwnOrAdmin
 
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def test(request):
     data = request.GET
     id = data.get["subject_id"]
     print(id)
-    return Response(id)
+    return JsonResponse({id})
 
 # """ course_category """
 
