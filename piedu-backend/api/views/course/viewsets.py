@@ -12,7 +12,7 @@ from course.serializers import CourseCategorySerializer, SubjectSerializer, Clas
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions
-from api.permission import  IsAdmin,IsLecturer,IsMyOwnOrAdmin,IsStudent
+from api.permission import  IsAdmin,IsLecturer,IsMyOwnOrAdmin,IsStudent,IsAdminOrLecturer
 
 
 
@@ -94,12 +94,11 @@ class SubjectDeleteView(generics.DestroyAPIView):
 
 
 #CLASS
-@permission_classes((IsLecturer,))
+@permission_classes((IsAdminOrLecturer,))
 class ClassCreateView(generics.CreateAPIView):
     queryset = Class.objects.all()
     serializer_class = ClassSerializer
-
-
+    
 class ClassListView(generics.ListAPIView):
     queryset = Class.objects.all()
     serializer_class = ClassSerializer

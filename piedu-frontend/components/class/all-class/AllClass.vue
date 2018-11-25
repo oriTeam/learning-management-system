@@ -4,6 +4,7 @@
             <div class="col-md-8 col-sm-12"></div>
             <div class="col-md-4 col-sm-12">
                 <div class="onoffswitch m--pull-right">
+                    <button id ="test" class = "btn btn-primary">Test</button>
                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
                     <label class="onoffswitch-label" for="myonoffswitch" @click="landscapeDisplay = !landscapeDisplay">
                         <span class="onoffswitch-inner"></span>
