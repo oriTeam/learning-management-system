@@ -45,3 +45,6 @@ def inner_course(request):
 # FOR TEST
 def new_class(request):
     return render(request, 'mainpage/new-class.html')
+
+def app(request):
+    return render(request, 'basepage/mainbase.html')

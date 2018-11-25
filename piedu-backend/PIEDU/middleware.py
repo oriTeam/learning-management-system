@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import QueryDict
  
 class HttpPostTunnelingMiddleware:
@@ -24,5 +25,13 @@ class HttpPostTunnelingMiddleware:
                 request.DELETE = QueryDict(request.body)
         return None
 
+class CORSMiddleware(object):
+    def __init__(self, get_response):
+        self.get_response = get_response
 
+    def __call__(self, request):
+        response = self.get_response(request)
+        response["Access-Control-Allow-Origin"] = settings.FRONTEND_SERVER_URL
+
+        return response
 

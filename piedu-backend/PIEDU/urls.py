@@ -19,13 +19,15 @@ from django.urls import include, path  # For django versions from 2.0 and up
 from django.conf import settings
 from . import views
 from django.conf.urls.static import static
+from rest_framework_jwt.views import obtain_jwt_token
 from machina.app import board
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include("api.urls")),
     path('account/', include("django.contrib.auth.urls")),
-    path('', views.index, name='homepage'),
+    path('', views.index, name='app'),
     path('login/', views.login, name='login'),
     path('course/my', views.my_course, name='my_course'),
     path('course/all', views.all_course, name='all_course'),
@@ -37,7 +39,7 @@ urlpatterns = [
     # path('restapi/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('new/', views.new_class, name='newclass'),
-
+    path('auth/', obtain_jwt_token),
 ]
 
 # debug_toolbar_URL

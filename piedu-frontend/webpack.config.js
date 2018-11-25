@@ -31,6 +31,7 @@ module.exports = {
             {
                 test: /\.(gif|svg|jpg|png)$/,
                 loader: "file-loader",
+
             },
             {
                 test: /\.(css|scss)$/,
@@ -45,7 +46,8 @@ module.exports = {
     resolve: {
         alias: {
             vue: 'vue/dist/vue.js',
-            vue$: 'vue/dist/vue.esm.js'
+            vue$: 'vue/dist/vue.esm.js',
+            'img': path.resolve(__dirname, './piedu-frontend/static/images/'),
         }
     },
 
