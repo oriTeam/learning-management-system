@@ -20,14 +20,15 @@ class SubjectSerializer(serializers.ModelSerializer):
 
 # CLASS
 class ClassSerializer(serializers.ModelSerializer):
-    def check_date(self,data):
-        if data['time_start'] > data['time_end'] :
-            raise serializers.ValidationError("time start must be after time end")
-        return data
     class Meta:
         model = Class
         fields = '__all__'
         read_only_fields = ()
+    def validate(self,data):
+        if data['time_start'] > data['time_end'] :
+            raise serializers.ValidationError("Time start can before time end")
+        return data
+
     
     
 

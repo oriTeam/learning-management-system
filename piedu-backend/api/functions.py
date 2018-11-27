@@ -1,8 +1,37 @@
 from django.http import JsonResponse
 from django.db.models import Prefetch
+from rest_framework.authtoken.models import Token
 
 def string_to_boolean(value):
     if value is not None and value.lower() == 'false':
         return False
     else: 
         return True
+
+def user_is_authenticated(token):
+    try:
+        token_object =  Token.objects.get(key=token)
+    except Token.DoesNotExist:
+        return False
+    else:
+        return True
+
+def get_user_from_token(token):
+    try:
+        token_object =  Token.objects.get(key=token)
+    except Token.DoesNotExist:
+        print('Token is invalid')
+        return None
+    else:
+        return token_object.user
+
+def get_token_from_request(request):
+    if request.method == "GET":
+        token = request.GET['token']
+    elif request.method == "POST":
+        token = request.POST['token']
+    elif request.method == "PUT":
+        token = request.PUT['token']
+    elif request.method == "DELETE":
+        token = request.DELETE['token']
+    return token

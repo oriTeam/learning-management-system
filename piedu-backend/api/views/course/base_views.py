@@ -14,16 +14,16 @@ from core.serializers import UserSerializerView
 from django.db.models import Q
 from rest_framework import permissions 
 from rest_framework.permissions import AllowAny
-from api.permission import IsLecturer,IsAdmin,IsStudent,IsMyOwnOrAdmin
-
-
+from api.permission import IsLecturer,IsAdmin,IsStudent,IsMyOwnOrAdmin,IsAdminOrLecturer
+from api.check import ClassSession
 
 @api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def test(request):
-    data = request.GET
-    id = data.get["subject_id"]
+    id = request.GET['id']
+    
     print(id)
-    return Response(id)
+    return JsonResponse({"data" : id})
 
 # """ course_category """
 
@@ -45,6 +45,7 @@ def course_category_list_view(request):
 @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def course_category_detail(request,id):
     try:
+        course_category = CourseCategory.objects.get(pk=id)
         course_category = CourseCategory.objects.get(pk=id)
     except CourseCategory.DoesNotExist:
         data = {
@@ -158,7 +159,8 @@ def class_detail(request,id):
 
 @api_view(['GET'])
 @permission_classes((IsMyOwnOrAdmin,))
-def get_student(request,id):
+def get_student(request):
+    id = request.GET['class_id']
     class_students = ClassStudent.objects.select_related('student').filter(own_class__id = id)
     if len(class_students) == 0 :
         data = {
@@ -180,7 +182,8 @@ def get_student(request,id):
             return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes((IsLecturer,IsMyOwnOrAdmin,))
+# @permission_classes((IsLecturer,IsMyOwnOrAdmin,))
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_enroll_request(request,id):
     enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
     if len(enroll_requests) == 0 :
@@ -202,8 +205,9 @@ def get_enroll_request(request,id):
             return Response(serializer.data)
 
 @api_view(["GET"])
-@permission_classes((IsMyOwnOrAdmin,))
-def get_current_class(request,id):
+@permission_classes((permissions.IsAuthenticated,))
+def get_current_class(request):
+    id = request.user.id
     try :
         user = User.objects.get(pk = id)
     except User.DoesNotExist :
@@ -277,8 +281,9 @@ def get_current_class(request,id):
 #             return Response(serializer.data)
 
 @api_view(["GET"])
-@permission_classes((IsMyOwnOrAdmin,))
-def get_past_class(request,id):
+@permission_classes((permissions.IsAuthenticated,))
+def get_past_class(request):
+    id = request.user.id
     try :
         user = User.objects.get(pk = id)
     except User.DoesNotExist :
@@ -290,7 +295,7 @@ def get_past_class(request,id):
     else :
         now = datetime.datetime.now(tz = timezone.utc)
         if user.is_lecturer() :
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(Q(own_class__time_start__gte= now) | Q( own_class__time_end__lte=now))
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_end__lte=now)
             if len(class_lecturers) == 0 :
                 data = {
                     "success" : False,
@@ -329,9 +334,67 @@ def get_past_class(request,id):
                     serializers = ClassSerializer(all_class,many = True)
                     return Response(serializers.data)
 
+@api_view(["GET"])
+@permission_classes((permissions.IsAuthenticated,))
+def get_future_class(request):
+    id = request.user.id
+    try :
+        user = User.objects.get(pk = id)
+    except User.DoesNotExist :
+        data = {
+                "success" : False,
+                "errors" : "User is invalid"
+        }
+        return Response(data)
+    else :
+        now = datetime.datetime.now(tz = timezone.utc)
+        if user.is_lecturer() :
+            
+            
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__gte= now)
+            if len(class_lecturers) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                else :
+                    serializers = ClassSerializer(all_class,many = True)
+                    return Response(serializers.data)
+        elif user.is_student :
+            
+            class_students = ClassStudent.objects.filter(student__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            if len(class_students) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_students if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                else :
+                    serializers = ClassSerializer(all_class,many = True)
+                    return Response(serializers.data)
+
+
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
-def get_schedule(request,id):
+def get_schedule(request):
+    id = request.user.id
     try :
         user = User.objects.get(pk = id)
     except User.DoesNotExist :
@@ -392,5 +455,84 @@ def get_schedule(request,id):
             
             return JsonResponse({"data" : schedules})
 
+@api_view(['POST','GET'])
+@permission_classes((IsLecturer,))
+def check_validate(request):
+    id = request.user.id
+    print(json.loads(request.body.decode('utf-8')))
+    time_start = request.GET.get('time_start')
+    time_end = request.GET.get('time_end')
+    session_start = request.GET.get('session_start')
+    session_end = request.GET.get('session_end')
+    day_of_week = request.GET.get('day_of_week')
+    # if time_start > time_end : 
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "Time start cannot greater than time end!"
+    #     }
+    #     return Response(data)
+    # if session_start > session_end :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "Session start cannot greater than session end!"
+    #     }
+    #     return Response(data)
+    try :
+        user = User.objects.get(pk = id)
+    except User.DoesNotExist :
+        data = {
+                "success" : False,
+                "errors" : "User is invalid"
+        }
+        return Response(data)
+    else :
+        now = datetime.datetime.now(tz = timezone.utc)
+        #comment  2 line after when read data from post method
+        time_end = now
+        time_start = now
+        all_class=[]
+        if user.is_lecturer()  : 
+            # class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').exclude(Q(own_class__time_start__gte= time_end)|Q(own_class__time_end__lte=time_start))
+            if len(class_lecturers) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                
+        elif user.is_student : 
+            data = {
+                        "success" : False,
+                        "errors" : "Access denied!"
+                    }
+            return Response(data) 
 
+        schedules = []
+        info_all_schedule = ClassSession()
+        for item  in all_class:
+            rs = Schedule.objects.filter(own_class__id = item.id,day_of_week = day_of_week)
+            
+            for rs_item in rs :
+                info_all_schedule.add(int(rs_item.session_start),int(rs_item.session_end))
+        if info_all_schedule.add(2,3) == False :
+            data = {
+                        "success" : False,
+                        "errors" : "Session is coincided!"
+                    }
+            return Response(data) 
+            # print(schedules)
+        data = {
+                        "success" : True,
+                        "errors" : "Done!"
+                    }
+        return Response(data)
 

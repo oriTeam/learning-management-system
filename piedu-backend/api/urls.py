@@ -59,18 +59,17 @@ subject_urlpatterns = [
 class_urlpatterns = [
     path('create', course_viewsets.ClassCreateView.as_view(), name="class_create"),
     path('list',course_base_views.class_list_view),
-    # path('list', viewsets.ClassListView.as_view(), name="class_list"),
     path('detail/<int:id>/', course_base_views.class_detail),
-    # path('detail/<int:id>/', viewsets.ClassDetailView.as_view(), name="class_detail"),
     path('update/<int:id>/', course_viewsets.ClassUpdateView.as_view(), name="class_update"),
     path('delete/<int:id>/', course_viewsets.ClassDeleteView.as_view(), name="class_delete"),
     path('a',course_base_views.test),
-    path('<int:id>/get_student',course_base_views.get_student),
+    path('get_student',course_base_views.get_student),
     path('<int:id>/get_enroll_request',course_base_views.get_enroll_request),
     
     path('all/', crud_functions.get_all_class_info),
     path('info/', crud_functions.get_full_class_info),
     path('<int:id>/get_syllabus',syllabus_base_views.get_class_syllabus),
+    path('validated',course_base_views.check_validate),
 
 ]
 
@@ -95,8 +94,6 @@ enroll_request_urlpatterns = [
 
 schedule_urlpatterns = [
     path('create', course_viewsets.ScheduleCreateView.as_view(), name="schedule_create"),
-    # path('list', viewsets.ScheduleListView.as_view(), name="schedule_list"),
-    # path('detail/<int:id>/', viewsets.ScheduleDetailView.as_view(), name="schedule_detail"),
     path('update/<int:id>/', course_viewsets.ScheduleUpdateView.as_view(), name="schedule_update"),
     path('delete/<int:id>/', course_viewsets.ScheduleDeleteView.as_view(), name="schedule_delete"),
 ]
@@ -127,12 +124,10 @@ syllabus_template_url_patterns=[
 
 user_url_patterns=[
     path('detail/<int:id>/',user_base_views.get_user_detail_view),
-    path('<int:id>/get_current_class',course_base_views.get_current_class),
-    path('<int:id>/get_past_class',course_base_views.get_past_class),
-    # path('create/<int:id>/', user_viewsets.UserCreateView.as_view(), name="user_detail"),
-    # path('update/<int:id>/', user_viewsets.UserUpdateView.as_view(), name="user_update"),
-    # path('delete/<int:id>/', user_viewsets.UserDeleteView.as_view(), name="user_delete"),
-    path('<int:id>/get_schedule',course_base_views.get_schedule),
+    path('get_current_class',course_base_views.get_current_class),
+    path('get_past_class',course_base_views.get_past_class),
+    path('get_schedule',course_base_views.get_schedule),
+    path('get_future_class',course_base_views.get_future_class),
 ]
 
 urlpatterns = [
@@ -142,7 +137,6 @@ urlpatterns = [
     path('material/',include(material_url_patterns)), 
     path('syllabus_template/',include(syllabus_template_url_patterns)),
     path('user/',include(user_url_patterns)),
-    # path('', include(router.urls)),
     path('course_category/', include(course_category_urlpatterns)),
     path('subject/', include(subject_urlpatterns)),
     path('class/', include(class_urlpatterns)),
