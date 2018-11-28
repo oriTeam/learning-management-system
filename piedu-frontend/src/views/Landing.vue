@@ -25,7 +25,7 @@
                                 <p class="lead  text-white">Giải pháp dễ dàng, hiệu quả và thân thiện nhất để đem tri
                                     thức đến với từng sinh viên ...</p>
                                 <div class="btn-wrapper">
-                                    <router-link v-if="username!=null" :to="{name:'login'}"
+                                    <router-link v-if="username!=null" :to="{name:'all-class'}"
                                                  class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
                                           <i class="fa fa-sign-in-alt mr-2"></i>
