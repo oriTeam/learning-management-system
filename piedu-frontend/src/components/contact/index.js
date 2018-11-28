@@ -1,2 +1,2 @@
-import ContactPage from './Page.vue'
+import ContactPage from '../../views/Contact.vue'
 export default ContactPage

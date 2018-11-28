@@ -10,10 +10,10 @@
 
 </style>
 <script>
-    import HorizontalStepper from './HorizontalStepper.vue';
-    import StepOne from './StepOne.vue'
-    import StepTwo from './StepTwo.vue'
-    import Review from './Review.vue'
+    import HorizontalStepper from '@/components/class/HorizontalStepper.vue';
+    import StepOne from '@/components/class/StepOne.vue'
+    import StepTwo from '@/components/class/StepTwo.vue'
+    import Review from '@/components/class/Review.vue'
 
     export default {
         data(){

@@ -81,15 +81,15 @@
     </div>
 </template>
 <script>
-    import ClassBoxPortrait from '../share/ClassBoxPortrait.vue';
-    import ClassBoxLandscape from '../share/ClassBoxLandscape.vue';
+    import ClassBoxPortrait from '@/components/class/ClassBoxPortrait.vue';
+    import ClassBoxLandscape from '@/components/class/ClassBoxLandscape.vue';
     import BACKEND_URL from "@/backendServer";
-    import Search from "@/components/class/share/Search"
-    import Sidebar from "@/components/class/share/AsideLecturer"
+    import Search from "@/components/class/Search"
+    import Sidebar from "@/components/class/AsideLecturer"
 
     export default {
         name: "AllClass",
-        datfa() {
+        data() {
             return {
                 classList: [],
                 preloader: true,

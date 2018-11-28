@@ -2,37 +2,20 @@ import Vue from "vue";
 import Router from "vue-router";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
-import Components from "./views/Components.vue";
-import Landing from "./views/Landing.vue";
+import Landing from "./views/Home.vue";
 import Login from "./views/Login.vue";
-import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
-import Contact from "./components/contact";
-import Help from "./components/help";
-import SignIn from  "@/components/SignIn";
-import AllClass from "@/components/class/all-class";
-import MyClass from "@/components/class/my-class"
-import InnerClass from "@/components/class/inner-class"
+import Contact from "./views/Contact";
+import Help from "./views/Help";
+import AllClass from "./views/AllClass";
+import MyClass from "./views/MyClass";
+import InnerClass from "./views/InnerClass";
 
 Vue.use(Router);
 var router = new Router({
     linkExactActiveClass: "active",
     mode: 'history',
     routes: [
-        {
-            path: "/components",
-            name: "components",
-            components: {
-                header: AppHeader,
-                default: Components,
-                footer: AppFooter
-            }
-        },
-        {
-            path: "/signin",
-            name: "signin",
-            component: SignIn
-        },
         {
             path: "/",
             name: "home",
@@ -66,15 +49,6 @@ var router = new Router({
             components: {
                 header: AppHeader,
                 default: Login,
-                footer: AppFooter
-            }
-        },
-        {
-            path: "/register",
-            name: "register",
-            components: {
-                header: AppHeader,
-                default: Register,
                 footer: AppFooter
             }
         },

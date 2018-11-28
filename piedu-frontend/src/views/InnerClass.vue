@@ -46,29 +46,29 @@
                                     grow>
                                 <v-tabs-slider color="yellow"></v-tabs-slider>
 
-                                <v-tab href="#tab-1">
+                                <v-tab>
                                     Thời gian biểu
                                     <v-icon>timeline</v-icon>
                                 </v-tab>
 
-                                <v-tab href="#tab-2">
+                                <v-tab>
                                     Danh sách học sinh
                                     <v-icon>chrome_reader_mode</v-icon>
                                 </v-tab>
 
-                                <v-tab href="#tab-3">
+                                <v-tab>
                                     Danh sách xin vào lớp
                                     <v-icon>toc</v-icon>
                                 </v-tab>
 
-                                <v-tab-item id="tab-1">
+                                <v-tab-item>
                                     <v-card flat>
                                         <v-card-text>Thời gian biểu</v-card-text>
 
                                     </v-card>
                                 </v-tab-item>
 
-                                <v-tab-item id="tab-2">
+                                <v-tab-item>
                                     <v-card flat>
                                         <v-card-text>Danh sách sinh viên</v-card-text>
                                         <v-card-text v-for="student in classDetail.students"
@@ -77,7 +77,7 @@
                                         </v-card-text>
                                     </v-card>
                                 </v-tab-item>
-                                <v-tab-item id="tab-3">
+                                <v-tab-item>
                                     <v-card flat>
                                         <v-card-text>Danh sách xin vào lớp</v-card-text>
                                     </v-card>
@@ -103,8 +103,9 @@
     </div>
 </template>
 <script>
-    import AsideLecturer from "@/components/class/share/AsideLecturer";
+    import AsideLecturer from "@/components/class/AsideLecturer";
     import BACKEND_URL from "@/backendServer";
+    import ajax from "@/request"
 
     export default  {
         name: "inner-class",
@@ -118,10 +119,7 @@
         components: {
             'sidebar': AsideLecturer,
         },
-        // created(){
-        //     console.log(this.isStudent());
-        // },
-        beforeCreate() {
+        created() {
             let self = this;
             let class_id = this.$route.params.id;
             this.axios.get(BACKEND_URL+ `/api/class/detail/${class_id}/?format=json`).then((response) => {
@@ -129,10 +127,8 @@
             }).catch((response) => {
                 console.log(response);
             });
-
-            this.axios.get(BACKEND_URL + `api/class/${class_id}/get_enroll_request`).then((response) => {
-                self.enrollRequestStudents = response.data;
-            })
+            ajax.send(this, 'get', `/api/class/${class_id}/get_enroll_request`, {}, this.get_enroll_request_success,
+                this.get_enroll_request_error);
         },
         methods: {
             isStudent: function () {
@@ -152,6 +148,12 @@
             },
             closeSidebar: function () {
                 document.querySelector("#innerside").style.width = "0";
+            },
+            get_enroll_request_success: function (response) {
+                self.enrollRequestStudents = response.data;
+            },
+            get_enroll_request_error: function (response) {
+                console.log(response);
             }
         }
     }
