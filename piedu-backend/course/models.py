@@ -49,10 +49,7 @@ class Class(models.Model):
     time_start = models.DateTimeField(verbose_name=_("Start time"))
     time_end = models.DateTimeField(verbose_name=_("End time"))
     subject = models.ForeignKey(Subject, null=True, on_delete=models.CASCADE,related_name='classes_set', verbose_name=_('Subject'))
-
     students = models.ManyToManyField('core.User', through='ClassStudent')
-
-
     class Meta:
         db_table = 'class'
         ordering = ["id"]
@@ -79,7 +76,15 @@ class Class(models.Model):
             "students": len(self.students_set.all())
         }
         return data
-
+    def parse_basic_info_for_class(self):
+        data = {
+            "id": self.id,
+            "code": self.code,
+            "name": self.name,
+            "subject": self.subject.name,
+            "students": [item.parse_data() for item in students],
+        }
+        return data
     def parse_info(self):
         data = self.parse_basic_info()
         data.update({

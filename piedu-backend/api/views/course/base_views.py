@@ -16,6 +16,7 @@ from rest_framework import permissions
 from rest_framework.permissions import AllowAny
 from api.permission import IsLecturer,IsAdmin,IsStudent,IsMyOwnOrAdmin,IsAdminOrLecturer
 from api.check import ClassSession
+from api.functions import get_token_from_request,get_user_from_token,user_is_authenticated
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
@@ -144,7 +145,7 @@ def class_list_view(request):
 @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def class_detail(request,id):
     try:
-        class_detail = Class.objects.get(pk=id)
+        class_detail = Class.objects.prefetch_related('students').get(pk=id)
     except Class.DoesNotExist:
         data = {
                 "success" : False,
@@ -152,9 +153,15 @@ def class_detail(request,id):
         }
         return Response(data)
     else:
-        serializer = ClassSerializer(class_detail)
-        
-        return Response(serializer.data)
+        result=[]
+        # rs = class_detail.parse_basic_info_for_class()
+        result.append(class_detail.parse_full_info())
+        class_student=ClassStudent.objects.filter(own_class__id = id).select_related('student')
+        students = [item.student.parse_data() for item in class_student]
+        result.append(students)
+        # serializer = ClassSerializer(class_detail)
+        return Response(result)
+        # return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes((IsMyOwnOrAdmin,))
@@ -206,16 +213,19 @@ def get_enroll_request(request,id):
 @api_view(["GET"])
 @permission_classes((permissions.IsAuthenticated,))
 def get_current_class(request):
-    id = request.user.id
-    try :
-        user = User.objects.get(pk = id)
-    except User.DoesNotExist :
-        data = {
-                "success" : False,
-                "errors" : "User is invalid"
-        }
-        return Response(data)
-    else :
+    # id = request.user.id
+    # try :
+    #     user = User.objects.get(pk = id)
+    # except User.DoesNotExist :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "User is invalid"
+    #     }
+    #     return Response(data)
+    # else :
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
         now = datetime.datetime.now(tz = timezone.utc)
         if user.is_lecturer() :
             
@@ -282,16 +292,19 @@ def get_current_class(request):
 @api_view(["GET"])
 @permission_classes((permissions.IsAuthenticated,))
 def get_past_class(request):
-    id = request.user.id
-    try :
-        user = User.objects.get(pk = id)
-    except User.DoesNotExist :
-        data = {
-                "success" : False,
-                "errors" : "User is invalid"
-        }
-        return Response(data)
-    else :
+    # id = request.user.id
+    # try :
+    #     user = User.objects.get(pk = id)
+    # except User.DoesNotExist :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "User is invalid"
+    #     }
+    #     return Response(data)
+    # else :
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
         now = datetime.datetime.now(tz = timezone.utc)
         if user.is_lecturer() :
             class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_end__lte=now)
@@ -336,16 +349,19 @@ def get_past_class(request):
 @api_view(["GET"])
 @permission_classes((permissions.IsAuthenticated,))
 def get_future_class(request):
-    id = request.user.id
-    try :
-        user = User.objects.get(pk = id)
-    except User.DoesNotExist :
-        data = {
-                "success" : False,
-                "errors" : "User is invalid"
-        }
-        return Response(data)
-    else :
+    # id = request.user.id
+    # try :
+    #     user = User.objects.get(pk = id)
+    # except User.DoesNotExist :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "User is invalid"
+    #     }
+    #     return Response(data)
+    # else :
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
         now = datetime.datetime.now(tz = timezone.utc)
         if user.is_lecturer() :
             
@@ -393,16 +409,19 @@ def get_future_class(request):
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
 def get_schedule(request):
-    id = request.user.id
-    try :
-        user = User.objects.get(pk = id)
-    except User.DoesNotExist :
-        data = {
-                "success" : False,
-                "errors" : "User is invalid"
-        }
-        return Response(data)
-    else :
+    # id = request.user.id
+    # try :
+    #     user = User.objects.get(pk = id)
+    # except User.DoesNotExist :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "User is invalid"
+    #     }
+    #     return Response(data)
+    # else :
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
         now = datetime.datetime.now(tz = timezone.utc)
         all_class=[]
         if user.is_lecturer() : 
@@ -457,7 +476,6 @@ def get_schedule(request):
 @api_view(['POST','GET'])
 @permission_classes((IsLecturer,))
 def check_validate(request):
-    id = request.user.id
     print(json.loads(request.body.decode('utf-8')))
     time_start = request.GET.get('time_start')
     time_end = request.GET.get('time_end')
@@ -476,15 +494,18 @@ def check_validate(request):
     #             "errors" : "Session start cannot greater than session end!"
     #     }
     #     return Response(data)
-    try :
-        user = User.objects.get(pk = id)
-    except User.DoesNotExist :
-        data = {
-                "success" : False,
-                "errors" : "User is invalid"
-        }
-        return Response(data)
-    else :
+    # try :
+    #     user = User.objects.get(pk = id)
+    # except User.DoesNotExist :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "User is invalid"
+    #     }
+    #     return Response(data)
+    # else :
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
         now = datetime.datetime.now(tz = timezone.utc)
         #comment  2 line after when read data from post method
         time_end = now

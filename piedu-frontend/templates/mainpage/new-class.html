@@ -1,0 +1,94 @@
+{% extends 'basepage/classbase.html' %}
+{% load staticfiles %}
+{% block navisize %} container-fluid m--padding-left-25 m--padding-right-25{% endblock %}
+
+{% block title %} Tất cả khóa học | Hệ thống quản lý môn học {% endblock %}
+
+{% block class_stylesheets %}
+    <link rel="stylesheet" href="{% static 'stylesheets/custom/all-class.css' %}"/>
+    <link rel="stylesheet" href="{% static 'stylesheets/custom/form.css' %}"/>
+
+{% endblock class_stylesheets %}
+{% block course %} active {% endblock %}
+{% block bodycontent %}
+    <div id="all-course-body">
+        <div class="hero-area section w-100">
+            <div class="bg-image bg-parallax overlay" style="background-image:url({% static 'images/br.jpg' %})"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 text-center">
+                        <ul class="hero-area-tree">
+                            <li><a href="/">Trang chủ</a></li>
+                            <li>Tất cả lớp học</li>
+                        </ul>
+                        <h1 class="white-text">Tất cả lớp học</h1>
+                    </div>
+                                        <search></search>
+                </div>
+            </div>
+
+        </div>
+        <dcontainer></dcontainer>
+        <div class="container-fluid">
+            <div class="row mx-0 my-4">
+                <div class="col-lg-3 col-sm-12 pr-3">
+                    {% if user.is_lecturer %}
+                        <a-side-lecturer></a-side-lecturer>
+                    {% else %}
+                        <a-side-student></a-side-student>
+                    {% endif %}
+                </div>
+                <div class="col-lg-9 px-3">
+                    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+                        <div class="row mx-0">
+                            <div class="col-lg-8 col-sm-12 px-lg-2 px-0 m--margin-bottom-10-tablet-and-mobile">
+                                <form action="">
+                                    <div class="inner-form">
+                                        <div class="input-field">
+                                                                                        <button type="button" class="btn-search"><i
+                                                                                                class="fa fa-search"></i></button>
+                                            <input id="search" type="text" placeholder="Tìm kiếm khóa học ..."
+                                                   class="form-control"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4 col-sm-12 text-right px-lg-2 px-0">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle w-100"
+                                            type="button"
+                                            id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sắp xếp theo
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                         x-placement="top-start"
+                                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
+                                        <a class="dropdown-item" href="#" data-toggle="m-tooltip" title=""
+                                           data-placement="left"
+                                           data-original-title="Tooltip title">Phổ biến nhất</a>
+                                        <a class="dropdown-item" href="#" data-toggle="m-tooltip" title=""
+                                           data-placement="left"
+                                           data-original-title="Tooltip title">Mới nhất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row py-4 mx-0">
+                            <new-class></new-class>
+                            {#<my-class></my-class> #}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer_size %} container-fluid {% endblock %}
+
+{% block class_javascripts %}
+    <script type="text/javascript" src="{% static 'javascripts/custom/all-class.js' %}"></script>
+
+{% endblock class_javascripts %}

@@ -9,15 +9,18 @@ from rest_framework import permissions
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
-def get_user_detail_view(request,id):
-    try :
-        user = User.objects.get(pk=id)
-    except User.DoesNotExist:
-        data = {
-                "success" : False,
-                "errors" : "User is invalid"
-        }
-        return Response(data)
-    else:
+def get_user_detail_view(request):
+    # try :
+    #     user = User.objects.get(pk=id)
+    # except User.DoesNotExist:
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "User is invalid"
+    #     }
+    #     return Response(data)
+    # else:
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
         serializer = UserSerializerView(user)
         return Response(serializer.data)
