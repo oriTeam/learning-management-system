@@ -72,8 +72,6 @@
     </section>
 </template>
 <script>
-    import BACKEND_URL from "@/backendServer";
-    import router from "../router";
     import auth from "../auth"
     export default {
         name: "login",
@@ -102,51 +100,6 @@
                 };
                 auth.login(this, credentials, "/");
             },
-
-
-
-            submit_form: function () {
-                let csrftoken = this.getCookie("csrftoken");
-                let formdata = new FormData(document.querySelector('#login-form'));
-                formdata.append(
-                    "csrfmiddlewaretoken",
-                    csrftoken
-                );
-                let data = this.formdata_to_dict(formdata);
-                this.axios.post(BACKEND_URL + '/api/auth/', data)
-                    .then(function (response) {
-                        if (response.data.success == true) {
-                            // window.location.href = 'http://' + response.data.redirectTo.toString();
-                        } else {
-                            alert("Bạn đã nhập sai tài khoản hoặc mật khẩu. Vui lòng kiểm tra lại ...");
-                        }
-                    })
-                    .catch(function (response) {
-                        console.log(response.data);
-                    });
-            },
-            getCookie: function (name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie !== "") {
-                    var cookies = document.cookie.split(";");
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = cookies[i].trim();
-                        if (cookie.substring(0, name.length + 1) === name + "=") {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            },
-
-            formdata_to_dict: function (formdata) {
-                let data = {};
-                for (var pair of formdata.entries()) {
-                    data[pair[0]] = pair[1]
-                }
-                return data;
-            }
         }
     };
 </script>

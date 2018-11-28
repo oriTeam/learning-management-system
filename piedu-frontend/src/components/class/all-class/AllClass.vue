@@ -89,7 +89,7 @@
 
     export default {
         name: "AllClass",
-        data() {
+        datfa() {
             return {
                 classList: [],
                 preloader: true,

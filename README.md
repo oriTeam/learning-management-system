@@ -9,23 +9,27 @@
     
   2. Download file zip hoặc clone repo này về máy, mở cmd (terminal) tại thư mục chính (chứa file manage.py).
     
-  3. Cài đặt một số package python phải dùng:
-      
-    $ pip install -r piedu-backend/requirements.txt
+  3. Cài đặt một số package python phải dùng, tại thư mục gốc:
     
-      
+    $ cd piedu-backend
+    $ pip install -r requirements.txt
+       
   5. Migrate:
         
-    $ python piedu-backend/manage.py makemigrations
+    $ python manage.py makemigrations
         
-    $ python piedu-backend/manage.py migrate
+    $ python manage.py migrate
+  
+  6. Chuyển tới thư mục frontend và setup cho frontend:
+    
+    $ cd ../piedu-frontend
+    $ npm install        
         
-        
-  6. Và chạy thôi :)) 
+  7. Và chạy thôi :)) 
        
     $ python piedu-backend/manage.py runserver
     $ cd ../piedu-frontend    
-    $ npm run dev
+    $ npm run serve
     
 ## Contributors
 

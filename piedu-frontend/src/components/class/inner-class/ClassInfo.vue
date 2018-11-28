@@ -1,7 +1,7 @@
 <template>
     <div class="row m--margin-bottom-25">
         <div class="col-lg-4 col-sm-12">
-            <img src="{% static 'images/code.jpg' %}" alt="" width="100%">
+            <!--<img src="{% static 'images/code.jpg' %}" alt="" width="100%">-->
         </div>
         <div class="col-lg-8 col-sm-12">
             <h2 class="course-title m--margin-top-10-mobile">Phát triển Ứng dụng Web</h2>

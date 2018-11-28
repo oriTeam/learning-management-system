@@ -147,7 +147,6 @@ def class_detail(request,id):
     try:
         class_detail = Class.objects.prefetch_related('students').get(pk=id)
     except Class.DoesNotExist:
-        
         data = {
                 "success" : False,
                 "errors" : "Class is invalid"
