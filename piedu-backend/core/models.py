@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import Group, Permission
 # from guardian.shortcuts import assign_perm
+from django.conf import settings
+import os
 
 GENDER_CHOICES = (
     (_('Male'), _('Male')),
@@ -38,10 +40,15 @@ class User(AbstractUser):
         return "{}: {}".format(user_group, self.username)
 
     def parse_data(self):
+        avatar_url = settings.MEDIA_URL + "908312.png"
+        # print(self.avatar == "")
+        if self.avatar != "" :
+            avatar_url= self.avatar 
+
         data = {
             "id": self.id,
             "code": self.code,
-            # "avatar" : self.avatar,
+            "avatar" : avatar_url,
             "phone_number": self.phone_number,
             "gender": self.phone_number,
             "unit": self.unit,

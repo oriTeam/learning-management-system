@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import datetime
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     #
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 
     #
     'webpack_loader',
@@ -73,6 +75,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,8 +85,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # debug_toolbar_MIDDDLEWARE
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'PIEDU.middleware.HttpPostTunnelingMiddleware'
-
+    'PIEDU.middleware.HttpPostTunnelingMiddleware',
+    'PIEDU.middleware.CORSMiddleware',
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 
@@ -187,8 +190,8 @@ AUTH_USER_MODEL = 'core.User'
 from machina import MACHINA_MAIN_STATIC_DIR
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '../piedu-frontend/static'),
-    os.path.join(BASE_DIR, '../piedu-frontend/node_modules/vuetify'),
+    os.path.join(BASE_DIR, '../piedu-frontend/src/assets'),
+    # os.path.join(BASE_DIR, '../piedu-frontend/node_modules/vuetify'),
     MACHINA_MAIN_STATIC_DIR,
 )
 
@@ -198,7 +201,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '../piedu-backend/uploads')
 
 MEDIA_URL = '/piedu-backend/uploads/'
 
-LOGOUT_REDIRECT_URL = 'homepage'
+# LOGOUT_REDIRECT_URL = 'homepage'
 
 CACHES = {
     'default': {
@@ -224,6 +227,15 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+JWT_AUTH = {
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LEEWAY': 0,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=10),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -238,6 +250,7 @@ REST_FRAMEWORK = {
 
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
@@ -246,6 +259,15 @@ REST_FRAMEWORK = {
 }
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:8080',
+    'localhost:8080',
+    '127.0.0.1',
+    'localhost'
+)
+
+FRONTEND_SERVER_URL = '127.0.0.1:8080'
 
 # SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)

@@ -131,7 +131,8 @@ user_url_patterns=[
 ]
 
 urlpatterns = [
-    path('auth', auth_views.login, name="login"),
+    path('auth/', auth_views.CustomObtainAuthToken.as_view(), name="login"),
+    # path('course/',include(course_url_patterns)),
     path('syllabus/',include(syllabus_url_patterns)),
     path('material/',include(material_url_patterns)), 
     path('syllabus_template/',include(syllabus_template_url_patterns)),
@@ -143,5 +144,7 @@ urlpatterns = [
     path('class-student/', include(class_student_urlpatterns)),
     path('enroll_request/', include(enroll_request_urlpatterns)),
     path('schedule/', include(schedule_urlpatterns)),
+    path('authenticated/', auth_views.is_authenticated, name="authenticated"),
+    path('logout/', auth_views.logout, name="logout"),
 
 ]

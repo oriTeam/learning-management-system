@@ -10,47 +10,10 @@
   2. Download file zip hoặc clone repo này về máy, mở cmd (terminal) tại thư mục chính (chứa file manage.py).
     
   3. Cài đặt một số package python phải dùng:
-
-    Note: Gỡ Pillow bản cũ và cài bản 5.0.0:
-	
-    $ pip remove Pillow
-
-	$ pip install Pillow==5.0.0
-	
-  -- Cách 1: AIO:
-        
-        $ pip install -r piedu-backend/requirements.txt
+      
+    $ pip install -r piedu-backend/requirements.txt
     
-  -- Cách 2: Cài từng package:
-        
-        $ pip install django-mptt
-        
-        $ pip install django-haystack
-        
-        $ pip install markdown2
-        
-        $ pip install django-widget-tweaks
-        
-        $ pip install django-machina
-        
-        **sudo rm -rf /usr/local/lib/python3.6/dist-packages/haystack/
-    
-        $ pip install django-debug-toolbar
-
-        $ pip install django-webpack-loader
-        
-        $ pip install django-guardian
-        
-        $ pip install reportlab
-
-        $ pip install mysql-python
-        
-        hoặc nếu không được: 
-        
-        $ pip install mysqlclient
-        
-
-   
+      
   5. Migrate:
         
     $ python piedu-backend/manage.py makemigrations
@@ -59,13 +22,15 @@
         
         
   6. Và chạy thôi :)) 
-        
+       
     $ python piedu-backend/manage.py runserver
-        
+    $ cd ../piedu-frontend    
+    $ npm run dev
+    
 ## Contributors
 
    1. vantrong291
-   2. Chikyuu
+   2. chikyuu29198
    3. tuanhah
    4. LeCongThuong
    5. lethithanhhoa

@@ -19,4 +19,6 @@ Pillow==5.0.0
 Markdown==2.6.6
 bleach==1.4.3
 whitenoise==3.2
-mysql-connector==2.1.4
+
+django-cors-headers
+djangorestframework-jwt
