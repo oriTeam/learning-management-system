@@ -7,6 +7,7 @@ import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import Contact from "./views/Contact";
 import Help from "./views/Help";
+import Class from "./views/Class"
 import AllClass from "./views/AllClass";
 import MyClass from "./views/MyClass";
 import InnerClass from "./views/InnerClass";
@@ -62,32 +63,50 @@ var router = new Router({
             }
         },
         {
-            path: "/class/all",
-            name: 'all-class',
+            path: '/class',
             components: {
                 header: AppHeader,
-                default: AllClass,
+                default: Class,
                 footer: AppFooter
-            }
+            },
+            children: [
+                {
+                    path: 'all',
+                    component: AllClass
+                },
+                {
+                    path: 'my',
+                    component: MyClass
+                }
+            ]
         },
-        {
-            path: "/class/my",
-            name: 'my-class',
-            components: {
-                header: AppHeader,
-                default: MyClass,
-                footer: AppFooter
-            }
-        },
-        {
-            path: "/class/:id",
-            name: "inner-class",
-            components: {
-                header: AppHeader,
-                default: InnerClass,
-                footer: AppFooter
-            }
-        }
+        // {
+        //     path: "/class/all",
+        //     name: 'all-class',
+        //     components: {
+        //         header: AppHeader,
+        //         default: AllClass,
+        //         footer: AppFooter
+        //     }
+        // },
+        // {
+        //     path: "/class/my",
+        //     name: 'my-class',
+        //     components: {
+        //         header: AppHeader,
+        //         default: MyClass,
+        //         footer: AppFooter
+        //     }
+        // },
+        // {
+        //     path: "/class/:id",
+        //     name: "inner-class",
+        //     components: {
+        //         header: AppHeader,
+        //         default: InnerClass,
+        //         footer: AppFooter
+        //     }
+        // },
     ],
     scrollBehavior: to => {
         if (to.hash) {

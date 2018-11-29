@@ -1,83 +1,83 @@
 <template>
     <div>
-        <section class="section section-allclass-cover section-shaped my-0">
-            <search></search>
-            <div class="shape shape-style-1 shape-primary alpha-4">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </section>
-        <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3" id="allside">
-                        <a href="javascript:void(0)" class="closebtn" @click="closeSidebar">&times;</a>
-                        <sidebar></sidebar>
-                    </div>
-                    <div class="col-lg-9 col-sm-12 p-0">
-                        <div class="row mt-3 view-switch">
-                            <div class="col-md-8 col-sm-12"></div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="onoffswitch pull-right">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                                           id="myonoffswitch"
-                                           checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch"
-                                           @click="landscapeDisplay = !landscapeDisplay">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+        <!--<section class="section section-allclass-cover section-shaped my-0">-->
+        <!--<search></search>-->
+        <!--<div class="shape shape-style-1 shape-primary alpha-4">-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--</div>-->
+        <!--</section>-->
+        <!--<section>-->
+        <!--<div class="container">-->
+        <!--<div class="row">-->
+        <!--<div class="col-lg-3" id="allside">-->
+        <!--<a href="javascript:void(0)" class="closebtn" @click="closeSidebar">&times;</a>-->
+        <!--<sidebar></sidebar>-->
+        <!--</div>-->
+        <!--<div class="col-lg-9 col-sm-12 p-0">-->
+        <!--<div class="row mt-3 view-switch">-->
+        <!--<div class="col-md-8 col-sm-12"></div>-->
+        <!--<div class="col-md-4 col-sm-12">-->
+        <!--<div class="onoffswitch pull-right">-->
+        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"-->
+        <!--id="myonoffswitch"-->
+        <!--checked>-->
+        <!--<label class="onoffswitch-label" for="myonoffswitch"-->
+        <!--@click="landscapeDisplay = !landscapeDisplay">-->
+        <!--<span class="onoffswitch-inner"></span>-->
+        <!--<span class="onoffswitch-switch"></span>-->
+        <!--</label>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
-                        <div class="row mx-0" v-show="preloader">
-                            <v-progress-circular :size="20" color="primary" indeterminate/>
-                        </div>
-                        <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
-                            <class-box-landscape class="class-box" v-show="landscapeDisplay"
-                                                 v-for="class_obj in classList"
-                                                 :id="class_obj.id"
-                                                 :avatar-path="class_obj.avatar_path"
-                                                 :category="class_obj.subject"
-                                                 lecturer="Hoàng Xuân Tùng"
-                                                 :class-name="class_obj.name"
-                                                 :student-count="class_obj.students"
-                                                 :code="class_obj.code"
-                                                 :short-description="getShortDescription(class_obj.description)"
-                                                 :key="class_obj.code + ' 1'"></class-box-landscape>
-                            <class-box-portrait v-show="!landscapeDisplay" v-for="class_obj in classList"
-                                                :id="class_obj.id"
-                                                :avatar-path="class_obj.avatar_path"
-                                                :category="class_obj.subject"
-                                                lecturer="Hoàng Xuân Tùng"
-                                                :class-name="class_obj.name"
-                                                :student-count="class_obj.students"
-                                                :code="class_obj.code"
-                                                :short-description="getShortDescription(class_obj.description)"
-                                                :key="class_obj.code + ' 2'"></class-box-portrait>
-                        </transition-group>
-                        <v-layout row wrap>
-                            <v-flex xs12 class="text-xs-center">
-                                <v-pagination
-                                        v-model="pagination.page"
-                                        :length="pagination.pageTotal"
-                                        @input="next"
-                                ></v-pagination>
-                            </v-flex>
-                        </v-layout>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div @click="openSidebar" id="all-open-menu">
-            Open
+        <div class="row mx-0" v-show="preloader">
+            <v-progress-circular :size="20" color="primary" indeterminate/>
         </div>
+        <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
+            <class-box-landscape class="class-box" v-show="landscapeDisplay"
+                                 v-for="class_obj in classList"
+                                 :id="class_obj.id"
+                                 :avatar-path="class_obj.avatar_path"
+                                 :category="class_obj.subject"
+                                 lecturer="Hoàng Xuân Tùng"
+                                 :class-name="class_obj.name"
+                                 :student-count="class_obj.students"
+                                 :code="class_obj.code"
+                                 :short-description="getShortDescription(class_obj.description)"
+                                 :key="class_obj.code + ' 1'"></class-box-landscape>
+            <class-box-portrait v-show="!landscapeDisplay" v-for="class_obj in classList"
+                                :id="class_obj.id"
+                                :avatar-path="class_obj.avatar_path"
+                                :category="class_obj.subject"
+                                lecturer="Hoàng Xuân Tùng"
+                                :class-name="class_obj.name"
+                                :student-count="class_obj.students"
+                                :code="class_obj.code"
+                                :short-description="getShortDescription(class_obj.description)"
+                                :key="class_obj.code + ' 2'"></class-box-portrait>
+        </transition-group>
+        <v-layout row wrap>
+            <v-flex xs12 class="text-xs-center">
+                <v-pagination
+                        v-model="pagination.page"
+                        :length="pagination.pageTotal"
+                        @input="next"
+                ></v-pagination>
+            </v-flex>
+        </v-layout>
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</section>-->
+        <!--<div @click="openSidebar" id="all-open-menu">-->
+        <!--Open-->
+        <!--</div>-->
     </div>
 </template>
 <script>
@@ -140,7 +140,7 @@
             next: function (page) {
                 this.getShowClass(page);
             },
-            openSidebar: function() {
+            openSidebar: function () {
                 document.querySelector("#allside").style.width = "270px";
             },
             closeSidebar: function () {
@@ -279,7 +279,7 @@
         #allside {
             /*display: none;*/
             height: 100%; /* 100% Full-height */
-            width: 0 ; /* 0 width - change this with JavaScript */
+            width: 0; /* 0 width - change this with JavaScript */
             position: fixed; /* Stay in place */
             z-index: 1200; /* Stay on top */
             top: 0; /* Stay at the top */
@@ -289,14 +289,17 @@
             overflow-x: hidden; /* Disable horizontal scroll */
             padding-top: 60px; /* Place content 60px from the top */
             transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-        };
+        }
+    ;
     }
-    @media screen and (min-width: 992px){
+
+    @media screen and (min-width: 992px) {
         #allside {
             .closebtn {
                 display: none;
-           }
-        };
+            }
+        }
+    ;
         #all-open-menu {
             display: none;
         }
@@ -307,6 +310,7 @@
         background-size: cover;
         background-position: center center;
     }
+
     #allside {
         .closebtn {
             position: absolute;
@@ -316,6 +320,7 @@
             margin-left: 50px;
         }
     }
+
     #all-open-menu {
         position: fixed;
         bottom: 70%;
