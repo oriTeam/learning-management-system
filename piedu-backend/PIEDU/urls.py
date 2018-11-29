@@ -20,7 +20,7 @@ from django.conf import settings
 from . import views
 from django.conf.urls.static import static
 from rest_framework_jwt.views import obtain_jwt_token
-from machina.app import board
+# from machina.app import board
 
 
 urlpatterns = [
@@ -33,7 +33,7 @@ urlpatterns = [
     path('course/all', views.all_course, name='all_course'),
     path('contact/', views.contact, name='contact'),
     path('help/', views.help, name='help'),
-    path('forum/v1/', include(board.urls)),
+    # path('forum/v1/', include(board.urls)),
     path('user',views.user,name = 'user'),
     path('course/1', views.inner_course, name='inner_course'),
     # path('restapi/', include('rest_framework.urls', namespace='rest_framework')),

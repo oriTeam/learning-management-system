@@ -38,30 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #
-    'mptt',
-    'haystack',
-    'widget_tweaks',
-
-    #
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
 
     #
     'webpack_loader',
-
-    #
-    'machina',
-    'machina.apps.forum',
-    'machina.apps.forum_conversation',
-    'machina.apps.forum_conversation.forum_attachments',
-    'machina.apps.forum_conversation.forum_polls',
-    'machina.apps.forum_feeds',
-    'machina.apps.forum_moderation',
-    'machina.apps.forum_search',
-    'machina.apps.forum_tracking',
-    'machina.apps.forum_member',
-    'machina.apps.forum_permission',
 
     #
     'debug_toolbar',
@@ -87,8 +69,6 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'PIEDU.middleware.HttpPostTunnelingMiddleware',
     'PIEDU.middleware.CORSMiddleware',
-    # Machina
-    'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 
     # Whitenoise
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -105,10 +85,7 @@ ROOT_URLCONF = 'PIEDU.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, "../piedu-frontend/templates"),
-            os.path.join(BASE_DIR, "../piedu-frontend/templates/forum")
-        ],
+        'DIRS': [],
         # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,9 +93,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                # Machina
-                'machina.core.context_processors.metadata',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -187,12 +161,9 @@ INTERNAL_IPS = ['127.0.0.1']
 # Extened User Model
 AUTH_USER_MODEL = 'core.User'
 
-from machina import MACHINA_MAIN_STATIC_DIR
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../piedu-frontend/src/assets'),
-    # os.path.join(BASE_DIR, '../piedu-frontend/node_modules/vuetify'),
-    MACHINA_MAIN_STATIC_DIR,
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../piedu-frontend/staticfiles')
@@ -207,10 +178,6 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
-    'machina_attachments': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/tmp',
-    },
 }
 
 WEBPACK_LOADER = {
@@ -218,13 +185,6 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': 'javascripts/bundles/',
         'STATS_FILE': os.path.join(BASE_DIR, '../piedu-frontend/webpack-stats.json'),
     }
-}
-
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-    },
 }
 
 JWT_AUTH = {
@@ -268,25 +228,3 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 FRONTEND_SERVER_URL = '127.0.0.1:8080'
-
-# SECRET_KEY = config('SECRET_KEY')
-# DEBUG = config('DEBUG', default=False, cast=bool)
-
-# mysql://b1d9b9e2c747e3:1e808974@us-cdbr-iron-east-01.cleardb.net/heroku_d8c1c07035d581a?reconnect=true
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         # 'NAME': 'heroku_d8c1c07035d581a',
-#         # 'USER': 'b1d9b9e2c747e3',
-#         # 'PASSWORD': '1e808974',
-#         # 'HOST': 'us-cdbr-iron-east-01.cleardb.net',
-#         # 'PORT': '',
-#         ##
-#         'NAME': 'sql12264035',
-#         'USER': 'sql12264035',
-#         'PASSWORD': 'dgv4jMDekg',
-#         'HOST': 'sql12.freemysqlhosting.net',
-#         'PORT': '3306',
-#
-#     }
-# }
