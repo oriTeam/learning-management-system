@@ -26,9 +26,12 @@ class IsAdmin(BasePermission):
     def has_permission(self,request,view):
         token = get_token_from_request(request)
         user = get_user_from_token(token)
+        # print(user)
+        print(user)
         if user is not None and user.is_admin() :
             return True
         return False
+
 class IsAdminOrLecturer(BasePermission):
     def has_permission(self,request,view):
         token = get_token_from_request(request)

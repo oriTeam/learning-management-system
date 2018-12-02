@@ -70,7 +70,7 @@ class_urlpatterns = [
     path('info/', crud_functions.get_full_class_info),
     path('<int:id>/get_syllabus',syllabus_base_views.get_class_syllabus),
     path('validated',course_base_views.check_validate),
-
+    path('student_status/', course_base_views.get_status)
 ]
 
 class_lecturer_urlpatterns = [
@@ -87,9 +87,9 @@ class_student_urlpatterns = [
 ]
 
 enroll_request_urlpatterns = [
-    path('create', course_viewsets.ClassCreateView.as_view(), name="class_create"),
-    path('update/<int:id>/', course_viewsets.ClassUpdateView.as_view(), name="class_update"),
-    path('delete/<int:id>/', course_viewsets.ClassDeleteView.as_view(), name="class_delete"),
+    path('create', course_viewsets.EnrollRequestCreateView.as_view(), name="class_create"),
+    path('update/<int:id>/', course_viewsets.EnrollRequestUpdateView.as_view(), name="class_update"),
+    path('delete/<int:id>/', course_viewsets.EnrollRequestDeleteView.as_view(), name="class_delete"),
 ]
 
 schedule_urlpatterns = [

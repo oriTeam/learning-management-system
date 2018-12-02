@@ -27,8 +27,8 @@
                 </div>
             </div>
         </section>
-        <div @click="openSidebar" id="my-open-menu" class="btn btn-info btn-sm">
-            Menu
+        <div @click="openSidebar" id="my-open-menu" class="btn btn-sm">
+            <i class="fa fa-angle-double-right px-3 py-1" style="font-size: 20px"></i>
         </div>
     </div>
 </template>
@@ -104,9 +104,12 @@
 
     #my-open-menu {
         position: fixed;
-        bottom: 70%;
-        right: 0px;
+        top: 63px;
+        left: 0px;
         font-size: 15px;
-        z-index: 1200;
+        z-index: 1000;
+        color: #fff;
+        background-color: #0a8cf0;
+        border-radius: 0px;
     }
 </style>

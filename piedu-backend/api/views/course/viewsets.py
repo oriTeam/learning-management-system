@@ -229,7 +229,7 @@ class ClassStudentDeleteView(generics.DestroyAPIView):
 
 
 ##ENROLLREQUEST
-
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 class EnrollRequestCreateView(generics.CreateAPIView):
     queryset = EnrollRequest.objects.all()
     serializer_class = EnrollRequestSerializer

@@ -300,7 +300,7 @@
             }
         }
     ;
-        #my-open-menu {
+        inner-menu {
             display: none !important;
         }
     }
@@ -319,14 +319,6 @@
             font-size: 36px;
             margin-left: 50px;
         }
-    }
-
-    #my-open-menu {
-        position: fixed;
-        bottom: 70%;
-        right: 0px;
-        font-size: 15px;
-        z-index: 1200;
     }
 
     @media (max-width: 768px) {

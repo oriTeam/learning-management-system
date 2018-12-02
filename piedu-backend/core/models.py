@@ -56,6 +56,26 @@ class User(AbstractUser):
         }
         return data
 
+    def parse_basic_info(self):
+        avatar_url = settings.MEDIA_URL + "908312.png"
+        if self.avatar != "":
+            avatar_url = self.avatar
+        data = {
+            "code": self.code,
+            "fullname": self.fullname(),
+            "username": self.username,
+            "gender": self.gender,
+            "phone_number": self.phone_number,
+            "personal_page": '',
+        }
+        return data
+
+    def fullname(self):
+        if self.last_name and self.first_name:
+            return self.first_name + " " + self.last_name
+        else:
+            return "Chưa cập nhật"
+
     def is_admin(self):
         return True if 'admin' in str(self.group) else False
 

@@ -26,12 +26,6 @@ def get_user_from_token(token):
         return token_object.user
 
 def get_token_from_request(request):
-    if request.method == "GET":
-        token = request.GET['token']
-    elif request.method == "POST":
-        token = request.POST['token']
-    elif request.method == "PUT":
-        token = request.PUT['token']
-    elif request.method == "DELETE":
-        token = request.DELETE['token']
+    token = ''
+    token = request.data.get('token')
     return token

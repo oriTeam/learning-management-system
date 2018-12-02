@@ -20,21 +20,21 @@
         <!--<sidebar></sidebar>-->
         <!--</div>-->
         <!--<div class="col-lg-9 col-sm-12 p-0">-->
-        <!--<div class="row mt-3 view-switch">-->
-        <!--<div class="col-md-8 col-sm-12"></div>-->
-        <!--<div class="col-md-4 col-sm-12">-->
-        <!--<div class="onoffswitch pull-right">-->
-        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"-->
-        <!--id="myonoffswitch"-->
-        <!--checked>-->
-        <!--<label class="onoffswitch-label" for="myonoffswitch"-->
-        <!--@click="landscapeDisplay = !landscapeDisplay">-->
-        <!--<span class="onoffswitch-inner"></span>-->
-        <!--<span class="onoffswitch-switch"></span>-->
-        <!--</label>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="row mt-3 view-switch">
+            <div class="col-md-8 col-sm-12"></div>
+            <div class="col-md-4 col-sm-12">
+                <div class="onoffswitch pull-right">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                           id="myonoffswitch"
+                           checked>
+                    <label class="onoffswitch-label" for="myonoffswitch"
+                           @click="landscapeDisplay = !landscapeDisplay">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
 
         <div class="row mx-0 justify-center" v-if="preloader">
             <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>

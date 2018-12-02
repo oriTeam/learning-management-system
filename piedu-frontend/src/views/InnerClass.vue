@@ -1,114 +1,124 @@
-<template xmlns="http://www.w3.org/1999/html">
-    <!--<div>-->
-    <!--<section class="section section-profile-cover section-shaped my-0">-->
-    <!--<div class="shape shape-style-1 shape-primary shape-skew alpha-4">-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--</div>-->
-    <!--</section>-->
-    <!--<section class="section section-skew">-->
-    <!--<div class="container inner-content mt&#45;&#45;500">-->
-    <!--<div class="row">-->
-    <!--<div class="col-lg-3" id="innerside">-->
-    <!--<a href="javascript:void(0)" class="closebtn" @click="closeSidebar">&times;</a>-->
-    <!--<sidebar></sidebar>-->
-    <!--</div>-->
-    <!--<div class="col-lg-9 col-sm-12 card p-3">-->
-    <div class="card p-3">
-        <div class="row mx-0 justify-center" v-if="preloader">
-            <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
-        </div>
-        <div v-if="!preloader" class="row m--margin-bottom-25">
-            <div class="col-lg-4 col-sm-12">
-                <img :src="imgUrl(classDetail.avatar_path)" alt="" width="100%">
+<template>
+    <div class="row mx-0">
+        <div class="col-lg-12 p-1">
+            <div class="card p-3 mr-3">
+                <div class="row mx-0 justify-center" v-if="preloader">
+                    <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+                </div>
+                <div v-if="!preloader" class="row m--margin-bottom-25">
+                    <div class="col-lg-6 col-sm-12">
+                        <img :src="imgUrl(classDetail.avatar_path)" alt="" width="100%">
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <h2 class="course-title m--margin-top-10-mobile">{{ classDetail.name}}</h2>
+                        <p class="m--regular-font-size-lg2"><i class="fa fa-user"></i> Giảng viên: <a href="#">
+                            Hoàng Xuân Tùng
+                        </a></p>
+                        <p class="m--regular-font-size-lg2"><i class="fa fa-qrcode"></i> Mã lớp học: {{
+                            classDetail.code }}
+                        </p>
+                        <p class="m--regular-font-size-lg2"><i class="fa fa-tag"></i> Môn học: <a
+                                href="#">{{ classDetail.subject }}</a></p>
+                        <!--<button v-show="isStudent()" class="btn m-btn btn-success">Tham gia Khóa học</button>-->
+                        <enroll-btn :class_id="classDetail.id"></enroll-btn>
+                    </div>
+                </div>
+                <hr/>
+                <div v-if="!preloader" class="row mx-0 mt-3">
+                    <v-tabs class="w-100"
+                            centered
+                            color="cyan"
+                            dark
+                            icons-and-text
+                            grow>
+                        <v-tabs-slider color="yellow"></v-tabs-slider>
+
+                        <v-tab>
+                            Thời gian biểu
+                            <v-icon>timeline</v-icon>
+                        </v-tab>
+
+                        <v-tab>
+                            Danh sách học sinh ({{ this.students_list.body.length }})
+                            <v-icon>chrome_reader_mode</v-icon>
+                        </v-tab>
+
+                        <v-tab>
+                            Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})
+                            <v-icon>toc</v-icon>
+                        </v-tab>
+
+                        <v-tab-item>
+                            <v-card flat>
+                                <v-card-text>Thời gian biểu</v-card-text>
+                            </v-card>
+                        </v-tab-item>
+
+                        <v-tab-item>
+                            <v-card flat>
+                                <v-data-table
+                                        :headers="students_list.title"
+                                        :items="students_list.body"
+                                        class="elevation-1"
+                                        loading
+                                >
+                                    <template slot="items" slot-scope="props">
+                                        <td>{{ props.item.code }}</td>
+                                        <td class="text-xs-left">{{ props.item.fullname }}</td>
+                                        <td class="text-xs-left">{{ props.item.username }}</td>
+                                        <td class="">{{ props.item.gender }}</td>
+                                        <td class="">{{ props.item.phone_number }}</td>
+                                        <td class="">{{ props.item.personal_page }}</td>
+                                        <td class="justify-center layout px-0">
+                                            <v-icon
+                                                    small
+                                                    @click=""
+                                            >
+                                                delete
+                                            </v-icon>
+                                        </td>
+                                    </template>
+                                </v-data-table>
+                            </v-card>
+                        </v-tab-item>
+                        <v-tab-item>
+                            <v-card flat>
+                                <v-data-table
+                                        :headers="enroll_request_list.title"
+                                        :items="enroll_request_list.body"
+                                        class="elevation-1"
+                                        loading
+                                >
+                                    <template slot="items" slot-scope="props">
+                                        <td>{{ props.item.code }}</td>
+                                        <td class="text-xs-left">{{ props.item.fullname }}</td>
+                                        <td class="text-xs-left">{{ props.item.username }}</td>
+                                        <td class="">{{ props.item.gender }}</td>
+                                        <td class="">{{ props.item.phone_number }}</td>
+                                        <td class="">{{ props.item.personal_page }}</td>
+                                        <td class="justify-center layout px-0">
+                                            <v-icon
+                                                    small
+                                                    @click=""
+                                            >
+                                                delete
+                                            </v-icon>
+                                        </td>
+                                    </template>
+                                </v-data-table>
+
+                            </v-card>
+                        </v-tab-item>
+
+                    </v-tabs>
+                </div>
             </div>
-            <div class="col-lg-8 col-sm-12">
-                <h2 class="course-title m--margin-top-10-mobile">{{ classDetail.name}}</h2>
-                <p class="m--regular-font-size-lg2"><i class="fa fa-user"></i> Giảng viên: <a href="#">
-                    Hoàng Xuân Tùng
-                </a></p>
-                <p class="m--regular-font-size-lg2"><i class="fa fa-qrcode"></i> Mã lớp học: {{
-                    classDetail.code }}
-                </p>
-                <p class="m--regular-font-size-lg2"><i class="fa fa-tag"></i> Môn học: <a
-                        href="#">{{ classDetail.subject }}</a></p>
-                <button v-show="isStudent()" class="btn m-btn btn-success">Tham gia Khóa học</button>
-            </div>
-        </div>
-        <hr/>
-        <div v-if="!preloader" class="row mx-0 mt-3">
-            <v-tabs class="w-100"
-                    centered
-                    color="cyan"
-                    dark
-                    icons-and-text
-                    grow>
-                <v-tabs-slider color="yellow"></v-tabs-slider>
-
-                <v-tab>
-                    Thời gian biểu
-                    <v-icon>timeline</v-icon>
-                </v-tab>
-
-                <v-tab>
-                    Danh sách học sinh
-                    <v-icon>chrome_reader_mode</v-icon>
-                </v-tab>
-
-                <v-tab>
-                    Danh sách xin vào lớp
-                    <v-icon>toc</v-icon>
-                </v-tab>
-
-                <v-tab-item>
-                    <v-card flat>
-                        <v-card-text>Thời gian biểu</v-card-text>
-
-                    </v-card>
-                </v-tab-item>
-
-                <v-tab-item>
-                    <v-card flat>
-                        <v-card-text>Danh sách sinh viên</v-card-text>
-                        <v-card-text v-for="student in students"
-                                     :key="student.id">
-                            {{ student }}
-                        </v-card-text>
-                    </v-card>
-                </v-tab-item>
-                <v-tab-item>
-                    <v-card flat>
-                        <v-card-text>Danh sách xin vào lớp</v-card-text>
-                    </v-card>
-                </v-tab-item>
-
-                <!--<v-tab-item-->
-                <!--v-for="i in 3"-->
-                <!--:id="'tab-' + i"-->
-                <!--:key="i">-->
-                <!--<v-card flat>-->
-                <!--<v-card-text>{{ text }}</v-card-text>-->
-                <!--</v-card>-->
-                <!--</v-tab-item>-->
-            </v-tabs>
         </div>
     </div>
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</section>-->
-    <!--<div @click="openSidebar" id="inner-open-menu">-->
-    <!--Open-->
-    <!--</div>-->
-    <!--</div>-->
 </template>
 <script>
     import AsideLecturer from "@/components/class/AsideLecturer";
+    import EnrollButton from "@/components/class/EnrollButton";
     import BACKEND_URL from "@/backendServer";
     import ajax from "@/request"
 
@@ -116,6 +126,40 @@
         name: "inner-class",
         data() {
             return {
+                students_list: {
+                    title: [
+                        {
+                            text: 'MSV',
+                            align: 'left',
+                            sortable: false,
+                            value: 'code'
+                        },
+                        {text: 'Họ và tên', value: 'fullname'},
+                        {text: 'Tên tài khoản', value: 'username'},
+                        {text: 'Giới tính', value: 'gender'},
+                        {text: 'Số điện thoại', value: 'phone'},
+                        {text: 'Trang cá nhân', value: 'page'},
+                        {text: 'Xóa khỏi lớp', value: 'delete', sortable: false}
+                    ],
+                    body: Object
+                },
+                enroll_request_list: {
+                    title: [
+                        {
+                            text: 'MSV',
+                            align: 'left',
+                            sortable: false,
+                            value: 'code'
+                        },
+                        {text: 'Họ và tên', value: 'fullname'},
+                        {text: 'Tên tài khoản', value: 'username'},
+                        {text: 'Giới tính', value: 'gender'},
+                        {text: 'Số điện thoại', value: 'phone'},
+                        {text: 'Trang cá nhân', value: 'page'},
+                        {text: 'Hành động', value: 'delete', sortable: false}
+                    ],
+                    body: Object
+                },
                 preloader: true,
                 classDetail: Object,
                 students: Object,
@@ -125,13 +169,14 @@
         },
         components: {
             'sidebar': AsideLecturer,
+            'enroll-btn': EnrollButton,
         },
         created() {
             let self = this;
             let class_id = this.$route.params.id;
             this.axios.get(BACKEND_URL + `/api/class/detail/${class_id}/?format=json`).then((response) => {
                 self.classDetail = response.data[0];
-                self.students = response.data[1];
+                self.students_list.body = response.data[1];
                 self.preloader = false;
             }).catch((response) => {
                 console.log(response);
@@ -153,7 +198,7 @@
                 return false;
             },
             get_enroll_request_success: function (response) {
-                self.enrollRequestStudents = response.data;
+                this.enroll_request_list.body = response.data;
             },
             get_enroll_request_error: function (response) {
                 console.log(response);
