@@ -69,14 +69,24 @@ var router = new Router({
                 default: Class,
                 footer: AppFooter
             },
+            scrollBehavior: function () {
+                return {x: 0, y: 100};
+            },
             children: [
                 {
                     path: 'all',
+                    name: 'all-class',
                     component: AllClass
                 },
                 {
                     path: 'my',
+                    name: 'my-class',
                     component: MyClass
+                },
+                {
+                    path: ':id',
+                    name: 'inner-class',
+                    component: InnerClass
                 }
             ]
         },
@@ -108,9 +118,9 @@ var router = new Router({
         //     }
         // },
     ],
-    scrollBehavior: to => {
-        if (to.hash) {
-            return {selector: to.hash};
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return {savedPosition};
         } else {
             return {x: 0, y: 0};
         }

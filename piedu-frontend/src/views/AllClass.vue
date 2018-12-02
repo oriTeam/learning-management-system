@@ -36,9 +36,10 @@
         <!--</div>-->
         <!--</div>-->
 
-        <div class="row mx-0" v-show="preloader">
-            <v-progress-circular :size="20" color="primary" indeterminate/>
+        <div class="row mx-0 justify-center" v-if="preloader">
+            <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
         </div>
+
         <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
             <class-box-landscape class="class-box" v-show="landscapeDisplay"
                                  v-for="class_obj in classList"

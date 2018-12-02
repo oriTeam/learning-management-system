@@ -19,6 +19,12 @@
         created() {
             console.log(this.$ls.get('user'));
             console.log(this.$route);
+        },
+        watch: {
+            $route(to, from) {
+                this.$ls.set("savedPosition");
+                // alert('1');
+            }
         }
     };
 </script>

@@ -20,7 +20,9 @@
                         <sidebar></sidebar>
                     </div>
                     <div class="col-lg-9 col-sm-12 p-0">
-                        <router-view></router-view>
+                        <fade-transition origin="center" mode="out-in" :duration="250">
+                            <router-view></router-view>
+                        </fade-transition>
                     </div>
                 </div>
             </div>
@@ -31,7 +33,7 @@
     </div>
 </template>
 <script>
-        import BACKEND_URL from "@/backendServer";
+    import {FadeTransition} from "vue2-transitions";
     import Search from "@/components/class/Search";
     import Sidebar from "@/components/class/AsideLecturer"
 
@@ -39,10 +41,11 @@
         name: 'Class',
         components: {
             'search': Search,
-            'sidebar': Sidebar
+            'sidebar': Sidebar,
+            FadeTransition,
         },
         methods: {
-            openSidebar: function() {
+            openSidebar: function () {
                 document.querySelector("#myside").style.width = "270px";
             },
             closeSidebar: function () {
@@ -56,7 +59,7 @@
         #myside {
             /*display: none;*/
             height: 100%; /* 100% Full-height */
-            width: 0 ; /* 0 width - change this with JavaScript */
+            width: 0; /* 0 width - change this with JavaScript */
             position: fixed; /* Stay in place */
             z-index: 1200; /* Stay on top */
             top: 0; /* Stay at the top */
@@ -66,24 +69,29 @@
             overflow-x: hidden; /* Disable horizontal scroll */
             padding-top: 60px; /* Place content 60px from the top */
             transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-        };
+        }
+    ;
 
     }
-    @media (min-width: 992px){
+
+    @media (min-width: 992px) {
         #myside {
             .closebtn {
                 display: none;
-           }
-        };
+            }
+        }
+    ;
         #my-open-menu {
             display: none !important;
         }
     }
+
     .section-myclass-cover {
         height: 450px;
         background-size: cover;
         background-position: center center;
     }
+
     #myside {
         .closebtn {
             position: absolute;
@@ -93,6 +101,7 @@
             margin-left: 50px;
         }
     }
+
     #my-open-menu {
         position: fixed;
         bottom: 70%;

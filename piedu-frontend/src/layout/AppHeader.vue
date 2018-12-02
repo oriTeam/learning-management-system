@@ -115,6 +115,7 @@
         data() {
             return {
                 username: String,
+                top: 0
             }
         },
         components: {
@@ -130,6 +131,7 @@
                 this.setUsername();
             }
         },
+
         methods: {
             isAuthenticated: function () {
                 return auth.isAuthenticated(this);
@@ -145,7 +147,11 @@
     };
 </script>
 <style>
+    nav {
+        transition: 0.3s;
+    }
     .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
         color: #fff !important;
     }
+
 </style>
