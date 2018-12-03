@@ -1,2 +1,2 @@
-import HelpPage from './Page.vue'
+import HelpPage from '../../views/Help.vue'
 export default HelpPage

@@ -21,7 +21,7 @@ import {
     SidebarToggler
 } from './Sidebar'
 
-import GoTopBtn from './GoTopBtn.vue'
+import GoTopBtn from '../GoTopBtn.vue'
 
 export {
     Aside,

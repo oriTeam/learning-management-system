@@ -23,7 +23,7 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    <router-link :to="item.to">{{ item.title }}</router-link>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
@@ -34,8 +34,8 @@
         data() {
             return {
                 items: [
-                    {title: 'Home', icon: 'dashboard'},
-                    {title: 'About', icon: 'question_answer'}
+                    {title: 'Home', icon: 'dashboard', to: '/class/all'},
+                    {title: 'About', icon: 'question_answer', to: '/class/my'}
                 ],
                 right: null
             }

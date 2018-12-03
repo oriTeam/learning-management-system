@@ -2,37 +2,21 @@ import Vue from "vue";
 import Router from "vue-router";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
-import Components from "./views/Components.vue";
-import Landing from "./views/Landing.vue";
+import Landing from "./views/Home.vue";
 import Login from "./views/Login.vue";
-import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
-import Contact from "./components/contact";
-import Help from "./components/help";
-import SignIn from  "@/components/SignIn";
-import AllClass from "@/components/class/all-class";
-import MyClass from "@/components/class/my-class"
-import InnerClass from "@/components/class/inner-class"
+import Contact from "./views/Contact";
+import Help from "./views/Help";
+import Class from "./views/Class"
+import AllClass from "./views/AllClass";
+import MyClass from "./views/MyClass";
+import InnerClass from "./views/InnerClass";
 
 Vue.use(Router);
 var router = new Router({
     linkExactActiveClass: "active",
     mode: 'history',
     routes: [
-        {
-            path: "/components",
-            name: "components",
-            components: {
-                header: AppHeader,
-                default: Components,
-                footer: AppFooter
-            }
-        },
-        {
-            path: "/signin",
-            name: "signin",
-            component: SignIn
-        },
         {
             path: "/",
             name: "home",
@@ -70,15 +54,6 @@ var router = new Router({
             }
         },
         {
-            path: "/register",
-            name: "register",
-            components: {
-                header: AppHeader,
-                default: Register,
-                footer: AppFooter
-            }
-        },
-        {
             path: "/profile",
             name: "profile",
             components: {
@@ -88,36 +63,64 @@ var router = new Router({
             }
         },
         {
-            path: "/class/all",
-            name: 'all-class',
+            path: '/class',
             components: {
                 header: AppHeader,
-                default: AllClass,
+                default: Class,
                 footer: AppFooter
-            }
+            },
+            scrollBehavior: function () {
+                return {x: 0, y: 100};
+            },
+            children: [
+                {
+                    path: 'all',
+                    name: 'all-class',
+                    component: AllClass
+                },
+                {
+                    path: 'my',
+                    name: 'my-class',
+                    component: MyClass
+                },
+                {
+                    path: ':id',
+                    name: 'inner-class',
+                    component: InnerClass
+                }
+            ]
         },
-        {
-            path: "/class/my",
-            name: 'my-class',
-            components: {
-                header: AppHeader,
-                default: MyClass,
-                footer: AppFooter
-            }
-        },
-        {
-            path: "/class/:id",
-            name: "inner-class",
-            components: {
-                header: AppHeader,
-                default: InnerClass,
-                footer: AppFooter
-            }
-        }
+        // {
+        //     path: "/class/all",
+        //     name: 'all-class',
+        //     components: {
+        //         header: AppHeader,
+        //         default: AllClass,
+        //         footer: AppFooter
+        //     }
+        // },
+        // {
+        //     path: "/class/my",
+        //     name: 'my-class',
+        //     components: {
+        //         header: AppHeader,
+        //         default: MyClass,
+        //         footer: AppFooter
+        //     }
+        // },
+        // {
+        //     path: "/class/:id",
+        //     name: "inner-class",
+        //     components: {
+        //         header: AppHeader,
+        //         default: InnerClass,
+        //         footer: AppFooter
+        //     }
+        // },
     ],
-    scrollBehavior: to => {
-        if (to.hash) {
-            return {selector: to.hash};
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return {savedPosition};
         } else {
             return {x: 0, y: 0};
         }

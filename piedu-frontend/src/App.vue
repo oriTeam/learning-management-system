@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" data-app="true">
         <router-view name="header"></router-view>
         <main>
             <fade-transition origin="center" mode="out-in" :duration="250">
@@ -19,6 +19,12 @@
         created() {
             console.log(this.$ls.get('user'));
             console.log(this.$route);
+        },
+        watch: {
+            $route(to, from) {
+                this.$ls.set("savedPosition");
+                // alert('1');
+            }
         }
     };
 </script>
