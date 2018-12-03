@@ -475,8 +475,8 @@ def get_schedule(request):
 
 @api_view(['POST','GET'])
 @permission_classes((IsLecturer,))
-def check_validate(request):
-    print(json.loads(request.body.decode('utf-8')))
+def check_validate_lecturer(request):
+    # print(json.loads(request.body.decode('utf-8')))
     time_start = request.GET.get('time_start')
     time_end = request.GET.get('time_end')
     session_start = request.GET.get('session_start')
@@ -529,7 +529,82 @@ def check_validate(request):
                     }
                     return Response(data) 
                 
-        elif user.is_student : 
+        elif user.is_student() : 
+            data = {
+                        "success" : False,
+                        "errors" : "Access denied!"
+                    }
+            return Response(data) 
+
+        schedules = []
+        info_all_schedule = ClassSession()
+        for item  in all_class:
+            rs = Schedule.objects.filter(own_class__id = item.id,day_of_week = day_of_week)
+            
+            for rs_item in rs :
+                info_all_schedule.add(int(rs_item.session_start),int(rs_item.session_end))
+        if info_all_schedule.add(2,3) == False :
+            data = {
+                        "success" : False,
+                        "errors" : "Session is coincided!"
+                    }
+            return Response(data) 
+            # print(schedules)
+        data = {
+                        "success" : True,
+                        "errors" : "Done!"
+                    }
+        return Response(data)
+
+@api_view(['POST','GET'])
+@permission_classes((IsLecturer,))
+def check_validate_student(request):
+    # print(json.loads(request.body.decode('utf-8')))
+    time_start = request.GET.get('time_start')
+    time_end = request.GET.get('time_end')
+    session_start = request.GET.get('session_start')
+    session_end = request.GET.get('session_end')
+    day_of_week = request.GET.get('day_of_week')
+    # if time_start > time_end : 
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "Time start cannot greater than time end!"
+    #     }
+    #     return Response(data)
+    # if session_start > session_end :
+    #     data = {
+    #             "success" : False,
+    #             "errors" : "Session start cannot greater than session end!"
+    #     }
+    #     return Response(data)
+    
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    if user is not None:
+        now = datetime.datetime.now(tz = timezone.utc)
+        #comment  2 line after when read data from post method
+        time_end = now
+        time_start = now
+        all_class=[]
+        if user.is_student()  : 
+            # class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
+            class_students = ClassStudent.objects.filter(student__id= id).select_related('own_class').exclude(Q(own_class__time_start__gte= time_end)|Q(own_class__time_end__lte=time_start))
+            if len(class_students) == 0 :
+                data = {
+                    "success" : False,
+                    "errors" : "Class is invalid"
+                }
+                return Response(data) 
+            else :          
+                all_class = [item.own_class for item in class_students if item.own_class is not None]
+                if len(all_class) == 0 :
+                    data = {
+                        "success" : False,
+                        "errors" : "Class is invalid"
+                    }
+                    return Response(data) 
+                
+        elif user.is_lecturer() : 
             data = {
                         "success" : False,
                         "errors" : "Access denied!"

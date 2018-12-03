@@ -69,7 +69,7 @@ class_urlpatterns = [
     path('all/', crud_functions.get_all_class_info),
     path('info/', crud_functions.get_full_class_info),
     path('<int:id>/get_syllabus',syllabus_base_views.get_class_syllabus),
-    path('validated',course_base_views.check_validate),
+    path('validated',course_base_views.check_validate_lecturer),
 
 ]
 
