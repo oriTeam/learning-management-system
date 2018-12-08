@@ -29,7 +29,7 @@
                            id="myonoffswitch"
                            checked>
                     <label class="onoffswitch-label" for="myonoffswitch"
-                           @click="landscapeDisplay = !landscapeDisplay">
+                           @click="currentClass.landscapeDisplay = !currentClass.landscapeDisplay">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
                     </label>
@@ -37,12 +37,12 @@
             </div>
         </div>
 
-        <div class="row mx-0 justify-center" v-if="preloader">
+        <div class="row mx-0 justify-center" v-if="currentClass.preloader">
             <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
         </div>
-        <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
-            <class-box-landscape class="class-box" v-show="landscapeDisplay"
-                                 v-for="class_obj in classList"
+        <transition-group name="classbox" class="row mx-0" v-if="currentClass.classDisplay">
+            <class-box-landscape class="class-box" v-show="currentClass.landscapeDisplay"
+                                 v-for="class_obj in currentClass.classList"
                                  :id="class_obj.id"
                                  :avatar-path="class_obj.avatar_path"
                                  :category="class_obj.subject"
@@ -52,7 +52,7 @@
                                  :code="class_obj.code"
                                  :short-description="getShortDescription(class_obj.description)"
                                  :key="class_obj.code + ' 1'"></class-box-landscape>
-            <class-box-portrait v-show="!landscapeDisplay" v-for="class_obj in classList"
+            <class-box-portrait v-show="!currentClass.landscapeDisplay" v-for="class_obj in currentClass.classList"
                                 :id="class_obj.id"
                                 :avatar-path="class_obj.avatar_path"
                                 :category="class_obj.subject"
@@ -66,8 +66,8 @@
         <v-layout row wrap>
             <v-flex xs12 class="text-xs-center">
                 <v-pagination
-                        v-model="pagination.page"
-                        :length="pagination.pageTotal"
+                        v-model="currentClass.pagination.page"
+                        :length="currentClass.pagination.pageTotal"
                         @input="next"
                 ></v-pagination>
             </v-flex>
@@ -86,22 +86,50 @@
     import ClassBoxLandscape from '@/components/class/ClassBoxLandscape.vue'
     import BACKEND_URL from "@/backendServer";
     import Search from "@/components/class/Search";
-    import Sidebar from "@/components/class/AsideLecturer"
+    import Sidebar from "@/components/class/AsideLecturer";
+    import ajax from "@/request";
+
 
     export default {
         name: "MyClass",
         data() {
             return {
-                classList: [],
-                preloader: true,
-                classDisplay: false,
-                landscapeDisplay: true,
-                pagination: {
-                    itemTotal: 0,
-                    page: 1,
-                    pageTotal: 0,
-                    itemPerPage: 6
-                }
+                currentClass: {
+                    classList: [],
+                    preloader: true,
+                    classDisplay: false,
+                    landscapeDisplay: true,
+                    pagination: {
+                        itemTotal: 0,
+                        page: 1,
+                        pageTotal: 0,
+                        itemPerPage: 6
+                    }
+                },
+                pastClass: {
+                    classList: [],
+                    preloader: true,
+                    classDisplay: false,
+                    landscapeDisplay: true,
+                    pagination: {
+                        itemTotal: 0,
+                        page: 1,
+                        pageTotal: 0,
+                        itemPerPage: 6
+                    }
+                },
+                futureClass: {
+                    classList: [],
+                    preloader: true,
+                    classDisplay: false,
+                    landscapeDisplay: true,
+                    pagination: {
+                        itemTotal: 0,
+                        page: 1,
+                        pageTotal: 0,
+                        itemPerPage: 6
+                    }
+                },
             }
         },
         components: {
@@ -112,9 +140,9 @@
         },
         created: function () {
             this.axios.get(BACKEND_URL + '/api/class/all/').then((response) => {
-                this.pagination.itemTotal = response.data.length;
-                this.pagination.pageTotal = Math.round(this.pagination.itemTotal / this.pagination.itemPerPage);
-                console.log(this.pagination.pageTotal);
+                this.currentClass.pagination.itemTotal = response.data.length;
+                this.currentClass.pagination.pageTotal = Math.round(this.currentClass.pagination.itemTotal /
+                    this.currentClass.pagination.itemPerPage);
             }).catch((response) => {
                 console.log(response);
             })
@@ -131,12 +159,27 @@
             },
             getShowClass: function (page) {
                 let self = this;
+                let token = self.$ls.get('token');
+                // console.log(token);
+                let config = {
+                   headers : {
+                       "Authorization": "Token " +  token.toString()
+                   }
+                };
+                let data = {
+                    'format': "json",
+                    'token': token
+                }
                 this.axios.get(BACKEND_URL + '/api/class/all/?format=json&page=' + page).then((response) => {
-                    self.classList = response.data;
-                    self.preloader = false;
-                    self.classDisplay = true;
-
-                })
+                    self.currentClass.classList = response.data;
+                    self.currentClass.preloader = false;
+                    self.currentClass.classDisplay = true;
+                });
+                this.axios.post(BACKEND_URL + `/api/user/get_past_class`, data, config).then((res) => function () {
+                    alert(res.data);
+                });
+                // ajax.send(this, 'get', '/api/user/get_past_class', {}, this.get_past_class_success,
+                // this.request_error);
             },
             next: function (page) {
                 this.getShowClass(page);
@@ -146,6 +189,12 @@
             },
             closeSidebar: function () {
                 document.querySelector("#myside").style.width = "0";
+            },
+            get_past_class_success: function (res) {
+                this.pastClass.classList = res.data;
+            },
+            request_error: function (res) {
+                console.log(res);
             }
 
         }

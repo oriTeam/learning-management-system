@@ -301,8 +301,8 @@ def get_current_class(request):
 #             serializer = UserSerializerView(students,many = True)
 #             return Response(serializer.data)
 
-@api_view(["GET"])
-@permission_classes((permissions.IsAuthenticated,))
+@api_view(["GET", "POST"])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_past_class(request):
     # id = request.user.id
     # try :
@@ -319,7 +319,7 @@ def get_past_class(request):
     if user is not None:
         now = datetime.datetime.now(tz=timezone.utc)
         if user.is_lecturer():
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').filter(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').filter(
                 own_class__time_end__lte=now)
             if len(class_lecturers) == 0:
                 data = {
@@ -338,9 +338,8 @@ def get_past_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-        elif user.is_student:
-
-            class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
+        elif user.is_student():
+            class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
             if len(class_students) == 0:
                 data = {
@@ -350,6 +349,7 @@ def get_past_class(request):
                 return Response(data)
             else:
                 all_class = [item.own_class for item in class_students if item.own_class is not None]
+
                 if len(all_class) == 0:
                     data = {
                         "success": False,
@@ -359,6 +359,8 @@ def get_past_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
+        else:
+            return Response({"admin": "User is admin"})
     else:
         return Response({"invalid": "User is invalid"})
 

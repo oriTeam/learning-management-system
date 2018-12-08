@@ -27,5 +27,8 @@ def get_user_from_token(token):
 
 def get_token_from_request(request):
     token = ''
-    token = request.data.get('token')
+    if request.method == 'GET':
+        token = request.GET.get('token')
+    else:
+        token = request.data.get('token')
     return token
