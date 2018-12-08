@@ -1,7 +1,7 @@
 <template>
     <div class="row mx-0">
         <div class="col-lg-12 p-1">
-            <div class="card p-3 mr-3">
+            <div class="card p-3 mr-lg-3 mx-sm-3">
                 <div class="row mx-0 justify-center" v-if="preloader">
                     <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
                 </div>

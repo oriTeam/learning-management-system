@@ -256,8 +256,8 @@ def get_current_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-        elif user.is_student:
 
+        elif user.is_student() or user.is_admin():
             class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
             if len(class_students) == 0:
@@ -277,7 +277,8 @@ def get_current_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-
+    else:
+        return Response({"invalid": "User is invalid"})
 
 # @api_view(['GET'])
 # def get_enroll_request(request,id):
@@ -358,7 +359,8 @@ def get_past_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-
+    else:
+        return Response({"invalid": "User is invalid"})
 
 @api_view(["GET"])
 @permission_classes((permissions.IsAuthenticated,))
@@ -419,7 +421,8 @@ def get_future_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-
+    else:
+        return Response({"invalid": "User is invalid"})
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -428,7 +431,7 @@ def get_schedule(request):
     # try :
     #     user = User.objects.get(pk = id)
     # except User.DoesNotExist :
-    #     data = {
+    #        data = {
     #             "success" : False,
     #             "errors" : "User is invalid"
     #     }
@@ -489,10 +492,12 @@ def get_schedule(request):
         else:
 
             return JsonResponse({"data": schedules})
-
+    else:
+        return Response({"invalid": "User is invalid"})
 
 @api_view(['POST', 'GET'])
 @permission_classes((IsLecturer,))
+# @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def check_validate(request):
     print(json.loads(request.body.decode('utf-8')))
     time_start = request.GET.get('time_start')

@@ -42,7 +42,7 @@
             <v-flex lg5 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Giờ bắt đầu</label>
-                    <div class="control col-12">
+                    <div class="control col-12 px-0">
                         <div :class="['select', 'w-100', ($v.form.main_schedule.start_session.$error) ? 'is-danger' :
                         '']">
                             <select v-model="form.main_schedule.start_session" class="w-100">
@@ -63,7 +63,7 @@
             <v-flex lg5 sm12 px-3 my-2>
                 <div class="input-group date">
                     <label class="label col-12 px-0">Giờ kết thúc</label>
-                    <div class="control col-12">
+                    <div class="control col-12 px-0">
                         <div :class="['select', 'w-100', ($v.form.main_schedule.end_session.$error) ? 'is-danger' :
                         '']">
                             <select v-model="form.main_schedule.end_session" class="w-100">
@@ -121,7 +121,7 @@
                 <v-flex lg5 sm12 px-3 my-2>
                     <div class="input-group date">
                         <label class="label col-12 px-0">Giờ bắt đầu</label>
-                        <div class="control col-12">
+                        <div class="control col-12 px-0">
                         <div :class="['select', 'w-100']">
                             <select v-model="form.sub_schedule.start_session" class="w-100">
                                 <option v-for="session in 12" :value="session"
@@ -138,12 +138,14 @@
                 <v-flex lg5 sm12 px-3 my-2>
                     <div class="input-group date">
                         <label class="label col-12 px-0">Giờ kết thúc</label>
+                        <div class="control col-12 px-0">
                         <div :class="['select', 'w-100']">
                             <select v-model="form.sub_schedule.end_session" class="w-100">
                                 <option v-for="session in 12" :value="session"
                                         :key="session">{{ session + 6 }}:50
                                 </option>
                             </select>
+                        </div>
                         </div>
                         <!--<datetime type="time" class="col-12 px-0" input-class="input"-->
                                   <!--v-model="form.sub_schedule.end_session">-->
