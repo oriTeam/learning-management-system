@@ -1,77 +1,193 @@
 <template>
-    <!--<div>-->
-    <!--<section class="section section-myclass-cover section-shaped my-0">-->
-    <!--<search></search>-->
-    <!--<div class="shape shape-style-1 shape-primary alpha-4">-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--<span></span>-->
-    <!--</div>-->
-    <!--</section>-->
-    <!--<section>-->
-    <!--<div class="container">-->
-    <!--<div class="row">-->
-    <!--<div class="col-lg-3" id="myside">-->
-    <!--<a href="javascript:void(0)" class="closebtn" @click="closeSidebar">&times;</a>-->
-    <!--<sidebar></sidebar>-->
-    <!--</div>-->
-    <!--<div class="col-lg-9 col-sm-12 p-0">-->
     <div>
-        <div class="row view-switch">
-            <div class="col-md-8 col-sm-12"></div>
-            <div class="col-md-4 col-sm-12">
-                <div class="onoffswitch pull-right">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                           id="myonoffswitch"
-                           checked>
-                    <label class="onoffswitch-label" for="myonoffswitch"
-                           @click="currentClass.landscapeDisplay = !currentClass.landscapeDisplay">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
+        <section>
+            <div class="row mr-0">
+                <div class="col-lg-10 col-md-8 col-sm-12">
+                    <h2 class="section-title"><span>Các lớp học hiện tại</span></h2>
+                </div>
+                <div class="view-switch col-lg-2 col-md-4 col-sm-12">
+                    <div class="onoffswitch pull-right">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                               id="myonoffswitch"
+                               checked>
+                        <label class="onoffswitch-label" for="myonoffswitch"
+                               @click="currentClass.landscapeDisplay = !currentClass.landscapeDisplay">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mx-0 justify-center" v-if="currentClass.preloader">
-            <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
-        </div>
-        <transition-group name="classbox" class="row mx-0" v-if="currentClass.classDisplay">
-            <class-box-landscape class="class-box" v-show="currentClass.landscapeDisplay"
-                                 v-for="class_obj in currentClass.classList"
-                                 :id="class_obj.id"
-                                 :avatar-path="class_obj.avatar_path"
-                                 :category="class_obj.subject"
-                                 lecturer="Hoàng Xuân Tùng"
-                                 :class-name="class_obj.name"
-                                 :student-count="class_obj.students"
-                                 :code="class_obj.code"
-                                 :short-description="getShortDescription(class_obj.description)"
-                                 :key="class_obj.code + ' 1'"></class-box-landscape>
-            <class-box-portrait v-show="!currentClass.landscapeDisplay" v-for="class_obj in currentClass.classList"
-                                :id="class_obj.id"
-                                :avatar-path="class_obj.avatar_path"
-                                :category="class_obj.subject"
-                                lecturer="Hoàng Xuân Tùng"
-                                :class-name="class_obj.name"
-                                :student-count="class_obj.students"
-                                :code="class_obj.code"
-                                :short-description="getShortDescription(class_obj.description)"
-                                :key="class_obj.code + ' 2'"></class-box-portrait>
-        </transition-group>
-        <v-layout row wrap>
-            <v-flex xs12 class="text-xs-center">
-                <v-pagination
-                        v-model="currentClass.pagination.page"
-                        :length="currentClass.pagination.pageTotal"
-                        @input="next"
-                ></v-pagination>
-            </v-flex>
-        </v-layout>
+            <div class="row mx-0 justify-center" v-if="currentClass.preloader">
+                <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+            </div>
+            <transition-group name="classbox" v-if="currentClass.classDisplay">
+                <div v-if="currentClass.classList.length == 0" class="row m-3 alert alert-warning"
+                     key="emptyCurrentClass">
+                    <strong>Danh sách trống. </strong> Bạn không đang học lớp học nào
+                </div>
+                <div v-else key="currentClass" class="row mx-0 my-3">
+                <class-box-landscape class="class-box" v-show="currentClass.landscapeDisplay"
+                                     v-for="class_obj in currentClass.classList"
+                                     :id="class_obj.id"
+                                     :avatar-path="class_obj.avatar_path"
+                                     :category="class_obj.subject"
+                                     lecturer="Hoàng Xuân Tùng"
+                                     :class-name="class_obj.name"
+                                     :student-count="class_obj.students"
+                                     :code="class_obj.code"
+                                     :short-description="getShortDescription(class_obj.description)"
+                                     :key="class_obj.code + ' 1'"></class-box-landscape>
+                <class-box-portrait v-show="!currentClass.landscapeDisplay" v-for="class_obj in currentClass.classList"
+                                    :id="class_obj.id"
+                                    :avatar-path="class_obj.avatar_path"
+                                    :category="class_obj.subject"
+                                    lecturer="Hoàng Xuân Tùng"
+                                    :class-name="class_obj.name"
+                                    :student-count="class_obj.students"
+                                    :code="class_obj.code"
+                                    :short-description="getShortDescription(class_obj.description)"
+                                    :key="class_obj.code + ' 2'"></class-box-portrait>
+                </div>
+            </transition-group>
+            <v-layout row wrap >
+                <v-flex xs12 class="text-xs-center">
+                    <v-pagination
+                            v-model="currentClass.pagination.page"
+                            :length="currentClass.pagination.pageTotal"
+                            @input="next"
+                            v-if="currentClass.classList.length >= 9"
+                    ></v-pagination>
+                </v-flex>
+            </v-layout>
+        </section>
+        <hr>
+        <section>
+            <div class="row mr-0">
+                <div class="col-lg-10 col-md-8 col-sm-12">
+                    <h2 class="section-title"><span>Các lớp học sắp tới</span></h2>
+                </div>
+                <div class="view-switch col-lg-2 col-md-4 col-sm-12">
+                    <div class="onoffswitch pull-right">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                               id="myonoffswitch"
+                               checked>
+                        <label class="onoffswitch-label" for="myonoffswitch"
+                               @click="futureClass.landscapeDisplay = !futureClass.landscapeDisplay">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mx-0 justify-center" v-if="futureClass.preloader">
+                <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+            </div>
+            <transition-group name="classbox" v-if="futureClass.classDisplay">
+                <div v-if="futureClass.classList.length == 0" class="row m-3 alert alert-warning"
+                     key="emptyFutureClass">
+                    <strong>Danh sách trống. </strong> Bạn chưa đăng ký vào lớp học nào sắp diễn ra
+                </div>
+                <div v-else class="row mx-0 my-3" key="futureClass">
+                    <class-box-landscape class="class-box" v-show="futureClass.landscapeDisplay"
+                                         v-for="class_obj in futureClass.classList"
+                                         :id="class_obj.id"
+                                         :avatar-path="class_obj.avatar_path"
+                                         :category="class_obj.subject"
+                                         lecturer="Hoàng Xuân Tùng"
+                                         :class-name="class_obj.name"
+                                         :student-count="class_obj.students"
+                                         :code="class_obj.code"
+                                         :short-description="getShortDescription(class_obj.description)"
+                                         :key="class_obj.code + ' 1'"></class-box-landscape>
+                    <class-box-portrait v-show="!futureClass.landscapeDisplay" v-for="class_obj in futureClass.classList"
+                                        :id="class_obj.id"
+                                        :avatar-path="class_obj.avatar_path"
+                                        :category="class_obj.subject"
+                                        lecturer="Hoàng Xuân Tùng"
+                                        :class-name="class_obj.name"
+                                    :student-count="class_obj.students"
+                                    :code="class_obj.code"
+                                    :short-description="getShortDescription(class_obj.description)"
+                                    :key="class_obj.code + ' 2'"></class-box-portrait>
+                </div>
+            </transition-group>
+            <v-layout row wrap>
+                <v-flex xs12 class="text-xs-center">
+                    <v-pagination
+                            v-model="futureClass.pagination.page"
+                            :length="futureClass.pagination.pageTotal"
+                            @input="next"
+                            v-if="futureClass.classList.length >= 9"
+                    ></v-pagination>
+                </v-flex>
+            </v-layout>
+        </section>
+        <hr>
+        <section>
+            <div class="row mr-0">
+                <div class="col-lg-10 col-md-8 col-sm-12">
+                    <h2 class="section-title"><span>Các lớp đã kết thúc</span></h2>
+                </div>
+                <div class="view-switch col-lg-2 col-md-4 col-sm-12">
+                    <div class="onoffswitch pull-right">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                               id="myonoffswitch"
+                               checked>
+                        <label class="onoffswitch-label" for="myonoffswitch"
+                               @click="pastClass.landscapeDisplay = !pastClass.landscapeDisplay">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mx-0 justify-center" v-if="pastClass.preloader">
+                <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+            </div>
+            <transition-group name="classbox" v-if="pastClass.classDisplay">
+                <div v-if="pastClass.classList.length == 0" class="row m-3 alert alert-warning"
+                     key="emptyPastClass">
+                    <strong>Danh sách trống. </strong> Bạn chưa từng tham gia học lớp nào
+                </div>
+                <div v-else  class="row mx-0 my-3" key="pastClass">
+                <class-box-landscape class="class-box" v-show="pastClass.landscapeDisplay"
+                                     v-for="class_obj in pastClass.classList"
+                                     :id="class_obj.id"
+                                     :avatar-path="class_obj.avatar_path"
+                                     :category="class_obj.subject"
+                                     lecturer="Hoàng Xuân Tùng"
+                                     :class-name="class_obj.name"
+                                     :student-count="class_obj.students"
+                                     :code="class_obj.code"
+                                     :short-description="getShortDescription(class_obj.description)"
+                                     :key="class_obj.code + ' 1'"></class-box-landscape>
+                <class-box-portrait v-show="!pastClass.landscapeDisplay" v-for="class_obj in pastClass.classList"
+                                    :id="class_obj.id"
+                                    :avatar-path="class_obj.avatar_path"
+                                    :category="class_obj.subject"
+                                    lecturer="Hoàng Xuân Tùng"
+                                    :class-name="class_obj.name"
+                                    :student-count="class_obj.students"
+                                    :code="class_obj.code"
+                                    :short-description="getShortDescription(class_obj.description)"
+                                    :key="class_obj.code + ' 2'"></class-box-portrait>
+                </div>
+            </transition-group>
+            <v-layout row wrap>
+                <v-flex xs12 class="text-xs-center">
+                    <v-pagination
+                            v-model="pastClass.pagination.page"
+                            :length="pastClass.pagination.pageTotal"
+                            @input="next"
+                            v-if="currentClass.classList.length >= 9"
+                    ></v-pagination>
+                </v-flex>
+            </v-layout>
+        </section>
     </div>
     <!--</div>-->
     <!--</div>-->
@@ -87,7 +203,6 @@
     import BACKEND_URL from "@/backendServer";
     import Search from "@/components/class/Search";
     import Sidebar from "@/components/class/AsideLecturer";
-    import ajax from "@/request";
 
 
     export default {
@@ -162,24 +277,61 @@
                 let token = self.$ls.get('token');
                 // console.log(token);
                 let config = {
-                   headers : {
-                       "Authorization": "Token " +  token.toString()
-                   }
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
                 };
                 let data = {
                     'format': "json",
                     'token': token
                 }
-                this.axios.get(BACKEND_URL + '/api/class/all/?format=json&page=' + page).then((response) => {
-                    self.currentClass.classList = response.data;
-                    self.currentClass.preloader = false;
-                    self.currentClass.classDisplay = true;
+                // this.axios.get(BACKEND_URL + '/api/class/all/?format=json&page=' + page).then((response) => {
+                //     self.currentClass.classList = response.data;
+                //     self.currentClass.preloader = false;
+                //     self.currentClass.classDisplay = true;
+                // });
+                this.axios.post(BACKEND_URL + `/api/user/get_current_class`, data, config).then((res) => {
+                    if(res.data.empty == true) {
+                        self.currentClass.preloader = false;
+                        self.currentClass.classDisplay = true;
+                    }
+                    else {
+                        self.currentClass.classList = res.data;
+                        self.currentClass.preloader = false;
+                        self.currentClass.classDisplay = true;
+                        self.currentClass.pagination.itemTotal = res.data.length;
+                        self.currentClass.pagination.pageTotal = Math.round(self.currentClass.pagination.itemTotal / self.currentClass.pagination.itemPerPage);
+                    }
                 });
-                this.axios.post(BACKEND_URL + `/api/user/get_past_class`, data, config).then((res) => function () {
-                    alert(res.data);
+                this.axios.post(BACKEND_URL + `/api/user/get_future_class`, data, config).then((res) => {
+                    if(res.data.empty == true) {
+                        self.futureClass.preloader = false;
+                        self.futureClass.classDisplay = true;
+                    }
+                    else {
+                        self.futureClass.classList = res.data;
+                        self.futureClass.preloader = false;
+                        self.futureClass.classDisplay = true;
+                        self.futureClass.pagination.itemTotal = res.data.length;
+                        self.futureClass.pagination.pageTotal = Math.round(self.futureClass.pagination.itemTotal /
+                            self.futureClass.pagination.itemPerPage);
+                    }
                 });
-                // ajax.send(this, 'get', '/api/user/get_past_class', {}, this.get_past_class_success,
-                // this.request_error);
+                this.axios.post(BACKEND_URL + `/api/user/get_past_class`, data, config).then((res) => {
+                    if(res.data.empty == true) {
+                        self.pastClass.preloader = false;
+                        self.pastClass.classDisplay = true;
+                    }
+                    else {
+                        self.pastClass.classList = res.data;
+                        self.pastClass.preloader = false;
+                        self.pastClass.classDisplay = true;
+                        self.pastClass.pagination.itemTotal = res.data.length;
+                        self.pastClass.pagination.pageTotal = Math.round(self.pastClass.pagination.itemTotal /
+                            self.pastClass.pagination.itemPerPage);
+                    }
+                });
+
             },
             next: function (page) {
                 this.getShowClass(page);
@@ -375,4 +527,30 @@
             display: none !important;
         }
     }
+
+    h2.section-title {
+        position: relative;
+        z-index: 1;
+        padding-left: 50px;
+
+        &:after {
+            border-top: 2px solid #dfdfdf;
+            content: "";
+            margin: 0 auto; /* this centers the line to the full width specified */
+            position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+            top: 50%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 95%;
+            z-index: -1;
+        }
+
+        span {
+            /* to hide the lines from behind the text, you have to set the background color the same as the container */
+            background: #fff;
+            padding: 0 15px;
+        }
+    }
+
 </style>
