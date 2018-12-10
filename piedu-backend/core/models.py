@@ -39,6 +39,12 @@ class User(AbstractUser):
             user_group = 'Admin'
         return "{}: {}".format(user_group, self.username)
 
+    def get_name_and_id(self):
+        data ={
+            "id" : self.id,
+            "name" : self.fullname(),
+        }
+        return data
     def parse_data(self):
         avatar_url = settings.MEDIA_URL + "908312.png"
         # print(self.avatar == "")
