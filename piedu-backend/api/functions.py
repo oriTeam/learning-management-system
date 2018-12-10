@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.db.models import Prefetch
 from rest_framework.authtoken.models import Token
 
+
 def string_to_boolean(value):
     if value is not None and value.lower() == 'false':
         return False
@@ -29,3 +30,12 @@ def get_token_from_request(request):
     token = ''
     token = request.data.get('token')
     return token
+
+def split_word(string):
+    word = string.split(" ")
+    return word
+
+
+
+
+
