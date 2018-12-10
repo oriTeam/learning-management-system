@@ -3,7 +3,7 @@ import json
 import dateutil.parser
 
 from api.check import ClassSession
-from api.functions import get_token_from_request, get_user_from_token
+from api.functions import get_token_from_request, get_user_from_token,split_word
 from api.permission import IsLecturer, IsMyOwnOrAdmin
 from core.serializers import UserSerializerView
 from course.models import CourseCategory, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest, Subject
@@ -14,6 +14,7 @@ from django.utils import timezone
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from core.models import User
 
 
 @api_view(['GET'])
@@ -48,7 +49,7 @@ def course_category_list_view(request):
 def course_category_detail(request, id):
     try:
         course_category = CourseCategory.objects.get(pk=id)
-        course_category = CourseCategory.objects.get(pk=id)
+    
     except CourseCategory.DoesNotExist:
         data = {
             "success": False,
@@ -530,7 +531,7 @@ def get_schedule(request):
         return Response({"invalid": "User is invalid"})
 
 @api_view(['POST', 'GET'])
-@permission_classes((IsLecturer,))
+@permission_classes((permissions.IsAuthenticated,))
 # @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def check_validate(request):
     # print(json.loads(request.body.decode('utf-8')))
@@ -552,15 +553,6 @@ def check_validate(request):
                 "errors" : "Session start cannot greater than session end!"
         }
         return Response(data)
-    # try :
-    #     user = User.objects.get(pk = id)
-    # except User.DoesNotExist :
-    #     data = {
-    #             "success" : False,
-    #             "errors" : "User is invalid"
-    #     }
-    #     return Response(data)
-    # else :
     token = get_token_from_request(request)
     user = get_user_from_token(token)
     if user is not None:
@@ -583,37 +575,91 @@ def check_validate(request):
                 all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
                 if len(all_class) == 0:
                     data = {
-                        "suc    cess": False,
+                        "success": False,
+                        "errors": "Class is invalid"
+                    }
+                    return Response(data) 
+
+
+        elif user.is_student() : 
+            # data = {
+            #             "success" : False,
+            #             "errors" : "Access denied!"
+            #         }
+            # return Response(data)
+            class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').exclude(
+                Q(own_class__time_start__gte=time_end) | Q(own_class__time_end__lte=time_start))
+            if len(class_students) == 0:
+                data = {
+                    "success": False,
+                    "errors": "Class is invalid"
+                }
+                return Response(data)
+            else:
+                all_class = [item.own_class for item in class_students if item.own_class is not None]
+                if len(all_class) == 0:
+                    data = {
+                        "success": False,
                         "errors": "Class is invalid"
                     }
                     return Response(data)
 
-        elif user.is_student():
-            data = {
-                "success": False,
-                "errors": "Access denied!"
-            }
-            return Response(data)
-
         schedules = []
         info_all_schedule = ClassSession()
-        for item in all_class:
-            rs = Schedule.objects.filter(own_class__id=item.id, day_of_week=day_of_week)
-
-            for rs_item in rs:
-                info_all_schedule.add(int(rs_item.session_start), int(rs_item.session_end))
-        if info_all_schedule.add(session_start, session_end) == False:
+        for item  in all_class:
+            rs = Schedule.objects.filter(own_class__id = item.id,day_of_week = day_of_week)
+            
+            for rs_item in rs :
+                info_all_schedule.add(int(rs_item.session_start),int(rs_item.session_end))
+        if info_all_schedule.add(session_start, session_end) == False :
             data = {
-                "success": False,
-                "message": "Session is coincided!"
-            }
-            return Response(data)
+                        "success" : False,
+                        "errors" : "Session is coincided!"
+                    }
+            return Response(data) 
             # print(schedules)
         data = {
-            "success": True,
-            "message": "Class is valid"
-        }
+                        "success" : True,
+                        "errors" : "Done!"
+                    }
         return Response(data)
+
+
+# @api_view(['GET'])
+# @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+# def search(request):
+#     print("a")
+#     # value = 3
+
+#     value = str(request.GET.get('value'))
+#     print(value)
+#     if value =="1" :
+#         words = split_word(request.GET.get('search'))
+#         rs = []
+#         for word in words :
+#             classes = Class.objects.filter(name = word)
+#             for item in classes :
+#                 rs.append(item.parse_full_info())
+#         return JsonResponse({"data" : rs})
+#     elif value == "2":
+#         words = split_word(request.GET.get('search'))
+#         rs = []
+#         for word in words :
+#             lecturers = User.objects.filter(username__contains = word)
+#             for item in lecturers :
+#                 if (str(item.group) == "lecturer_group"):
+#                     rs.append(item.parse_data())
+#         return JsonResponse({"data" : rs})
+#     else:
+#         words = split_word(request.GET.get('search'))
+#         rs = []
+#         for word in words :
+#             print(word)
+#             students = User.objects.filter(username__contains = word)
+#             for item in students :
+#                 if (str(item.group) == "student_group"):
+#                     rs.append(item.parse_data())
+#         return JsonResponse({"data" :rs})
 
 
 @api_view(['GET'])

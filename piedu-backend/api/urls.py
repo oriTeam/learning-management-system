@@ -1,6 +1,6 @@
 from django.urls import include, path
 from django.conf.urls import  url
-from . import auth_views
+from . import auth_views,base
 from rest_framework import routers
 
 from .views.course import crud_functions
@@ -42,6 +42,7 @@ course_category_urlpatterns = [
     path('update/<int:id>/', course_viewsets.CourseCayegoryUpdateView.as_view(), name="course_category_update"),
     path('delete/<int:id>/', course_viewsets.CourseCategoryDeleteView.as_view(), name="course_category_delete"),
     path('<int:id>/get_subject',course_base_views.get_subject),
+    # path('search',course_base_views.search),
 ]
 
 subject_urlpatterns = [
@@ -146,5 +147,6 @@ urlpatterns = [
     path('schedule/', include(schedule_urlpatterns)),
     path('authenticated/', auth_views.is_authenticated, name="authenticated"),
     path('logout/', auth_views.logout, name="logout"),
+    path('search',base.search),
 
 ]
