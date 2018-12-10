@@ -64,7 +64,7 @@
                                 >
                                     <template slot="items" slot-scope="props">
                                         <td>{{ props.item.code }}</td>
-                                        <td class="text-xs-left">{{ props.item.fullname }}</td>
+                                        <td class="text-xs-left">{{     props.item.fullname }}</td>
                                         <td class="text-xs-left">{{ props.item.username }}</td>
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>

@@ -107,7 +107,7 @@
         top: 63px;
         left: 0px;
         font-size: 15px;
-        z-index: 1000;
+        z-index: 2;
         color: #fff;
         background-color: #0a8cf0;
         border-radius: 0px;

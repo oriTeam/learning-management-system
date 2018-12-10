@@ -3,7 +3,7 @@
         <button v-if="this.status==0" @click="enroll()" type="button" class="btn btn-icon btn-primary"><span
                 class="btn-inner--icon"><i
             class="ni ni-bag-17"></i></span> <span class="btn-inner--text">Tham gia lớp học</span></button>
-        <button v-else-if="this.status=2" type="button" class="btn btn-icon btn-light disabled">Đang chờ xác nhận
+        <button v-else-if="this.status==2" type="button" class="btn btn-icon btn-light disabled">Đang chờ xác nhận
             ...</button>
     </div>
 </template>

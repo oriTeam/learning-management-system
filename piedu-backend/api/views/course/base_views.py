@@ -607,9 +607,11 @@ def check_validate(request):
                                                     session_start, session_end=session_end)
             new_schedule.save()
 
+
+
             data = {
                 "success": True,
-                "message": "Class is valid"
+                "message": "Class" + new_class.name + "have been created successfully"
             }
             return Response(data)
 
@@ -648,6 +650,7 @@ def check_validate(request):
             if info_all_schedule.add(session_start, session_end) == False:
                 data = {
                     "success": False,
+                    "code": "coincided",
                     "errors": "Session is coincided!"
                 }
                 return Response(data)
@@ -655,7 +658,7 @@ def check_validate(request):
 
             data = {
                 "success": True,
-                "message": "Class is valid"
+                "message": "You can enroll this class"
             }
             return Response(data)
 

@@ -114,7 +114,7 @@
             this.axios.get(BACKEND_URL + '/api/class/all/?format=json').then((response) => {
                 this.pagination.itemTotal = response.data.length;
                 this.pagination.pageTotal = Math.round(this.pagination.itemTotal / this.pagination.itemPerPage);
-                console.log(this.pagination.pageTotal);
+                console.log(this.pagination.itemTotal);
             }).catch((response) => {
                 console.log(response);
             })
