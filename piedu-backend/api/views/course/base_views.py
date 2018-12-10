@@ -162,7 +162,13 @@ def class_detail(request, id):
         result.append(class_detail.parse_full_info())
         class_student = ClassStudent.objects.filter(own_class__id=id).select_related('student')
         students = [item.student.parse_basic_info() for item in class_student]
-        result.append(students)
+        class_lecturer = ClassLecturer.objects.filter(own_class__id=id)    
+        result.append({"lecturer" :[item.lecturer.get_name_and_id() for item in class_lecturer]})
+        result.append({"student" : students})
+        schedules = Schedule.objects.filter(own_class__id =id)
+        schedule = [item.parse_data() for item in schedules]
+        result.append(schedule)
+        
         # serializer = ClassSerializer(class_detail)
         return Response(result)
         # return Response(serializer.data)

@@ -147,6 +147,6 @@ urlpatterns = [
     path('schedule/', include(schedule_urlpatterns)),
     path('authenticated/', auth_views.is_authenticated, name="authenticated"),
     path('logout/', auth_views.logout, name="logout"),
-    path('search',base.search),
+    path('get-data',base.get_data),
 
 ]

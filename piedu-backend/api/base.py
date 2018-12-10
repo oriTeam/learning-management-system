@@ -12,40 +12,15 @@ from course.models import Class
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
-def search(request):
-    # print("a")
-    # value = 3
-
-    value = str(request.GET.get('value'))
-    # print(value)
-    if value =="1" :
-        words = split_word(request.GET.get('search'))
-        rs = []
-        for word in words :
-            classes = Class.objects.filter(name = word)
-            for item in classes :
-                rs.append(item.parse_full_info())
-        return JsonResponse({"data" : rs})
-    elif value == "2":
-        words = split_word(request.GET.get('search'))
-        rs = []
-        for word in words :
-            lecturers = User.objects.filter(username__contains = word)
-            for item in lecturers :
-                if (str(item.group) == "lecturer_group"):
-                    rs.append(item.parse_data())
-        return JsonResponse({"data" : rs})
-    else:
-        words = split_word(request.GET.get('search'))
-        rs = []
-        for word in words :
-            print(word)
-            students = User.objects.filter(username__contains = word)
-            for item in students :
-                if (str(item.group) == "student_group"):
-                    rs.append(item.parse_data())
-        return JsonResponse({"data" :rs})
-
+def get_data(request):
+    all_data = []
+    list_user =  User.objects.all()
+    for user in list_user :
+        all_data.append({"id" : user.id,"name" : user.username })
+    list_class = Class.objects.all()
+    for  classes in list_class :
+        all_data.append({"id" : classes.id, "name" : classes.name})
+    return JsonResponse({"data" :all_data})
 
 
 class BaseManageView(View):
