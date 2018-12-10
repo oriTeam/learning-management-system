@@ -12,7 +12,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <h2 class="course-title m--margin-top-10-mobile">{{ classDetail.name}}</h2>
                         <p class="m--regular-font-size-lg2"><i class="fa fa-user"></i> Giảng viên: <a href="#">
-                            Hoàng Xuân Tùng
+                            {{ lecturer[0].name }}
                         </a></p>
                         <p class="m--regular-font-size-lg2"><i class="fa fa-qrcode"></i> Mã lớp học: {{
                             classDetail.code }}
@@ -161,6 +161,7 @@
                     body: Object
                 },
                 preloader: true,
+                lecturer: Object,
                 classDetail: Object,
                 students: Object,
                 enrollRequestStudents: Object,
@@ -176,7 +177,8 @@
             let class_id = this.$route.params.id;
             this.axios.get(BACKEND_URL + `/api/class/detail/${class_id}/?format=json`).then((response) => {
                 self.classDetail = response.data[0];
-                self.students_list.body = response.data[1];
+                self.students_list.body = response.data[2].student;
+                self.lecturer = response.data[1].lecturer;
                 self.preloader = false;
             }).catch((response) => {
                 console.log(response);

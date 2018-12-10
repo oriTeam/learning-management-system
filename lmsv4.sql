@@ -18,6 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
+DROP DATABASE IF EXISTS lmsv3;
+CREATE DATABASE lmsv3;
+USE lmsv3;
+
+
 --
 -- Cơ sở dữ liệu: `lmsv3`
 --
