@@ -82,10 +82,10 @@ for _class in classes:
             start_date = choice(start)
             end_date = choice(end)
             new_class = Class.objects.create(code=_class['id'], name=_class['name'], description="", time_start=start_date,
-                                         time_end=end_date)
-            new_class.subject = subject
+                                         time_end=end_date, subject = subject)
+            # new_class.subject = subject
             new_class.save()
-            print('Class {0} successfully created in {1}'.format(_class['name'], subject))
+            print('Class {0} successfully    created in {1}'.format(_class['name'], subject))
 
             for i in range(0, 2):
                 lecturer_id = get_random_lecturer();

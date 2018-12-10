@@ -4,5 +4,5 @@ from .models import Class
 
 @receiver([post_save, ], sender = Class)
 def update_name_code(sender, instance, **kwargs):
-    print("NN")
     instance.update_name_and_code()
+    # pass

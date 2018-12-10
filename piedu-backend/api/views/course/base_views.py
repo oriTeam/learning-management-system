@@ -1,10 +1,9 @@
 import datetime
-import json
-import dateutil.parser
 
+import dateutil.parser
 from api.check import ClassSession
-from api.functions import get_token_from_request, get_user_from_token,split_word
-from api.permission import IsLecturer, IsMyOwnOrAdmin
+from api.functions import get_token_from_request, get_user_from_token
+from api.permission import IsMyOwnOrAdmin
 from core.serializers import UserSerializerView
 from course.models import CourseCategory, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest, Subject
 from course.serializers import CourseCategorySerializer, SubjectSerializer, ClassSerializer
@@ -14,7 +13,6 @@ from django.utils import timezone
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from core.models import User
 
 
 @api_view(['GET'])
@@ -49,7 +47,7 @@ def course_category_list_view(request):
 def course_category_detail(request, id):
     try:
         course_category = CourseCategory.objects.get(pk=id)
-    
+
     except CourseCategory.DoesNotExist:
         data = {
             "success": False,
@@ -293,6 +291,7 @@ def get_current_class(request):
     else:
         return Response({"invalid": "User is invalid"})
 
+
 # @api_view(['GET'])
 # def get_enroll_request(request,id):
 #     enroll_requests = EnrollRequest.objects.select_related('student').filter(own_class__id = id)
@@ -316,7 +315,6 @@ def get_current_class(request):
 
 @api_view(["GET", "POST"])
 @permission_classes((permissions.IsAuthenticated,))
-
 # @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_past_class(request):
     # id = request.user.id
@@ -387,6 +385,7 @@ def get_past_class(request):
             return Response({"admin": "User is admin"})
     else:
         return Response({"invalid": "User is invalid"})
+
 
 @api_view(["GET", "POST"])
 @permission_classes((permissions.IsAuthenticated,))
@@ -460,6 +459,7 @@ def get_future_class(request):
     else:
         return Response({"invalid": "User is invalid"})
 
+
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
 def get_schedule(request):
@@ -530,6 +530,7 @@ def get_schedule(request):
     else:
         return Response({"invalid": "User is invalid"})
 
+
 @api_view(['POST', 'GET'])
 @permission_classes((permissions.IsAuthenticated,))
 # @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
@@ -541,16 +542,16 @@ def check_validate(request):
     session_start = request.data.get('session_start')
     session_end = request.data.get('session_end')
     day_of_week = request.data.get('day_of_week')
-    if time_start > time_end :
+    if time_start > time_end:
         data = {
-                "success" : False,
-                "errors" : "Time start cannot greater than time end!"
+            "success": False,
+            "errors": "Time start cannot greater than time end!"
         }
         return Response(data)
-    if session_start > session_end :
+    if session_start > session_end:
         data = {
-                "success" : False,
-                "errors" : "Session start cannot greater than session end!"
+            "success": False,
+            "errors": "Session start cannot greater than session end!"
         }
         return Response(data)
     token = get_token_from_request(request)
@@ -578,10 +579,10 @@ def check_validate(request):
                         "success": False,
                         "errors": "Class is invalid"
                     }
-                    return Response(data) 
+                    return Response(data)
 
 
-        elif user.is_student() : 
+        elif user.is_student():
             # data = {
             #             "success" : False,
             #             "errors" : "Access denied!"
@@ -606,22 +607,24 @@ def check_validate(request):
 
         schedules = []
         info_all_schedule = ClassSession()
-        for item  in all_class:
-            rs = Schedule.objects.filter(own_class__id = item.id,day_of_week = day_of_week)
-            
-            for rs_item in rs :
-                info_all_schedule.add(int(rs_item.session_start),int(rs_item.session_end))
-        if info_all_schedule.add(session_start, session_end) == False :
+        for item in all_class:
+            rs = Schedule.objects.filter(own_class__id=item.id, day_of_week=day_of_week)
+
+            for rs_item in rs:
+                info_all_schedule.add(int(rs_item.session_start), int(rs_item.session_end))
+        if info_all_schedule.add(session_start, session_end) == False:
             data = {
-                        "success" : False,
-                        "errors" : "Session is coincided!"
-                    }
-            return Response(data) 
+                "success": False,
+                "errors": "Session is coincided!"
+            }
+            return Response(data)
             # print(schedules)
+
+
         data = {
-                        "success" : True,
-                        "errors" : "Done!"
-                    }
+            "success": True,
+            "message": "Class is valid"
+        }
         return Response(data)
 
 

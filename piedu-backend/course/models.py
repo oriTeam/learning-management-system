@@ -67,6 +67,7 @@ class Class(models.Model):
             self.name = name
             self.save()
 
+
     def parse_basic_info(self):
         data = {
             "id": self.id,
