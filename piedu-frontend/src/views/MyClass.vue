@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div v-if="isAdmin()" class="row m-3 alert alert-info"
+                     key="emptyCurrentClass">
+                    <strong>Bạn là admin</strong>
+        </div>
+        <div v-else>
         <section>
             <div class="row mr-0">
                 <div class="col-lg-10 col-md-8 col-sm-12">
@@ -25,7 +30,7 @@
             <transition-group name="classbox" v-if="currentClass.classDisplay">
                 <div v-if="currentClass.classList.length == 0" class="row m-3 alert alert-warning"
                      key="emptyCurrentClass">
-                    <strong>Danh sách trống. </strong> Bạn không đang học lớp học nào
+                    <strong>Danh sách trống. </strong>
                 </div>
                 <div v-else key="currentClass" class="row mx-0 my-3">
                 <class-box-landscape class="class-box" v-show="currentClass.landscapeDisplay"
@@ -88,7 +93,7 @@
             <transition-group name="classbox" v-if="futureClass.classDisplay">
                 <div v-if="futureClass.classList.length == 0" class="row m-3 alert alert-warning"
                      key="emptyFutureClass">
-                    <strong>Danh sách trống. </strong> Bạn chưa đăng ký vào lớp học nào sắp diễn ra
+                    <strong>Danh sách trống. </strong>
                 </div>
                 <div v-else class="row mx-0 my-3" key="futureClass">
                     <class-box-landscape class="class-box" v-show="futureClass.landscapeDisplay"
@@ -151,7 +156,7 @@
             <transition-group name="classbox" v-if="pastClass.classDisplay">
                 <div v-if="pastClass.classList.length == 0" class="row m-3 alert alert-warning"
                      key="emptyPastClass">
-                    <strong>Danh sách trống. </strong> Bạn chưa từng tham gia học lớp nào
+                    <strong>Danh sách trống. </strong>
                 </div>
                 <div v-else  class="row mx-0 my-3" key="pastClass">
                 <class-box-landscape class="class-box" v-show="pastClass.landscapeDisplay"
@@ -189,13 +194,7 @@
             </v-layout>
         </section>
     </div>
-    <!--</div>-->
-    <!--</div>-->
-    <!--</section>-->
-    <!--<div @click="openSidebar" id="my-open-menu" class="btn btn-info btn-sm">-->
-    <!--Menu-->
-    <!--</div>-->
-    <!--</div>-->
+    </div>
 </template>
 <script>
     import ClassBoxPortrait from '@/components/class/ClassBoxPortrait.vue'
@@ -260,7 +259,7 @@
                     this.currentClass.pagination.itemPerPage);
             }).catch((response) => {
                 console.log(response);
-            })
+            });
         },
         mounted() {
             this.getShowClass(1);
@@ -275,7 +274,6 @@
             getShowClass: function (page) {
                 let self = this;
                 let token = self.$ls.get('token');
-                // console.log(token);
                 let config = {
                     headers: {
                         "Authorization": "Token " + token.toString()
@@ -285,11 +283,6 @@
                     'format': "json",
                     'token': token
                 }
-                // this.axios.get(BACKEND_URL + '/api/class/all/?format=json&page=' + page).then((response) => {
-                //     self.currentClass.classList = response.data;
-                //     self.currentClass.preloader = false;
-                //     self.currentClass.classDisplay = true;
-                // });
                 this.axios.post(BACKEND_URL + `/api/user/get_current_class`, data, config).then((res) => {
                     if(res.data.empty == true) {
                         self.currentClass.preloader = false;
@@ -342,11 +335,8 @@
             closeSidebar: function () {
                 document.querySelector("#myside").style.width = "0";
             },
-            get_past_class_success: function (res) {
-                this.pastClass.classList = res.data;
-            },
-            request_error: function (res) {
-                console.log(res);
+            isAdmin: function () {
+                return this.$ls.get("group") == "admin_group";
             }
 
         }

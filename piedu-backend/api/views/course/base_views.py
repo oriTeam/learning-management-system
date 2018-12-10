@@ -1,5 +1,6 @@
 import datetime
 import json
+import dateutil.parser
 
 from api.check import ClassSession
 from api.functions import get_token_from_request, get_user_from_token
@@ -255,8 +256,12 @@ def get_current_class(request):
                     }
                     return Response(data)
                 else:
-                    serializers = ClassSerializer(all_class, many=True)
-                    return Response(serializers.data)
+                    data = []
+                    for class_queryset in all_class:
+                        data.append(class_queryset.parse_info())
+                    return Response(data)
+                    # serializers = ClassSerializer(all_class, many=True)
+                    # return Response(serializers.data)
 
         elif user.is_student():
             class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
@@ -345,8 +350,12 @@ def get_past_class(request):
                     }
                     return Response(data)
                 else:
-                    serializers = ClassSerializer(all_class, many=True)
-                    return Response(serializers.data)
+                    data = []
+                    for class_queryset in all_class:
+                        data.append(class_queryset.parse_info())
+                    return Response(data)
+                    # serializers = ClassSerializer(all_class, many=True)
+                    # return Response(serializers.data)
         elif user.is_student():
             class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
                 own_class__time_end__lte=now)
@@ -414,8 +423,12 @@ def get_future_class(request):
                     }
                     return Response(data)
                 else:
-                    serializers = ClassSerializer(all_class, many=True)
-                    return Response(serializers.data)
+                    data = []
+                    for class_queryset in all_class:
+                        data.append(class_queryset.parse_info())
+                    return Response(data)
+                    # serializers = ClassSerializer(all_class, many=True)
+                    # return Response(serializers.data)
         elif user.is_student():
             class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
                 own_class__time_start__gte=now)
@@ -520,24 +533,25 @@ def get_schedule(request):
 @permission_classes((IsLecturer,))
 # @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def check_validate(request):
-    print(json.loads(request.body.decode('utf-8')))
-    time_start = request.GET.get('time_start')
-    time_end = request.GET.get('time_end')
-    session_start = request.GET.get('session_start')
-    session_end = request.GET.get('session_end')
-    day_of_week = request.GET.get('day_of_week')
-    # if time_start > time_end : 
-    #     data = {
-    #             "success" : False,
-    #             "errors" : "Time start cannot greater than time end!"
-    #     }
-    #     return Response(data)
-    # if session_start > session_end :
-    #     data = {
-    #             "success" : False,
-    #             "errors" : "Session start cannot greater than session end!"
-    #     }
-    #     return Response(data)
+    # print(json.loads(request.body.decode('utf-8')))
+
+    time_start = dateutil.parser.parse(request.data.get('time_start'))
+    time_end = dateutil.parser.parse(request.data.get('time_end'))
+    session_start = request.data.get('session_start')
+    session_end = request.data.get('session_end')
+    day_of_week = request.data.get('day_of_week')
+    if time_start > time_end :
+        data = {
+                "success" : False,
+                "errors" : "Time start cannot greater than time end!"
+        }
+        return Response(data)
+    if session_start > session_end :
+        data = {
+                "success" : False,
+                "errors" : "Session start cannot greater than session end!"
+        }
+        return Response(data)
     # try :
     #     user = User.objects.get(pk = id)
     # except User.DoesNotExist :
@@ -552,12 +566,12 @@ def check_validate(request):
     if user is not None:
         now = datetime.datetime.now(tz=timezone.utc)
         # comment  2 line after when read data from post method
-        time_end = now
-        time_start = now
+        # time_end = now
+        # time_start = now
         all_class = []
         if user.is_lecturer():
             # class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').exclude(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').exclude(
                 Q(own_class__time_start__gte=time_end) | Q(own_class__time_end__lte=time_start))
             if len(class_lecturers) == 0:
                 data = {
@@ -569,12 +583,12 @@ def check_validate(request):
                 all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
                 if len(all_class) == 0:
                     data = {
-                        "success": False,
+                        "suc    cess": False,
                         "errors": "Class is invalid"
                     }
                     return Response(data)
 
-        elif user.is_student:
+        elif user.is_student():
             data = {
                 "success": False,
                 "errors": "Access denied!"
@@ -588,16 +602,16 @@ def check_validate(request):
 
             for rs_item in rs:
                 info_all_schedule.add(int(rs_item.session_start), int(rs_item.session_end))
-        if info_all_schedule.add(2, 3) == False:
+        if info_all_schedule.add(session_start, session_end) == False:
             data = {
                 "success": False,
-                "errors": "Session is coincided!"
+                "message": "Session is coincided!"
             }
             return Response(data)
             # print(schedules)
         data = {
             "success": True,
-            "errors": "Done!"
+            "message": "Class is valid"
         }
         return Response(data)
 
