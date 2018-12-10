@@ -418,14 +418,8 @@ def get_future_class(request):
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
         elif user.is_student():
-<<<<<<< HEAD
-
-            class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
-                own_class__time_start__lte=now, own_class__time_end__gte=now)
-=======
             class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
                 own_class__time_start__gte=now)
->>>>>>> bca0e1a5fb7dcb1b5f756ef88b8c44a3054e0680
             if len(class_students) == 0:
                 data = {
                     "empty": True,
@@ -525,14 +519,8 @@ def get_schedule(request):
 
 @api_view(['POST', 'GET'])
 @permission_classes((IsLecturer,))
-<<<<<<< HEAD
 def check_validate_lecturer(request):
     # print(json.loads(request.body.decode('utf-8')))
-=======
-# @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
-def check_validate(request):
-    print(json.loads(request.body.decode('utf-8')))
->>>>>>> bca0e1a5fb7dcb1b5f756ef88b8c44a3054e0680
     time_start = request.GET.get('time_start')
     time_end = request.GET.get('time_end')
     session_start = request.GET.get('session_start')
@@ -569,7 +557,7 @@ def check_validate(request):
         all_class = []
         if user.is_lecturer():
             # class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').exclude(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').exclude(
                 Q(own_class__time_start__gte=time_end) | Q(own_class__time_end__lte=time_start))
             if len(class_lecturers) == 0:
                 data = {
@@ -646,7 +634,7 @@ def check_validate_student(request):
         all_class=[]
         if user.is_student()  : 
             # class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
-            class_students = ClassStudent.objects.filter(student__id= id).select_related('own_class').exclude(Q(own_class__time_start__gte= time_end)|Q(own_class__time_end__lte=time_start))
+            class_students = ClassStudent.objects.filter(student__id= user.id).select_related('own_class').exclude(Q(own_class__time_start__gte= time_end)|Q(own_class__time_end__lte=time_start))
             if len(class_students) == 0 :
                 data = {
                     "success" : False,
@@ -679,13 +667,13 @@ def check_validate_student(request):
         if info_all_schedule.add(2, 3) == False:
             data = {
                 "success": False,
-                "errors": "Session is coincided!"
+                "message": "Session is coincided!"
             }
             return Response(data)
             # print(schedules)
         data = {
             "success": True,
-            "errors": "Done!"
+            "message": "Done!"
         }
         return Response(data)
 
