@@ -542,6 +542,8 @@ def check_validate(request):
     session_start = request.data.get('session_start')
     session_end = request.data.get('session_end')
     day_of_week = request.data.get('day_of_week')
+    subject = Subject.objects.get(pk=request.data.get('subject'))
+    description = request.data.get('description')
     if time_start > time_end:
         data = {
             "success": False,
@@ -581,6 +583,37 @@ def check_validate(request):
                     }
                     return Response(data)
 
+            schedules = []
+            info_all_schedule = ClassSession()
+            for item in all_class:
+                rs = Schedule.objects.filter(own_class__id=item.id, day_of_week=day_of_week)
+
+                for rs_item in rs:
+                    info_all_schedule.add(int(rs_item.session_start), int(rs_item.session_end))
+            if info_all_schedule.add(session_start, session_end) == False:
+                data = {
+                    "success": False,
+                    "errors": "Session is coincided!"
+                }
+                return Response(data)
+                # print(schedules)
+
+            new_class = Class.objects.create(description=description, time_start=time_start, time_end=time_end,
+                                             subject=subject)
+            new_class.save()
+            new_class_lecturer = ClassLecturer.objects.create(own_class=new_class, lecturer=user)
+            new_class_lecturer.save()
+            new_schedule = Schedule.objects.create(own_class=new_class, day_of_week=day_of_week, session_start=
+                                                    session_start, session_end=session_end)
+            new_schedule.save()
+
+            data = {
+                "success": True,
+                "message": "Class is valid"
+            }
+            return Response(data)
+
+
 
         elif user.is_student():
             # data = {
@@ -605,27 +638,26 @@ def check_validate(request):
                     }
                     return Response(data)
 
-        schedules = []
-        info_all_schedule = ClassSession()
-        for item in all_class:
-            rs = Schedule.objects.filter(own_class__id=item.id, day_of_week=day_of_week)
+            schedules = []
+            info_all_schedule = ClassSession()
+            for item in all_class:
+                rs = Schedule.objects.filter(own_class__id=item.id, day_of_week=day_of_week)
 
-            for rs_item in rs:
-                info_all_schedule.add(int(rs_item.session_start), int(rs_item.session_end))
-        if info_all_schedule.add(session_start, session_end) == False:
+                for rs_item in rs:
+                    info_all_schedule.add(int(rs_item.session_start), int(rs_item.session_end))
+            if info_all_schedule.add(session_start, session_end) == False:
+                data = {
+                    "success": False,
+                    "errors": "Session is coincided!"
+                }
+                return Response(data)
+                # print(schedules)
+
             data = {
-                "success": False,
-                "errors": "Session is coincided!"
+                "success": True,
+                "message": "Class is valid"
             }
             return Response(data)
-            # print(schedules)
-
-
-        data = {
-            "success": True,
-            "message": "Class is valid"
-        }
-        return Response(data)
 
 
 # @api_view(['GET'])
