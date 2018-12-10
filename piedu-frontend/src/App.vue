@@ -31,6 +31,7 @@
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Muli');
     @import url('https://fonts.googleapis.com/css?family=Cabin');
+    @import './assets/scss/form.css';
 
     #app, html {
         font-family: "Cabin", "Muli", sans-serif;
@@ -40,7 +41,7 @@
     ;
     @media (min-width: 1200px) {
         .container {
-            max-width: 1174px !important;
+            max-width: 1234px !important;
         }
     }
 
@@ -50,5 +51,8 @@
             padding-left: 20px !important;
             padding-right: 20px !important;
         }
+    }
+    h4, .h4 {
+        font-size: 1rem !important;
     }
 </style>

@@ -52,6 +52,7 @@
 <script>
     import {validationMixin} from "vuelidate";
     import {required} from "vuelidate/lib/validators";
+    import BACKEND_URL from  "../../backendServer";
 
     export default {
         props: ["clickedNext", "currentStep"],
@@ -115,16 +116,17 @@
         },
         methods: {
             getAllCategory: function () {
-                self = this;
-                this.axios.get('/api/course_category/list?format=json').then((response) => {
+                let self = this;
+                this.axios.get(BACKEND_URL + '/api/course_category/list?format=json').then((response) => {
                     self.categories = response.data;
                 }).catch((response) => {
                     console.log(response);
                 })
             },
             getSubjects: function () {
-                self = this;
-                this.axios.get(`/api/course_category/${self.form.selected_category}/get_subject?format=json`).then((response) => {
+                let self = this;
+                this.axios.get(BACKEND_URL
+                    + `/api/course_category/${self.form.selected_category}/get_subject?format=json`).then((response) => {
                     self.subjects = response.data;
                 }).catch((response) => {
                     console.log(response);

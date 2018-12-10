@@ -11,6 +11,7 @@ import Class from "./views/Class"
 import AllClass from "./views/AllClass";
 import MyClass from "./views/MyClass";
 import InnerClass from "./views/InnerClass";
+import NewClass from "./views/NewClass";
 
 Vue.use(Router);
 var router = new Router({
@@ -82,6 +83,11 @@ var router = new Router({
                     path: 'my',
                     name: 'my-class',
                     component: MyClass
+                },
+                {
+                    path: 'new',
+                    name:'new class',
+                    component: NewClass
                 },
                 {
                     path: ':id',

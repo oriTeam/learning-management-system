@@ -220,7 +220,7 @@ def get_enroll_request(request, id):
             # return Response(serializer.data)
 
 
-@api_view(["GET"])
+@api_view(["GET", "POST"])
 @permission_classes((permissions.IsAuthenticated,))
 def get_current_class(request):
     # id = request.user.id
@@ -235,15 +235,16 @@ def get_current_class(request):
     # else :
     token = get_token_from_request(request)
     user = get_user_from_token(token)
+    print(user)
     if user is not None:
         now = datetime.datetime.now(tz=timezone.utc)
         if user.is_lecturer():
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').filter(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
             if len(class_lecturers) == 0:
                 data = {
-                    "success": False,
-                    "errors": "Class is invalid"
+                    "empty": True,
+                    "message": "ClassList is empty"
                 }
                 return Response(data)
             else:
@@ -257,14 +258,14 @@ def get_current_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-        elif user.is_student:
 
-            class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
+        elif user.is_student():
+            class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
             if len(class_students) == 0:
                 data = {
-                    "success": False,
-                    "errors": "Class is invalid"
+                    "empty": True,
+                    "message": "ClassList is empty"
                 }
                 return Response(data)
             else:
@@ -276,9 +277,16 @@ def get_current_class(request):
                     }
                     return Response(data)
                 else:
-                    serializers = ClassSerializer(all_class, many=True)
-                    return Response(serializers.data)
-
+                    data = []
+                    for class_queryset in all_class:
+                        data.append(class_queryset.parse_info())
+                    return Response(data)
+                    # serializers = ClassSerializer(all_class, many=True)
+                    # return Response(serializers.data)
+        else:
+            return Response({"admin": "User is admin"})
+    else:
+        return Response({"invalid": "User is invalid"})
 
 # @api_view(['GET'])
 # def get_enroll_request(request,id):
@@ -301,8 +309,10 @@ def get_current_class(request):
 #             serializer = UserSerializerView(students,many = True)
 #             return Response(serializer.data)
 
-@api_view(["GET"])
+@api_view(["GET", "POST"])
 @permission_classes((permissions.IsAuthenticated,))
+
+# @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_past_class(request):
     # id = request.user.id
     # try :
@@ -319,12 +329,12 @@ def get_past_class(request):
     if user is not None:
         now = datetime.datetime.now(tz=timezone.utc)
         if user.is_lecturer():
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').filter(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').filter(
                 own_class__time_end__lte=now)
             if len(class_lecturers) == 0:
                 data = {
-                    "success": False,
-                    "errors": "Class is invalid"
+                    "empty": True,
+                    "message": "ClassList is empty"
                 }
                 return Response(data)
             else:
@@ -338,18 +348,18 @@ def get_past_class(request):
                 else:
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
-        elif user.is_student:
-
-            class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
-                own_class__time_start__lte=now, own_class__time_end__gte=now)
+        elif user.is_student():
+            class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
+                own_class__time_end__lte=now)
             if len(class_students) == 0:
                 data = {
-                    "success": False,
-                    "errors": "Class is invalid"
+                    "empty": True,
+                    "message": "ClassList is empty"
                 }
                 return Response(data)
             else:
                 all_class = [item.own_class for item in class_students if item.own_class is not None]
+
                 if len(all_class) == 0:
                     data = {
                         "success": False,
@@ -357,11 +367,19 @@ def get_past_class(request):
                     }
                     return Response(data)
                 else:
-                    serializers = ClassSerializer(all_class, many=True)
-                    return Response(serializers.data)
+                    data = []
+                    for class_queryset in all_class:
+                        data.append(class_queryset.parse_info())
+                    return Response(data)
 
+                    # serializers = ClassSerializer(all_class, many=True)
+                    # return Response(serializers.data)
+        else:
+            return Response({"admin": "User is admin"})
+    else:
+        return Response({"invalid": "User is invalid"})
 
-@api_view(["GET"])
+@api_view(["GET", "POST"])
 @permission_classes((permissions.IsAuthenticated,))
 def get_future_class(request):
     # id = request.user.id
@@ -380,12 +398,12 @@ def get_future_class(request):
         now = datetime.datetime.now(tz=timezone.utc)
         if user.is_lecturer():
 
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').filter(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').filter(
                 own_class__time_start__gte=now)
             if len(class_lecturers) == 0:
                 data = {
-                    "success": False,
-                    "errors": "Class is invalid"
+                    "empty": True,
+                    "message": "ClassList is empty"
                 }
                 return Response(data)
             else:
@@ -400,13 +418,18 @@ def get_future_class(request):
                     serializers = ClassSerializer(all_class, many=True)
                     return Response(serializers.data)
         elif user.is_student():
+<<<<<<< HEAD
 
             class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
+=======
+            class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
+                own_class__time_start__gte=now)
+>>>>>>> bca0e1a5fb7dcb1b5f756ef88b8c44a3054e0680
             if len(class_students) == 0:
                 data = {
-                    "success": False,
-                    "errors": "Class is invalid"
+                    "empty": True,
+                    "message": "ClassList is empty"
                 }
                 return Response(data)
             else:
@@ -418,9 +441,17 @@ def get_future_class(request):
                     }
                     return Response(data)
                 else:
-                    serializers = ClassSerializer(all_class, many=True)
-                    return Response(serializers.data)
+                    data = []
+                    for class_queryset in all_class:
+                        data.append(class_queryset.parse_info())
+                    return Response(data)
 
+                    # serializers = ClassSerializer(all_class, many=True)
+                    # return Response(serializers.data)
+        else:
+            return Response({"admin": "User is admin"})
+    else:
+        return Response({"invalid": "User is invalid"})
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -429,7 +460,7 @@ def get_schedule(request):
     # try :
     #     user = User.objects.get(pk = id)
     # except User.DoesNotExist :
-    #     data = {
+    #        data = {
     #             "success" : False,
     #             "errors" : "User is invalid"
     #     }
@@ -441,7 +472,7 @@ def get_schedule(request):
         now = datetime.datetime.now(tz=timezone.utc)
         all_class = []
         if user.is_lecturer():
-            class_lecturers = ClassLecturer.objects.filter(lecturer__id=id).select_related('own_class').filter(
+            class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
             if len(class_lecturers) == 0:
                 data = {
@@ -458,9 +489,8 @@ def get_schedule(request):
                     }
                     return Response(data)
 
-        elif user.is_student:
-
-            class_students = ClassStudent.objects.filter(student__id=id).select_related('own_class').filter(
+        elif user.is_student():
+            class_students = ClassStudent.objects.filter(student__id=user.id).select_related('own_class').filter(
                 own_class__time_start__lte=now, own_class__time_end__gte=now)
             if len(class_students) == 0:
                 data = {
@@ -490,12 +520,19 @@ def get_schedule(request):
         else:
 
             return JsonResponse({"data": schedules})
-
+    else:
+        return Response({"invalid": "User is invalid"})
 
 @api_view(['POST', 'GET'])
 @permission_classes((IsLecturer,))
+<<<<<<< HEAD
 def check_validate_lecturer(request):
     # print(json.loads(request.body.decode('utf-8')))
+=======
+# @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+def check_validate(request):
+    print(json.loads(request.body.decode('utf-8')))
+>>>>>>> bca0e1a5fb7dcb1b5f756ef88b8c44a3054e0680
     time_start = request.GET.get('time_start')
     time_end = request.GET.get('time_end')
     session_start = request.GET.get('session_start')
