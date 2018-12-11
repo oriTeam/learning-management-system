@@ -1,10 +1,12 @@
 <template>
     <div>
+        <section v-if="isStudent()">
         <button v-if="this.status==0" @click="enroll()" type="button" class="btn btn-icon btn-primary"><span
                 class="btn-inner--icon"><i
             class="ni ni-bag-17"></i></span> <span class="btn-inner--text">Tham gia lớp học</span></button>
         <button v-else-if="this.status==2" type="button" class="btn btn-icon btn-light disabled">Đang chờ xác nhận
             ...</button>
+        </section>
     </div>
 </template>
 <script>
@@ -59,7 +61,19 @@
                this.axios.get(BACKEND_URL + '/api/class/student_status', {params: data}, config).then((res) => {
                    self.status = res.data.code;
                })
-           }
+           },
+           isStudent: function () {
+                if (this.$ls.get('group') == 'student_group') {
+                    return true;
+                }
+                else return false;
+           },
+           isLecturer: function () {
+                if (this.$ls.get('group') == 'lecturer_group') {
+                    return true;
+                }
+                return false;
+            },
         }
     }
 </script>
