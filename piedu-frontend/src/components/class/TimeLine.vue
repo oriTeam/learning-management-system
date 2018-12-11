@@ -1,10 +1,10 @@
 <template>
     <ul class="timeline">
-        <li class="timeline-item">
-            <div class="timeline-badge ">1</div>
+        <li class="timeline-item" v-for="syllabus in syllabuses" :key="syllabus.id">
+            <div class="timeline-badge ">{{ syllabus.week }}</div>
             <div class="timeline-panel">
                 <div class="timeline-heading">
-                    <h4 class="timeline-title">Admin added a comment.</h4>
+                    <h4 class="timeline-title"> Nội dung tuần {{ syllabus.week }}</h4>
                     <div class="timeline-panel-controls">
                         <div class="controls">
                             <button class="btn btn-sm btn-link"><i class="fas fa-edit"></i> Chỉnh sửa</button>
@@ -15,15 +15,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="timeline-body"><p><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, maxime
-                    alias nam dignissimos natus voluptate iure deleniti. Doloremque, perspiciatis voluptas dignissimos
-                    ex, ullam et, reprehenderit similique possimus iste commodi minima fugiat non culpa, veniam
-                    temporibus laborum. Distinctio ipsam cupiditate debitis aliquid deleniti consectetur voluptates
-                    corporis officiis tempora minus veniam, accusamus cum optio nesciunt illo nulla odio? Quidem
-                    nesciunt, omnis at quo aliquam porro amet fugit mollitia minus explicabo, possimus deserunt rem ut
-                    commodi laboriosam quia. Numquam, est facilis rem iste voluptatum. Cupiditate porro fuga saepe quis
-                    nulla mollitia, magni dicta soluta distinctio tempore voluptate quo perferendis. Maiores eveniet
-                    deleniti, nemo.</i></p></div>
+                <div class="timeline-body">
+                    <p><i>
+                        {{ syllabus.content }}
+                    </i></p>
+                    <a :href="material_url(material.file)" target="_blank" v-for="material in syllabus.materials">
+                        {{ material.name }}
+                    </a>
+                </div>
             </div>
 
         </li>
@@ -31,6 +30,41 @@
 </template>
 
 <script>
+    import BACKEND_URL from "@/backendServer";
+    export default {
+        name: "time-line",
+        data() {
+            return {
+                syllabuses: Object,
+            }
+        },
+        created() {
+            this.get_syllabus();
+        },
+        methods: {
+            get_syllabus: function () {
+                let self = this;
+                let token = self.$ls.get('token');
+                let classId = self.$route.params.id;
+                // alert(classId);
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'token': self.$ls.get('token')
+                };
+                this.axios.get(BACKEND_URL+ `/api/class/${classId}/get_syllabus`, {params: data}, config).then((res) => {
+                    console.log(res.data);
+                    self.syllabuses = res.data;
+                })
+            },
+            material_url: function (path) {
+                return BACKEND_URL + path;
+            }
+        },
+    }
 
 </script>
 <style lang="scss">
@@ -120,7 +154,7 @@
                 text-align: center;
                 top: 16px;
                 width: 50px;
-                z-index: 100;
+                z-index: 2;
             }
 
             .timeline-badge + .timeline-panel {

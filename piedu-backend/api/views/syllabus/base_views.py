@@ -9,6 +9,8 @@ User = settings.AUTH_USER_MODEL
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions 
+from api.permission import IsMyOwnOrAdmin, IsAuthenticated
+
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -39,8 +41,8 @@ def get_syllabus_material(request,id):
         serializers = MaterialSerializer(materials,many=True)
         return Response(serializers.data)
     
-@api_view(['GET'])
-@permission_classes((permissions.IsAuthenticated,))
+@api_view(['GET','POST'])
+@permission_classes((IsAuthenticated,))
 def get_class_syllabus(request,id):
     all_syllabus =Syllabus.objects.filter(own_class__id = id) 
     
@@ -57,9 +59,9 @@ def get_class_syllabus(request,id):
             materials = Material.objects.filter(syllabus__id = syllabus.id)
             
             serializers = MaterialSerializer(materials,many=True)
-            material.append(serializers.data)
+            # material.append(serializers.data)
             data = syllabus.parse_data()
-            data['materials'] = material
+            data['materials'] = serializers.data
             result.append(data)
         return Response(result) 
 			

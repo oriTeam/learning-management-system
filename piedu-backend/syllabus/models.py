@@ -3,6 +3,15 @@ from django.utils.translation import gettext as _
 from course.models import Class
 from django.conf import settings
 
+FILE_TYPE_CHOICES = (
+    (_('PDF'), _('PDF')),
+    (_('DOC/DOCX'), _('DOC/DOCX')),
+    (_('IMG/PNG/SVG/GIF'), _('IMG/PNG/SVG/GIF')),
+    (_('MP4/AVI'), _('MP4/AVI')),
+    (_('MP3'), _('MP3')),
+    (_('Other'), _('Other'))
+)
+
 class Syllabus(models.Model):
     title = models.CharField(max_length=100, default="", verbose_name=_("Syllabus's title"))
     content = models.TextField(default="",verbose_name=_("Syllabus's content"))
@@ -16,6 +25,7 @@ class Syllabus(models.Model):
         verbose_name_plural = _("Syllabus")
 
     def __str__(self):
+        # return "Syllabus : {}".format(self.title + " " + self.own_class.code)
         return "Syllabus : {}".format(self.title)
 
     def parse_data(self):
@@ -33,7 +43,7 @@ class Syllabus(models.Model):
 class Material(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Material's Name"))
     syllabus = models.ForeignKey(Syllabus, on_delete=models.CASCADE, related_name='materials_set', verbose_name=_("Syllabus"))
-    material_type = models.CharField(max_length=255, verbose_name=_("Material's Type"))
+    material_type = models.CharField(choices=FILE_TYPE_CHOICES, max_length=255, verbose_name=_("Material's Type"))
     file = models.FileField(blank=False, null=True)
 
     class Meta:
