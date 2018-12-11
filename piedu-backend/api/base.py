@@ -14,13 +14,13 @@ from course.models import Class
 @permission_classes((permissions.IsAuthenticatedOrReadOnly,))
 def get_data(request):
     all_data = []
-    list_user =  User.objects.all()
+    list_user =  User.objects.all().exclude(group__name = 'admin_group')
     for user in list_user :
-        all_data.append({"id" : user.id,"name" : user.username })
+        all_data.append({"id" : user.id,"name" : user.fullname() })
     list_class = Class.objects.all()
     for  classes in list_class :
         all_data.append({"id" : classes.id, "name" : classes.name})
-    return JsonResponse({"data" :all_data})
+    return Response(all_data)
 
 
 class BaseManageView(View):

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--<section class="section section-allclass-cover section-shaped my-0">-->
-        <!--<search></search>-->
+        <!-- <search></search> -->
         <!--<div class="shape shape-style-1 shape-primary alpha-4">-->
         <!--<span></span>-->
         <!--<span></span>-->
@@ -121,6 +121,7 @@
         },
         mounted() {
             this.getShowClass(1);
+           
         },
         methods: {
             getShortDescription: function (description) {
@@ -146,7 +147,8 @@
             },
             closeSidebar: function () {
                 document.querySelector("#allside").style.width = "0";
-            }
+            },
+            
         }
     }
 </script>
