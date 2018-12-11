@@ -50,7 +50,8 @@
 
                         <v-tab-item>
                             <v-card flat>
-                                <v-card-text>Thời gian biểu</v-card-text>
+                                <!--<v-card-text>Thời gian biểu</v-card-text>-->
+                                <time-line></time-line>
                             </v-card>
                         </v-tab-item>
 
@@ -119,6 +120,7 @@
 <script>
     import AsideLecturer from "@/components/class/AsideLecturer";
     import EnrollButton from "@/components/class/EnrollButton";
+    import TimeLine from "@/components/class/TimeLine";
     import BACKEND_URL from "@/backendServer";
     import ajax from "@/request"
 
@@ -171,6 +173,7 @@
         components: {
             'sidebar': AsideLecturer,
             'enroll-btn': EnrollButton,
+            'time-line': TimeLine
         },
         created() {
             let self = this;
