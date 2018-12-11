@@ -43,6 +43,7 @@ def get_syllabus_material(request,id):
 @permission_classes((permissions.IsAuthenticated,))
 def get_class_syllabus(request,id):
     all_syllabus =Syllabus.objects.filter(own_class__id = id) 
+    
     if len(all_syllabus) == 0 :
         data = {
                 "success" : False,
@@ -50,6 +51,19 @@ def get_class_syllabus(request,id):
         }
         return Response(data) 
     else :
+        result = []
+        for syllabus in all_syllabus:
+            material=[]
+            materials = Material.objects.filter(syllabus__id = syllabus.id)
+            
+            serializers = MaterialSerializer(materials,many=True)
+            material.append(serializers.data)
+            data = syllabus.parse_data()
+            data['materials'] = material
+            result.append(data)
+        return Response(result) 
+			
+
         serializers = SyllabusSerializer(all_syllabus,many=True)
         return Response(serializers.data)                        
 

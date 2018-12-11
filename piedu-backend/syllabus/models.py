@@ -23,7 +23,7 @@ class Syllabus(models.Model):
             "id" : self.id,
             "title" : self.title,
             "content" : self.content,
-            "class_id" : self.own_class,
+            "class_id" : self.own_class.id,
             "week" : self.week
             
         }
@@ -49,7 +49,7 @@ class Material(models.Model):
         data ={
             "id" : self.id,
             "name" : self.name,
-            "syllabus_id" : self.syllabus,
+            "syllabus_id" : self.syllabus.id,
             "material_type" : self.material_type,
             "file" : self.file
         }
