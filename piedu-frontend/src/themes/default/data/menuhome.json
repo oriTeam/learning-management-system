@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "icon": "pvi-icon_Menu_Cat",
+      "url": "",
+      "name": "Danh mục sản phẩm"
+    },
+    {
+      "icon": "pvi-icon_Promotion",
+      "url": "",
+      "name": "Chương trình khuyến mãi"
+    },
+    {
+      "icon": "pvi-icon_BuildPC_2",
+      "url": "",
+      "name": "Xây dựng cấu hình"
+    },
+    {
+      "icon": "pvi-icon_Viewed",
+      "url": "",
+      "name": "Sản phẩm vừa xem"
+    }
+  ]
+}

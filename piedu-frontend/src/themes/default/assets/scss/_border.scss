@@ -1,0 +1,8 @@
+$position: top right left bottom;
+$color: #dbdbdb;
+
+@each $p in $position {
+  .b-#{$p} {
+    border-#{$p}: 1px solid #{$color};
+  }
+}

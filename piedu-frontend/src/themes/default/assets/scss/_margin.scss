@@ -1,0 +1,27 @@
+$sizes: 0 5 8 10 15 20 25 30 35 40 45 50 70 80;
+
+@each $m in $sizes {
+  .m#{$m} {
+    margin: #{$m}px !important;
+  }
+  .mt#{$m} {
+    margin-top: #{$m}px !important;
+  }
+  .mb#{$m} {
+    margin-bottom: #{$m}px !important;
+  }
+  .ml#{$m} {
+    margin-left: #{$m}px !important;
+  }
+  .mr#{$m} {
+    margin-right: #{$m}px !important;
+  }
+  .mx#{$m} {
+    margin-left: #{$m}px !important;
+    margin-right: #{$m}px !important;
+  }
+  .my#{$m} {
+    margin-top: #{$m}px !important;
+    margin-bottom: #{$m}px !important;
+  }
+}

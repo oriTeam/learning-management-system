@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "url": "/",
+      "img": "https://phongvu.vn/media/banner/pv-banner-635x397-15bca.png"
+    },
+    {
+      "url": "/",
+      "img": "https://phongvu.vn/media/banner/pv-banner-635x397-ca1fc.png"
+    }
+  ],
+  "home_banners": [
+    {
+      "url": "/he",
+      "img": "https://phongvu.vn/media/banner/pv-banner-200x97-fd748.png"
+    },
+    {
+      "url": "/",
+      "img": "https://phongvu.vn/media/banner/pv-banner-200x97-ac875.jpg"
+    }
+  ]
+}
