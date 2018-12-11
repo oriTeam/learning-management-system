@@ -68,7 +68,7 @@
                                         <td class="text-xs-left">{{ props.item.username }}</td>
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>
-                                        <td class="">{{ props.item.personal_page }}</td>
+                                        <!--<td class="">{{ props.item.personal_page }}</td>-->
                                         <td class="justify-center layout px-0">
                                             <v-icon
                                                     small
@@ -95,7 +95,7 @@
                                         <td class="text-xs-left">{{ props.item.username }}</td>
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>
-                                        <td class="">{{ props.item.personal_page }}</td>
+                                        <!--<td class="">{{ props.item.personal_page }}</td>-->
                                         <td class="justify-center layout px-0">
                                             <v-icon
                                                     small
@@ -138,7 +138,7 @@
                         {text: 'Tên tài khoản', value: 'username'},
                         {text: 'Giới tính', value: 'gender'},
                         {text: 'Số điện thoại', value: 'phone'},
-                        {text: 'Trang cá nhân', value: 'page'},
+                        // {text: 'Trang cá nhân', value: 'page'},
                         {text: 'Xóa khỏi lớp', value: 'delete', sortable: false}
                     ],
                     body: Object
@@ -155,7 +155,7 @@
                         {text: 'Tên tài khoản', value: 'username'},
                         {text: 'Giới tính', value: 'gender'},
                         {text: 'Số điện thoại', value: 'phone'},
-                        {text: 'Trang cá nhân', value: 'page'},
+                        // {text: 'Trang cá nhân', value: 'page'},
                         {text: 'Hành động', value: 'delete', sortable: false}
                     ],
                     body: Object
