@@ -1,6 +1,13 @@
-<template></template>
+<template>
+    <div>
+
+    </div>
+</template>
 <script>
-    const user = [
+    export default {
+        data() {
+            return {
+                user: [
     {
         "first_name": "Quỳnh",
         "last_name": "Nguyễn Thị Như",
@@ -61566,5 +61573,8 @@
         "last_name_group": "Nguyễn",
         "gender": ""
     }
-]
+                ],
+            }
+        }
+    }
 </script>
