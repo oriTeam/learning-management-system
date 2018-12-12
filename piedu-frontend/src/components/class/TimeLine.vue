@@ -46,7 +46,6 @@
                 let self = this;
                 let token = self.$ls.get('token');
                 let classId = self.$route.params.id;
-                // alert(classId);
                 let config = {
                     headers: {
                         "Authorization": "Token " + token.toString()
@@ -56,7 +55,6 @@
                     'token': self.$ls.get('token')
                 };
                 this.axios.get(BACKEND_URL+ `/api/class/${classId}/get_syllabus`, {params: data}, config).then((res) => {
-                    console.log(res.data);
                     self.syllabuses = res.data;
                 })
             },

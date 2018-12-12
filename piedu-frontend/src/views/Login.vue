@@ -33,7 +33,7 @@
 
                         </v-layout>
                         <template v-else>
-                            <form role="form" id="login-form">
+                            <form role="form" id="login-form" @submit.prevent="submit">
                                 <div class="form-group input-group input-group-alternative"><!---->
                                     <div class="input-group-prepend"><span class="input-group-text"><i
                                             class="ni ni-email-83"></i></span>
@@ -50,9 +50,10 @@
                                            v-model="credentials.password"/>
                                 </div>
                                 <div class="text-center">
-                                    <base-button typ                                                                                                                                                                            e="primary" class="mt-5 mb-4" @click="submit">Đăng
+                                    <button type="submit" class="btn btn-primary mt-5 mb-4"
+                                            @click="submit">Đăng
                                         nhập
-                                    </base-button>
+                                    </button>
                                 </div>
                             </form>
                         </template>
