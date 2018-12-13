@@ -22,7 +22,29 @@ def get_data(request):
         all_data.append({"id" : classes.id, "name" : classes.name ,"type" : "class"})
     return Response(all_data)
 
-
+@api_view(['GET'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+def result_search(request):
+    _type = request.data.get('type')
+    if _type == "user" :
+        user_id = request.data.get('user_id')
+        try :
+            user = User.objects.get(pk = user_id)
+        except User.DoesNotExist :
+            return Response("User is invalid")
+        else :
+            return Response(user.parse_data())
+    elif _type == "class":
+        class_id = request.data.get('class_id')
+        try :
+            item = Class.objects.get(pk = class_id)
+        except Class.DoesNotExist :
+            return Response("Class is invalid")
+        else:
+            return Response(item.parse_info_and_username())
+    else :
+        return Response("Search failed")
+    
 
 class BaseManageView(View):
     """

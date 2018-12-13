@@ -112,13 +112,17 @@ def save_syllabus_template(request):
         # except ClassLecturer.DoesNotExist :
         #     return Response("Access denied!")
         # else:
-        new_syllabus_template = SyllabusTemplate.objects.create( own_class= new_class)
-        new_syllabus_template.save()
-        data = {
-            "success": True,
-            "message": " Template have been created successfully"
-        }
-        return Response(data)
+        validated = SyllabusTemplate.objects.filter(own_class__id = class_id)
+        if len(validated) == 0 :
+            new_syllabus_template = SyllabusTemplate.objects.create( own_class= new_class)
+            new_syllabus_template.save()
+            data = {
+                "success": True,
+                "message": " Template have been created successfully"
+            }
+            return Response(data)
+        else :
+            return Response("Template was exist")
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
