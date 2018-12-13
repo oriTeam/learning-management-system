@@ -41,10 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-
-    #
-    'webpack_loader',
-
     #
     'debug_toolbar',
     # 'guardian',
@@ -180,12 +176,6 @@ CACHES = {
     },
 }
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'javascripts/bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, '../piedu-frontend/webpack-stats.json'),
-    }
-}
 
 JWT_AUTH = {
     'JWT_VERIFY': True,
