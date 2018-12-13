@@ -3,7 +3,7 @@ import datetime
 import dateutil.parser
 from api.check import ClassSession
 from api.functions import get_token_from_request, get_user_from_token
-from api.permission import IsMyOwnOrAdmin
+from api.permission import IsMyOwnOrAdmin, IsAuthenticated
 from core.serializers import UserSerializerView
 from course.models import CourseCategory, Class, Schedule, ClassLecturer, ClassStudent, EnrollRequest, Subject
 from course.serializers import CourseCategorySerializer, SubjectSerializer, ClassSerializer

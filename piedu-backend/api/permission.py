@@ -6,6 +6,14 @@ SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS']
 from .functions import get_user_from_token, get_token_from_request
 
 
+class IsAuthenticated(BasePermission):
+    def has_permission(self,request,view):
+        token = get_token_from_request(request)
+        user = get_user_from_token(token)
+        if user is not None:
+            return True
+        return False
+
 class IsLecturer(BasePermission):
     def has_permission(self,request,view):
         token = get_token_from_request(request)

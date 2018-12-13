@@ -1,10 +1,12 @@
 <template>
     <div id="app" data-app="true">
         <router-view name="header"></router-view>
-        <main>
-            <fade-transition origin="center" mode="out-in" :duration="250">
-                <router-view/>
-            </fade-transition>
+        <main id="main">
+            <div class="wrapper">
+                <fade-transition origin="center" mode="out-in" :duration="250">
+                    <router-view/>
+                </fade-transition>
+            </div>
         </main>
         <router-view name="footer"></router-view>
     </div>
@@ -31,6 +33,8 @@
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Muli');
     @import url('https://fonts.googleapis.com/css?family=Cabin');
+    /*@import "./assets/scss/materialize.css";*/
+    /*@import "./assets/scss/style.css";*/
     @import './assets/scss/form.css';
 
     #app, html {
@@ -52,6 +56,7 @@
             padding-right: 20px !important;
         }
     }
+
     h4, .h4 {
         font-size: 1rem !important;
     }
