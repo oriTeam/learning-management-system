@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-12 p-1">
-        <div class="card p-3 my-2 mx-3">
+        <div class="card border-0 shadow p-3 my-2 mx-3">
             <div class="course-item-pic-text row">
                 <div class="course-pic relative-position col-md-5 col-sm-12">
                     <img v-lazy="avatarUrl(avatarPath)" class="card-img"/>
