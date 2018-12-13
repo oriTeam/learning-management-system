@@ -21,3 +21,10 @@ class SyllabusTemplateSerializer(serializers.ModelSerializer):
         model = SyllabusTemplate
         fields= '__all__'
         read_only_fields =()
+
+class SyllabusTemplateSerializer1(serializers.ModelSerializer):
+    
+    class Meta1:
+        model = SyllabusTemplate
+        fields= '__all__'
+        read_only_fields =()
