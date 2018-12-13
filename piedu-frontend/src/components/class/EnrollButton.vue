@@ -41,8 +41,10 @@
                };
                this.axios.post(BACKEND_URL + '/api/enroll_request/create', data, config).then((res) => {
                    console.log("enroll success");
+                   this.check_status();
+
                });
-               this.check_status();
+               // this.check_status();
            },
            check_status: function () {
                let self = this;
