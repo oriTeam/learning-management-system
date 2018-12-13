@@ -39,12 +39,14 @@
                         </v-tab>
 
                         <v-tab>
-                            Danh sách học sinh ({{ this.students_list.body.length }})
+                            <!--Danh sách học sinh ({{ this.students_list.body.length }})-->
+                            Danh sách học sinh
                             <v-icon>chrome_reader_mode</v-icon>
                         </v-tab>
 
                         <v-tab>
-                            Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})
+                            <!--Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})-->
+                            Danh sách xin vào lớp
                             <v-icon>toc</v-icon>
                         </v-tab>
 
@@ -57,15 +59,22 @@
 
                         <v-tab-item>
                             <v-card flat>
-                                <v-data-table
-                                        :headers="students_list.title"
-                                        :items="students_list.body"
-                                        class="elevation-1"
-                                        loading
+                                <section v-if="students_list.body.length == 0">
+                                    <button @click="apply_syllabus()" type="button"
+                                            class="btn btn-icon btn-primary"><span
+                                            class="btn-inner--icon"><i
+                                            class="ni ni-bag-17"></i></span> <span class="btn-inner--text">Lưu mẫu syllabus</span>
+                                    </button>
+                                </section>
+                                <v-data-table v-else
+                                              :headers="students_list.title"
+                                              :items="students_list.body"
+                                              class="elevation-1"
+                                              loading
                                 >
                                     <template slot="items" slot-scope="props">
                                         <td>{{ props.item.code }}</td>
-                                        <td class="text-xs-left">{{     props.item.fullname }}</td>
+                                        <td class="text-xs-left">{{ props.item.fullname }}</td>
                                         <td class="text-xs-left">{{ props.item.username }}</td>
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>
@@ -128,6 +137,7 @@
         name: "inner-class",
         data() {
             return {
+                classId: this.$route.params.id,
                 students_list: {
                     title: [
                         {
@@ -143,7 +153,7 @@
                         // {text: 'Trang cá nhân', value: 'page'},
                         {text: 'Xóa khỏi lớp', value: 'delete', sortable: false}
                     ],
-                    body: Object
+                    body: []
                 },
                 enroll_request_list: {
                     title: [
@@ -160,14 +170,10 @@
                         // {text: 'Trang cá nhân', value: 'page'},
                         {text: 'Hành động', value: 'delete', sortable: false}
                     ],
-                    body: Object
+                    body: []
                 },
                 preloader: true,
-                lecturer: Object,
                 classDetail: Object,
-                students: Object,
-                enrollRequestStudents: Object,
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
             }
         },
         components: {
@@ -190,6 +196,23 @@
                 this.get_enroll_request_error);
         },
         methods: {
+            apply_syllabus: function(){
+                let self = this;
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'class_id': this.classId,
+                    'token': self.$ls.get('token'),
+                    'template_class_id': 816
+                };
+                this.axios.post(BACKEND_URL + '/api/syllabus_template/add', data, config).then((res) => {
+                    console.log("apply success");
+                });
+            },
             isStudent: function () {
                 if (this.$ls.get('group') == 'student_group') {
                     return true;

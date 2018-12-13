@@ -45,112 +45,178 @@
             <v-tabs-slider color="yellow"></v-tabs-slider>
 
             <v-tab>
-                Thời gian biểu
+                Lớp học đang diễn ra
                 <v-icon>timeline</v-icon>
             </v-tab>
 
             <v-tab>
-                Danh sách học sinh
+                Lớp học sắp tới
                 <v-icon>chrome_reader_mode</v-icon>
             </v-tab>
 
             <v-tab>
-                Danh sách xin vào lớp
+                Lớp học đã kết thúc
                 <v-icon>toc</v-icon>
             </v-tab>
 
             <v-tab-item>
+                <v-card flat ref="presentTab">
+                    <div class="row mt-5 justify-center" v-if="presentClass.preloader">
+                        <v-progress-circular :size="30" color="green" indeterminate class="mb-5"/>
+                    </div>
+                    <section v-else>
+                        <section v-if="presentClass.classList.length == 0">
+                            <div class="w-100 my-3 mx-0 alert alert-warning"
+                                 key="emptyFutureClass">
+                                <strong>Danh sách trống. </strong>
+                            </div>
+                        </section>
+                        <section v-else>
+                            <transition-group name="classbox" class="row mt-3" v-if="presentClass.classDisplay">
+                                <class-box-portrait v-for="class_obj in presentClass.classList"
+                                                    :id="class_obj.id"
+                                                    :avatar-path="class_obj.avatar_path"
+                                                    :category="class_obj.subject"
+                                                    :lecturer="class_obj.lecturer[0]"
+                                                    :class-name="class_obj.name"
+                                                    :student-count="class_obj.students"
+                                                    :code="class_obj.code"
+                                                    :short-description="getShortDescription(class_obj.description)"
+                                                    :key="class_obj.code + ' 2'"></class-box-portrait>
+                            </transition-group>
+                            <v-layout row wrap>
+                                <v-flex xs6></v-flex>
+                                <v-flex xs6 class="text-xs-right">
+                                    <v-pagination
+                                            v-model="presentClass.pagination.page"
+                                            :length="presentClass.pagination.pageTotal"
+                                            @input="presentClassNext"
+                                    ></v-pagination>
+                                </v-flex>
+                            </v-layout>
+                        </section>
+                    </section>
+                </v-card>
+            </v-tab-item>
+            <v-tab-item>
                 <v-card flat>
-                    <div class="row mx-0 justify-center" v-if="presentClass.preloader">
+                    <div class="row mx-0 justify-center" v-if="futureClass.preloader">
                         <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
                     </div>
-
-                    <transition-group name="classbox" class="row mx-0" v-if="presentClass.classDisplay">
-                        <!--<class-box-landscape class="class-box" v-show="landscapeDisplay"-->
-                        <!--v-for="class_obj in classList"-->
-                        <!--:id="class_obj.id"-->
-                        <!--:avatar-path="class_obj.avatar_path"-->
-                        <!--:category="class_obj.subject"-->
-                        <!--lecturer="Hoàng Xuân Tùng"-->
-                        <!--:class-name="class_obj.name"-->
-                        <!--:student-count="class_obj.students"-->
-                        <!--:code="class_obj.code"-->
-                        <!--:short-description="getShortDescription(class_obj.description)"-->
-                        <!--:key="class_obj.code + ' 1'"></class-box-landscape>-->
-                        <class-box-portrait v-for="class_obj in presentClass.classList"
-                                            :id="class_obj.id"
-                                            :avatar-path="class_obj.avatar_path"
-                                            :category="class_obj.subject"
-                                            lecturer=""
-                                            :class-name="class_obj.name"
-                                            :student-count="class_obj.students"
-                                            :code="class_obj.code"
-                                            :short-description="getShortDescription(class_obj.description)"
-                                            :key="class_obj.code + ' 2'"></class-box-portrait>
-                    </transition-group>
-                    <v-layout row wrap>
-                        <v-flex xs6></v-flex>
-                        <v-flex xs6 class="text-xs-right">
-                            <v-pagination
-                                    v-model="presentClass.pagination.page"
-                                    :length="presentClass.pagination.pageTotal"
-                                    @input="presentClassNext"
-                            ></v-pagination>
-                        </v-flex>
-                    </v-layout>
+                    <section v-else>
+                        <section v-if="futureClass.classList.length == 0">
+                            <div class="w-100 my-3 mx-0 alert alert-warning"
+                                 key="emptyFutureClass">
+                                <strong>Danh sách trống. </strong>
+                            </div>
+                        </section>
+                        <section v-else>
+                            <transition-group name="classbox" class="row mt-3" v-if="futureClass.classDisplay">
+                                <class-box-portrait v-for="class_obj in futureClass.classList"
+                                                    :id="class_obj.id"
+                                                    :avatar-path="class_obj.avatar_path"
+                                                    :category="class_obj.subject"
+                                                    :lecturer="class_obj.lecturer[0]"
+                                                    :class-name="class_obj.name"
+                                                    :student-count="class_obj.students"
+                                                    :code="class_obj.code"
+                                                    :short-description="getShortDescription(class_obj.description)"
+                                                    :key="class_obj.code + ' 2'"></class-box-portrait>
+                            </transition-group>
+                            <v-layout row wrap>
+                                <v-flex xs6></v-flex>
+                                <v-flex xs6 class="text-xs-right">
+                                    <v-pagination
+                                            v-model="futureClass.pagination.page"
+                                            :length="futureClass.pagination.pageTotal"
+                                            @input="futureClassNext"
+                                    ></v-pagination>
+                                </v-flex>
+                            </v-layout>
+                        </section>
+                    </section>
                 </v-card>
             </v-tab-item>
             <v-tab-item>
                 <v-card flat>
-                    <v-card-text>Thời gian biểu</v-card-text>
-                    <!--<time-line></time-line>-->
-                </v-card>
-            </v-tab-item>
-            <v-tab-item>
-                <v-card flat>
-                    <v-card-text>Thời gian biểu</v-card-text>
-                    <!--<time-line></time-line>-->
+                    <v-card flat>
+                        <div class="row mt-3 justify-center" v-if="pastClass.preloader">
+                            <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+                        </div>
+                        <section v-else>
+                            <section v-if="pastClass.classList.length == 0">
+                                <div class="w-100 my-3 mx-0 alert alert-warning"
+                                     key="emptyFutureClass">
+                                    <strong>Danh sách trống. </strong>
+                                </div>
+                            </section>
+                            <section v-else>
+                                <transition-group name="classbox" class="row mt-3" v-if="pastClass.classDisplay">
+                                    <class-box-portrait v-for="class_obj in pastClass.classList"
+                                                        :id="class_obj.id"
+                                                        :avatar-path="class_obj.avatar_path"
+                                                        :category="class_obj.subject"
+                                                        :lecturer="class_obj.lecturer[0]"
+                                                        :class-name="class_obj.name"
+                                                        :student-count="class_obj.students"
+                                                        :code="class_obj.code"
+                                                        :short-description="getShortDescription(class_obj.description)"
+                                                        :key="class_obj.code + ' 2'"></class-box-portrait>
+                                </transition-group>
+                                <v-layout row wrap>
+                                    <v-flex xs6></v-flex>
+                                    <v-flex xs6 class="text-xs-right">
+                                        <v-pagination
+                                                v-model="pastClass.pagination.page"
+                                                :length="pastClass.pagination.pageTotal"
+                                                @input="pastClassNext"
+                                        ></v-pagination>
+                                    </v-flex>
+                                </v-layout>
+                            </section>
+                        </section>
+                    </v-card>
                 </v-card>
             </v-tab-item>
         </v-tabs>
 
 
         <!--<div class="row mx-0 justify-center" v-if="presentClass.preloader">-->
-            <!--<v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>-->
+        <!--<v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>-->
         <!--</div>-->
 
         <!--<transition-group name="classbox" class="row mx-0" v-if="presentClass.classDisplay">-->
-            <!--&lt;!&ndash;<class-box-landscape class="class-box" v-show="landscapeDisplay"&ndash;&gt;-->
-            <!--&lt;!&ndash;v-for="class_obj in classList"&ndash;&gt;-->
-            <!--&lt;!&ndash;:id="class_obj.id"&ndash;&gt;-->
-            <!--&lt;!&ndash;:avatar-path="class_obj.avatar_path"&ndash;&gt;-->
-            <!--&lt;!&ndash;:category="class_obj.subject"&ndash;&gt;-->
-            <!--&lt;!&ndash;lecturer="Hoàng Xuân Tùng"&ndash;&gt;-->
-            <!--&lt;!&ndash;:class-name="class_obj.name"&ndash;&gt;-->
-            <!--&lt;!&ndash;:student-count="class_obj.students"&ndash;&gt;-->
-            <!--&lt;!&ndash;:code="class_obj.code"&ndash;&gt;-->
-            <!--&lt;!&ndash;:short-description="getShortDescription(class_obj.description)"&ndash;&gt;-->
-            <!--&lt;!&ndash;:key="class_obj.code + ' 1'"></class-box-landscape>&ndash;&gt;-->
-            <!--<class-box-portrait v-for="class_obj in presentClass.classList"-->
-                                <!--:id="class_obj.id"-->
-                                <!--:avatar-path="class_obj.avatar_path"-->
-                                <!--:category="class_obj.subject"-->
-                                <!--lecturer=""-->
-                                <!--:class-name="class_obj.name"-->
-                                <!--:student-count="class_obj.students"-->
-                                <!--:code="class_obj.code"-->
-                                <!--:short-description="getShortDescription(class_obj.description)"-->
-                                <!--:key="class_obj.code + ' 2'"></class-box-portrait>-->
+        <!--&lt;!&ndash;<class-box-landscape class="class-box" v-show="landscapeDisplay"&ndash;&gt;-->
+        <!--&lt;!&ndash;v-for="class_obj in classList"&ndash;&gt;-->
+        <!--&lt;!&ndash;:id="class_obj.id"&ndash;&gt;-->
+        <!--&lt;!&ndash;:avatar-path="class_obj.avatar_path"&ndash;&gt;-->
+        <!--&lt;!&ndash;:category="class_obj.subject"&ndash;&gt;-->
+        <!--&lt;!&ndash;lecturer="Hoàng Xuân Tùng"&ndash;&gt;-->
+        <!--&lt;!&ndash;:class-name="class_obj.name"&ndash;&gt;-->
+        <!--&lt;!&ndash;:student-count="class_obj.students"&ndash;&gt;-->
+        <!--&lt;!&ndash;:code="class_obj.code"&ndash;&gt;-->
+        <!--&lt;!&ndash;:short-description="getShortDescription(class_obj.description)"&ndash;&gt;-->
+        <!--&lt;!&ndash;:key="class_obj.code + ' 1'"></class-box-landscape>&ndash;&gt;-->
+        <!--<class-box-portrait v-for="class_obj in presentClass.classList"-->
+        <!--:id="class_obj.id"-->
+        <!--:avatar-path="class_obj.avatar_path"-->
+        <!--:category="class_obj.subject"-->
+        <!--lecturer=""-->
+        <!--:class-name="class_obj.name"-->
+        <!--:student-count="class_obj.students"-->
+        <!--:code="class_obj.code"-->
+        <!--:short-description="getShortDescription(class_obj.description)"-->
+        <!--:key="class_obj.code + ' 2'"></class-box-portrait>-->
         <!--</transition-group>-->
         <!--<v-layout row wrap>-->
-            <!--<v-flex xs6></v-flex>-->
-            <!--<v-flex xs6 class="text-xs-right">-->
-                <!--<v-pagination-->
-                        <!--v-model="presentClass.pagination.page"-->
-                        <!--:length="presentClass.pagination.pageTotal"-->
-                        <!--@input="presentClassNext"-->
-                <!--&gt;</v-pagination>-->
-            <!--</v-flex>-->
+        <!--<v-flex xs6></v-flex>-->
+        <!--<v-flex xs6 class="text-xs-right">-->
+        <!--<v-pagination-->
+        <!--v-model="presentClass.pagination.page"-->
+        <!--:length="presentClass.pagination.pageTotal"-->
+        <!--@input="presentClassNext"-->
+        <!--&gt;</v-pagination>-->
+        <!--</v-flex>-->
         <!--</v-layout>-->
         <!--</div>-->
         <!--</div>-->
@@ -347,6 +413,15 @@
             },
             presentClassNext: function (page) {
                 this.getShowPresentClass(page);
+                this.$nextTick(() => {
+                    this.$refs.presentTab.scrollTop = 0;
+                });
+            },
+            futureClassNext: function (page) {
+                this.getShowFutureClass(page);
+            },
+            pastClassNext: function (page) {
+                this.getShowPastClass(page);
             },
             openSidebar: function () {
                 document.querySelector("#allside").style.width = "270px";

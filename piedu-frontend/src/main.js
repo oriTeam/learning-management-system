@@ -8,6 +8,9 @@ import '@/assets/vuetify.custom.min.css'; // Ensure you are using css-loader
 import Argon from "./plugins/argon-kit";
 import VueLocalStorage from "vue-localstorage";
 import vueScrollBehavior from 'vue-scroll-behavior'
+import VueScroll from 'vue-scrollto';
+import VueSweetalert2 from 'vue-sweetalert2';
+import Toasted from 'vue-toasted';
 
 
 Vue.config.productionTip = false;
@@ -22,6 +25,9 @@ Vue.use(VueLocalStorage, {
     bind: true
 });
 Vue.use(vueScrollBehavior, { router: router });
+Vue.use(VueScroll);
+Vue.use(VueSweetalert2);
+Vue.use(Toasted)
 
 new Vue({
     router,

@@ -4,10 +4,10 @@
             <img class="card-img-top class-avatar-portrait" v-lazy="avatarUrl(avatarPath)"/>
             <div class="card-body py-3 px-3">
                 <h6 class="text-primary text-uppercase">{{ className }}</h6>
-                <p class="description mt-3">{{ lecturer }}</p>
-                <div><div class="badge badge-primary badge-pill">{{ code }}</div></div>
+                <p class="description mt-3">Giảng viên: {{ lecturer }}</p>
+                <div><div class="badge badge-primary badge-pill">#{{ code }}</div></div>
                 <div><div
-                        class="badge badge-primary badge-pill">{{ category }}</div></div>
+                        class="badge badge-primary badge-pill">#{{ category }}</div></div>
 
                 <!--<div class="col-6 course-viewer ul-li d-inline-block">-->
                             <!--<ul>-->

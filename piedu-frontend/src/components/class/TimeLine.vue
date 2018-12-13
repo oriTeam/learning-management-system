@@ -1,6 +1,6 @@
 <template>
     <ul class="timeline">
-        <li class="timeline-item" v-for="syllabus in syllabuses" :key="syllabus.id">
+        <li class="timeline-item" v-if="getSyllabusSuccess" if v-for="syllabus in syllabuses" :key="syllabus.id">
             <div class="timeline-badge ">{{ syllabus.week }}</div>
             <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -35,6 +35,7 @@
         name: "time-line",
         data() {
             return {
+                getSyllabusSuccess: false,
                 syllabuses: Object,
             }
         },
@@ -55,7 +56,11 @@
                     'token': self.$ls.get('token')
                 };
                 this.axios.get(BACKEND_URL+ `/api/class/${classId}/get_syllabus`, {params: data}, config).then((res) => {
-                    self.syllabuses = res.data;
+                    if(res.data.errors) {}
+                    else {
+                        self.getSyllabusSuccess = true;
+                        self.syllabuses = res.data;
+                    }
                 })
             },
             material_url: function (path) {
