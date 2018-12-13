@@ -71,7 +71,7 @@ class Material(models.Model):
 
 class SyllabusTemplate(models.Model):
     own_class = models.ForeignKey(Class, on_delete=models.CASCADE, null=True, related_name='lecturers_in_template_set', verbose_name=_('Class'))
-    lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='classes_in_template_set', verbose_name=_('Lecturer'))
+    # lecturer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='classes_in_template_set', verbose_name=_('Lecturer'))
 
     class Meta:
         db_table = 'syllabus_template'
