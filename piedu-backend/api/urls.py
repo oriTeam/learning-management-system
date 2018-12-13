@@ -71,7 +71,8 @@ class_urlpatterns = [
     path('info/', crud_functions.get_full_class_info),
     path('<int:id>/get_syllabus',syllabus_base_views.get_class_syllabus),
     path('validated',course_base_views.check_validate),
-    path('student_status/', course_base_views.get_status)
+    path('student_status/', course_base_views.get_status),
+    path('edit-syllabus',syllabus_base_views.edit_syllabus),
 ]
 
 class_lecturer_urlpatterns = [
@@ -107,6 +108,7 @@ syllabus_url_patterns= [
     path('update/<int:id>/', syllabus_viewsets.SyllabusUpdateView.as_view(), name="syllabus_update"),
     path('delete/<int:id>/', syllabus_viewsets.SyllabusDeleteView.as_view(), name="syllabus_delete"),
     path('<int:id>/get_material/',syllabus_base_views.get_syllabus_material),
+    path('edit-materia',syllabus_base_views.edit_material),
 ]
 material_url_patterns=[
     path('create/<int:id>/', syllabus_viewsets.MaterialCreateView.as_view(), name="material_create"),
@@ -122,6 +124,8 @@ syllabus_template_url_patterns=[
     path('<int:id>/get_template/',syllabus_base_views.get_syllabus_template),
     path('get_all_template/',syllabus_base_views.get_all_syllabus_template),
     path('save',syllabus_base_views.save_syllabus_template),
+    path('add',syllabus_base_views.add_template),
+
 ]
 
 user_url_patterns=[
@@ -130,6 +134,9 @@ user_url_patterns=[
     path('get_past_class',course_base_views.get_past_class),
     path('get_schedule',course_base_views.get_schedule),
     path('get_future_class',course_base_views.get_future_class),
+    path('change-password',user_base_views.change_password),
+    path('create',user_base_views.create_user),
+    path('edit',user_base_views.edit_user_info),
 ]
 
 urlpatterns = [
