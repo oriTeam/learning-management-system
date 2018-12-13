@@ -12,6 +12,8 @@ FILE_TYPE_CHOICES = (
     (_('Other'), _('Other'))
 )
 
+
+
 class Syllabus(models.Model):
     title = models.CharField(max_length=100, default="", verbose_name=_("Syllabus's title"))
     content = models.TextField(default="",verbose_name=_("Syllabus's content"))
@@ -38,6 +40,8 @@ class Syllabus(models.Model):
             
         }
         return data
+
+
 
 
 class Material(models.Model):
@@ -77,3 +81,4 @@ class SyllabusTemplate(models.Model):
 
     def __str__(self):
         return "Syllabus Template: {}".format(self.own_class.name)
+
