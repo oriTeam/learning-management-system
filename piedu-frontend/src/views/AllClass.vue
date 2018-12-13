@@ -35,84 +35,123 @@
         <!--</div>-->
         <!--</div>-->
         <!--</div>-->
-        <!--<div class="flex-column flex-md-row"><div class="nav-wrapper"><ul role="tablist" class="nav nav-pills nav-fill"><li class="nav-item"><a data-toggle="tab" role="tab" href="#undefined" class="nav-link active" aria-selected="true"><div><span><i class="ni ni-cloud-upload-96">-->
-        <!--Home-->
-        <!--</i></span></div></a></li><li class="nav-item"><a data-toggle="tab" role="tab" href="#Profile" class="nav-link"><div><span><i class="ni ni-bell-55 mr-2">-->
-        <!--Profile-->
-        <!--</i></span></div></a></li><li class="nav-item"><a data-toggle="tab" role="tab" href="#undefined" class="nav-link"><div><span><i class="ni ni-calendar-grid-58">-->
-        <!--Messages-->
-        <!--</i></span></div></a></li></ul></div> <div class="tab-content"><div class="card shadow">&lt;!&ndash;&ndash;&gt; <div class="card-body"><div class="tab-pane fade active show" aria-expanded="true" style=""> <p class="description">Raw denim you probably haven't heard of them jean shorts-->
-        <!--Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache-->
-        <!--cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro-->
-        <!--keffiyeh dreamcatcher synth.</p></div> <div class="tab-pane fade" style="display: none;"> <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex-->
-        <!--squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan-->
-        <!--american apparel, butcher voluptate nisi qui.</p></div> <div class="tab-pane fade" style="display: none;"> <p class="description">Raw denim you probably haven't heard of them jean shorts-->
-        <!--Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache-->
-        <!--cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro-->
-        <!--keffiyeh dreamcatcher synth.</p></div></div> &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;</div></div></div>-->
-        <!--<tabs>-->
-        <!--<tab name="First tab">-->
-        <!--First tab content-->
-        <!--</tab>-->
-        <!--<tab name="Second tab">-->
-        <!--Second tab content-->
-        <!--</tab>-->
-        <!--<tab name="Third tab">-->
-        <!--Third tab content-->
-        <!--</tab>-->
-        <!--</tabs>-->
-        <div class="mx-0 nav-wrapper">
-            <ul role="tablist" class="nav nav-pills nav-fill">
-                <li class="nav-item"><a data-toggle="tab" role="tab" href="#UI/UX Design" class="nav-link">
-                    <div>UI/UX Design</div>
-                </a></li>
-                <li class="nav-item"><a data-toggle="tab" role="tab" href="#Programming" class="nav-link active"
-                                        aria-selected="true">
-                    <div>Programming</div>
-                </a></li>
-                <li class="nav-item"><a data-toggle="tab" role="tab" href="#Graphic" class="nav-link">
-                    <div>Graphic</div>
-                </a></li>
-            </ul>
-        </div>
 
-        <div class="row mx-0 justify-center" v-if="preloader">
-            <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
-        </div>
+        <v-tabs class="w-100 px-3 br-4"
+                centered
+                color="#5e72e4"
+                dark
+                icons-and-text
+                grow>
+            <v-tabs-slider color="yellow"></v-tabs-slider>
 
-        <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
-            <!--<class-box-landscape class="class-box" v-show="landscapeDisplay"-->
-            <!--v-for="class_obj in classList"-->
-            <!--:id="class_obj.id"-->
-            <!--:avatar-path="class_obj.avatar_path"-->
-            <!--:category="class_obj.subject"-->
-            <!--lecturer="Hoàng Xuân Tùng"-->
-            <!--:class-name="class_obj.name"-->
-            <!--:student-count="class_obj.students"-->
-            <!--:code="class_obj.code"-->
-            <!--:short-description="getShortDescription(class_obj.description)"-->
-            <!--:key="class_obj.code + ' 1'"></class-box-landscape>-->
-            <class-box-portrait v-for="class_obj in classList"
-                                :id="class_obj.id"
-                                :avatar-path="class_obj.avatar_path"
-                                :category="class_obj.subject"
-                                lecturer="Hoàng Xuân Tùng"
-                                :class-name="class_obj.name"
-                                :student-count="class_obj.students"
-                                :code="class_obj.code"
-                                :short-description="getShortDescription(class_obj.description)"
-                                :key="class_obj.code + ' 2'"></class-box-portrait>
-        </transition-group>
-        <v-layout row wrap>
-            <v-flex xs6></v-flex>
-            <v-flex xs6 class="text-xs-right">
-                <v-pagination
-                        v-model="pagination.page"
-                        :length="pagination.pageTotal"
-                        @input="next"
-                ></v-pagination>
-            </v-flex>
-        </v-layout>
+            <v-tab>
+                Thời gian biểu
+                <v-icon>timeline</v-icon>
+            </v-tab>
+
+            <v-tab>
+                Danh sách học sinh
+                <v-icon>chrome_reader_mode</v-icon>
+            </v-tab>
+
+            <v-tab>
+                Danh sách xin vào lớp
+                <v-icon>toc</v-icon>
+            </v-tab>
+
+            <v-tab-item>
+                <v-card flat>
+                    <div class="row mx-0 justify-center" v-if="presentClass.preloader">
+                        <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+                    </div>
+
+                    <transition-group name="classbox" class="row mx-0" v-if="presentClass.classDisplay">
+                        <!--<class-box-landscape class="class-box" v-show="landscapeDisplay"-->
+                        <!--v-for="class_obj in classList"-->
+                        <!--:id="class_obj.id"-->
+                        <!--:avatar-path="class_obj.avatar_path"-->
+                        <!--:category="class_obj.subject"-->
+                        <!--lecturer="Hoàng Xuân Tùng"-->
+                        <!--:class-name="class_obj.name"-->
+                        <!--:student-count="class_obj.students"-->
+                        <!--:code="class_obj.code"-->
+                        <!--:short-description="getShortDescription(class_obj.description)"-->
+                        <!--:key="class_obj.code + ' 1'"></class-box-landscape>-->
+                        <class-box-portrait v-for="class_obj in presentClass.classList"
+                                            :id="class_obj.id"
+                                            :avatar-path="class_obj.avatar_path"
+                                            :category="class_obj.subject"
+                                            lecturer=""
+                                            :class-name="class_obj.name"
+                                            :student-count="class_obj.students"
+                                            :code="class_obj.code"
+                                            :short-description="getShortDescription(class_obj.description)"
+                                            :key="class_obj.code + ' 2'"></class-box-portrait>
+                    </transition-group>
+                    <v-layout row wrap>
+                        <v-flex xs6></v-flex>
+                        <v-flex xs6 class="text-xs-right">
+                            <v-pagination
+                                    v-model="presentClass.pagination.page"
+                                    :length="presentClass.pagination.pageTotal"
+                                    @input="presentClassNext"
+                            ></v-pagination>
+                        </v-flex>
+                    </v-layout>
+                </v-card>
+            </v-tab-item>
+            <v-tab-item>
+                <v-card flat>
+                    <v-card-text>Thời gian biểu</v-card-text>
+                    <!--<time-line></time-line>-->
+                </v-card>
+            </v-tab-item>
+            <v-tab-item>
+                <v-card flat>
+                    <v-card-text>Thời gian biểu</v-card-text>
+                    <!--<time-line></time-line>-->
+                </v-card>
+            </v-tab-item>
+        </v-tabs>
+
+
+        <!--<div class="row mx-0 justify-center" v-if="presentClass.preloader">-->
+            <!--<v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>-->
+        <!--</div>-->
+
+        <!--<transition-group name="classbox" class="row mx-0" v-if="presentClass.classDisplay">-->
+            <!--&lt;!&ndash;<class-box-landscape class="class-box" v-show="landscapeDisplay"&ndash;&gt;-->
+            <!--&lt;!&ndash;v-for="class_obj in classList"&ndash;&gt;-->
+            <!--&lt;!&ndash;:id="class_obj.id"&ndash;&gt;-->
+            <!--&lt;!&ndash;:avatar-path="class_obj.avatar_path"&ndash;&gt;-->
+            <!--&lt;!&ndash;:category="class_obj.subject"&ndash;&gt;-->
+            <!--&lt;!&ndash;lecturer="Hoàng Xuân Tùng"&ndash;&gt;-->
+            <!--&lt;!&ndash;:class-name="class_obj.name"&ndash;&gt;-->
+            <!--&lt;!&ndash;:student-count="class_obj.students"&ndash;&gt;-->
+            <!--&lt;!&ndash;:code="class_obj.code"&ndash;&gt;-->
+            <!--&lt;!&ndash;:short-description="getShortDescription(class_obj.description)"&ndash;&gt;-->
+            <!--&lt;!&ndash;:key="class_obj.code + ' 1'"></class-box-landscape>&ndash;&gt;-->
+            <!--<class-box-portrait v-for="class_obj in presentClass.classList"-->
+                                <!--:id="class_obj.id"-->
+                                <!--:avatar-path="class_obj.avatar_path"-->
+                                <!--:category="class_obj.subject"-->
+                                <!--lecturer=""-->
+                                <!--:class-name="class_obj.name"-->
+                                <!--:student-count="class_obj.students"-->
+                                <!--:code="class_obj.code"-->
+                                <!--:short-description="getShortDescription(class_obj.description)"-->
+                                <!--:key="class_obj.code + ' 2'"></class-box-portrait>-->
+        <!--</transition-group>-->
+        <!--<v-layout row wrap>-->
+            <!--<v-flex xs6></v-flex>-->
+            <!--<v-flex xs6 class="text-xs-right">-->
+                <!--<v-pagination-->
+                        <!--v-model="presentClass.pagination.page"-->
+                        <!--:length="presentClass.pagination.pageTotal"-->
+                        <!--@input="presentClassNext"-->
+                <!--&gt;</v-pagination>-->
+            <!--</v-flex>-->
+        <!--</v-layout>-->
         <!--</div>-->
         <!--</div>-->
         <!--</div>-->
@@ -134,15 +173,41 @@
         name: "AllClass",
         data() {
             return {
-                classList: [],
-                preloader: true,
-                classDisplay: false,
-                landscapeDisplay: true,
-                pagination: {
-                    itemTotal: 0,
-                    page: 1,
-                    pageTotal: 0,
-                    itemPerPage: 12
+                presentClass: {
+                    classList: [],
+                    preloader: true,
+                    classDisplay: false,
+                    landscapeDisplay: true,
+                    pagination: {
+                        itemTotal: 0,
+                        page: 1,
+                        pageTotal: 0,
+                        itemPerPage: 12
+                    }
+                },
+                futureClass: {
+                    classList: [],
+                    preloader: true,
+                    classDisplay: false,
+                    landscapeDisplay: true,
+                    pagination: {
+                        itemTotal: 0,
+                        page: 1,
+                        pageTotal: 0,
+                        itemPerPage: 12
+                    }
+                },
+                pastClass: {
+                    classList: [],
+                    preloader: true,
+                    classDisplay: false,
+                    landscapeDisplay: true,
+                    pagination: {
+                        itemTotal: 0,
+                        page: 1,
+                        pageTotal: 0,
+                        itemPerPage: 12
+                    }
                 }
             }
         },
@@ -160,20 +225,51 @@
                     "Authorization": "Token " + token.toString()
                 }
             };
-            let data = {
-                'token': self.$ls.get('token'),
+            let presentData = {
+                'token': token,
                 'format': 'json',
+                'time': 'present'
             };
-            this.axios.post(BACKEND_URL + '/api/class/all/', data, config).then((response) => {
-                this.pagination.itemTotal = response.data.length;
-                this.pagination.pageTotal = Math.round(this.pagination.itemTotal / this.pagination.itemPerPage);
-                console.log(this.pagination.itemTotal);
+            this.axios.post(BACKEND_URL + '/api/class/all/', presentData, config).then((response) => {
+                this.presentClass.pagination.itemTotal = response.data.length;
+                this.presentClass.pagination.pageTotal = Math.round(this.presentClass.pagination.itemTotal / this.presentClass.pagination.itemPerPage);
+                console.log(this.presentClass.pagination.itemTotal);
+            }).catch((response) => {
+                console.log(response);
+            });
+
+            let futureData = {
+                'token': token,
+                'format': 'json',
+                'time': 'future'
+            };
+            this.axios.post(BACKEND_URL + '/api/class/all/', futureData, config).then((response) => {
+                this.futureClass.pagination.itemTotal = response.data.length;
+                this.futureClass.pagination.pageTotal = Math.round(this.futureClass.pagination.itemTotal / this.futureClass.pagination.itemPerPage);
+                console.log(this.futureClass.pagination.itemTotal);
+            }).catch((response) => {
+                console.log(response);
+            });
+
+            let pastData = {
+                'token': token,
+                'format': 'json',
+                'time': 'past'
+            };
+            this.axios.post(BACKEND_URL + '/api/class/all/', pastData, config).then((response) => {
+                this.pastClass.pagination.itemTotal = response.data.length;
+                this.pastClass.pagination.pageTotal = Math.round(this.pastClass.pagination.itemTotal /
+                    this.pastClass.pagination.itemPerPage);
+                console.log(this.pastClass.pagination.itemTotal);
             }).catch((response) => {
                 console.log(response);
             })
+
         },
         mounted() {
-            this.getShowClass(1);
+            this.getShowPresentClass(1);
+            this.getShowFutureClass(1);
+            this.getShowPastClass(1);
 
         },
         methods: {
@@ -183,7 +279,7 @@
                 }
                 return description;
             },
-            getShowClass: function (page) {
+            getShowPresentClass: function (page) {
                 let self = this;
                 let token = self.$ls.get('token');
                 let config = {
@@ -195,17 +291,62 @@
                     'token': self.$ls.get('token'),
                     'format': 'json',
                     'page': page,
+                    'time': "present",
                 };
 
                 this.axios.post(BACKEND_URL + '/api/class/all/', data, config).then((response) => {
-                    self.classList = response.data;
-                    self.preloader = false;
-                    self.classDisplay = true;
+                    self.presentClass.classList = response.data;
+                    self.presentClass.preloader = false;
+                    self.presentClass.classDisplay = true;
 
                 })
             },
-            next: function (page) {
-                this.getShowClass(page);
+            getShowFutureClass: function (page) {
+                let self = this;
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'token': self.$ls.get('token'),
+                    'format': 'json',
+                    'page': page,
+                    'time': "future",
+                };
+
+                this.axios.post(BACKEND_URL + '/api/class/all/', data, config).then((response) => {
+                    self.futureClass.classList = response.data;
+                    self.futureClass.preloader = false;
+                    self.futureClass.classDisplay = true;
+
+                })
+            },
+            getShowPastClass: function (page) {
+                let self = this;
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'token': self.$ls.get('token'),
+                    'format': 'json',
+                    'page': page,
+                    'time': "past",
+                };
+
+                this.axios.post(BACKEND_URL + '/api/class/all/', data, config).then((response) => {
+                    self.pastClass.classList = response.data;
+                    self.pastClass.preloader = false;
+                    self.pastClass.classDisplay = true;
+
+                })
+            },
+            presentClassNext: function (page) {
+                this.getShowPresentClass(page);
             },
             openSidebar: function () {
                 document.querySelector("#allside").style.width = "270px";
@@ -395,5 +536,12 @@
         right: 0px;
         font-size: 15px;
         z-index: 1200;
+    }
+</style>
+<style>
+    .v-tabs__bar {
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
     }
 </style>

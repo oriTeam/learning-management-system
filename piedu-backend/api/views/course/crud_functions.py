@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
@@ -6,6 +8,8 @@ from course.serializers import CourseCategorySerializer
 from course.models import CourseCategory, Class
 from api.permission import IsMyOwnOrAdmin, IsAuthenticated
 from django.utils import timezone
+
+
 @api_view(["GET", "POST"])
 @permission_classes((IsAuthenticated,))
 def get_all_class_info(request):
@@ -15,14 +19,14 @@ def get_all_class_info(request):
     all_class=[]
     if time == "past" :
         all_class = Class.objects.filter(time_end__lte = now)
-    elif time == "future" :
+    elif time == "present" :
         all_class = Class.objects.filter(time_start__lte=now,time_end__gte = now)
     else :
         all_class = Class.objects.filter(time_start__gte=now)
     if 'page' in request.data:
         class_querysets = all_class
         paginator = Paginator(class_querysets, 12)
-        page = request.query_params.get('page')
+        page = request.data.get('page')
         try:
             class_querysets = paginator.page(page)
         except PageNotAnInteger:
