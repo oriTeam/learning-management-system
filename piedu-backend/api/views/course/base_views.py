@@ -263,7 +263,7 @@ def get_current_class(request):
                 else:
                     data = []
                     for class_queryset in all_class:
-                        data.append(class_queryset.parse_info())
+                        data.append(class_queryset.parse_info_and_username())
                     return Response(data)
                     # serializers = ClassSerializer(all_class, many=True)
                     # return Response(serializers.data)
@@ -288,7 +288,7 @@ def get_current_class(request):
                 else:
                     data = []
                     for class_queryset in all_class:
-                        data.append(class_queryset.parse_info())
+                        data.append(class_queryset.parse_info_and_username())
                     return Response(data)
                     # serializers = ClassSerializer(all_class, many=True)
                     # return Response(serializers.data)
@@ -357,7 +357,7 @@ def get_past_class(request):
                 else:
                     data = []
                     for class_queryset in all_class:
-                        data.append(class_queryset.parse_info())
+                        data.append(class_queryset.parse_info_and_username())
                     return Response(data)
                     # serializers = ClassSerializer(all_class, many=True)
                     # return Response(serializers.data)
@@ -382,7 +382,7 @@ def get_past_class(request):
                 else:
                     data = []
                     for class_queryset in all_class:
-                        data.append(class_queryset.parse_info())
+                        data.append(class_queryset.parse_info_and_username())
                     return Response(data)
 
                     # serializers = ClassSerializer(all_class, many=True)
@@ -431,7 +431,7 @@ def get_future_class(request):
                 else:
                     data = []
                     for class_queryset in all_class:
-                        data.append(class_queryset.parse_info())
+                        data.append(class_queryset.parse_info_and_username())
                     return Response(data)
                     # serializers = ClassSerializer(all_class, many=True)
                     # return Response(serializers.data)
@@ -455,7 +455,7 @@ def get_future_class(request):
                 else:
                     data = []
                     for class_queryset in all_class:
-                        data.append(class_queryset.parse_info())
+                        data.append(class_queryset.parse_info_and_username())
                     return Response(data)
 
                     # serializers = ClassSerializer(all_class, many=True)
