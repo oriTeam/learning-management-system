@@ -5,14 +5,22 @@ from rest_framework.response import Response
 from course.serializers import CourseCategorySerializer
 from course.models import CourseCategory, Class
 from api.permission import IsMyOwnOrAdmin, IsAuthenticated
-
+from django.utils import timezone
 @api_view(["GET", "POST"])
 @permission_classes((IsAuthenticated,))
 def get_all_class_info(request):
     data = []
-
+    time = request.data.get("time")
+    now = datetime.datetime.now(tz=timezone.utc)
+    all_class=[]
+    if time == "past" :
+        all_class = Class.objects.filter(time_end__lte = now)
+    elif time == "future" :
+        all_class = Class.objects.filter(time_start__lte=now,time_end__gte = now)
+    else :
+        all_class = Class.objects.filter(time_start__gte=now)
     if 'page' in request.data:
-        class_querysets = Class.objects.all()
+        class_querysets = all_class
         paginator = Paginator(class_querysets, 12)
         page = request.query_params.get('page')
         try:
