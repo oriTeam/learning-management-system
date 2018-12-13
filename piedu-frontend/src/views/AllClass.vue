@@ -61,7 +61,7 @@
         <!--Third tab content-->
         <!--</tab>-->
         <!--</tabs>-->
-        <div class="row mx-0">
+        <div class="mx-0 nav-wrapper">
             <ul role="tablist" class="nav nav-pills nav-fill">
                 <li class="nav-item"><a data-toggle="tab" role="tab" href="#UI/UX Design" class="nav-link">
                     <div>UI/UX Design</div>

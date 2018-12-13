@@ -4,14 +4,16 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from course.serializers import CourseCategorySerializer
 from course.models import CourseCategory, Class
+from api.permission import IsMyOwnOrAdmin, IsAuthenticated
 
-@api_view(["GET"])
-@permission_classes((permissions.AllowAny,))
+@api_view(["GET", "POST"])
+@permission_classes((IsAuthenticated,))
 def get_all_class_info(request):
     data = []
-    if 'page' in request.GET:
+
+    if 'page' in request.data:
         class_querysets = Class.objects.all()
-        paginator = Paginator(class_querysets, 6)
+        paginator = Paginator(class_querysets, 12)
         page = request.query_params.get('page')
         try:
             class_querysets = paginator.page(page)
