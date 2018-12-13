@@ -1,17 +1,24 @@
 <template>
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-3 pr-0 pl-3">
-        <div class="card border-0 card-lift--hover shadow h-100">
+    <div class="col-lg-4 col-md-6 col-sm-12 pb-3 px-3">
+        <router-link :to="{name:'inner-class', params:{id:id}}" class="card border-0 shadow h-100">
             <img class="card-img-top class-avatar-portrait" v-lazy="avatarUrl(avatarPath)"/>
             <div class="card-body py-3 px-3">
                 <h6 class="text-primary text-uppercase">{{ className }}</h6>
                 <p class="description mt-3">{{ lecturer }}</p>
-                <div><span class="badge badge-primary badge-pill">{{ code }}</span><span
-                        class="badge badge-primary badge-pill">{{ category }}</span></div>
-                <router-link type="" class="btn mt-4 btn-success btn-sm" :to="{name:'inner-class', params:{id:id}}" >
-                    Xem chi tiết
-                </router-link>
+                <div><div class="badge badge-primary badge-pill">{{ code }}</div></div>
+                <div><div
+                        class="badge badge-primary badge-pill">{{ category }}</div></div>
+
+                <!--<div class="col-6 course-viewer ul-li d-inline-block">-->
+                            <!--<ul>-->
+                                <!--<li><p class="m-0"><i class="fas fa-user"></i> Sĩ số: {{ studentCount }}</p></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                <div class="btn mt-4 btn-success btn-sm">
+                    <i class="fas fa-user"></i> Sĩ số: {{ studentCount }}
+                </div>
             </div>
-        </div>
+        </router-link>
     </div>
 </template>
 

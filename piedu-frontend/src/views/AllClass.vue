@@ -20,20 +20,60 @@
         <!--<sidebar></sidebar>-->
         <!--</div>-->
         <!--<div class="col-lg-9 col-sm-12 p-0">-->
-        <div class="row mt-3 view-switch">
-            <div class="col-md-8 col-sm-12"></div>
-            <div class="col-md-4 col-sm-12">
-                <div class="onoffswitch pull-right">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                           id="myonoffswitch"
-                           checked>
-                    <label class="onoffswitch-label" for="myonoffswitch"
-                           @click="landscapeDisplay = !landscapeDisplay">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div>
-            </div>
+        <!--<div class="row mt-3 view-switch">-->
+        <!--<div class="col-md-8 col-sm-12"></div>-->
+        <!--<div class="col-md-4 col-sm-12">-->
+        <!--<div class="onoffswitch pull-right">-->
+        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"-->
+        <!--id="myonoffswitch"-->
+        <!--checked>-->
+        <!--<label class="onoffswitch-label" for="myonoffswitch"-->
+        <!--@click="landscapeDisplay = !landscapeDisplay">-->
+        <!--<span class="onoffswitch-inner"></span>-->
+        <!--<span class="onoffswitch-switch"></span>-->
+        <!--</label>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="flex-column flex-md-row"><div class="nav-wrapper"><ul role="tablist" class="nav nav-pills nav-fill"><li class="nav-item"><a data-toggle="tab" role="tab" href="#undefined" class="nav-link active" aria-selected="true"><div><span><i class="ni ni-cloud-upload-96">-->
+        <!--Home-->
+        <!--</i></span></div></a></li><li class="nav-item"><a data-toggle="tab" role="tab" href="#Profile" class="nav-link"><div><span><i class="ni ni-bell-55 mr-2">-->
+        <!--Profile-->
+        <!--</i></span></div></a></li><li class="nav-item"><a data-toggle="tab" role="tab" href="#undefined" class="nav-link"><div><span><i class="ni ni-calendar-grid-58">-->
+        <!--Messages-->
+        <!--</i></span></div></a></li></ul></div> <div class="tab-content"><div class="card shadow">&lt;!&ndash;&ndash;&gt; <div class="card-body"><div class="tab-pane fade active show" aria-expanded="true" style=""> <p class="description">Raw denim you probably haven't heard of them jean shorts-->
+        <!--Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache-->
+        <!--cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro-->
+        <!--keffiyeh dreamcatcher synth.</p></div> <div class="tab-pane fade" style="display: none;"> <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex-->
+        <!--squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan-->
+        <!--american apparel, butcher voluptate nisi qui.</p></div> <div class="tab-pane fade" style="display: none;"> <p class="description">Raw denim you probably haven't heard of them jean shorts-->
+        <!--Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache-->
+        <!--cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro-->
+        <!--keffiyeh dreamcatcher synth.</p></div></div> &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;</div></div></div>-->
+        <!--<tabs>-->
+        <!--<tab name="First tab">-->
+        <!--First tab content-->
+        <!--</tab>-->
+        <!--<tab name="Second tab">-->
+        <!--Second tab content-->
+        <!--</tab>-->
+        <!--<tab name="Third tab">-->
+        <!--Third tab content-->
+        <!--</tab>-->
+        <!--</tabs>-->
+        <div class="row mx-0">
+            <ul role="tablist" class="nav nav-pills nav-fill">
+                <li class="nav-item"><a data-toggle="tab" role="tab" href="#UI/UX Design" class="nav-link">
+                    <div>UI/UX Design</div>
+                </a></li>
+                <li class="nav-item"><a data-toggle="tab" role="tab" href="#Programming" class="nav-link active"
+                                        aria-selected="true">
+                    <div>Programming</div>
+                </a></li>
+                <li class="nav-item"><a data-toggle="tab" role="tab" href="#Graphic" class="nav-link">
+                    <div>Graphic</div>
+                </a></li>
+            </ul>
         </div>
 
         <div class="row mx-0 justify-center" v-if="preloader">
@@ -41,18 +81,18 @@
         </div>
 
         <transition-group name="classbox" class="row mx-0" v-if="classDisplay">
-            <class-box-landscape class="class-box" v-show="landscapeDisplay"
-                                 v-for="class_obj in classList"
-                                 :id="class_obj.id"
-                                 :avatar-path="class_obj.avatar_path"
-                                 :category="class_obj.subject"
-                                 lecturer="Hoàng Xuân Tùng"
-                                 :class-name="class_obj.name"
-                                 :student-count="class_obj.students"
-                                 :code="class_obj.code"
-                                 :short-description="getShortDescription(class_obj.description)"
-                                 :key="class_obj.code + ' 1'"></class-box-landscape>
-            <class-box-portrait v-show="!landscapeDisplay" v-for="class_obj in classList"
+            <!--<class-box-landscape class="class-box" v-show="landscapeDisplay"-->
+            <!--v-for="class_obj in classList"-->
+            <!--:id="class_obj.id"-->
+            <!--:avatar-path="class_obj.avatar_path"-->
+            <!--:category="class_obj.subject"-->
+            <!--lecturer="Hoàng Xuân Tùng"-->
+            <!--:class-name="class_obj.name"-->
+            <!--:student-count="class_obj.students"-->
+            <!--:code="class_obj.code"-->
+            <!--:short-description="getShortDescription(class_obj.description)"-->
+            <!--:key="class_obj.code + ' 1'"></class-box-landscape>-->
+            <class-box-portrait v-for="class_obj in classList"
                                 :id="class_obj.id"
                                 :avatar-path="class_obj.avatar_path"
                                 :category="class_obj.subject"
@@ -64,7 +104,8 @@
                                 :key="class_obj.code + ' 2'"></class-box-portrait>
         </transition-group>
         <v-layout row wrap>
-            <v-flex xs12 class="text-xs-center">
+            <v-flex xs6></v-flex>
+            <v-flex xs6 class="text-xs-right">
                 <v-pagination
                         v-model="pagination.page"
                         :length="pagination.pageTotal"
@@ -88,6 +129,7 @@
     import Search from "@/components/class/Search"
     import Sidebar from "@/components/class/AsideLecturer"
 
+
     export default {
         name: "AllClass",
         data() {
@@ -100,7 +142,7 @@
                     itemTotal: 0,
                     page: 1,
                     pageTotal: 0,
-                    itemPerPage: 6
+                    itemPerPage: 12
                 }
             }
         },
@@ -111,7 +153,18 @@
             'sidebar': Sidebar,
         },
         beforeCreate: function () {
-            this.axios.get(BACKEND_URL + '/api/class/all/?format=json').then((response) => {
+            let self = this;
+            let token = self.$ls.get('token');
+            let config = {
+                headers: {
+                    "Authorization": "Token " + token.toString()
+                }
+            };
+            let data = {
+                'token': self.$ls.get('token'),
+                'format': 'json',
+            };
+            this.axios.post(BACKEND_URL + '/api/class/all/', data, config).then((response) => {
                 this.pagination.itemTotal = response.data.length;
                 this.pagination.pageTotal = Math.round(this.pagination.itemTotal / this.pagination.itemPerPage);
                 console.log(this.pagination.itemTotal);
@@ -121,7 +174,7 @@
         },
         mounted() {
             this.getShowClass(1);
-           
+
         },
         methods: {
             getShortDescription: function (description) {
@@ -132,7 +185,19 @@
             },
             getShowClass: function (page) {
                 let self = this;
-                this.axios.get(BACKEND_URL + '/api/class/all/?format=json&page=' + page).then((response) => {
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'token': self.$ls.get('token'),
+                    'format': 'json',
+                    'page': page,
+                };
+
+                this.axios.post(BACKEND_URL + '/api/class/all/', data, config).then((response) => {
                     self.classList = response.data;
                     self.preloader = false;
                     self.classDisplay = true;
@@ -148,7 +213,7 @@
             closeSidebar: function () {
                 document.querySelector("#allside").style.width = "0";
             },
-            
+
         }
     }
 </script>
