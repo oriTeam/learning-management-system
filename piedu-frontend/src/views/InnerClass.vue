@@ -39,12 +39,14 @@
                         </v-tab>
 
                         <v-tab>
-                            Danh sách học sinh ({{ this.students_list.body.length }})
+                            <!--Danh sách học sinh ({{ this.students_list.body.length }})-->
+                            Danh sách học sinh
                             <v-icon>chrome_reader_mode</v-icon>
                         </v-tab>
 
                         <v-tab>
-                            Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})
+                            <!--Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})-->
+                            Danh sách xin vào lớp
                             <v-icon>toc</v-icon>
                         </v-tab>
 
@@ -143,7 +145,24 @@
                         // {text: 'Trang cá nhân', value: 'page'},
                         {text: 'Xóa khỏi lớp', value: 'delete', sortable: false}
                     ],
-                    body: Object
+                    body: [
+                        {
+                            "code": "000",
+                            "fullname": "Chưa có dữ liệu",
+                            "username": "",
+                            "gender": "",
+                            "phone_number": "",
+                            "personal_page": ""
+                        },
+                        {
+                            "code": "000",
+                            "fullname": "Chưa có dữ liệu",
+                            "username": "",
+                            "gender": "",
+                            "phone_number": "",
+                            "personal_page": ""
+                        },
+                    ]
                 },
                 enroll_request_list: {
                     title: [
@@ -160,14 +179,27 @@
                         // {text: 'Trang cá nhân', value: 'page'},
                         {text: 'Hành động', value: 'delete', sortable: false}
                     ],
-                    body: Object
+                    body: [
+                        {
+                            "code": "000",
+                            "fullname": "Chưa có dữ liệu",
+                            "username": "",
+                            "gender": "",
+                            "phone_number": "",
+                            "personal_page": ""
+                        },
+                        {
+                            "code": "000",
+                            "fullname": "Chưa có dữ liệu",
+                            "username": "",
+                            "gender": "",
+                            "phone_number": "",
+                            "personal_page": ""
+                        },
+                    ]
                 },
                 preloader: true,
-                lecturer: Object,
                 classDetail: Object,
-                students: Object,
-                enrollRequestStudents: Object,
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
             }
         },
         components: {
