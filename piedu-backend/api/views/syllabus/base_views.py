@@ -84,7 +84,7 @@ def get_syllabus_template(request,id):
         return Response(serializers.data)
 
 @api_view(['GET'])
-@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+@permission_classes((permissions.IsAuthenticated,))
 def get_all_syllabus_template(request):
     all_syllabus_template = SyllabusTemplate.objects.all()
     if len(all_syllabus_template) ==0 :
@@ -97,7 +97,7 @@ def get_all_syllabus_template(request):
         return Response(serializers.data)
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+@permission_classes((permissions.IsAuthenticated,))
 def save_syllabus_template(request):
     class_id = request.data.get('class_id')
     # token = get_token_from_request(request)
@@ -120,9 +120,60 @@ def save_syllabus_template(request):
         }
         return Response(data)
 
+@api_view(['GET','POST'])
+@permission_classes((permissions.IsAuthenticated,))
+def add_template(request):
+    class_id = request.data.get('class_id')
+    try :
+        new_class = Class.objects.get(pk = class_id)
+    except Class.DoesNotExist :
+        return Response("Class in invalid")
+    else:
+        template_class_id = request.data.get('template_class_id')
+        all_syllabus = Syllabus.objects.filter(own_class__id = template_class_id)
+        try :
+            for syllabus in all_syllabus :
+                new_syllabus =Syllabus.objects.create(own_class =new_class,content = syllabus.content,title = syllabus.title,week = syllabus.week)
+                new_syllabus.save()
+                all_material = Material.objects.filter(syllabus__id = syllabus.id)
+                for material in all_material:
+                    new_material = Material.objects.create(name = material.name,material_type = material.material_type,syllabus = new_syllabus,file = material.file)
+                    new_material.save()
+        except e:
+            raise e
+        else:
+            return Response({"success" : True})
+            
+@api_view(['GET','POST'])
+@permission_classes((permissions.IsAuthenticated,))
+def edit_syllabus(request):
+    content = request.data.get('content')
+    title = request.data.get('title')
+    syllabus_id = request.data.get('syllabus_id')
+    try :
+        syllabus = Syllabus.objects.get(pk = syllabus_id)
+    except Syllabus.DoesNotExist :
+        return Response("Syllabus is invalid")
+    else:
+        syllabus.content = content
+        syllabus.title = title
+        syllabus.save()
+        return Response({"success" :True})
 
-
-
-
-
-
+@api_view(['GET','POST'])
+@permission_classes((permissions.IsAuthenticated,))
+def edit_material(request):
+    name = request.data.get('name')
+    materia_type = request.data.get('material_type')
+    file = request.data.get('file')
+    material_id = request.data.get('material_id')
+    try :
+        material = Material.objects.get(pk = material_id)
+    except Material.DoesNotExist :
+        return Response("Material is invalid")
+    else:
+        material.name = name 
+        material.materia_type = materia_type
+        material.file = file
+        material.save()
+        return Response({"success" :True})
