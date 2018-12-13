@@ -122,7 +122,7 @@ def save_syllabus_template(request):
             }
             return Response(data)
         else :
-            return Response("Template was exist")
+            return Response({"success" : False,"message" :"Template was exist"})
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -133,6 +133,12 @@ def add_template(request):
     except Class.DoesNotExist :
         return Response("Class in invalid")
     else:
+        delete_all_syllabus = Syllabus.objects.filter(own_class__id = class_id)
+        if len(delete_all_syllabus) >0:
+            for item in delete_all_syllabus :
+                Material.objects.filter(syllabus__id =item.id).delete()
+            for item in delete_all_syllabus :
+                item.delete()
         template_class_id = request.data.get('template_class_id')
         all_syllabus = Syllabus.objects.filter(own_class__id = template_class_id)
         try :
