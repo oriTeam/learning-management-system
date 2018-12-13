@@ -134,6 +134,9 @@ user_url_patterns=[
     path('get_past_class',course_base_views.get_past_class),
     path('get_schedule',course_base_views.get_schedule),
     path('get_future_class',course_base_views.get_future_class),
+    path('change-password',user_base_views.change_password),
+    path('create',user_base_views.create_user),
+    path('edit',user_base_views.edit_user_info),
 ]
 
 urlpatterns = [
