@@ -23,6 +23,7 @@
     "vue-scrollto": "^2.13.0",
     "vue-select": "^2.5.1",
     "vue-stepper": "^1.4.0",
+    "vue-toasted": "^1.1.26",
     "vue2-transitions": "^0.2.3",
     "vuelidate": "^0.7.4"
   },

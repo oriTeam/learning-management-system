@@ -34,12 +34,12 @@
             console.log(this.$ls.get('user'));
             console.log(this.$route);
             window.addEventListener('scroll', this.showGoTopBtn);
-            Swal({
-                title: 'Error!',
-                text: 'Do you want to continue',
-                type: 'error',
-                confirmButtonText: 'Cool'
-            })
+            this.$toasted.show("Toasted !!", {
+                theme: "bubble",
+                position: "top-right",
+                duration: 3000
+            });
+
         },
         watch: {
             $route(to, from) {

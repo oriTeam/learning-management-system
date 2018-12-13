@@ -9,7 +9,9 @@ import Argon from "./plugins/argon-kit";
 import VueLocalStorage from "vue-localstorage";
 import vueScrollBehavior from 'vue-scroll-behavior'
 import VueScroll from 'vue-scrollto';
-import Swal from 'sweetalert2'
+import VueSweetalert2 from 'vue-sweetalert2';
+import Toasted from 'vue-toasted';
+
 
 Vue.config.productionTip = false;
 
@@ -24,7 +26,9 @@ Vue.use(VueLocalStorage, {
 });
 Vue.use(vueScrollBehavior, { router: router });
 Vue.use(VueScroll);
-Vue.use(Swal);
+Vue.use(VueSweetalert2);
+Vue.use(Toasted)
+
 new Vue({
     router,
     render: h => h(App)
