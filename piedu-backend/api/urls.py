@@ -120,7 +120,8 @@ syllabus_template_url_patterns=[
     path('update/<int:id>/', syllabus_viewsets.SyllabusTemplateUpdateView.as_view(), name="syllabus_template_update"),
     path('delete/<int:id>/', syllabus_viewsets.SyllabusTemplateDeleteView.as_view(), name="syllabus_template_delete"),
     path('<int:id>/get_template/',syllabus_base_views.get_syllabus_template),
-    path('get_all_template/',syllabus_base_views.get_syllabus_template),
+    path('get_all_template/',syllabus_base_views.get_all_syllabus_template),
+    path('save',syllabus_base_views.save_syllabus_template),
 ]
 
 user_url_patterns=[

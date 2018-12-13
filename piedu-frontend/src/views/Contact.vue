@@ -36,8 +36,6 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button id="test" class="btn btn-primary" v-on:click="test">TestApi</button>
-
                             <form action="#" method="post" class="contact-us-form" novalidate="novalidate">
                                 <h6>Hoặc liên hệ ngay với chúng tôi:</h6>
                                 <form id="contact-form" class="m-login__form m-form" action="">
@@ -114,18 +112,7 @@
         },
         methods: {
 
-            test: function () {
-
-                this.axios.get("/api/class/validated?day_of_week=Hai", {
-                    time_start: "ts",
-                    time_end: "te",
-                    session_start: "ss",
-                    session_end: "se",
-
-                })
-                    .then(alert("OK!"))
-                    .catch(alert("Faild!"))
-            },
+            
             submit_form: function () {
                 let csrftoken = getCookie("csrftoken");
                 let formdata = new FormData(document.querySelector("#contact-form"));

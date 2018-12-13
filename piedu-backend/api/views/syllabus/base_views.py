@@ -82,8 +82,8 @@ def get_syllabus_template(request,id):
         return Response(serializers.data)
 
 @api_view(['GET'])
-@permission_classes((permissions.IsAuthenticated,))
-def get_syllabus_template(request):
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+def get_all_syllabus_template(request):
     all_syllabus_template = SyllabusTemplate.objects.all()
     if len(all_syllabus_template) ==0 :
         data = {
@@ -93,5 +93,34 @@ def get_syllabus_template(request):
     else :
         serializers = SyllabusTemplateSerializer(all_syllabus_template,many=True)
         return Response(serializers.data)
+
+@api_view(['GET','POST'])
+@permission_classes((permissions.IsAuthenticatedOrReadOnly,))
+def save_syllabus_template(request):
+    class_id = request.data.get('class_id')
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    try :
+        new_class = Class.objects.get(pk = class_id)
+    except Class.DoesNotExist:
+        return Response("Class is invalid")
+    else:
+        try :
+            validate = ClassLecturer.objects.get(own_class__id= class_id,lecturer__id = user.id)
+        except ClassLecturer.DoesNotExist :
+            return Response("Access denied!")
+        else:
+            new_syllabus_template = SyllabusTemplate.objects.create( own_class= new_class,lecturer =user)
+            new_syllabus_template.save()
+            data = {
+                "success": True,
+                "message": " Template have been created successfully"
+            }
+            return Response(data)
+
+
+
+
+
 
 
