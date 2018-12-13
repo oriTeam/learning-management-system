@@ -1,23 +1,11 @@
 <template>
     <div>
-        <section class="section section-myclass-cover section-shaped my-0">
-            <search></search>
-            <div class="shape shape-style-1 shape-primary alpha-4">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </section>
         <section id="content">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3" id="myside">
                         <a href="javascript:void(0)" class="closebtn" @click="closeSidebar">&times;</a>
-                        <sidebar></sidebar>
+                        <!--<sidebar></sidebar>-->
                     </div>
                     <div class="col-lg-9 col-sm-12 p-0">
                         <fade-transition origin="center" mode="out-in" :duration="250">
@@ -34,13 +22,11 @@
 </template>
 <script>
     import {FadeTransition} from "vue2-transitions";
-    import Search from "@/components/class/Search";
     import Sidebar from "@/components/class/AsideLecturer"
 
     export default {
         name: 'Class',
         components: {
-            'search': Search,
             'sidebar': Sidebar,
             FadeTransition,
         },

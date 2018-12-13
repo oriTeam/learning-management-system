@@ -34,11 +34,18 @@
             console.log(this.$ls.get('user'));
             console.log(this.$route);
             window.addEventListener('scroll', this.showGoTopBtn);
-            this.$toasted.show("Toasted !!", {
-                theme: "bubble",
-                position: "top-right",
-                duration: 3000
-            });
+            // this.$toast.show(
+            //     'What would you like to add?', "dfa",{
+            //             balloon: true,
+            //             position: 'topRight'
+            // });
+            // this.$swal({
+            //     position: 'top-end',
+            //     type: 'success',
+            //     title: 'Your work has been saved',
+            //     showConfirmButton: false,
+            //     timer: 3000
+            // });
 
         },
         watch: {
@@ -64,6 +71,7 @@
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Muli');
     @import url('https://fonts.googleapis.com/css?family=Cabin');
+    @import "../node_modules/izitoast/dist/css/iziToast.min.css";
     @import './assets/scss/form.css';
 
     #app, html {
@@ -107,5 +115,29 @@
         letter-spacing: 0;
         -webkit-transition: all 0.15s linear;
         transition: all 0.15s linear;
+    }
+    .section-shaped {
+        .shape-style-1.shape-primary {
+            background:url('../public/img/landing.jpg') !important;
+        }
+    }
+
+    .iziToast {
+        opacity: 1 !important;
+        font-family: "Cabin", sans-serif !important;
+        background-color: #28a745 !important;
+        color: #fff !important;
+    }
+    .swal2-container {
+        font-family: "Cabin", sans-serif !important;
+    }
+    .swal2-title {
+        font-size: 1rem !important;
+    }
+    .swal2-icon {
+        font-size: 0.5rem;
+    }
+    .swal2-popup {
+        width: 20em !important;
     }
 </style>

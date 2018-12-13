@@ -92,14 +92,18 @@
             //     ]
             // }
         }),
+        created() {
+
+        },
         methods: {
             submit: function() {
-                this.loading = true;
+                // this.loading = true;
                 let credentials = {
                     username: this.credentials.username,
                     password: this.credentials.password
                 };
                 auth.login(this, credentials, "/");
+
             },
         }
     };

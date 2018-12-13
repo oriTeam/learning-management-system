@@ -2,7 +2,7 @@
     <div>
         <div id="contact-cta" class="section">
             <div class="bg-image bg-parallax overlay"
-                 style="background-image:url('../../../piedu-frontend/static/images/cta2-background.jpg')"></div>
+                 :style="{'background':'url(\'img/cta2-background.jpg\')'}"></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">

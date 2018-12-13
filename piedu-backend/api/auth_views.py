@@ -12,14 +12,16 @@ def login(request):
     username = request.data.get("username")
     password = request.data.get("password")
     user = authenticate(username=username, password=password)
-    if not user:
-        return Response({'success':'False',"error": "username or password is incorrect!"})
-    else:
+    if user:
         auth(request, user)
         token, _ = Token.objects.get_or_create(user=user)
     # return Response({"token": token.key})
-    redirectTo = settings.FRONTEND_SERVER_URL
-    return Response({'success' : True, 'token': token.key, "redirectTo" : redirectTo})
+        redirectTo = settings.FRONTEND_SERVER_URL
+        return Response({'success' : True, 'token': token.key, "redirectTo" : redirectTo})
+
+    print("NOT USER")
+    return Response({'success': 'False', "error": "username or password is incorrect!"})
+
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny,))

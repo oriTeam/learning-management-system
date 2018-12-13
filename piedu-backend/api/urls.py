@@ -129,7 +129,7 @@ syllabus_template_url_patterns=[
 ]
 
 user_url_patterns=[
-    path('detail/<int:id>/',user_base_views.get_user_detail_view),
+    path('detail/',user_base_views.get_user_detail_view),
     path('get_current_class',course_base_views.get_current_class),
     path('get_past_class',course_base_views.get_past_class),
     path('get_schedule',course_base_views.get_schedule),
