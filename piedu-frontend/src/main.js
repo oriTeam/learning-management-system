@@ -9,6 +9,7 @@ import Argon from "./plugins/argon-kit";
 import VueLocalStorage from "vue-localstorage";
 import vueScrollBehavior from 'vue-scroll-behavior'
 import VueScroll from 'vue-scrollto';
+import Swal from 'sweetalert2'
 
 Vue.config.productionTip = false;
 
@@ -23,6 +24,7 @@ Vue.use(VueLocalStorage, {
 });
 Vue.use(vueScrollBehavior, { router: router });
 Vue.use(VueScroll);
+Vue.use(Swal);
 new Vue({
     router,
     render: h => h(App)

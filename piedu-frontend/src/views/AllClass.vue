@@ -116,7 +116,7 @@
                                                     :id="class_obj.id"
                                                     :avatar-path="class_obj.avatar_path"
                                                     :category="class_obj.subject"
-                                                    lecturer=""
+                                                    :lecturer="class_obj.lecturer[0]"
                                                     :class-name="class_obj.name"
                                                     :student-count="class_obj.students"
                                                     :code="class_obj.code"

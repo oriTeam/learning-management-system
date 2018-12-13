@@ -11,7 +11,7 @@
         <router-view name="footer"></router-view>
         <div v-if="this.showGotop">
             <button v-scroll-to="'#app'" class="btn btn-primary" data-toggle="tooltip" data-placement="left" id="gotop"
-                     title="Lên trên cùng"
+                    title="Lên trên cùng"
                     style="display: block;">
                 <i class="fa fa-arrow-up"></i>
             </button>
@@ -23,7 +23,7 @@
 
     export default {
         data() {
-            return{
+            return {
                 showGotop: false,
             }
         },
@@ -34,6 +34,12 @@
             console.log(this.$ls.get('user'));
             console.log(this.$route);
             window.addEventListener('scroll', this.showGoTopBtn);
+            Swal({
+                title: 'Error!',
+                text: 'Do you want to continue',
+                type: 'error',
+                confirmButtonText: 'Cool'
+            })
         },
         watch: {
             $route(to, from) {
@@ -91,5 +97,15 @@
         right: 30px;
         display: none;
         z-index: 8;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem !important;
+        font-family: "Muli", sans-serif !important;
+        font-weight: 400;
+        text-transform: uppercase !important;
+        letter-spacing: 0;
+        -webkit-transition: all 0.15s linear;
+        transition: all 0.15s linear;
     }
 </style>
