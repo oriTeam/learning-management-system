@@ -14,4 +14,4 @@ class MaterialAdmin(admin.ModelAdmin):
 
 @admin.register(SyllabusTemplate)
 class SyllabusTemplateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'own_class', 'lecturer')
+    list_display = ('id', 'own_class')
