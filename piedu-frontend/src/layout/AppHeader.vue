@@ -93,10 +93,10 @@
                     <base-button slot="title" type="secondary" class="dropdown-toggle" style="text-transform: none">
                         Xin chào, {{ username }}
                     </base-button>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-                    <div class="dropdown-divider"></div>
+                    <router-link class="dropdown-item"
+                                 :to="{ name: 'profile', params: { id: this.$ls.get('user') }}">Trang
+                        cá nhân
+                    </router-link>
                     <a class="dropdown-item" @click="this.logout" href="#">Đăng xuất</a>
                 </base-dropdown>
             </ul>
@@ -115,7 +115,8 @@
         data() {
             return {
                 username: String,
-                top: 0
+                top: 0,
+
             }
         },
         components: {

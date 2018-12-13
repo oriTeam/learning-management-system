@@ -46,7 +46,7 @@ def change_password(request):
     # else:
     token = get_token_from_request(request)
     user = get_user_from_token(token)
-    new_password = request.data.get(new_password)
+    new_password = request.data.get("new_password")
     if user is not None:
         user.set_password(str(new_password))
         data = {

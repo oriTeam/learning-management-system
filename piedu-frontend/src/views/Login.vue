@@ -92,8 +92,17 @@
             //     ]
             // }
         }),
-        created() {
+        beforeCreate() {
+            if(this.$ls.get('user') != null) {
+                this.$swal({
+                    type: 'error',
+                    title: 'Bạn đã đăng nhập',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                this.$router.push('/');
 
+            };
         },
         methods: {
             submit: function() {

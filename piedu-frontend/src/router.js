@@ -58,15 +58,6 @@ var router = new Router({
             }
         },
         {
-            path: "/profile",
-            name: "profile",
-            components: {
-                header: AppHeader,
-                default: Profile,
-                footer: AppFooter
-            }
-        },
-        {
             path: '/class',
             components: {
                 header: AppHeader,
@@ -101,6 +92,7 @@ var router = new Router({
         },
         {
             path: '/user/:id',
+            name: 'profile',
             components: {
                 header: AppHeader,
                 default: Profile,

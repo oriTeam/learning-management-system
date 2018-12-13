@@ -25,8 +25,147 @@
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
-                                    <base-button type="info" size="sm" class="mr-4">Connect</base-button>
-                                    <base-button type="default" size="sm" class="float-right">Message</base-button>
+                                    <!--<v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>-->
+                                    <!--<base-button type="info" size="sm" class="mr-4">Connect</base-button>-->
+                                    <!--<base-button type="default" size="sm" class="float-right">Message</base-button>-->
+                                    <v-dialog v-model="editProfile.dialog" fullscreen hide-overlay
+                                              transition="dialog-bottom-transition">
+                                        <base-button slot="activator" type="info" size="sm" class="mr-4">Sửa thông
+                                            tin cá nhân
+                                        </base-button>
+                                        <v-card>
+                                            <v-toolbar dark color="#5e72e4">
+                                                <v-btn icon dark @click="editProfile.dialog = false">
+                                                    <v-icon>close</v-icon>
+                                                </v-btn>
+                                                <v-toolbar-title>Thay đổi thông tin cá nhân</v-toolbar-title>
+                                                <v-spacer></v-spacer>
+                                                <v-toolbar-items>
+                                                    <v-btn dark flat @click="editProfile.dialog = false">Lưu lại</v-btn>
+                                                </v-toolbar-items>
+                                            </v-toolbar>
+                                            <v-list three-line subheader>
+                                                <!--<v-subheader>User Controls</v-subheader>-->
+                                                <v-card-text>
+                                                    <v-container grid-list-md>
+                                                        <v-layout wrap>
+                                                            <v-flex xs12 sm6 md4>
+                                                                <v-text-field label="Họ"
+                                                                              required></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs12 sm6 md4>
+                                                                <v-text-field label="Tên"></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs12 sm6 md4>
+                                                                <v-text-field
+                                                                        label="Mã sinh viên/giảng viên"
+                                                                        required
+                                                                ></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs12 sm6 md4>
+                                                                <v-select
+                                                                        :items="['Nam', 'Nữ', 'Khác']"
+                                                                        label="Giới tính"
+                                                                ></v-select>
+                                                            </v-flex>
+                                                            <v-flex xs12 sm6 md4>
+                                                                <v-text-field label="Số điện thoại"
+                                                                              required></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs12 sm6 md4>
+                                                                <v-text-field
+                                                                        label="Tên đơn vị/lớp"
+                                                                        required
+                                                                ></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs12>
+                                                                <v-text-field label="Địa chỉ Email"
+                                                                              required></v-text-field>
+                                                            </v-flex>
+                                                            <v-flex xs12>
+                                                                <v-text-field label="Địa chỉ liên hệ"
+                                                                              required></v-text-field>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                    </v-container>
+                                                </v-card-text>
+                                            </v-list>
+                                        </v-card>
+                                    </v-dialog>
+                                    <v-dialog v-model="changePassword.dialog" persistent max-width="600px">
+                                        <!--<v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>-->
+                                        <base-button slot="activator" type="default" size="sm" class="mr-4">Đổi mật
+                                            khẩu
+                                        </base-button>
+                                        <v-card>
+                                            <v-card-title>
+                                                <span class="headline   ">Thay đổi mật khẩu</span>
+                                            </v-card-title>
+                                            <v-card-text>
+                                                <v-container grid-list-md>
+                                                    <v-layout wrap>
+                                                        <v-flex xs12>
+                                                            <v-text-field
+                                                                    v-model="changePassword.currentPassword"
+                                                                    :append-icon="changePassword.showCurrentPass ? 'visibility_off'
+                                                                    : 'visibility'"
+                                                                    :type="changePassword.showCurrentPass ? 'text' :
+                                                                    'password'"
+                                                                    name="input-10-1"
+                                                                    label="Nhập mật khẩu hiện tại của bạn"
+                                                                    hint="At least 8 characters"
+                                                                    counter
+                                                                    @click:append="changePassword.showCurrentPass =
+                                                                    !changePassword.showCurrentPass"
+                                                            ></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12>
+                                                            <v-text-field
+                                                                    v-model="changePassword.newPassword1"
+                                                                    :append-icon="changePassword.showNewPass1 ?
+                                                                    'visibility_off'
+                                                                    : 'visibility'"
+                                                                    :type="changePassword.showNewPass1 ? 'text' :
+                                                                    'password'"
+                                                                    name="input-10-1"
+                                                                    label="Nhập mật khẩu mới của bạn"
+                                                                    hint="At least 8 characters"
+                                                                    counter
+                                                                    @click:append="changePassword.showNewPass1 =
+                                                                    !changePassword.showNewPass2"
+                                                            ></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12>
+                                                            <v-text-field
+                                                                    v-model="changePassword.newPassword2"
+                                                                    :append-icon="changePassword.showNewPass2 ?
+                                                                    'visibility_off'
+                                                                    : 'visibility'"
+                                                                    :type="changePassword.showNewPass2 ? 'text' :
+                                                                    'password'"
+                                                                    name="input-10-1"
+                                                                    label="Nhập lại mật khẩu mới của bạn"
+                                                                    hint="At least 8 characters"
+                                                                    counter
+                                                                    @click:append="changePassword.showNewPass2 =
+                                                                    !changePassword.showNewPass2"
+                                                            ></v-text-field>
+                                                        </v-flex>
+
+                                                    </v-layout>
+                                                </v-container>
+                                            </v-card-text>
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="blue darken-1" flat @click="changePassword.dialog =
+                                                false">Hủy
+                                                </v-btn>
+                                                <v-btn color="blue darken-1" flat @click="submitChangePassword()">Lưu
+                                                    lại
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-1">
@@ -51,12 +190,14 @@
                                 <!--<span class="font-weight-light">, 27</span>-->
                             </h3>
                             <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i> {{
-                                getName(profile.group)
-                                }}
+                                profile.phone_number }}
+                            </div>
+                            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i> {{
+                                getName(profile.group) }}
                             </div>
                             <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{ profile.unit }}
                             </div>
-                            <div><i class="ni education_hat mr-2"></i>University of Computer Science</div>
+                            <div><i class="ni education_hat mr-2"></i>Đại Học Công Nghệ - ĐHQGHN</div>
                         </div>
                         <div class="mt-5 py-5 border-top text-center">
                             <div class="row justify-content-center">
@@ -87,6 +228,19 @@
                 currentUserId: this.$ls.get('user'),
                 profileUserId: this.$route.params.id,
                 profile: Object,
+                editProfile: {
+                    dialog: false,
+                },
+                changePassword: {
+                    dialog: false,
+                    showCurrentPass: false,
+                    showNewPass1: false,
+                    showNewPass2: false,
+                    currentPassword: '',
+                    newPassword1: '',
+                    newPassword2: '',
+
+                }
             }
         },
         components: {},
@@ -139,6 +293,37 @@
                 }
                 else if (group == "admin_group") {
                     return "Quản trị viên";
+                }
+            },
+            submitChangePassword: function () {
+                let self = this;
+                if (this.changePassword.newPassword2 == '' || this.changePassword.newPassword1 == '' ||
+                    this.changePassword.currentPassword == '') {
+                    this.$swal({
+                        type: 'error',
+                        title: 'Không được để trống trường nào',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                else if (this.changePassword.newPassword2 != this.changePassword.newPassword1) {
+                    this.$swal({
+                        type: 'error',
+                        title: 'Hai mật khẩu mới của bạn không trùng khớp',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                else if (this.changePassword.newPassword2.length < 8) {
+                    this.$swal({
+                        type: 'error',
+                        title: 'Mật khẩu mới chưa đủ 8 kí tự',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                else {
+
                 }
             }
         }
