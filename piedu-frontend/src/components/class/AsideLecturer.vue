@@ -1,5 +1,5 @@
 <template>
-    <div class="card border-0 shadow h-100">
+    <div class="card border-0 shadow h-100  ">
         <div class="card-body py-5"><div class="icon icon-shape mb-4 icon-shape-primary rounded-circle"><i class="ni ni-check-bold"></i></div><h6 class="text-primary text-uppercase">Download Argon</h6><p class="description mt-3">Argon is a great free UI package based on Bootstrap 4
                                     that includes the most important components and features.</p><div><span class="badge badge-primary badge-pill">design</span><span class="badge badge-primary badge-pill">system</span><span class="badge badge-primary badge-pill">creative</span></div><a type="" class="btn mt-4 btn-primary" href="#"><!----><!----><!---->
                                     Learn more

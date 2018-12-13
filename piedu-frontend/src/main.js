@@ -8,7 +8,7 @@ import '@/assets/vuetify.custom.min.css'; // Ensure you are using css-loader
 import Argon from "./plugins/argon-kit";
 import VueLocalStorage from "vue-localstorage";
 import vueScrollBehavior from 'vue-scroll-behavior'
-
+import VueScroll from 'vue-scrollto';
 
 Vue.config.productionTip = false;
 
@@ -22,7 +22,7 @@ Vue.use(VueLocalStorage, {
     bind: true
 });
 Vue.use(vueScrollBehavior, { router: router });
-
+Vue.use(VueScroll);
 new Vue({
     router,
     render: h => h(App)

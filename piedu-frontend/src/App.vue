@@ -9,23 +9,48 @@
             </div>
         </main>
         <router-view name="footer"></router-view>
+        <div v-if="this.showGotop">
+            <button v-scroll-to="'#app'" class="btn btn-primary" data-toggle="tooltip" data-placement="left" id="gotop"
+                     title="Lên trên cùng"
+                    style="display: block;">
+                <i class="fa fa-arrow-up"></i>
+            </button>
+        </div>
     </div>
 </template>
 <script>
     import {FadeTransition} from "vue2-transitions";
 
     export default {
+        data() {
+            return{
+                showGotop: false,
+            }
+        },
         components: {
             FadeTransition
         },
         created() {
             console.log(this.$ls.get('user'));
             console.log(this.$route);
+            window.addEventListener('scroll', this.showGoTopBtn);
         },
         watch: {
             $route(to, from) {
                 this.$ls.set("savedPosition");
                 // alert('1');
+            }
+        },
+        destroyed() {
+            window.removeEventListener('scroll', this.showGoTopBtn);
+        },
+        methods: {
+            showGoTopBtn: function () {
+                let supportPageOffset = window.pageXOffset !== undefined;
+                let isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+                let scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ?
+                    document.documentElement.scrollTop : document.body.scrollTop;
+                this.showGotop = (scrollTop > 70);
             }
         }
     };
@@ -33,8 +58,6 @@
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Muli');
     @import url('https://fonts.googleapis.com/css?family=Cabin');
-    /*@import "./assets/scss/materialize.css";*/
-    /*@import "./assets/scss/style.css";*/
     @import './assets/scss/form.css';
 
     #app, html {
@@ -59,5 +82,14 @@
 
     h4, .h4 {
         font-size: 1rem !important;
+    }
+
+    #gotop {
+        float: right;
+        position: fixed;
+        bottom: 10px;
+        right: 30px;
+        display: none;
+        z-index: 8;
     }
 </style>
