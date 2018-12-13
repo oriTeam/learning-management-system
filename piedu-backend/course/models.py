@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from core.models import User
 
 
 class CourseCategory(models.Model):
@@ -77,6 +78,21 @@ class Class(models.Model):
             "students": len(self.students_set.all())
         }
         return data
+    def parse_info_and_username(self):
+        data = self.parse_basic_info()
+        
+        data.update({
+            "avatar_path": self.subject.avatar.url,
+            "description": self.description
+        })
+
+        class_lecturer = ClassLecturer.objects.filter(own_class__id = self.id).select_related("lecturer")
+        username = [item.lecturer.fullname() for item in class_lecturer]
+        data.update({
+            "lecturer" : username
+        })
+        return data
+
     def parse_basic_info_for_class(self):
         data = {
             "id": self.id,

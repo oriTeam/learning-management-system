@@ -32,7 +32,7 @@ def get_all_class_info(request):
             # class_querysets = Class.objects.all()
 
         for class_queryset in class_querysets:
-            data.append(class_queryset.parse_info())
+            data.append(class_queryset.parse_info_and_username())
     else:
         for classo in Class.objects.all():
             data.append({"class" : classo.name})
