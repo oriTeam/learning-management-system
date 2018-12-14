@@ -68,6 +68,7 @@ class User(AbstractUser):
         if self.avatar != "":
             avatar_url = self.avatar
         data = {
+            "id": self.id,
             "code": self.code,
             "fullname": self.fullname(),
             "username": self.username,

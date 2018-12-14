@@ -39,14 +39,14 @@
                         </v-tab>
 
                         <v-tab>
-                            <!--Danh sách học sinh ({{ this.students_list.body.length }})-->
-                            Danh sách học sinh
+                            Danh sách học sinh ({{ this.students_list.body.length }})
+                            <!--Danh sách học sinh-->
                             <v-icon>chrome_reader_mode</v-icon>
                         </v-tab>
 
                         <v-tab>
-                            <!--Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})-->
-                            Danh sách xin vào lớp
+                            Danh sách xin vào lớp ({{ this.enroll_request_list.body.length }})
+                            <!--Danh sách xin vào lớp-->
                             <v-icon>toc</v-icon>
                         </v-tab>
 
@@ -60,11 +60,10 @@
                         <v-tab-item>
                             <v-card flat>
                                 <section v-if="students_list.body.length == 0">
-                                    <button @click="apply_syllabus()" type="button"
-                                            class="btn btn-icon btn-primary"><span
-                                            class="btn-inner--icon"><i
-                                            class="ni ni-bag-17"></i></span> <span class="btn-inner--text">Lưu mẫu syllabus</span>
-                                    </button>
+                                    <div class="w-100 my-3 mx-0 alert alert-warning"
+                                         key="emptyFutureClass">
+                                        <strong>Danh sách trống. </strong>
+                                    </div>
                                 </section>
                                 <v-data-table v-else
                                               :headers="students_list.title"
@@ -74,18 +73,27 @@
                                 >
                                     <template slot="items" slot-scope="props">
                                         <td>{{ props.item.code }}</td>
-                                        <td class="text-xs-left">{{ props.item.fullname }}</td>
+                                        <td class="text-xs-left">
+                                            <router-link :to="{ name: 'profile', params: { id:
+                                        props.item.id}}"> {{ props.item.fullname }}
+                                            </router-link>
+                                        </td>
                                         <td class="text-xs-left">{{ props.item.username }}</td>
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>
                                         <!--<td class="">{{ props.item.personal_page }}</td>-->
                                         <td class="justify-center layout px-0">
-                                            <v-icon
-                                                    small
-                                                    @click=""
-                                            >
-                                                delete
-                                            </v-icon>
+                                            <base-button @click="deleteStudentFromClass(props.item.id,
+                                            props.item.fullname)"
+                                                         size="sm"
+                                                         type="warning" class="h-75 mt-1">
+                                                <v-icon color="#fff"
+                                                        small
+                                                >
+                                                    delete
+                                                </v-icon>
+                                            </base-button>
+
                                         </td>
                                     </template>
                                 </v-data-table>
@@ -93,7 +101,15 @@
                         </v-tab-item>
                         <v-tab-item>
                             <v-card flat>
-                                <v-data-table
+                                <section v-if="enroll_request_list.body.length == 0">
+                                    <div class="w-100 my-3 mx-0 alert alert-warning"
+                                         key="emptyFutureClass">
+                                        <strong>Danh sách trống. </strong>
+                                    </div>
+
+
+                                </section>
+                                <v-data-table v-else
                                         :headers="enroll_request_list.title"
                                         :items="enroll_request_list.body"
                                         class="elevation-1"
@@ -101,18 +117,28 @@
                                 >
                                     <template slot="items" slot-scope="props">
                                         <td>{{ props.item.code }}</td>
-                                        <td class="text-xs-left">{{ props.item.fullname }}</td>
+                                        <td class="text-xs-left">
+                                            <router-link :to="{ name: 'profile', params: { id:
+                                        props.item.id}}"> {{ props.item.fullname}}
+                                            </router-link>
+                                        </td>
                                         <td class="text-xs-left">{{ props.item.username }}</td>
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>
                                         <!--<td class="">{{ props.item.personal_page }}</td>-->
                                         <td class="justify-center layout px-0">
-                                            <v-icon
-                                                    small
-                                                    @click=""
-                                            >
-                                                delete
-                                            </v-icon>
+                                            <base-button @click="addStudentIntoClass(props.item.id)" type="success"
+                                                         size="sm" class="h-75 mt-1"><i class="fa fa-check"></i>
+                                            </base-button>
+                                            <base-button @click="deleteEnrollRequest(props.item.id,
+                                            props.item.fullname)" size="sm" type="warning"
+                                                         class="h-75 mt-1">
+                                                <v-icon color="#fff"
+                                                        small
+                                                >
+                                                    delete
+                                                </v-icon>
+                                            </base-button>
                                         </td>
                                     </template>
                                 </v-data-table>
@@ -182,21 +208,130 @@
             'time-line': TimeLine
         },
         created() {
-            let self = this;
-            let class_id = this.$route.params.id;
-            this.axios.get(BACKEND_URL + `/api/class/detail/${class_id}/?format=json`).then((response) => {
-                self.classDetail = response.data[0];
-                self.students_list.body = response.data[2].student;
-                self.lecturer = response.data[1].lecturer;
-                self.preloader = false;
-            }).catch((response) => {
-                console.log(response);
-            });
-            ajax.send(this, 'get', `/api/class/${class_id}/get_enroll_request`, {}, this.get_enroll_request_success,
-                this.get_enroll_request_error);
+            this.getData();
         },
         methods: {
-            apply_syllabus: function(){
+            getData: function () {
+                let self = this;
+                let class_id = this.$route.params.id;
+                this.axios.get(BACKEND_URL + `/api/class/detail/${class_id}/?format=json`).then((response) => {
+                    self.classDetail = response.data[0];
+                    self.students_list.body = response.data[2].student;
+                    self.lecturer = response.data[1].lecturer;
+                    self.preloader = false;
+                }).catch((response) => {
+                    console.log(response);
+                });
+                ajax.send(this, 'get', `/api/class/${class_id}/get_enroll_request`, {}, this.get_enroll_request_success,
+                    this.get_enroll_request_error);
+            },
+            deleteStudentFromClass: function (student_id, name) {
+                let self = this;
+                self.$swal({
+                    title: `Bạn muốn xóa sinh viên ${name} khỏi lớp ?`,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Có',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.value) {
+                        let self = this;
+                        let token = self.$ls.get('token');
+                        let config = {
+                            headers: {
+                                "Authorization": "Token " + token.toString()
+                            }
+                        };
+                        let data = {
+                            'class_id': self.classId,
+                            'token': self.$ls.get('token'),
+                            'student_id': student_id
+                        };
+                        this.axios.post(BACKEND_URL + '/api/class-student/delete/', data, config).then((res) => {
+                            this.getData();
+                        });
+                        self.$swal({
+                            title: 'Đã xóa',
+                            type: 'success'
+                        }).catch((res) => {
+                            self.$swal({
+                                title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                                type: 'erorr'
+                            })
+                        });
+                    }
+                })
+            },
+            addStudentIntoClass: function (student_id) {
+                let self = this;
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'class_id': self.classId,
+                    'token': self.$ls.get('token'),
+                    'student_id': student_id
+                };
+                this.axios.post(BACKEND_URL + '/api/class-student/add/', data, config).then((res) => {
+                    this.getData();
+                    self.$swal({
+                        title: 'Thêm thành công',
+                        type: 'success'
+                    })
+                }).catch((res) => {
+                    self.$swal({
+                        title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                        type: 'erorr'
+                    })
+                });
+
+            },
+            deleteEnrollRequest: function (student_id, name) {
+                let self = this;
+                self.$swal({
+                    title: `Bạn muốn xóa sinh viên ${name} khỏi danh sách xin vào lớp ?`,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Có',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.value) {
+                        let self = this;
+                        let token = self.$ls.get('token');
+                        let config = {
+                            headers: {
+                                "Authorization": "Token " + token.toString()
+                            }
+                        };
+                        let data = {
+                            'class_id': self.classId,
+                            'token': self.$ls.get('token'),
+                            'student_id': student_id
+                        };
+                        this.axios.post(BACKEND_URL + '/api/enroll_request/delete/', data, config).then((res) => {
+                            this.getData();
+                            self.$swal({
+                                title: 'Đã xóa',
+                                type: 'success'
+                            })
+                        }).catch((res) => {
+                            self.$swal({
+                                title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                                type: 'erorr'
+                            })
+                        });
+
+                    }
+                })
+            },
+            apply_syllabus: function () {
                 let self = this;
                 let token = self.$ls.get('token');
                 let config = {
@@ -226,7 +361,13 @@
                 return false;
             },
             get_enroll_request_success: function (response) {
-                this.enroll_request_list.body = response.data;
+                if(response.data.success) {
+                    this.enroll_request_list.body = response.data.students;
+                }
+                else {
+                    this.enroll_request_list.body = []
+                }
+
             },
             get_enroll_request_error: function (response) {
                 console.log(response);

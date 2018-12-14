@@ -84,14 +84,18 @@ class_lecturer_urlpatterns = [
 class_student_urlpatterns = [
     path('create', course_viewsets.ClassStudentCreateView.as_view(), name="class_student_create"),
     path('update/<int:id>/', course_viewsets.ClassStudentUpdateView.as_view(), name="class_student_update"),
-    path('delete/<int:id>/', course_viewsets.ClassStudentDeleteView.as_view(), name="class_student_delete"),
-    
+    # path('delete/<int:id>/', course_viewsets.ClassStudentDeleteView.as_view(), name="class_student_delete"),
+    path('delete/', crud_functions.remove_class_student, name="class_student_delete"),
+    path('add/', crud_functions.add_class_student, name="class_student_add"),
+
 ]
 
 enroll_request_urlpatterns = [
     path('create', course_viewsets.EnrollRequestCreateView.as_view(), name="class_create"),
     path('update/<int:id>/', course_viewsets.EnrollRequestUpdateView.as_view(), name="class_update"),
-    path('delete/<int:id>/', course_viewsets.EnrollRequestDeleteView.as_view(), name="class_delete"),
+    # path('delete/<int:id>/', course_viewsets.EnrollRequestDeleteView.as_view(), name="class_delete"),
+    path('delete/', crud_functions.remove_enroll_request, name="enroll_request_del"),
+
 ]
 
 schedule_urlpatterns = [

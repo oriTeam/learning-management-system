@@ -14,6 +14,7 @@ import InnerClass from "./views/class/InnerClass";
 import NewClass from "./views/class/NewClass";
 import Admin from "./views/admin/Admin";
 import NotFound from "./views/NotFound";
+import Dashboard from "./views/admin/Dashboard";
 
 
 Vue.use(Router);
@@ -101,17 +102,17 @@ var router = new Router({
         },
         {
             path: '/admin',
-            component: {
+            components: {
                 header: AppHeader,
                 default: Admin,
                 footer: AppFooter
             },
             children: [
-                // {
-                //     path: ':id',
-                //     name: 'profile',
-                //     component: Profile
-                // },
+                {
+                    path: 'dashboard',
+                    name: 'dashboard',
+                    component: Dashboard
+                },
                 // {
                 //     path: 'e',
                 //     name: '',

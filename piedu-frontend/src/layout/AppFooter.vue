@@ -1,8 +1,7 @@
 <template>
     <div>
         <div id="contact-cta" class="section">
-            <div class="bg-image bg-parallax overlay"
-                 :style="{'background':'url(\'img/cta2-background.jpg\')'}"></div>
+            <div class="bg-image bg-parallax overlay"></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">
@@ -100,6 +99,11 @@
         font-weight: 600;
         /*color: #374050;*/
     }
+
+    #contact-cta > .bg-image {
+        background: url("../../public/img/cta2-background.jpg") !important;
+    }
+
 
     .main-button {
         position: relative;

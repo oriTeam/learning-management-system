@@ -140,4 +140,21 @@
     .swal2-popup {
         width: 20em !important;
     }
+
+    .swal2-popup {
+        .swal2-styled.swal2-confirm {
+            border: 0;
+            border-radius: .25em;
+            color: #fff;
+            font-size: 0.875rem !important;
+            padding: 5px 20px;
+        }
+        .swal2-styled.swal2-cancel {
+            border: 0;
+            border-radius: .25em;
+            color: #fff;
+            font-size: 0.875rem !important;
+            padding: 5px 20px;
+        }
+    }
 </style>

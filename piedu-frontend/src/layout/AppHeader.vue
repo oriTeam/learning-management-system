@@ -97,6 +97,9 @@
                                  :to="{ name: 'profile', params: { id: this.$ls.get('user') }}">Trang
                         cá nhân
                     </router-link>
+                    <router-link v-if="this.$ls.get('group') == 'admin_group'" class="dropdown-item"
+                                 :to="{ name: 'dashboard' }">Quản lý PIEdu
+                    </router-link>
                     <a class="dropdown-item" @click="this.logout" href="#">Đăng xuất</a>
                 </base-dropdown>
             </ul>

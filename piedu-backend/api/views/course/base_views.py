@@ -220,7 +220,7 @@ def get_enroll_request(request, id):
             return Response(data)
         else:
             student_list = [item.parse_basic_info() for item in students]
-            return Response(student_list)
+            return Response({"success": True, "students": student_list})
             # serializer = UserSerializerView(students,many = True)
             # return Response(serializer.data)
 
