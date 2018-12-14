@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from rest_framework import permissions 
 import dateutil.parser
 from api.functions import get_token_from_request, get_user_from_token
-
+from api.permission import IsAdmin,IsAuthenticated,IsMyOwnOrAdmin
+from django.contrib.auth.models import Group
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -33,7 +34,7 @@ def get_user_detail_view(request):
             # return Response(serializer.data)
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsMyOwnOrAdmin,))
 def change_password(request):
     # try :
     #     user = User.objects.get(pk=id)
@@ -62,14 +63,14 @@ def change_password(request):
     return Response(data)
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsAdmin,))
 def create_user(request):
     code = request.data.get("code")
-    avatar = request.data.get("avatar")
+    # avatar = request.data.get("avatar")
     phone_number = request.data.get("phone_number")
     gender = request.data.get("gender")
     unit = request.data.get("unit")
-    group = request.data.get("group")
+    group = Group.objects.get(pk=request.data.get("group"))
     address = request.data.get("address")
     birthday = dateutil.parser.parse(request.data.get("birthday"))
     first_name =request.data.get("first_name")
@@ -77,19 +78,21 @@ def create_user(request):
     password = request.data.get("password")
     username = request.data.get("username")
     try :
-        new_user = User.objects.create(code= code,avatar=avatar,phone_number=phone_number,gender=gender,unit=unit,group=group,address=address,birthday=birthday,first_name=first_name,last_name=last_name,username=username,password=password)
+        new_user = User.objects.create(code= code,phone_number=phone_number,gender=gender,unit=unit,group=group,address=address,birthday=birthday,first_name=first_name,last_name=last_name,username=username,password=password)
         new_user.save()
-    except :
+    except Exception as e:
         data ={
             "success" : False,
             "message" : "Can't create"
         }
+        
         return Response(data)
     else :
         data ={
             "success" : True,
             "message" : "Created"
         }
+        return Response(data)
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))

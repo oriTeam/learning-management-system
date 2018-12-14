@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="section section-myclass-cover section-shaped my-0">
-            <search></search>
+            <!-- <search></search> -->
             <div class="shape shape-style-1 shape-primary alpha-4 bg-image bg-parallax overlay">
                 <span></span>
                 <span></span>
