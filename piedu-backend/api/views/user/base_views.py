@@ -1,4 +1,5 @@
-
+import datetime
+from django.utils import timezone
 from core.models import User
 from django.http import JsonResponse
 from api.functions import string_to_boolean
@@ -10,6 +11,7 @@ import dateutil.parser
 from api.functions import get_token_from_request, get_user_from_token
 from api.permission import IsAdmin,IsAuthenticated,IsMyOwnOrAdmin
 from django.contrib.auth.models import Group
+from course.models import Class,ClassStudent,ClassLecturer
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -95,7 +97,7 @@ def create_user(request):
         return Response(data)
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsMyOwnOrAdmin,))
 def edit_user_info(request):
     token = get_token_from_request(request)
     user = get_user_from_token(token)
@@ -133,5 +135,31 @@ def edit_user_info(request):
             "message" : "Edited"
         }
     
-
-        
+@api_view(['GET','POST'])
+@permission_classes((permissions.IsAuthenticated,))
+def get_class_of_user(request):
+    token = get_token_from_request(request)
+    user = get_user_from_token(token)
+    now = datetime.datetime.now(tz=timezone.utc)
+    if user is not None:
+        if user.is_student():
+    
+            all_class = ClassStudent.objects.filter(student__id =user.id).exclude(own_class__time_start__gte=now)
+            data = {
+                "success" : True,
+                "data"     : len(all_class)
+            }
+            return Response(data)
+        elif user.is_lecturer():
+            all_class = ClassLecturer.objects.filter(lecturer__id =user.id).exclude(own_class__time_start__gte=now)
+            data = {
+                "success" : True,
+                "data"     : len(all_class)
+            }
+            return Response(data)
+    else :
+        data = {
+                "success" : False,
+                "data"     : "User is invalid"
+            }
+        return Response(data)

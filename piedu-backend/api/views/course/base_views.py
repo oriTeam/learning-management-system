@@ -240,7 +240,7 @@ def get_current_class(request):
     # else :
     token = get_token_from_request(request)
     user = get_user_from_token(token)
-    print(user)
+    
     if user is not None:
         now = datetime.datetime.now(tz=timezone.utc)
         if user.is_lecturer():
