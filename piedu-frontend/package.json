@@ -17,7 +17,6 @@
     "npm": "^6.4.1",
     "vue": "^2.5.16",
     "vue-clazy-load": "^0.4.2",
-    "vue-filepond": "^4.0.2",
     "vue-flatpickr-component": "^7.0.4",
     "vue-izitoast": "^1.1.2",
     "vue-lazyload": "^1.2.6",

@@ -108,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lmsv3',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': 'root',
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
@@ -221,3 +221,11 @@ CORS_ORIGIN_WHITELIST = (
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 FRONTEND_SERVER_URL = '127.0.0.1:8080'
+
+##EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'lms.vn@gmail.com'
+EMAIL_HOST_PASSWORD = 'lmssss123'
