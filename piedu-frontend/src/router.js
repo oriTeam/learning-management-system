@@ -15,6 +15,7 @@ import NewClass from "./views/class/NewClass";
 import Admin from "./views/admin/Admin";
 import NotFound from "./views/NotFound";
 import Dashboard from "./views/admin/Dashboard";
+import CreateUser from "./views/admin/CreateUser";
 
 
 Vue.use(Router);
@@ -113,6 +114,11 @@ var router = new Router({
                     name: 'dashboard',
                     component: Dashboard
                 },
+                {
+                    path: 'create-user',
+                    name: 'create-user',
+                    component: CreateUser
+                }
                 // {
                 //     path: 'e',
                 //     name: '',
