@@ -7,7 +7,7 @@
                 <div class="col-lg-10 col-sm-12" id="app_search">
                    <!-- <button class = "btn btn-primary"> Choice</button> -->
                     <!-- <dropdown :options="arrayOfObjects" :selected="object" v-on:updateOption="test"></dropdown> -->
-                    <select v-model="basic.selected_type" class="w-100" @change="getData">
+                    <select v-model="basic.selected_type" class="w-100" style="background-color: azure;" @change="getData">
                                     <option v-for="item in items" :value="item.id"
                                             :key="item.id">{{ item.name }}
                                     </option>
@@ -100,9 +100,6 @@
 
     #app_search .dropdown li a .fa {
         padding-right: 0.5em;
-    }
-    .w-100{
-        background-color: azure;
     }
 
 </style>

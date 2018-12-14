@@ -132,80 +132,80 @@
                 </v-flex>
             </v-layout>
             <v-layout>
-                <button class="btn btn-primary" @click="submit"> Check vaf tajo lowp</button>
+                <button class="btn btn-primary" @click="submit"> Kiểm tra và tạo lớp</button>
             </v-layout>
             <!--<v-layout row wrap v-show="!subScheduleShow">-->
-                <!--<v-flex class="text-xs-center">-->
-                    <!--<v-btn color="btn-primary"-->
-                           <!--class="white&#45;&#45;text" @click="subScheduleShow=true">-->
-                        <!--Thêm lịch học thực hành-->
-                    <!--</v-btn>-->
-                <!--</v-flex>-->
+            <!--<v-flex class="text-xs-center">-->
+            <!--<v-btn color="btn-primary"-->
+            <!--class="white&#45;&#45;text" @click="subScheduleShow=true">-->
+            <!--Thêm lịch học thực hành-->
+            <!--</v-btn>-->
+            <!--</v-flex>-->
             <!--</v-layout>-->
 
             <!--<transition name="subSchedule">-->
-                <!--<v-layout row wrap v-show="subScheduleShow">-->
+            <!--<v-layout row wrap v-show="subScheduleShow">-->
 
-                    <!--<v-flex lg8 sm12 px-3 text-left><h4>Lịch học Bài tập/Thực hành</h4></v-flex>-->
-                    <!--<v-flex lg4 sm12 px-3 text-right>-->
-                        <!--<v-btn color="warning" dark @click="hideSubSchedule()">-->
-                            <!--Xóa lịch thực hành-->
-                        <!--</v-btn>-->
-                    <!--</v-flex>-->
-                    <!--<v-flex lg2 sm12 px-3 my-2>-->
-                        <!--<div class="field">-->
-                            <!--<label class="label">Thứ trong tuần</label>-->
-                            <!--<div class="control">-->
-                                <!--<div :class="['select', 'w-100']">-->
-                                    <!--<select v-model="time.sub_schedule.day_of_week" class="w-100">-->
-                                        <!--<option v-for="day in 6" :value="day + 1"-->
-                                                <!--:key="day">Thứ {{ day + 1 }}-->
-                                        <!--</option>-->
-                                    <!--</select>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;<p v-if="$v.sub_schedule.day_of_week.$error" class="help is-danger">Không được để trống-->
-                            <!--Thứ</p>&ndash;&gt;-->
-                        <!--</div>-->
-                    <!--</v-flex>-->
-                    <!--<v-flex lg5 sm12 px-3 my-2>-->
-                        <!--<div class="input-group date">-->
-                            <!--<label class="label col-12 px-0">Giờ bắt đầu</label>-->
-                            <!--<div class="control col-12 px-0">-->
-                                <!--<div :class="['select', 'w-100']">-->
-                                    <!--<select v-model="time.sub_schedule.start_session" class="w-100">-->
-                                        <!--<option v-for="session in 12" :value="session"-->
-                                                <!--:key="session">{{ session + 6 }}:00-->
-                                        <!--</option>-->
-                                    <!--</select>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;<datetime type="time" class="col-12 px-0" input-class="input"&ndash;&gt;-->
-                            <!--&lt;!&ndash;v-model="time.sub_schedule.start_session">&ndash;&gt;-->
-                            <!--&lt;!&ndash;</datetime>&ndash;&gt;-->
-                        <!--</div>-->
-                    <!--</v-flex>-->
-                    <!--<v-flex lg5 sm12 px-3 my-2>-->
-                        <!--<div class="input-group date">-->
-                            <!--<label class="label col-12 px-0">Giờ kết thúc</label>-->
-                            <!--<div class="control col-12 px-0">-->
-                                <!--<div :class="['select', 'w-100']">-->
-                                    <!--<select v-model="time.sub_schedule.end_session" class="w-100">-->
-                                        <!--<option v-for="session in 12" :value="session"-->
-                                                <!--:key="session">{{ session + 6 }}:50-->
-                                        <!--</option>-->
-                                    <!--</select>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash;<datetime type="time" class="col-12 px-0" input-class="input"&ndash;&gt;-->
-                            <!--&lt;!&ndash;v-model="time.sub_schedule.end_session">&ndash;&gt;-->
-                            <!--&lt;!&ndash;</datetime>&ndash;&gt;-->
-                        <!--</div>-->
-                    <!--</v-flex>-->
-                    <!--<v-flex sm12 px-3 my-2>-->
-                        <!--<hr class="w-100">-->
-                    <!--</v-flex>-->
-                <!--</v-layout>-->
+            <!--<v-flex lg8 sm12 px-3 text-left><h4>Lịch học Bài tập/Thực hành</h4></v-flex>-->
+            <!--<v-flex lg4 sm12 px-3 text-right>-->
+            <!--<v-btn color="warning" dark @click="hideSubSchedule()">-->
+            <!--Xóa lịch thực hành-->
+            <!--</v-btn>-->
+            <!--</v-flex>-->
+            <!--<v-flex lg2 sm12 px-3 my-2>-->
+            <!--<div class="field">-->
+            <!--<label class="label">Thứ trong tuần</label>-->
+            <!--<div class="control">-->
+            <!--<div :class="['select', 'w-100']">-->
+            <!--<select v-model="time.sub_schedule.day_of_week" class="w-100">-->
+            <!--<option v-for="day in 6" :value="day + 1"-->
+            <!--:key="day">Thứ {{ day + 1 }}-->
+            <!--</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<p v-if="$v.sub_schedule.day_of_week.$error" class="help is-danger">Không được để trống-->
+            <!--Thứ</p>&ndash;&gt;-->
+            <!--</div>-->
+            <!--</v-flex>-->
+            <!--<v-flex lg5 sm12 px-3 my-2>-->
+            <!--<div class="input-group date">-->
+            <!--<label class="label col-12 px-0">Giờ bắt đầu</label>-->
+            <!--<div class="control col-12 px-0">-->
+            <!--<div :class="['select', 'w-100']">-->
+            <!--<select v-model="time.sub_schedule.start_session" class="w-100">-->
+            <!--<option v-for="session in 12" :value="session"-->
+            <!--:key="session">{{ session + 6 }}:00-->
+            <!--</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<datetime type="time" class="col-12 px-0" input-class="input"&ndash;&gt;-->
+            <!--&lt;!&ndash;v-model="time.sub_schedule.start_session">&ndash;&gt;-->
+            <!--&lt;!&ndash;</datetime>&ndash;&gt;-->
+            <!--</div>-->
+            <!--</v-flex>-->
+            <!--<v-flex lg5 sm12 px-3 my-2>-->
+            <!--<div class="input-group date">-->
+            <!--<label class="label col-12 px-0">Giờ kết thúc</label>-->
+            <!--<div class="control col-12 px-0">-->
+            <!--<div :class="['select', 'w-100']">-->
+            <!--<select v-model="time.sub_schedule.end_session" class="w-100">-->
+            <!--<option v-for="session in 12" :value="session"-->
+            <!--:key="session">{{ session + 6 }}:50-->
+            <!--</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<datetime type="time" class="col-12 px-0" input-class="input"&ndash;&gt;-->
+            <!--&lt;!&ndash;v-model="time.sub_schedule.end_session">&ndash;&gt;-->
+            <!--&lt;!&ndash;</datetime>&ndash;&gt;-->
+            <!--</div>-->
+            <!--</v-flex>-->
+            <!--<v-flex sm12 px-3 my-2>-->
+            <!--<hr class="w-100">-->
+            <!--</v-flex>-->
+            <!--</v-layout>-->
             <!--</transition>-->
 
         </div>
@@ -309,7 +309,7 @@
 
             },
             submit(payload) {
-                alert('end');
+                // alert('end');
                 let self = this;
                 let token = self.$ls.get('token');
                 let config = {
@@ -320,17 +320,25 @@
                 let data = {
                     "subject": this.basic.selected_subject,
                     "description": this.basic.description,
-                    "time_start" : this.time.start_date,
-                    "time_end" : this.time.end_date,
-                    "session_start" : this.time.main_schedule.start_session,
-                    "session_end" : this.time.main_schedule.end_session,
-                    "day_of_week" : this.time.main_schedule.day_of_week,
+                    "time_start": this.time.start_date,
+                    "time_end": this.time.end_date,
+                    "session_start": this.time.main_schedule.start_session,
+                    "session_end": this.time.main_schedule.end_session,
+                    "day_of_week": this.time.main_schedule.day_of_week,
                     'format': "json",
                     'token': token
                 };
                 console.log(data);
                 this.axios.post(BACKEND_URL + '/api/class/validated', data, config).then((res) => {
                     console.log(res.data);
+                    self.$swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Tạo lớp thành công',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    this.$router.push(`/class/${res.data.class_id}`);
                 })
 
             },

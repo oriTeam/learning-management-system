@@ -617,7 +617,8 @@ def check_validate(request):
 
             data = {
                 "success": True,
-                "message": "Class" + new_class.name + "have been created successfully"
+                "message": "Class" + new_class.name + "have been created successfully",
+                "class_id": new_class.id
             }
             return Response(data)
 
