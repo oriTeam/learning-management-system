@@ -80,7 +80,8 @@ def create_user(request):
     password = request.data.get("password")
     username = request.data.get("username")
     try :
-        new_user = User.objects.create(code= code,phone_number=phone_number,gender=gender,unit=unit,group=group,address=address,birthday=birthday,first_name=first_name,last_name=last_name,username=username,password=password)
+        new_user = User.objects.create(code= code,phone_number=phone_number,gender=gender,unit=unit,group=group,address=address,birthday=birthday,first_name=first_name,last_name=last_name,username=username)
+        new_user.set_password(str(password))
         new_user.save()
     except Exception as e:
         data ={
