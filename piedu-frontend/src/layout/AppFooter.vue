@@ -25,11 +25,11 @@
                     </div>
                     <div class="col-md-7">
                         <ul class="footer-nav">
-                            <li><a href="/">TRANG CHỦ</a></li>
-                            <li><a href="/course/my">KHÓA HỌC CỦA TÔI</a></li>
-                            <li><a href="/course/all">TẤT CẢ KHÓA HỌC</a></li>
-                            <li><a href="/contact">LIÊN HỆ</a></li>
-                            <li><a href="/help">TRỢ GIÚP</a></li>
+                            <li><router-link to="/">TRANG CHỦ</router-link></li>
+                            <li><router-link to="/course/my">KHÓA HỌC CỦA TÔI</router-link></li>
+                            <li><router-link to="/course/all">TẤT CẢ KHÓA HỌC</router-link></li>
+                            <li><router-link to="/contact">LIÊN HỆ</router-link></li>
+                            <li><router-link to="/help">TRỢ GIÚP</router-link></li>
                         </ul>
                     </div>
                 </div>

@@ -7,8 +7,40 @@
                     <h4 class="timeline-title"> Nội dung tuần {{ syllabus.week }}</h4>
                     <div class="timeline-panel-controls">
                         <div class="controls">
-                            <button class="btn btn-sm btn-link"><i class="fas fa-edit"></i> Chỉnh sửa</button>
-                            <button class="btn btn-sm btn-link"><i class="fas fa-trash-alt"></i> Xóa</button>
+                            <v-dialog v-model="syllabus.dialog" persistent max-width="600px">
+                                <button slot="activator" class="btn btn-sm btn-link"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">Chỉnh sửa Syllabus</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container grid-list-md>
+                                            <v-layout wrap>
+                                                <v-flex xs12 sm6>
+                                                    <v-text-field label="Tiêu đề" required
+                                                                  :value="syllabus.title"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6>
+                                                    <v-text-field label="Nội dung tuần học"
+                                                                  :value="syllabus.content"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6>
+                                                    <v-text-field type="file"
+                                                            label=""
+                                                    ></v-text-field>
+                                                </v-flex>
+
+                                            </v-layout>
+                                        </v-container>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="blue darken-1" flat @click="syllabus.dialog = false">Close</v-btn>
+                                        <v-btn color="blue darken-1" flat @click="syllabus.dialog = false">Save</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                            <!--<button class="btn btn-sm btn-link"><i class="fas fa-trash-alt"></i> Xóa</button>-->
                         </div>
                         <div class="timestamp">
                             <small class="text-muted">24. Sep 17:03</small>
@@ -31,12 +63,14 @@
 
 <script>
     import BACKEND_URL from "@/backendServer";
+
     export default {
         name: "time-line",
         data() {
             return {
                 getSyllabusSuccess: false,
                 syllabuses: Object,
+                dialog: false
             }
         },
         created() {
@@ -65,6 +99,9 @@
             },
             material_url: function (path) {
                 return BACKEND_URL + path;
+            },
+            saveWeekkSyllabus: function () {
+
             }
         },
     }
