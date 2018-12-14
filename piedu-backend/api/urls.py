@@ -141,6 +141,7 @@ user_url_patterns=[
     path('change-password',user_base_views.change_password),
     path('create',user_base_views.create_user),
     path('edit',user_base_views.edit_user_info),
+    path('get-number-class',user_base_views.get_class_of_user),
 ]
 
 urlpatterns = [
