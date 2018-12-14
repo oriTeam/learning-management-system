@@ -42,13 +42,31 @@
             'sidebar': Sidebar,
             FadeTransition,
         },
+        beforeCreate() {
+            if(this.$ls.get('group') != 'admin_group') {
+                this.$router.push('/');
+                this.$swal({
+                    type: 'error',
+                    title: 'Bạn không phải Quản Trị Viên',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        },
         methods: {
             openSidebar: function () {
                 document.querySelector("#myside").style.width = "270px";
             },
             closeSidebar: function () {
                 document.querySelector("#myside").style.width = "0";
-            }
+            },
+            isAdmin: function () {
+                if(this.$ls.get('group') == 'admin_group') {
+                    return true;
+                }
+                else return false;
+            },
+
         }
     }
 </script>

@@ -286,6 +286,17 @@
             }
         },
         name: 'new-class',
+        beforeCreate() {
+            if(this.$ls.get('group') == 'student_group') {
+                this.$router.push('/class/my');
+                this.$swal({
+                    type: 'error',
+                    title: 'Bạn không phải có quyền truy cập Trang này ',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        },
         created() {
             this.getAllCategory();
         },
