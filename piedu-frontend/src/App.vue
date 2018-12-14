@@ -118,7 +118,8 @@
     }
     .section-shaped {
         .shape-style-1.shape-primary {
-            background:url('../public/img/landing.jpg') !important;
+            background-image:url('../public/img/landing.jpg') !important;
+            background-size: cover !important;
         }
     }
 
@@ -156,5 +157,8 @@
             font-size: 0.875rem !important;
             padding: 5px 20px;
         }
+    }
+    .v-dialog {
+        border-radius: 4px !important;
     }
 </style>

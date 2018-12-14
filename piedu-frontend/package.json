@@ -26,7 +26,8 @@
     "vue-select": "^2.5.1",
     "vue-stepper": "^1.4.0",
     "vue2-transitions": "^0.2.3",
-    "vuelidate": "^0.7.4"
+    "vuelidate": "^0.7.4",
+    "webpack": "^4.27.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.10",
