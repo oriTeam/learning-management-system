@@ -125,7 +125,7 @@
 <script>
     import VueSelect from "../../../node_modules/vue-select/src/components/Select";
     import BACKEND_URL from "@/backendServer";
-    import VueDropdown from "../../../node_modules/vue-dropdowns/Dropdown"
+    
     export default {
         name: "search",
        
@@ -150,7 +150,7 @@
         },
         components: {
             "v-select": VueSelect,
-            "dropdown" : VueDropdown,
+            
         },
         created() {
             // this.getData()
@@ -158,23 +158,22 @@
         methods: {
             
             getData: function () {
-                let sefl = this;
+                let self = this;
                 // alert(sefl.basic.selected_type);
             
-                this.axios.get(BACKEND_URL + `/api/get-data?selected_type=${sefl.basic.selected_type}&format=json`).then((response) => {
-                    sefl.options = response.data;
+                this.axios.get(BACKEND_URL + `/api/get-data?selected_type=${self.basic.selected_type}&format=json`).then((response) => {
+                    self.options = response.data;
                     // alert(response.data["data"])
                 })
             },
             redirect :function(){
-                let sefl = this;
-                // alert(sefl.basic.selected);
-                // alert(sefl.basic.selected_type);
-                if (sefl.basic.selected_type == "class") {
-                    window.location.href=`http://127.0.0.1:8080/class/${sefl.basic.selected}`;
+                let self = this;
+                
+                if (self.basic.selected_type == "class") {
+                    self.$router.push(`/class/${self.basic.selected}`);
                 }
                 else {
-                    window.location.href=``;
+                    self.$router.push(`/user/${self.basic.selected}`);
                 }
             }
         }

@@ -219,7 +219,7 @@ class ClassStudentUpdateView(generics.RetrieveUpdateAPIView):
     serializer_class = ClassStudentSerializer
     lookup_field = 'id'
 
-
+@permission_classes((IsLecturer,))
 class ClassStudentDeleteView(generics.DestroyAPIView):
     queryset = ClassStudent.objects.all()
     lookup_field = 'id'

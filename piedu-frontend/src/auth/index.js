@@ -18,8 +18,22 @@ export default {
             context.$ls.set("avatarPath", response.data.avatarPath);
             this.user.authenticated = true;
             router.push(rediect);
+            context.$swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Đăng nhập thành công',
+                showConfirmButton: false,
+                timer: 1000
+            });
         }).catch((response) => {
-            console.log(response);
+            // console.log(response);
+            context.$swal({
+                position: 'top-end',
+                type: 'error',
+                title: 'Đăng nhập thất bại. Vui lòng xem lại tên tài khoản hoặc mật khẩu',
+                showConfirmButton: false,
+                timer: 1000
+            });
         });
     },
     logout: function (context) {

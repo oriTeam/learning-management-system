@@ -2,7 +2,7 @@
     <div>
         <section class="section section-myclass-cover section-shaped my-0">
             <search></search>
-            <div class="shape shape-style-1 shape-primary alpha-4">
+            <div class="shape shape-style-1 shape-primary alpha-4 bg-image bg-parallax overlay">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -115,4 +115,10 @@
     /*.section-shaped .shape-style-1.shape-primary {*/
         /*background: linear-gradient(150deg, #7795f8 15%, #6772e5 70%, #555abf 94%);*/
     /*}*/
+    .theme--light.v-pagination {
+        .v-pagination__item--active {
+            color: #fff;
+            background-color: #36a3f7 !important;
+        }
+    }
 </style>

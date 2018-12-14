@@ -7,25 +7,30 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions 
 import dateutil.parser
+from api.functions import get_token_from_request, get_user_from_token
 
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
 def get_user_detail_view(request):
-    # try :
-    #     user = User.objects.get(pk=id)
-    # except User.DoesNotExist:
-    #     data = {
-    #             "success" : False,
-    #             "errors" : "User is invalid"
-    #     }
-    #     return Response(data)
-    # else:
+
     token = get_token_from_request(request)
-    user = get_user_from_token(token)
-    if user is not None:
-        serializer = UserSerializerView(user)
-        return Response(serializer.data)
+    view_user = get_user_from_token(token)
+    id = request.data.get('profile_id')
+    try :
+        user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+        data = {
+                "success" : False,
+                "errors" : "User is invalid"
+        }
+        return Response(data)
+    else:
+        if view_user is not None:
+            result = user.parse_data()
+            return Response({"success": True,"profile": result})
+            # serializer = UserSerializerView(user)
+            # return Response(serializer.data)
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -41,7 +46,7 @@ def change_password(request):
     # else:
     token = get_token_from_request(request)
     user = get_user_from_token(token)
-    new_password = request.data.get(new_password)
+    new_password = request.data.get("new_password")
     if user is not None:
         user.set_password(str(new_password))
         data = {

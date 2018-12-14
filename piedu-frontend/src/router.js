@@ -4,14 +4,18 @@ import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Landing from "./views/Home.vue";
 import Login from "./views/Login.vue";
-import Profile from "./views/Profile.vue";
+import Profile from "./views/user/Profile.vue";
 import Contact from "./views/Contact";
 import Help from "./views/Help";
-import Class from "./views/Class"
-import AllClass from "./views/AllClass";
-import MyClass from "./views/MyClass";
-import InnerClass from "./views/InnerClass";
-import NewClass from "./views/NewClass";
+import Class from "./views/class/Class"
+import AllClass from "./views/class/AllClass";
+import MyClass from "./views/class/MyClass";
+import InnerClass from "./views/class/InnerClass";
+import NewClass from "./views/class/NewClass";
+import Admin from "./views/admin/Admin";
+import NotFound from "./views/NotFound";
+import Dashboard from "./views/admin/Dashboard";
+
 
 Vue.use(Router);
 var router = new Router({
@@ -55,15 +59,6 @@ var router = new Router({
             }
         },
         {
-            path: "/profile",
-            name: "profile",
-            components: {
-                header: AppHeader,
-                default: Profile,
-                footer: AppFooter
-            }
-        },
-        {
             path: '/class',
             components: {
                 header: AppHeader,
@@ -86,7 +81,7 @@ var router = new Router({
                 },
                 {
                     path: 'new',
-                    name:'new class',
+                    name: 'new class',
                     component: NewClass
                 },
                 {
@@ -94,6 +89,35 @@ var router = new Router({
                     name: 'inner-class',
                     component: InnerClass
                 }
+            ]
+        },
+        {
+            path: '/user/:id',
+            name: 'profile',
+            components: {
+                header: AppHeader,
+                default: Profile,
+                footer: AppFooter
+            },
+        },
+        {
+            path: '/admin',
+            components: {
+                header: AppHeader,
+                default: Admin,
+                footer: AppFooter
+            },
+            children: [
+                {
+                    path: 'dashboard',
+                    name: 'dashboard',
+                    component: Dashboard
+                },
+                // {
+                //     path: 'e',
+                //     name: '',
+                //     component: Profile
+                // }
             ]
         },
         // {
@@ -123,6 +147,8 @@ var router = new Router({
         //         footer: AppFooter
         //     }
         // },
+        {path: '/404', component: NotFound},
+        {path: '*', redirect: '/404'},
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
@@ -134,16 +160,16 @@ var router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/login', '/', '/contact', '/help', '/auth'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
+    // redirect to login page if not logged in and trying to access a restricted page
+    const publicPages = ['/login', '/', '/contact', '/help', '/auth'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
 
-  if (authRequired && !loggedIn) {
-    return next('/login');
-  }
+    if (authRequired && !loggedIn) {
+        return next('/login');
+    }
 
-  next();
+    next();
 });
 
 export default router;

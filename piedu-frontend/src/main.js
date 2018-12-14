@@ -10,7 +10,7 @@ import VueLocalStorage from "vue-localstorage";
 import vueScrollBehavior from 'vue-scroll-behavior'
 import VueScroll from 'vue-scrollto';
 import VueSweetalert2 from 'vue-sweetalert2';
-import Toasted from 'vue-toasted';
+import VueIziToast from 'vue-izitoast';
 
 
 Vue.config.productionTip = false;
@@ -27,7 +27,7 @@ Vue.use(VueLocalStorage, {
 Vue.use(vueScrollBehavior, { router: router });
 Vue.use(VueScroll);
 Vue.use(VueSweetalert2);
-Vue.use(Toasted)
+Vue.use(VueIziToast);
 
 new Vue({
     router,
