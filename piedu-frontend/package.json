@@ -16,6 +16,7 @@
     "npm": "^6.4.1",
     "vue": "^2.5.16",
     "vue-clazy-load": "^0.4.2",
+    "vue-dropdowns": "^1.0.6",
     "vue-flatpickr-component": "^7.0.4",
     "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.1",

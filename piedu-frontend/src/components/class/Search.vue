@@ -1,24 +1,28 @@
 <template>
 
-    <!-- <div id="app_search">
-        <h1>Tìm kiếm lớp học,giảng viên, học sinh</h1>
-        <v-select :options="options" label="name">
-            <template slot="option" slot-scope="option">
-                {{ option.name }}
-            </template>
-          </v-select> -->
+  
     <form action="" class="row justify-content-center class-search">
         <div class="col-lg-7 col-sm-12">
             <div class="form-group row justify-content-center">
                 <div class="col-lg-10 col-sm-12" id="app_search">
-                    <!--<div id="app_search"> -->
-                    <!--<h1>Tìm kiếm lớp học,giảng viên, học sinh</h1>-->
-                    <v-select :options="options" label="name">
-                        <template slot="option" slot-scope="option">
+                   <!-- <button class = "btn btn-primary"> Choice</button> -->
+                    <!-- <dropdown :options="arrayOfObjects" :selected="object" v-on:updateOption="test"></dropdown> -->
+                    <select v-model="basic.selected_type" class="w-100" @change="getData">
+                                    <option v-for="item in items" :value="item.id"
+                                            :key="item.id">{{ item.name }}
+                                    </option>
+                                </select>
+                    <!-- <v-select :options="options" label="name" v-model="basic.seleted" v-on:change="redirect">
+                        <template slot="option" slot-scope="option" :value ="option.id">
                             {{ option.name }}
                         </template>
-                    </v-select>
-                    <!-- </div> -->
+                    </v-select> -->
+                    <select v-model="basic.selected" class="w-100" @change="redirect">
+                                    <option v-for="option in options" :value="option.id"
+                                            :key="option.id">{{ option.name }}
+                                    </option>
+                                </select>
+                    
                 </div>
                 <!--<div class="col-lg-2 col-sm-10 px-3 text-center mt-lg-0 mt-sm-3">-->
                 <!--<base-button type="white">Tìm kiếm</base-button>-->
@@ -93,8 +97,12 @@
     /*font-size: 0.875rem;*/
     /*}*/
 
+
     #app_search .dropdown li a .fa {
         padding-right: 0.5em;
+    }
+    .w-100{
+        background-color: azure;
     }
 
 </style>
@@ -117,25 +125,57 @@
 <script>
     import VueSelect from "../../../node_modules/vue-select/src/components/Select";
     import BACKEND_URL from "@/backendServer";
-
+    import VueDropdown from "../../../node_modules/vue-dropdowns/Dropdown"
     export default {
         name: "search",
+       
         data() {
-            return {options: []}
+            return {
+                options: [],
+                basic : {
+                    selected_type : "",
+                    selected : "",
+                },
+                items : [
+                    {
+                        id : "user",
+                        name : "Giang vien, sinh vien"
+                    },
+                    {
+                        id : "class",
+                        name : "Lop hoc"
+                    }
+                    ]
+            }
         },
         components: {
             "v-select": VueSelect,
+            "dropdown" : VueDropdown,
         },
         created() {
-            this.getData()
+            // this.getData()
         },
         methods: {
+            
             getData: function () {
                 let sefl = this;
-                this.axios.get(BACKEND_URL + '/api/get-data?format=json').then((response) => {
+                // alert(sefl.basic.selected_type);
+            
+                this.axios.get(BACKEND_URL + `/api/get-data?selected_type=${sefl.basic.selected_type}&format=json`).then((response) => {
                     sefl.options = response.data;
                     // alert(response.data["data"])
                 })
+            },
+            redirect :function(){
+                let sefl = this;
+                // alert(sefl.basic.selected);
+                // alert(sefl.basic.selected_type);
+                if (sefl.basic.selected_type == "class") {
+                    window.location.href=`http://127.0.0.1:8080/class/${sefl.basic.selected}`;
+                }
+                else {
+                    window.location.href=``;
+                }
             }
         }
 

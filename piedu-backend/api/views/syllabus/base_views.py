@@ -193,6 +193,6 @@ def delete_syllabus(request):
     syllabus_id = request.data.get('syllabus_id')
     all_material = Material.objects.filter(syllabus__id = syllabus_id).delete()
     Syllabus.objects.filter(syllabus_id).delete()
-    return Response({"success" :True,"message" : "Done"}})
+    return Response({"success" :True,"message" : "Done"})
     
 
