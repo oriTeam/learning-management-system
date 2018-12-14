@@ -118,7 +118,7 @@
     }
     .section-shaped {
         .shape-style-1.shape-primary {
-            background:url('../public/img/landing.jpg') !important;
+            background-image:url('../public/img/landing.jpg') !important;
         }
     }
 
