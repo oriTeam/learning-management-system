@@ -94,7 +94,7 @@
                                     </v-dialog>
                                     <v-dialog v-model="changePassword.dialog" persistent max-width="600px">
                                         <!--<v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>-->
-                                        <base-button slot="activator" type="default" size="sm" class="mr-4">Đổi mật
+                                        <base-button slot="activator" type="default" size="sm" class="mr-4" >Đổi mật
                                             khẩu
                                         </base-button>
                                         <v-card>
@@ -323,7 +323,22 @@
                     });
                 }
                 else {
-
+                    let token =self.$ls.get('token');
+                    let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                    let data = {
+                    'token': token,
+                    'format': 'json',
+                    'old_password' : this.changePassword.currentPassword,
+                    'new_password': this.changePassword.newPassword1,
+                };
+                this.axios.post(BACKEND_URL + '/api/user/change-password', data, config).then((res) => {
+                    console.log(res.data);
+                });
+  
                 }
             }
         }
