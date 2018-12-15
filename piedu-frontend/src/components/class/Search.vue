@@ -1,32 +1,27 @@
 <template>
-
-  
     <form action="" class="row justify-content-center class-search">
         <div class="col-lg-7 col-sm-12">
             <div class="form-group row justify-content-center">
-                <div class="col-lg-10 col-sm-12" id="app_search">
-                   <!-- <button class = "btn btn-primary"> Choice</button> -->
-                    <!-- <dropdown :options="arrayOfObjects" :selected="object" v-on:updateOption="test"></dropdown> -->
-                    <select v-model="basic.selected_type" class="w-100" style="background-color: azure;" @change="getData">
+                <div class="col-sm-12" id="app_search">
+                    <div class="field">
+                        <div class="control">
+                            <div class="select w-25">
+                                <select v-model="basic.selected_type" class="w-100" @change="getData">
                                     <option v-for="item in items" :value="item.id"
                                             :key="item.id">{{ item.name }}
                                     </option>
                                 </select>
-                    <!-- <v-select :options="options" label="name" v-model="basic.seleted" v-on:change="redirect">
-                        <template slot="option" slot-scope="option" :value ="option.id">
-                            {{ option.name }}
-                        </template>
-                    </v-select> -->
-                    <select v-model="basic.selected" class="w-100" @change="redirect">
+                            </div>
+                            <div class="select w-75">
+                                <select v-model="basic.selected" class="w-100" @change="redirect">
                                     <option v-for="option in options" :value="option.id"
                                             :key="option.id">{{ option.name }}
                                     </option>
                                 </select>
-                    
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!--<div class="col-lg-2 col-sm-10 px-3 text-center mt-lg-0 mt-sm-3">-->
-                <!--<base-button type="white">Tìm kiếm</base-button>-->
-                <!--</div>-->
             </div>
         </div>
     </form>
@@ -97,7 +92,6 @@
     /*font-size: 0.875rem;*/
     /*}*/
 
-
     #app_search .dropdown li a .fa {
         padding-right: 0.5em;
     }
@@ -122,50 +116,54 @@
 <script>
     import VueSelect from "../../../node_modules/vue-select/src/components/Select";
     import BACKEND_URL from "@/backendServer";
-    
+
     export default {
         name: "search",
-       
+
         data() {
             return {
-                options: [],
-                basic : {
-                    selected_type : "",
-                    selected : "",
-                },
-                items : [
+                options: [
                     {
-                        id : "user",
-                        name : "Giang vien, sinh vien"
+                        "name": 'Bạn phải chọn loại tìm kiếm trước'
+                    }
+                ],
+                basic: {
+                    selected_type: "",
+                    selected: "",
+                },
+                items: [
+                    {
+                        id: "user",
+                        name: "Giảng viên, sinh viên"
                     },
                     {
-                        id : "class",
-                        name : "Lop hoc"
+                        id: "class",
+                        name: "Lớp học"
                     }
-                    ]
+                ]
             }
         },
         components: {
             "v-select": VueSelect,
-            
+
         },
         created() {
             // this.getData()
         },
         methods: {
-            
+
             getData: function () {
                 let self = this;
                 // alert(sefl.basic.selected_type);
-            
+
                 this.axios.get(BACKEND_URL + `/api/get-data?selected_type=${self.basic.selected_type}&format=json`).then((response) => {
                     self.options = response.data;
                     // alert(response.data["data"])
                 })
             },
-            redirect :function(){
+            redirect: function () {
                 let self = this;
-                
+
                 if (self.basic.selected_type == "class") {
                     self.$router.push(`/class/${self.basic.selected}`);
                 }

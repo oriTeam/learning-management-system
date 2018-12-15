@@ -172,16 +172,13 @@
                                 <div class="card-profile-stats d-flex justify-content-center">
                                     <div>
                                         <span class="heading">22</span>
-                                        <span class="description">Friends</span>
+                                        <span class="description">Số lớp đang tham gia</span>
                                     </div>
                                     <div>
                                         <span class="heading">10</span>
-                                        <span class="description">Photos</span>
+                                        <span class="description">Số lớp đã tham gia</span>
                                     </div>
-                                    <div>
-                                        <span class="heading">89</span>
-                                        <span class="description">Comments</span>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -202,11 +199,7 @@
                         <div class="mt-5 py-5 border-top text-center">
                             <div class="row justify-content-center">
                                 <div class="col-lg-9">
-                                    <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised,
-                                        Brooklyn-based Nick Murphy — writes, performs and records all of his own music,
-                                        giving it a warm, intimate feel with a solid groove structure. An artist of
-                                        considerable range.</p>
-                                    <a href="#">Show more</a>
+
                                 </div>
                             </div>
                         </div>

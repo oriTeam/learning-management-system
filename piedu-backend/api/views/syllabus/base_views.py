@@ -10,6 +10,8 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions 
 from api.permission import  IsAuthenticated, IsAdmin, IsLecturer,IsMyOwnOrAdmin,IsStudent,IsAdminOrLecturer
+from django.core.files.storage import FileSystemStorage
+
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -61,6 +63,7 @@ def get_class_syllabus(request,id):
             data = syllabus.parse_data()
             data['materials'] = serializers.data
             data['dialog'] = False
+            data['file'] = ''
             result.append(data)
         return Response(result) 
 			
@@ -171,21 +174,18 @@ def edit_syllabus(request):
 
 @api_view(['GET','POST'])
 @permission_classes((IsLecturer,))
-def edit_material(request):
-    name = request.data.get('name')
-    materia_type = request.data.get('material_type')
-    file = request.data.get('file')
-    material_id = request.data.get('material_id')
-    try :
-        material = Material.objects.get(pk = material_id)
-    except Material.DoesNotExist :
-        return Response("Material is invalid")
-    else:
-        material.name = name 
-        material.materia_type = materia_type
-        material.file = file
-        material.save()
-        return Response({"success" :True})
+def add_material(request):
+    file = request.FILES['file']
+    name = file.name
+    syllabus_id = request.data.get('syllabus_id')
+    syllabus = Syllabus.objects.get(id=syllabus_id)
+    fs = FileSystemStorage()
+    filename = fs.save(name, file)
+    new_material = Material.objects.create(syllabus = syllabus, file = file)
+    new_material.save()
+    return Response({"success" :True})
+
+
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
 def delete_syllabus(request):
@@ -194,4 +194,17 @@ def delete_syllabus(request):
     Syllabus.objects.filter(syllabus_id).delete()
     return Response({"success" :True,"message" : "Done"})
     
-
+@api_view(["GET", "POST"])
+@permission_classes((IsAdminOrLecturer, ))
+def remove_material(request):
+    if request.method == "POST":
+        material_id = request.data.get('material_id')
+        try:
+            material = Material.objects.get(id=material_id)
+        except Material.DoesNotExist:
+            return Response({"success": False, "code": "notexist"})
+        else:
+            material.delete()
+            return Response({"success": True, "message": "Material have been removed"})
+    errors = {'success': False, 'code': "failed"}
+    return Response(errors)

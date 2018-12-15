@@ -284,7 +284,7 @@
                 }).catch((res) => {
                     self.$swal({
                         title: 'Đã xảy ra lỗi. Vui lòng thử lại',
-                        type: 'erorr'
+                        type: 'error'
                     })
                 });
 

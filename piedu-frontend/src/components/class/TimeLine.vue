@@ -4,7 +4,7 @@
             <div class="timeline-badge ">{{ syllabus.week }}</div>
             <div class="timeline-panel">
                 <div class="timeline-heading">
-                    <h4 class="timeline-title"> Nội dung tuần {{ syllabus.week }}</h4>
+                    <h4 class="timeline-title"> {{ syllabus.title }}</h4>
                     <div class="timeline-panel-controls">
                         <div class="controls">
                             <v-dialog v-if="isOwnLecturer()" v-model="syllabus.dialog" persistent max-width="600px">
@@ -17,26 +17,39 @@
                                         <v-container grid-list-md>
                                             <v-layout wrap>
                                                 <v-flex xs12 sm6>
-                                                    <v-text-field label="Tiêu đề" required
+                                                    <v-text-field label="Tiêu đề" required v-model="syllabus.title"
                                                                   :value="syllabus.title"></v-text-field>
                                                 </v-flex>
                                                 <v-flex xs12 sm6>
-                                                    <v-text-field label="Nội dung tuần học"
+                                                    <v-text-field label="Nội dung tuần học" v-model="syllabus.content"
                                                                   :value="syllabus.content"></v-text-field>
                                                 </v-flex>
-                                                <v-flex xs12 sm6>
+                                                <v-flex xs12 v-for="material in syllabus.materials"
+                                                     :key="material.id" :id="'material-' + material.id">
+                                                    <a :href="material_url(material.file)" target="_blank">{{ material.name }}</a>
+                                                    <base-button @click="deleteMaterial(material.id)" type="warning"
+                                                                 size="sm"
+                                                                 class="pull-right">Xóa tài
+                                                        liệu
+                                                    </base-button>
+                                                </v-flex>
+                                                <v-flex xs12>
                                                     <v-text-field type="file"
                                                             label=""
+                                                            v-model="syllabus.file"
                                                     ></v-text-field>
                                                 </v-flex>
+
 
                                             </v-layout>
                                         </v-container>
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" flat @click="syllabus.dialog = false">Close</v-btn>
-                                        <v-btn color="blue darken-1" flat @click="syllabus.dialog = false">Save</v-btn>
+                                        <v-btn color="blue darken-1" flat @click="syllabus.dialog = false">Hủy</v-btn>
+                                        <v-btn color="blue darken-1" flat @click="saveSyllabus(syllabus.id,
+                                        syllabus.title, syllabus.content, syllabus.file)">Lưu
+                                            lại</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
@@ -79,6 +92,20 @@
             this.get_syllabus();
         },
         methods: {
+            getData: function () {
+                let self = this;
+                let class_id = this.$route.params.id;
+                this.axios.get(BACKEND_URL + `/api/class/detail/${class_id}/?format=json`).then((response) => {
+                    self.classDetail = response.data[0];
+                    self.students_list.body = response.data[2].student;
+                    self.lecturer = response.data[1].lecturer;
+                    self.preloader = false;
+                }).catch((response) => {
+                    console.log(response);
+                });
+                ajax.send(this, 'get', `/api/class/${class_id}/get_enroll_request`, {}, this.get_enroll_request_success,
+                    this.get_enroll_request_error);
+            },
             get_syllabus: function () {
                 let self = this;
                 let token = self.$ls.get('token');
@@ -125,6 +152,98 @@
                     }
 
                 }
+            },
+            deleteMaterial: function (material_id) {
+                let self = this;
+                self.$swal({
+                    title: `Bạn muốn xóa tài liệu này ?`,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Có',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.value) {
+                        let self = this;
+                        let token = self.$ls.get('token');
+                        let config = {
+                            headers: {
+                                "Authorization": "Token " + token.toString()
+                            }
+                        };
+                        let data = {
+                            'token': self.$ls.get('token'),
+                            'material_id': material_id
+                        };
+                        this.axios.post(BACKEND_URL + '/api/material/delete/', data, config).then((res) => {
+                            if(res.data.success) {
+                                // alert('a');
+                                let id = "material-" + material_id;
+                                document.getElementById(id).style.display = "none";
+                                self.$swal({
+                                    title: 'Đã xóa',
+                                    type: 'success'
+                                });
+
+                            }
+                        }).catch((res) => {
+                            self.$swal({
+                                title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                                type: 'error'
+                            })
+                        });
+
+                    }
+                })
+            },
+            saveSyllabus: function (syllabus_id, title, content, file) {
+                let self = this;
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'syllabus_id': syllabus_id,
+                    'title': title,
+                    'token': self.$ls.get('token'),
+                    'content': content
+                };
+                this.axios.post(BACKEND_URL + '/api/class/edit-syllabus', data, config).then((res) => {
+                    self.$swal({
+                        title: 'Sửa thành công',
+                        type: 'success'
+                    })
+                }).catch((res) => {
+                    self.$swal({
+                        title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                        type: 'error'
+                    })
+                });
+
+                let fileconfig = {
+                    headers: {
+                        "Authorization": "Token " + token.toString(),
+                        'Content-Type': 'multipart/form-data'
+                    }
+                };
+                let filedata = {
+                    'token': self.$ls.get('token'),
+                    'file': file
+                };
+                this.axios.post(BACKEND_URL + '/api/syllabus/add-material', filedata, config).then((res) => {
+                    self.$swal({
+                        title: 'Sửa thành công',
+                        type: 'success'
+                    })
+                }).catch((res) => {
+                    self.$swal({
+                        title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                        type: 'error'
+                    })
+                });
             }
         },
     }

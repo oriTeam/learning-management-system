@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import permissions 
 import dateutil.parser
 from api.functions import get_token_from_request, get_user_from_token
-from api.permission import IsAdmin,IsAuthenticated,IsMyOwnOrAdmin
+from api.permission import  IsAuthenticated, IsAdmin,IsLecturer,IsMyOwnOrAdmin,IsStudent,IsAdminOrLecturer
 from django.contrib.auth.models import Group
 from course.models import Class,ClassStudent,ClassLecturer
 
@@ -164,3 +164,5 @@ def get_class_of_user(request):
                 "data"     : "User is invalid"
             }
         return Response(data)
+
+

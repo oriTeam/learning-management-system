@@ -112,14 +112,13 @@ syllabus_url_patterns= [
     path('update/<int:id>/', syllabus_viewsets.SyllabusUpdateView.as_view(), name="syllabus_update"),
     path('delete/<int:id>/', syllabus_viewsets.SyllabusDeleteView.as_view(), name="syllabus_delete"),
     path('<int:id>/get_material/',syllabus_base_views.get_syllabus_material),
-    path('edit-materia',syllabus_base_views.edit_material),
+    path('add-material',syllabus_base_views.add_material),
 ]
 material_url_patterns=[
     path('create/<int:id>/', syllabus_viewsets.MaterialCreateView.as_view(), name="material_create"),
     path('update/<int:id>/', syllabus_viewsets.MaterialUpdateView.as_view(), name="material_update"),
-    path('delete/<int:id>/', syllabus_viewsets.MaterialDeleteView.as_view(), name="material_delete"),
     path('detail/<int:id>/',syllabus_base_views.get_material_info),
-    
+    path('delete/', syllabus_base_views.remove_material),
 ]
 syllabus_template_url_patterns=[
     path('create/<int:id>/', syllabus_viewsets.SyllabusTemplateCreateView.as_view(), name="syllabus_template_create"),
