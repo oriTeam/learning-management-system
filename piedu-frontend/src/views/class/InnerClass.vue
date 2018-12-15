@@ -1,13 +1,13 @@
 <template>
     <div class="row mx-0">
-        <div class="col-lg-12 p-1">
-            <div class="card p-3 mr-lg-3 mx-sm-3">
+        <div class="col-lg-12 px-1">
+            <div class="card border-0 shadow h-100 p-3 mr-lg-3 mx-sm-3">
                 <div class="row mx-0 justify-center" v-if="preloader">
                     <v-progress-circular :size="30" color="green" indeterminate class="mb-5"/>
                 </div>
                 <div v-if="!preloader" class="row m--margin-bottom-25">
                     <div class="col-lg-6 col-sm-12">
-                        <img :src="imgUrl(classDetail.avatar_path)" alt="" width="100%">
+                        <img class="rounded" :src="imgUrl(classDetail.avatar_path)" alt="" width="100%">
                     </div>
                     <div class="col-lg-6 col-sm-12">
                         <h2 class="course-title m--margin-top-10-mobile">{{ classDetail.name}}</h2>
@@ -20,14 +20,14 @@
                         <p class="m--regular-font-size-lg2"><i class="fa fa-tag"></i> Môn học: <a
                                 href="#">{{ classDetail.subject }}</a></p>
                         <!--<button v-show="isStudent()" class="btn m-btn btn-success">Tham gia Khóa học</button>-->
-                        <enroll-btn :class_id="classDetail.id"></enroll-btn>
+                        <enroll-btn :class_id="classDetail.id" :own_lecturers="this.lecturer"></enroll-btn>
                     </div>
                 </div>
                 <hr/>
-                <div v-if="!preloader" class="row mx-0 mt-3">
+                <div v-if="!preloader" class="row mx-0">
                     <v-tabs class="w-100"
                             centered
-                            color="cyan"
+                            color="#5e72e4"
                             dark
                             icons-and-text
                             grow>
@@ -165,7 +165,7 @@
 </template>
 <script>
     import AsideLecturer from "@/components/class/AsideLecturer";
-    import EnrollButton from "@/components/class/EnrollButton";
+    import ClassButton from "@/components/class/ClassButton";
     import TimeLine from "@/components/class/TimeLine";
     import BACKEND_URL from "@/backendServer";
     import ajax from "@/request"
@@ -215,7 +215,7 @@
         },
         components: {
             'sidebar': AsideLecturer,
-            'enroll-btn': EnrollButton,
+            'enroll-btn': ClassButton,
             'time-line': TimeLine
         },
         created() {

@@ -124,7 +124,7 @@ def save_syllabus_template(request):
             return Response({"success" : False,"message" :"Template was exist"})
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsLecturer,))
 def add_template(request):
     class_id = request.data.get('class_id')
     try :
@@ -154,7 +154,7 @@ def add_template(request):
             return Response({"success" : True})
             
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsLecturer,))
 def edit_syllabus(request):
     content = request.data.get('content')
     title = request.data.get('title')
@@ -170,7 +170,7 @@ def edit_syllabus(request):
         return Response({"success" :True})
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsLecturer,))
 def edit_material(request):
     name = request.data.get('name')
     materia_type = request.data.get('material_type')

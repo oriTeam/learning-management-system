@@ -18,7 +18,7 @@ class IsLecturer(BasePermission):
     def has_permission(self,request,view):
         token = get_token_from_request(request)
         user = get_user_from_token(token)
-        if user is not None and user.is_lecturer() :
+        if user is not None and user.is_lecturer():
             return True
         return False
         

@@ -8,10 +8,11 @@
                 ...
             </button>
         </section>
-        <section v-else-if="isLecturer()">
+        <section v-else-if="isOwnLecturer()">
             <button @click="save_syllabus()" type="button" class="btn btn-icon btn-primary"><span
                     class="btn-inner--icon"><i
-                    class="ni ni-bag-17"></i></span> <span class="btn-inner--text">Lưu mẫu syllabus</span></button>
+                    class="ni ni-bag-17"></i></span>
+                <span class="btn-inner--text">Lưu mẫu Đề cương môn học</span></button>
 
         </section>
     </div>
@@ -24,11 +25,13 @@
         data() {
             return {
                 status: Number,
-                classId: this.class_id
+                classId: this.class_id,
+                lecturers: this.own_lecturers
             }
         },
         props: [
-            'class_id'
+            'class_id',
+            'own_lecturers'
         ],
         created() {
             this.check_status()
@@ -72,7 +75,7 @@
                     self.status = res.data.code;
                 })
             },
-            save_syllabus: function() {
+            save_syllabus: function () {
                 let self = this;
                 let token = self.$ls.get('token');
                 let config = {
@@ -82,10 +85,29 @@
                 };
                 let data = {
                     'class_id': self.classId,
-                    'format': "json"
+                    'format': "json",
+                    'token': token
                 };
                 this.axios.post(BACKEND_URL + '/api/syllabus_template/save', data, config).then((res) => {
-                    console.log(res.data);
+                    if (res.data.success) {
+                        self.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: 'Lưu thành công',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    }
+                    else {
+                        self.$swal({
+                            position: 'top-end',
+                            type: 'error',
+                            title: "Mẫu này đã tồn tại",
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    }
+
                 })
             },
             isStudent: function () {
@@ -100,6 +122,30 @@
                 }
                 return false;
             },
+            isOwnLecturer: function () {
+                let user_id = this.$ls.get('user');
+                if(this.$ls.get('group') == 'student_group') {
+                    return false
+                }
+                else if(this.$ls.get('group') == 'admin_group') {
+                    return true
+                }
+                else {
+                    let own_lecturer = [];
+                    for (let lecturer of this.lecturers) {
+                        own_lecturer.push(lecturer.id.toString())
+                    }
+                    console.log(own_lecturer);
+
+                    if (own_lecturer.includes(user_id.toString())) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+
+                }
+            }
         }
     }
 </script>

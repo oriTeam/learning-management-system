@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
+
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from core.models import User
