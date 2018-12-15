@@ -108,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lmsv3',
         'USER': 'root',
-        'PASSWORD': 'lethuong0797',
+        'PASSWORD': '1234',
         'OPTIONS': {
             'charset': 'utf8mb4',
         }

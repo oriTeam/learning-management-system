@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-15 09:37+0700\n"
+"POT-Creation-Date: 2018-12-15 10:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,11 +34,11 @@ msgstr "Nữ"
 msgid "Other"
 msgstr ""
 
-#: core/models.py:16 course/models.py:32 course/models.py:47
+#: core/models.py:16 course/models.py:33 course/models.py:48
 msgid "Code"
 msgstr ""
 
-#: core/models.py:17 course/models.py:31
+#: core/models.py:17 course/models.py:32
 msgid "Avatar"
 msgstr "Ảnh Đại Diện"
 
@@ -78,101 +78,101 @@ msgstr "Khóa Học"
 msgid "Courses"
 msgstr "Khóa Học"
 
-#: course/models.py:10 course/models.py:34
+#: course/models.py:11 course/models.py:35
 msgid "Course Category"
 msgstr "Loại Môn Học"
 
-#: course/models.py:15
+#: course/models.py:16
 msgid "Catergory"
 msgstr "Loại"
 
-#: course/models.py:16
+#: course/models.py:17
 msgid "Categories"
 msgstr "Loại"
 
-#: course/models.py:30 course/models.py:39 course/models.py:52
+#: course/models.py:31 course/models.py:40 course/models.py:53
 msgid "Subject"
 msgstr "Môn Học"
 
-#: course/models.py:40
+#: course/models.py:41
 msgid "Subjects"
 msgstr "Môn học"
 
-#: course/models.py:48
+#: course/models.py:49
 msgid "Name"
 msgstr "Tên Môn Học"
 
-#: course/models.py:49
+#: course/models.py:50
 msgid "Description"
 msgstr "Mô Tả"
 
-#: course/models.py:50
+#: course/models.py:51
 msgid "Start time"
 msgstr "Bắt Đầu Khóa"
 
-#: course/models.py:51
+#: course/models.py:52
 msgid "End time"
 msgstr "Kết Thúc Khóa"
 
-#: course/models.py:57 course/models.py:125 course/models.py:151
-#: course/models.py:166 course/models.py:180 syllabus/models.py:20
+#: course/models.py:58 course/models.py:126 course/models.py:152
+#: course/models.py:167 course/models.py:181 syllabus/models.py:20
 #: syllabus/models.py:73
 msgid "Class"
 msgstr "Lớp Học"
 
-#: course/models.py:58
+#: course/models.py:59
 msgid "Classes"
 msgstr "Lớp Học"
 
-#: course/models.py:126
+#: course/models.py:127
 msgid "Day Of Week"
 msgstr "Thứ"
 
-#: course/models.py:127
+#: course/models.py:128
 msgid "Start Session"
 msgstr "Bắt Đầu Tiết Học"
 
-#: course/models.py:128
+#: course/models.py:129
 msgid "End Session"
 msgstr "Kết Thúc Tiết Học"
 
-#: course/models.py:133
+#: course/models.py:134
 msgid "Schedule"
 msgstr "Thời Gian Biểu"
 
-#: course/models.py:134
+#: course/models.py:135
 msgid "Schedules"
 msgstr "Thời Gian Biểu"
 
-#: course/models.py:153
+#: course/models.py:154
 msgid "Lecturer"
 msgstr "Giảng Viên"
 
-#: course/models.py:158
+#: course/models.py:159
 msgid "Class - Lecturer"
 msgstr "Học Phần - Giảng Viên"
 
-#: course/models.py:159
+#: course/models.py:160
 msgid "Classes - Lecturers"
 msgstr "Học Phần - Giảng Viên"
 
-#: course/models.py:167 course/models.py:182
+#: course/models.py:168 course/models.py:183
 msgid "Student"
 msgstr "Sinh Viên"
 
-#: course/models.py:172
+#: course/models.py:173
 msgid "Class - Student"
 msgstr "Học Phần - Giảng Viên"
 
-#: course/models.py:173
+#: course/models.py:174
 msgid "Classes - Students"
 msgstr "Học Phần - Giảng Viên"
 
-#: course/models.py:187
+#: course/models.py:188
 msgid "Enroll Request"
 msgstr "Yêu Cầu Tham Gia"
 
-#: course/models.py:188
+#: course/models.py:189
 msgid "Enroll Requests"
 msgstr "Yêu Cầu Tham Gia"
 
