@@ -164,7 +164,7 @@
     </div>
 </template>
 <script>
-    import AsideLecturer from "@/components/class/AsideLecturer";
+    import Aside from "@/components/class/Aside";
     import ClassButton from "@/components/class/ClassButton";
     import TimeLine from "@/components/class/TimeLine";
     import BACKEND_URL from "@/backendServer";
@@ -214,7 +214,7 @@
             }
         },
         components: {
-            'sidebar': AsideLecturer,
+            'sidebar': Aside,
             'enroll-btn': ClassButton,
             'time-line': TimeLine
         },

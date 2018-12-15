@@ -22,7 +22,7 @@
 </template>
 <script>
     import {FadeTransition} from "vue2-transitions";
-    import Sidebar from "@/components/class/AsideLecturer"
+    import Sidebar from "@/components/class/Aside"
 
     export default {
         name: 'Class',

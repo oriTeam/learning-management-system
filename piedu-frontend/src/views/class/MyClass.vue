@@ -228,10 +228,9 @@
 </template>
 <script>
     import ClassBoxPortrait from '@/components/class/ClassBoxPortrait.vue'
-    import ClassBoxLandscape from '@/components/class/ClassBoxLandscape.vue'
     import BACKEND_URL from "@/backendServer";
     import Search from "@/components/class/Search";
-    import Sidebar from "@/components/class/AsideLecturer";
+    import Sidebar from "@/components/class/Aside";
 
 
     export default {
@@ -278,7 +277,6 @@
         },
         components: {
             'class-box-portrait': ClassBoxPortrait,
-            'class-box-landscape': ClassBoxLandscape,
             'search': Search,
             'sidebar': Sidebar,
         },
