@@ -3,7 +3,7 @@
         <div class="col-lg-12 p-1">
             <div class="card p-3 mr-lg-3 mx-sm-3">
                 <div class="row mx-0 justify-center" v-if="preloader">
-                    <v-progress-circular :size="50" color="green" indeterminate class="mb-5"/>
+                    <v-progress-circular :size="30" color="green" indeterminate class="mb-5"/>
                 </div>
                 <div v-if="!preloader" class="row m--margin-bottom-25">
                     <div class="col-lg-6 col-sm-12">
@@ -53,7 +53,7 @@
                         <v-tab-item>
                             <v-card flat>
                                 <!--<v-card-text>Thời gian biểu</v-card-text>-->
-                                <time-line></time-line>
+                                <time-line :own_lecturers="this.lecturer"></time-line>
                             </v-card>
                         </v-tab-item>
 
@@ -83,7 +83,8 @@
                                         <td class="">{{ props.item.phone_number }}</td>
                                         <!--<td class="">{{ props.item.personal_page }}</td>-->
                                         <td class="justify-center layout px-0">
-                                            <base-button @click="deleteStudentFromClass(props.item.id,
+                                            <base-button v-if="isOwnLecturer()"
+                                                         @click="deleteStudentFromClass(props.item.id,
                                             props.item.fullname)"
                                                          size="sm"
                                                          type="warning" class="h-75 mt-1">
@@ -93,7 +94,14 @@
                                                     delete
                                                 </v-icon>
                                             </base-button>
-
+                                            <!--<base-button v-else disabled size="sm"-->
+                                                         <!--type="warning" class="h-75 mt-1">-->
+                                                <!--<v-icon color="#fff"-->
+                                                        <!--small-->
+                                                <!--&gt;-->
+                                                    <!--delete-->
+                                                <!--</v-icon>-->
+                                            <!--</base-button>-->
                                         </td>
                                     </template>
                                 </v-data-table>
@@ -110,10 +118,10 @@
 
                                 </section>
                                 <v-data-table v-else
-                                        :headers="enroll_request_list.title"
-                                        :items="enroll_request_list.body"
-                                        class="elevation-1"
-                                        loading
+                                              :headers="enroll_request_list.title"
+                                              :items="enroll_request_list.body"
+                                              class="elevation-1"
+                                              loading
                                 >
                                     <template slot="items" slot-scope="props">
                                         <td>{{ props.item.code }}</td>
@@ -126,19 +134,22 @@
                                         <td class="">{{ props.item.gender }}</td>
                                         <td class="">{{ props.item.phone_number }}</td>
                                         <!--<td class="">{{ props.item.personal_page }}</td>-->
-                                        <td class="justify-center layout px-0">
-                                            <base-button @click="addStudentIntoClass(props.item.id)" type="success"
-                                                         size="sm" class="h-75 mt-1"><i class="fa fa-check"></i>
-                                            </base-button>
-                                            <base-button @click="deleteEnrollRequest(props.item.id,
-                                            props.item.fullname)" size="sm" type="warning"
-                                                         class="h-75 mt-1">
-                                                <v-icon color="#fff"
-                                                        small
-                                                >
-                                                    delete
-                                                </v-icon>
-                                            </base-button>
+                                        <td class="justify-xs-center layout px-0">
+                                            <span v-if="isOwnLecturer()">
+                                                <base-button @click="addStudentIntoClass(props.item.id)"
+                                                             type="success"
+                                                             size="sm" class="h-75 mt-1"><i class="fa fa-check"></i>
+                                                </base-button>
+                                                <base-button @click="deleteEnrollRequest(props.item.id,
+                                                props.item.fullname)" size="sm" type="warning"
+                                                             class="h-75 mt-1">
+                                                    <v-icon color="#fff"
+                                                            small
+                                                    >
+                                                        delete
+                                                    </v-icon>
+                                                </base-button>
+                                            </span>
                                         </td>
                                     </template>
                                 </v-data-table>
@@ -169,7 +180,6 @@
                         {
                             text: 'MSV',
                             align: 'left',
-                            sortable: false,
                             value: 'code'
                         },
                         {text: 'Họ và tên', value: 'fullname'},
@@ -177,7 +187,7 @@
                         {text: 'Giới tính', value: 'gender'},
                         {text: 'Số điện thoại', value: 'phone'},
                         // {text: 'Trang cá nhân', value: 'page'},
-                        {text: 'Xóa khỏi lớp', value: 'delete', sortable: false}
+                        {text: 'Hành động', value: 'delete', sortable: false}
                     ],
                     body: []
                 },
@@ -200,6 +210,7 @@
                 },
                 preloader: true,
                 classDetail: Object,
+                lecturer: []
             }
         },
         components: {
@@ -361,7 +372,7 @@
                 return false;
             },
             get_enroll_request_success: function (response) {
-                if(response.data.success) {
+                if (response.data.success) {
                     this.enroll_request_list.body = response.data.students;
                 }
                 else {
@@ -374,6 +385,25 @@
             },
             imgUrl: function (path) {
                 return BACKEND_URL + path;
+            },
+            isOwnLecturer: function () {
+                let user_id = this.$ls.get('user');
+                if(this.$ls.get('group') == 'student_group') {
+                    return false
+                }
+                else {
+                    let own_lecturer = [];
+                    for (let lecturer of this.lecturer) {
+                        own_lecturer.push(lecturer.id.toString())
+                    }
+                    if (own_lecturer.includes(user_id.toString())) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+
+                }
             }
         }
     }

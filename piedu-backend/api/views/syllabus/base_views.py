@@ -9,8 +9,7 @@ User = settings.AUTH_USER_MODEL
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions 
-from api.permission import IsMyOwnOrAdmin, IsAuthenticated
-
+from api.permission import  IsAuthenticated, IsAdmin, IsLecturer,IsMyOwnOrAdmin,IsStudent,IsAdminOrLecturer
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -84,7 +83,7 @@ def get_syllabus_template(request,id):
         return Response(serializers.data)
 
 @api_view(['GET'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsLecturer,))
 def get_all_syllabus_template(request):
     all_syllabus_template = SyllabusTemplate.objects.all()
     if len(all_syllabus_template) ==0 :
@@ -97,7 +96,7 @@ def get_all_syllabus_template(request):
         return Response(serializers.data)
 
 @api_view(['GET','POST'])
-@permission_classes((permissions.IsAuthenticated,))
+@permission_classes((IsLecturer,))
 def save_syllabus_template(request):
     class_id = request.data.get('class_id')
     # token = get_token_from_request(request)

@@ -45,8 +45,6 @@
                     </div>
                 </v-flex>
             </v-layout>
-        </div>
-        <div style="padding: 2rem 3rem; text-align: left;">
             <v-layout row wrap>
                 <v-flex lg6 sm12 px-3 my-2>
                     <div class="input-group date">
@@ -62,13 +60,10 @@
                         </datetime>
                     </div>
                 </v-flex>
-                <v-flex sm12 px-3 my-2>
-                    <hr class="w-100">
-                </v-flex>
             </v-layout>
 
             <v-layout row wrap>
-                <v-flex sm12 px-3><h4>Lịch học lý thuyết</h4></v-flex>
+                <!--<v-flex sm12 px-3><h4>Lịch học lý thuyết</h4></v-flex>-->
                 <v-flex lg2 sm12 px-3 my-2>
                     <div class="field">
                         <label class="label">Thứ trong tuần</label>
@@ -134,80 +129,6 @@
             <v-layout>
                 <button class="btn btn-primary" @click="submit"> Kiểm tra và tạo lớp</button>
             </v-layout>
-            <!--<v-layout row wrap v-show="!subScheduleShow">-->
-            <!--<v-flex class="text-xs-center">-->
-            <!--<v-btn color="btn-primary"-->
-            <!--class="white&#45;&#45;text" @click="subScheduleShow=true">-->
-            <!--Thêm lịch học thực hành-->
-            <!--</v-btn>-->
-            <!--</v-flex>-->
-            <!--</v-layout>-->
-
-            <!--<transition name="subSchedule">-->
-            <!--<v-layout row wrap v-show="subScheduleShow">-->
-
-            <!--<v-flex lg8 sm12 px-3 text-left><h4>Lịch học Bài tập/Thực hành</h4></v-flex>-->
-            <!--<v-flex lg4 sm12 px-3 text-right>-->
-            <!--<v-btn color="warning" dark @click="hideSubSchedule()">-->
-            <!--Xóa lịch thực hành-->
-            <!--</v-btn>-->
-            <!--</v-flex>-->
-            <!--<v-flex lg2 sm12 px-3 my-2>-->
-            <!--<div class="field">-->
-            <!--<label class="label">Thứ trong tuần</label>-->
-            <!--<div class="control">-->
-            <!--<div :class="['select', 'w-100']">-->
-            <!--<select v-model="time.sub_schedule.day_of_week" class="w-100">-->
-            <!--<option v-for="day in 6" :value="day + 1"-->
-            <!--:key="day">Thứ {{ day + 1 }}-->
-            <!--</option>-->
-            <!--</select>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<p v-if="$v.sub_schedule.day_of_week.$error" class="help is-danger">Không được để trống-->
-            <!--Thứ</p>&ndash;&gt;-->
-            <!--</div>-->
-            <!--</v-flex>-->
-            <!--<v-flex lg5 sm12 px-3 my-2>-->
-            <!--<div class="input-group date">-->
-            <!--<label class="label col-12 px-0">Giờ bắt đầu</label>-->
-            <!--<div class="control col-12 px-0">-->
-            <!--<div :class="['select', 'w-100']">-->
-            <!--<select v-model="time.sub_schedule.start_session" class="w-100">-->
-            <!--<option v-for="session in 12" :value="session"-->
-            <!--:key="session">{{ session + 6 }}:00-->
-            <!--</option>-->
-            <!--</select>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<datetime type="time" class="col-12 px-0" input-class="input"&ndash;&gt;-->
-            <!--&lt;!&ndash;v-model="time.sub_schedule.start_session">&ndash;&gt;-->
-            <!--&lt;!&ndash;</datetime>&ndash;&gt;-->
-            <!--</div>-->
-            <!--</v-flex>-->
-            <!--<v-flex lg5 sm12 px-3 my-2>-->
-            <!--<div class="input-group date">-->
-            <!--<label class="label col-12 px-0">Giờ kết thúc</label>-->
-            <!--<div class="control col-12 px-0">-->
-            <!--<div :class="['select', 'w-100']">-->
-            <!--<select v-model="time.sub_schedule.end_session" class="w-100">-->
-            <!--<option v-for="session in 12" :value="session"-->
-            <!--:key="session">{{ session + 6 }}:50-->
-            <!--</option>-->
-            <!--</select>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<datetime type="time" class="col-12 px-0" input-class="input"&ndash;&gt;-->
-            <!--&lt;!&ndash;v-model="time.sub_schedule.end_session">&ndash;&gt;-->
-            <!--&lt;!&ndash;</datetime>&ndash;&gt;-->
-            <!--</div>-->
-            <!--</v-flex>-->
-            <!--<v-flex sm12 px-3 my-2>-->
-            <!--<hr class="w-100">-->
-            <!--</v-flex>-->
-            <!--</v-layout>-->
-            <!--</transition>-->
-
         </div>
 
     </section>
@@ -341,21 +262,38 @@
                 };
                 console.log(data);
                 this.axios.post(BACKEND_URL + '/api/class/validated', data, config).then((res) => {
-                    console.log(res.data);
+                    // alert(res.data.success);
+                    if(res.data.success) {
+                        self.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: 'Tạo lớp thành công',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        this.$router.push(`/class/${res.data.class_id}`);
+                    }
+                    else {
+                        self.$swal({
+                            type: 'error',
+                            title: 'Lớp học bị trùng lịch hoặc thời gian không hợp lệ. Vui lòng kiểm tra lại',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                }).catch((res) => {
                     self.$swal({
-                        position: 'top-end',
-                        type: 'success',
-                        title: 'Tạo lớp thành công',
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                    this.$router.push(`/class/${res.data.class_id}`);
-                })
+                        title: 'Đã xảy ra lỗi. Vui lòng thử lại',
+                        type: 'erorr'
+                    })
+                });
 
             },
         }
     }
 </script>
-<style>
-
+<style scoped>
+    .input, .select {
+        font-size: 1rem;
+    }
 </style>

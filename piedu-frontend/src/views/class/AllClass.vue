@@ -63,6 +63,8 @@
                 <v-card flat ref="presentTab">
                     <div class="row mt-5 justify-center" v-if="presentClass.preloader">
                         <v-progress-circular :size="30" color="green" indeterminate class="mb-5"/>
+                                                <!--<v-progress-linear :indeterminate="true"></v-progress-linear>-->
+
                     </div>
                     <section v-else>
                         <section v-if="presentClass.classList.length == 0">

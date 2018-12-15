@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-25 19:11+0700\n"
+"POT-Creation-Date: 2018-12-15 09:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,118 +22,162 @@ msgstr ""
 msgid "Core"
 msgstr ""
 
-#: core/models.py:7
-msgid "Code"
-msgstr ""
-
-#: core/models.py:8
-msgid "Avatar"
-msgstr ""
-
-#: core/models.py:9
-msgid "Phone Number"
-msgstr ""
-
 #: core/models.py:10
-msgid "Gender"
+msgid "Male"
 msgstr ""
 
 #: core/models.py:11
+msgid "Female"
+msgstr ""
+
+#: core/models.py:12 syllabus/models.py:12
+msgid "Other"
+msgstr ""
+
+#: core/models.py:16 course/models.py:32 course/models.py:47
+msgid "Code"
+msgstr ""
+
+#: core/models.py:17 course/models.py:31
+msgid "Avatar"
+msgstr ""
+
+#: core/models.py:18
+msgid "Phone Number"
+msgstr ""
+
+#: core/models.py:19
+msgid "Gender"
+msgstr ""
+
+#: core/models.py:20
 msgid "Unit"
 msgstr ""
 
-#: core/models.py:12
-msgid "User's role"
+#: core/models.py:22
+msgid "Birthday"
 msgstr ""
 
-#: core/models.py:20 course/models.py:53
+#: core/models.py:23
+msgid "Address"
+msgstr ""
+
+#: core/models.py:29
 msgid "User"
 msgstr ""
 
-#: core/models.py:21
+#: core/models.py:30
 msgid "Users"
 msgstr ""
 
-#: course/apps.py:6 course/models.py:13 course/models.py:25
+#: course/apps.py:6
 msgid "Course"
 msgstr ""
 
-#: course/apps.py:7 course/models.py:14
+#: course/apps.py:7
 msgid "Courses"
 msgstr ""
 
-#: course/models.py:8
-msgid "Course's Name"
+#: course/models.py:10 course/models.py:34
+msgid "Course Category"
 msgstr ""
 
-#: course/models.py:21
-msgid "Class's Name"
+#: course/models.py:15
+msgid "Catergory"
 msgstr ""
 
-#: course/models.py:22
-msgid "Description"
+#: course/models.py:16
+msgid "Categories"
 msgstr ""
 
-#: course/models.py:23
-msgid "Class's start time"
-msgstr ""
-
-#: course/models.py:24
-msgid "Class's end time"
-msgstr ""
-
-#: course/models.py:30 course/models.py:38 course/models.py:52
-#: course/models.py:66 course/models.py:80 syllabus/models.py:9
-#: syllabus/models.py:38 syllabus/models.py:51
-msgid "Class"
-msgstr ""
-
-#: course/models.py:31
-msgid "Classes"
-msgstr ""
-
-#: course/models.py:39
-msgid "Day Of Week"
+#: course/models.py:30 course/models.py:39 course/models.py:52
+msgid "Subject"
 msgstr ""
 
 #: course/models.py:40
-msgid "Encoded Session"
+msgid "Subjects"
 msgstr ""
 
-#: course/models.py:45
-msgid "Schedule"
+#: course/models.py:48
+msgid "Name"
+msgstr ""
+
+#: course/models.py:49
+msgid "Description"
+msgstr ""
+
+#: course/models.py:50
+msgid "Start time"
+msgstr ""
+
+#: course/models.py:51
+msgid "End time"
+msgstr ""
+
+#: course/models.py:57 course/models.py:125 course/models.py:151
+#: course/models.py:166 course/models.py:180 syllabus/models.py:20
+#: syllabus/models.py:73
+msgid "Class"
 msgstr ""
 
 #: course/models.py:58
+msgid "Classes"
+msgstr ""
+
+#: course/models.py:126
+msgid "Day Of Week"
+msgstr ""
+
+#: course/models.py:127
+msgid "Start Session"
+msgstr ""
+
+#: course/models.py:128
+msgid "End Session"
+msgstr ""
+
+#: course/models.py:133
+msgid "Schedule"
+msgstr ""
+
+#: course/models.py:134
+msgid "Schedules"
+msgstr ""
+
+#: course/models.py:153
+msgid "Lecturer"
+msgstr ""
+
+#: course/models.py:158
 msgid "Class - Lecturer"
 msgstr ""
 
-#: course/models.py:59
+#: course/models.py:159
 msgid "Classes - Lecturers"
 msgstr ""
 
-#: course/models.py:67 course/models.py:81
+#: course/models.py:167 course/models.py:182
 msgid "Student"
 msgstr ""
 
-#: course/models.py:72
+#: course/models.py:172
 msgid "Class - Student"
 msgstr ""
 
-#: course/models.py:73
+#: course/models.py:173
 msgid "Classes - Students"
 msgstr ""
 
-#: course/models.py:86
+#: course/models.py:187
 msgid "Enroll Request"
 msgstr ""
 
-#: course/models.py:87
+#: course/models.py:188
 msgid "Enroll Requests"
 msgstr ""
 
-#: syllabus/apps.py:6 syllabus/models.py:15 syllabus/models.py:16
-#: syllabus/models.py:24 syllabus/models.py:39
+#: syllabus/apps.py:6 syllabus/models.py:26 syllabus/models.py:27
+#: syllabus/models.py:49
 msgid "Syllabus"
 msgstr ""
 
@@ -142,705 +186,57 @@ msgid "Syllabuses"
 msgstr ""
 
 #: syllabus/models.py:7
-msgid "Syllabus's title"
+msgid "PDF"
 msgstr ""
 
 #: syllabus/models.py:8
-msgid "Syllabus's content"
+msgid "DOC/DOCX"
+msgstr ""
+
+#: syllabus/models.py:9
+msgid "IMG/PNG/SVG/GIF"
 msgstr ""
 
 #: syllabus/models.py:10
+msgid "MP4/AVI"
+msgstr ""
+
+#: syllabus/models.py:11
+msgid "MP3"
+msgstr ""
+
+#: syllabus/models.py:18
+msgid "Syllabus's title"
+msgstr ""
+
+#: syllabus/models.py:19
+msgid "Syllabus's content"
+msgstr ""
+
+#: syllabus/models.py:21
 msgid "Week"
 msgstr ""
 
-#: syllabus/models.py:23
+#: syllabus/models.py:48
 msgid "Material's Name"
 msgstr ""
 
-#: syllabus/models.py:25
+#: syllabus/models.py:50
 msgid "Material's Type"
 msgstr ""
 
-#: syllabus/models.py:31
+#: syllabus/models.py:56
 msgid "Material"
 msgstr ""
 
-#: syllabus/models.py:32
+#: syllabus/models.py:57
 msgid "Materials"
 msgstr ""
 
-#: syllabus/models.py:44
-msgid "Class - Syllasbus"
-msgstr ""
-
-#: syllabus/models.py:45
-msgid "Classes - Syllabus"
-msgstr ""
-
-#: syllabus/models.py:56
+#: syllabus/models.py:79
 msgid "Syllabus Template"
 msgstr ""
 
-#: syllabus/models.py:57
+#: syllabus/models.py:80
 msgid "Syllabus Templates"
-msgstr ""
-
-#: templates/basepage/mainbase.html:112 templates/common/navigation.html:93
-msgid "Bạn chưa cập nhật email"
-msgstr ""
-
-#: templates/forum/board_base.html:34
-msgid "Subscriptions"
-msgstr ""
-
-#: templates/forum/board_base.html:35
-msgid "View my posts"
-msgstr ""
-
-#: templates/forum/board_base.html:39
-#: templates/forum/forum_moderation/moderation_queue/detail.html:4
-#: templates/forum/forum_moderation/moderation_queue/detail.html:9
-#: templates/forum/forum_moderation/moderation_queue/list.html:4
-#: templates/forum/forum_moderation/moderation_queue/list.html:9
-#: templates/forum/forum_moderation/moderation_queue/list.html:32
-msgid "Moderation queue"
-msgstr ""
-
-#: templates/forum/forum/forum_detail.html:22
-msgid "Mark subforums read"
-msgstr ""
-
-#: templates/forum/forum/forum_detail.html:34
-#: templates/forum/forum/forum_detail.html:57
-#: templates/forum/forum_moderation/moderation_queue/detail.html:18
-#: templates/forum/forum_moderation/moderation_queue/list.html:66
-msgid "New topic"
-msgstr ""
-
-#: templates/forum/forum/forum_detail.html:42
-#: templates/forum/forum/forum_detail.html:65
-#: templates/forum/forum_tracking/mark_topics_read.html:5
-#: templates/forum/forum_tracking/mark_topics_read.html:11
-msgid "Mark topics read"
-msgstr ""
-
-#: templates/forum/forum/forum_detail.html:46
-msgid "Announcements"
-msgstr ""
-
-#: templates/forum/forum/forum_detail.html:50
-#: templates/forum/forum/forum_list.html:19
-#: templates/forum/forum/forum_list.html:37
-#: templates/forum/forum/forum_list.html:205
-msgid "Topics"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:20
-#: templates/forum/forum/forum_list.html:38
-#: templates/forum/forum/forum_list.html:206
-msgid "Posts"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:21
-#: templates/forum/forum/forum_list.html:39
-#: templates/forum/forum/forum_list.html:207
-#: templates/forum/forum_conversation/topic_list.html:14
-msgid "Last post"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:35
-#: templates/forum/forum/forum_list.html:203
-msgid "Forums"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:69
-#: templates/forum/forum/forum_list.html:142
-msgid "RSS feed"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:76
-#: templates/forum/forum/forum_list.html:149
-#: templates/forum/forum_conversation/topic_list.html:53
-#, python-format
-msgid "By: <a href=\"%(poster_url)s\">%(username)s</a>"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:80
-#: templates/forum/forum/forum_list.html:153
-#: templates/forum/forum_conversation/topic_list.html:57
-#, python-format
-msgid "By: %(poster_username)s"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:88
-#: templates/forum/forum/forum_list.html:161
-msgid "No posts"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:107
-#: templates/forum/forum/forum_list.html:180
-msgid "Total redirects:"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:187
-#: templates/forum/forum/forum_list.html:193
-msgid "Subforums:"
-msgstr ""
-
-#: templates/forum/forum/forum_list.html:212
-msgid "No forums."
-msgstr ""
-
-#: templates/forum/forum/index.html:6
-msgid "Index"
-msgstr ""
-
-#: templates/forum/forum/index.html:14
-#: templates/forum/forum_tracking/mark_forums_read.html:5
-#: templates/forum/forum_tracking/mark_forums_read.html:11
-msgid "Mark forums read"
-msgstr ""
-
-#: templates/forum/forum/index.html:16
-#: templates/forum/forum_tracking/unread_topic_list.html:4
-#: templates/forum/forum_tracking/unread_topic_list.html:10
-msgid "View unread topics"
-msgstr ""
-
-#: templates/forum/forum/index.html:23
-#: templates/forum/forum_member/forum_profile_detail.html:34
-msgid "Statistics"
-msgstr ""
-
-#: templates/forum/forum/index.html:24
-msgid "Total posts:"
-msgstr ""
-
-#: templates/forum/forum/index.html:24
-msgid "Total topics:"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_attachments/attachment_formset.html:28
-#: templates/forum/forum_member/forum_profile_update.html:20
-#: templates/forum/partials/form_field.html:6
-msgid "(optional)"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_attachments/attachment_formset.html:41
-msgid "Add another file"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_attachments/attachments_detail.html:8
-#: templates/forum/forum_conversation/forum_attachments/attachments_preview.html:7
-#: templates/forum/forum_conversation/partials/post_form.html:22
-#: templates/forum/forum_conversation/partials/post_form.html:60
-#: templates/forum/forum_conversation/partials/topic_form.html:26
-msgid "Attachments"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_detail.html:17
-#: templates/forum/forum_conversation/forum_polls/poll_preview.html:13
-msgid "You may select <b>1</b> option"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_detail.html:21
-#: templates/forum/forum_conversation/forum_polls/poll_preview.html:17
-#, python-format
-msgid "You may select up to <b>%(max_options)s</b> options"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_detail.html:40
-msgid "Vote"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_detail.html:44
-msgid "Change your vote"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_option_formset.html:3
-msgid "Poll options"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_option_formset.html:26
-msgid "Add a poll option"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_option_formset.html:30
-msgid ""
-"<b>Note:</b>&nbsp;Deleting poll options of an existing poll will delete the "
-"associated votes."
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_preview.html:9
-#: templates/forum/forum_conversation/post_preview.html:10
-msgid "Preview:"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_results.html:19
-msgid "Total votes:"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_vote_form.html:35
-#: templates/forum/forum_conversation/partials/topic_form.html:102
-#: templates/forum/forum_conversation/post_create.html:27
-#: templates/forum/forum_conversation/post_update.html:27
-#: templates/forum/forum_member/forum_profile_update.html:36
-msgid "Submit"
-msgstr ""
-
-#: templates/forum/forum_conversation/forum_polls/poll_vote_form.html:36
-msgid "View results"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/post_form.html:20
-#: templates/forum/forum_conversation/partials/topic_form.html:21
-msgid "Options"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:15
-msgid "Post reply"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:18
-msgid "Subscribe"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:20
-msgid "Unsubscribe"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:26
-#: templates/forum/forum_moderation/topic_lock.html:5
-#: templates/forum/forum_moderation/topic_lock.html:12
-msgid "Lock topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:27
-#: templates/forum/forum_moderation/topic_unlock.html:5
-#: templates/forum/forum_moderation/topic_unlock.html:12
-msgid "Unlock topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:28
-#: templates/forum/forum_moderation/topic_delete.html:5
-#: templates/forum/forum_moderation/topic_delete.html:12
-msgid "Delete topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:29
-#: templates/forum/forum_moderation/topic_move.html:5
-#: templates/forum/forum_moderation/topic_move.html:12
-msgid "Move topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:31
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:38
-msgid "Change to sticky topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:32
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:35
-msgid "Change to announce"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:34
-#: templates/forum/forum_conversation/partials/topic_detail_actions.html:37
-msgid "Change to standard topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_form.html:23
-msgid "Poll"
-msgstr ""
-
-#: templates/forum/forum_conversation/partials/topic_form.html:101
-#: templates/forum/forum_conversation/post_create.html:26
-#: templates/forum/forum_conversation/post_update.html:26
-msgid "Preview"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_create.html:5
-#: templates/forum/forum_conversation/post_create.html:20
-msgid "Post a reply"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_create.html:38
-#: templates/forum/forum_moderation/moderation_queue/detail.html:132
-msgid "Topic review"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_create.html:50
-#: templates/forum/forum_conversation/topic_detail.html:52
-#: templates/forum/forum_conversation/topic_list.html:33
-#: templates/forum/forum_member/user_posts_list.html:50
-#: templates/forum/forum_moderation/moderation_queue/detail.html:85
-#: templates/forum/forum_moderation/moderation_queue/detail.html:144
-#: templates/forum/forum_moderation/moderation_queue/list.html:50
-#: templates/forum/forum_search/search.html:85
-#, python-format
-msgid "By: <a href=\"%(poster_url)s\">%(username)s</a> on %(creation_date)s"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_create.html:54
-#: templates/forum/forum_conversation/topic_detail.html:56
-#: templates/forum/forum_conversation/topic_list.html:37
-#: templates/forum/forum_moderation/moderation_queue/detail.html:89
-#: templates/forum/forum_moderation/moderation_queue/detail.html:148
-#: templates/forum/forum_moderation/moderation_queue/list.html:54
-#: templates/forum/forum_search/search.html:89
-#, python-format
-msgid "By: %(poster_username)s on %(creation_date)s"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_delete.html:5
-#: templates/forum/forum_conversation/post_delete.html:12
-msgid "Delete post"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_delete.html:15
-msgid "Are you sure you want to delete this post?"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_delete.html:18
-#: templates/forum/forum_member/topic_subscribe.html:18
-#: templates/forum/forum_member/topic_unsubscribe.html:18
-#: templates/forum/forum_moderation/moderation_queue/post_approve.html:18
-#: templates/forum/forum_moderation/moderation_queue/post_disapprove.html:18
-#: templates/forum/forum_moderation/topic_delete.html:18
-#: templates/forum/forum_moderation/topic_lock.html:18
-#: templates/forum/forum_moderation/topic_unlock.html:18
-#: templates/forum/forum_moderation/topic_update_type.html:18
-#: templates/forum/forum_tracking/mark_forums_read.html:16
-#: templates/forum/forum_tracking/mark_topics_read.html:16
-msgid "Yes"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_delete.html:19
-#: templates/forum/forum_member/topic_subscribe.html:19
-#: templates/forum/forum_member/topic_unsubscribe.html:19
-#: templates/forum/forum_moderation/moderation_queue/post_approve.html:19
-#: templates/forum/forum_moderation/moderation_queue/post_disapprove.html:19
-#: templates/forum/forum_moderation/topic_delete.html:19
-#: templates/forum/forum_moderation/topic_lock.html:19
-#: templates/forum/forum_moderation/topic_unlock.html:19
-#: templates/forum/forum_moderation/topic_update_type.html:19
-#: templates/forum/forum_tracking/mark_forums_read.html:17
-#: templates/forum/forum_tracking/mark_topics_read.html:17
-msgid "No"
-msgstr ""
-
-#: templates/forum/forum_conversation/post_update.html:5
-#: templates/forum/forum_conversation/post_update.html:20
-#: templates/forum/forum_conversation/topic_update.html:5
-#: templates/forum/forum_conversation/topic_update.html:23
-msgid "Edit post"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_create.html:5
-#: templates/forum/forum_conversation/topic_create.html:23
-msgid "Post a new topic"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:33
-msgid "Edit"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:37
-msgid "Delete"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:76
-msgid "Last edited by:"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:76
-msgid "Updated"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:76
-msgid "on"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:76
-#, python-format
-msgid "edited %(counter)s time in total."
-msgid_plural "edited %(counter)s times in total."
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/forum/forum_conversation/topic_detail.html:81
-msgid "Reason:"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:95
-#: templates/forum/forum_member/user_posts_list.html:67
-#: templates/forum/forum_moderation/moderation_queue/detail.html:116
-msgid "Posts:"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_detail.html:98
-#: templates/forum/forum_moderation/moderation_queue/detail.html:119
-msgid "Anonymous user"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_list.html:12
-msgid "Replies"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_list.html:13
-msgid "Views"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_list.html:28
-msgid "This topic is locked"
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_list.html:73
-msgid "There are no topics in this forum."
-msgstr ""
-
-#: templates/forum/forum_conversation/topic_pages_inline_list.html:5
-msgid "Go to the page:"
-msgstr ""
-
-#: templates/forum/forum_feeds/topics_description.html:5
-msgid "Posted by"
-msgstr ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:4
-#: templates/forum/forum_member/forum_profile_detail.html:9
-#, python-format
-msgid "%(username)s profile"
-msgstr ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:26
-msgid "Edit profile"
-msgstr ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:39
-#, python-format
-msgid ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Post</small></p>"
-msgid_plural ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Posts</small></p>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:44
-#, python-format
-msgid ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Topic</small></p>"
-msgid_plural ""
-"<h2><strong>%(counter)s</strong></h2>\n"
-"                    <p><small>Topics</small></p>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:58
-msgid "Recent posts"
-msgstr ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:58
-msgid "View all"
-msgstr ""
-
-#: templates/forum/forum_member/forum_profile_detail.html:68
-#, python-format
-msgid "On %(creation_date)s"
-msgstr ""
-
-#: templates/forum/forum_member/forum_profile_update.html:4
-#: templates/forum/forum_member/forum_profile_update.html:12
-msgid "Edit forum profile"
-msgstr ""
-
-#: templates/forum/forum_member/subscription_topic_list.html:4
-#: templates/forum/forum_member/subscription_topic_list.html:10
-msgid "Topics that you are subscribed to"
-msgstr ""
-
-#: templates/forum/forum_member/subscription_topic_list.html:17
-#, python-format
-msgid "%(counter)s topic found"
-msgid_plural "%(counter)s topics found"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/forum/forum_member/subscription_topic_list.html:31
-msgid "Not topics found."
-msgstr ""
-
-#: templates/forum/forum_member/topic_subscribe.html:5
-#: templates/forum/forum_member/topic_subscribe.html:12
-msgid "Subscribe to topic"
-msgstr ""
-
-#: templates/forum/forum_member/topic_subscribe.html:15
-msgid "Would you like to subscribe to this topic?"
-msgstr ""
-
-#: templates/forum/forum_member/topic_unsubscribe.html:5
-#: templates/forum/forum_member/topic_unsubscribe.html:12
-msgid "Unsubscribe from topic"
-msgstr ""
-
-#: templates/forum/forum_member/topic_unsubscribe.html:15
-msgid "Would you like to unsubscribe from this topic?"
-msgstr ""
-
-#: templates/forum/forum_member/user_posts_list.html:4
-#: templates/forum/forum_member/user_posts_list.html:9
-msgid "My messages"
-msgstr ""
-
-#: templates/forum/forum_member/user_posts_list.html:4
-#: templates/forum/forum_member/user_posts_list.html:9
-#, python-format
-msgid "%(username)s's posts"
-msgstr ""
-
-#: templates/forum/forum_member/user_posts_list.html:17
-#, python-format
-msgid "%(counter)s post found"
-msgid_plural "%(counter)s posts found"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/forum/forum_member/user_posts_list.html:24
-msgid "No posts found"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/detail.html:14
-msgid "Disapprove"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/detail.html:15
-msgid "Approve"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/detail.html:18
-msgid "New post"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/detail.html:31
-msgid "<b>1</b> option may be selected"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/detail.html:35
-#, python-format
-msgid "Up to <b>%(max_options)s</b> options may be selected"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/list.html:16
-#, python-format
-msgid "%(topic_length)s posts found"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/list.html:34
-msgid "Topic"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/list.html:35
-msgid "Forum"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/list.html:78
-msgid "No posts awaiting approval."
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/post_approve.html:5
-#: templates/forum/forum_moderation/moderation_queue/post_approve.html:12
-msgid "Approve post"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/post_approve.html:15
-msgid "Are you sure you want to approve this post?"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/post_disapprove.html:5
-#: templates/forum/forum_moderation/moderation_queue/post_disapprove.html:12
-msgid "Disapprove post"
-msgstr ""
-
-#: templates/forum/forum_moderation/moderation_queue/post_disapprove.html:15
-msgid ""
-"Are you sure you want to disapprove this post? This post will be deleted."
-msgstr ""
-
-#: templates/forum/forum_moderation/topic_delete.html:15
-msgid "Are you sure you want to delete this topic?"
-msgstr ""
-
-#: templates/forum/forum_moderation/topic_lock.html:15
-msgid "Are you sure you want to lock this topic?"
-msgstr ""
-
-#: templates/forum/forum_moderation/topic_move.html:23
-msgid "Move"
-msgstr ""
-
-#: templates/forum/forum_moderation/topic_move.html:24
-msgid "Cancel"
-msgstr ""
-
-#: templates/forum/forum_moderation/topic_unlock.html:15
-msgid "Are you sure you want to unlock this topic?"
-msgstr ""
-
-#: templates/forum/forum_moderation/topic_update_type.html:5
-#: templates/forum/forum_moderation/topic_update_type.html:12
-msgid "Change topic type"
-msgstr ""
-
-#: templates/forum/forum_search/search.html:5
-#: templates/forum/forum_search/search.html:12
-#: templates/forum/forum_search/search.html:33
-#: templates/forum/forum_search/search.html:43
-msgid "Search"
-msgstr ""
-
-#: templates/forum/forum_search/search.html:19
-msgid "Search forums"
-msgstr ""
-
-#: templates/forum/forum_search/search.html:45
-msgid "New search"
-msgstr ""
-
-#: templates/forum/forum_search/search.html:51
-#, python-format
-msgid "Your search has returned <b>%(number_of_results)s</b> result"
-msgid_plural "Your search has returned <b>%(number_of_results)s</b> results"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/forum/forum_search/search.html:71
-msgid "Results"
-msgstr ""
-
-#: templates/forum/forum_search/search.html:103
-msgid "No results."
-msgstr ""
-
-#: templates/forum/forum_tracking/mark_forums_read.html:13
-msgid "Are you sure you want to mark forums read?"
-msgstr ""
-
-#: templates/forum/forum_tracking/mark_topics_read.html:13
-msgid "Are you sure you want to mark topics read?"
-msgstr ""
-
-#: templates/forum/forum_tracking/unread_topic_list.html:17
-#, python-format
-msgid "%(topic_length)s unread topics found"
-msgstr ""
-
-#: templates/forum/forum_tracking/unread_topic_list.html:27
-msgid "There are no unread topics."
-msgstr ""
-
-#: templates/forum/partials/breadcrumb.html:4
-msgid "Forum index"
 msgstr ""

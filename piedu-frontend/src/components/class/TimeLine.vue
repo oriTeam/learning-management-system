@@ -7,7 +7,7 @@
                     <h4 class="timeline-title"> Nội dung tuần {{ syllabus.week }}</h4>
                     <div class="timeline-panel-controls">
                         <div class="controls">
-                            <v-dialog v-model="syllabus.dialog" persistent max-width="600px">
+                            <v-dialog v-if="isOwnLecturer()" v-model="syllabus.dialog" persistent max-width="600px">
                                 <button slot="activator" class="btn btn-sm btn-link"><i class="fas fa-edit"></i> Chỉnh sửa</button>
                                 <v-card>
                                     <v-card-title>
@@ -66,11 +66,13 @@
 
     export default {
         name: "time-line",
+        props: ['own_lecturers'],
         data() {
             return {
                 getSyllabusSuccess: false,
                 syllabuses: Object,
-                dialog: false
+                dialog: false,
+                lecturers: this.own_lecturers
             }
         },
         created() {
@@ -101,7 +103,28 @@
                 return BACKEND_URL + path;
             },
             saveWeekkSyllabus: function () {
+            },
+            isOwnLecturer: function () {
+                let user_id = this.$ls.get('user');
+                if(this.$ls.get('group') == 'student_group') {
+                    return false
+                }
+                else if(this.$ls.get('group') == 'admin_group') {
+                    return true
+                }
+                else {
+                    let own_lecturer = [];
+                    for (let lecturer of this.lecturers) {
+                        own_lecturer.push(lecturer.id.toString())
+                    }
+                    if (own_lecturer.includes(user_id.toString())) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
 
+                }
             }
         },
     }
