@@ -24,11 +24,11 @@ msgstr ""
 
 #: core/models.py:10
 msgid "Male"
-msgstr ""
+msgstr "Nam"
 
 #: core/models.py:11
 msgid "Female"
-msgstr ""
+msgstr "Nữ"
 
 #: core/models.py:12 syllabus/models.py:12
 msgid "Other"
@@ -40,150 +40,150 @@ msgstr ""
 
 #: core/models.py:17 course/models.py:31
 msgid "Avatar"
-msgstr ""
+msgstr "Ảnh Đại Diện"
 
 #: core/models.py:18
 msgid "Phone Number"
-msgstr ""
+msgstr "Số Điện Thoại"
 
 #: core/models.py:19
 msgid "Gender"
-msgstr ""
+msgstr "Giới Tính"
 
 #: core/models.py:20
 msgid "Unit"
-msgstr ""
+msgstr "Đơn Vị Công Tác"
 
 #: core/models.py:22
 msgid "Birthday"
-msgstr ""
+msgstr "Sinh Nhật"
 
 #: core/models.py:23
 msgid "Address"
-msgstr ""
+msgstr "Địa Chỉ"
 
 #: core/models.py:29
 msgid "User"
-msgstr ""
+msgstr "Người sử dụng"
 
 #: core/models.py:30
 msgid "Users"
-msgstr ""
+msgstr "Người sử dụng"
 
 #: course/apps.py:6
 msgid "Course"
-msgstr ""
+msgstr "Khóa Học"
 
 #: course/apps.py:7
 msgid "Courses"
-msgstr ""
+msgstr "Khóa Học"
 
 #: course/models.py:10 course/models.py:34
 msgid "Course Category"
-msgstr ""
+msgstr "Loại Môn Học"
 
 #: course/models.py:15
 msgid "Catergory"
-msgstr ""
+msgstr "Loại"
 
 #: course/models.py:16
 msgid "Categories"
-msgstr ""
+msgstr "Loại"
 
 #: course/models.py:30 course/models.py:39 course/models.py:52
 msgid "Subject"
-msgstr ""
+msgstr "Môn Học"
 
 #: course/models.py:40
 msgid "Subjects"
-msgstr ""
+msgstr "Môn học"
 
 #: course/models.py:48
 msgid "Name"
-msgstr ""
+msgstr "Tên Môn Học"
 
 #: course/models.py:49
 msgid "Description"
-msgstr ""
+msgstr "Mô Tả"
 
 #: course/models.py:50
 msgid "Start time"
-msgstr ""
+msgstr "Bắt Đầu Khóa"
 
 #: course/models.py:51
 msgid "End time"
-msgstr ""
+msgstr "Kết Thúc Khóa"
 
 #: course/models.py:57 course/models.py:125 course/models.py:151
 #: course/models.py:166 course/models.py:180 syllabus/models.py:20
 #: syllabus/models.py:73
 msgid "Class"
-msgstr ""
+msgstr "Lớp Học"
 
 #: course/models.py:58
 msgid "Classes"
-msgstr ""
+msgstr "Lớp Học"
 
 #: course/models.py:126
 msgid "Day Of Week"
-msgstr ""
+msgstr "Thứ"
 
 #: course/models.py:127
 msgid "Start Session"
-msgstr ""
+msgstr "Bắt Đầu Tiết Học"
 
 #: course/models.py:128
 msgid "End Session"
-msgstr ""
+msgstr "Kết Thúc Tiết Học"
 
 #: course/models.py:133
 msgid "Schedule"
-msgstr ""
+msgstr "Thời Gian Biểu"
 
 #: course/models.py:134
 msgid "Schedules"
-msgstr ""
+msgstr "Thời Gian Biểu"
 
 #: course/models.py:153
 msgid "Lecturer"
-msgstr ""
+msgstr "Giảng Viên"
 
 #: course/models.py:158
 msgid "Class - Lecturer"
-msgstr ""
+msgstr "Học Phần - Giảng Viên"
 
 #: course/models.py:159
 msgid "Classes - Lecturers"
-msgstr ""
+msgstr "Học Phần - Giảng Viên"
 
 #: course/models.py:167 course/models.py:182
 msgid "Student"
-msgstr ""
+msgstr "Sinh Viên"
 
 #: course/models.py:172
 msgid "Class - Student"
-msgstr ""
+msgstr "Học Phần - Giảng Viên"
 
 #: course/models.py:173
 msgid "Classes - Students"
-msgstr ""
+msgstr "Học Phần - Giảng Viên"
 
 #: course/models.py:187
 msgid "Enroll Request"
-msgstr ""
+msgstr "Yêu Cầu Tham Gia"
 
 #: course/models.py:188
 msgid "Enroll Requests"
-msgstr ""
+msgstr "Yêu Cầu Tham Gia"
 
 #: syllabus/apps.py:6 syllabus/models.py:26 syllabus/models.py:27
 #: syllabus/models.py:49
 msgid "Syllabus"
-msgstr ""
+msgstr "Đề Cương"
 
 #: syllabus/apps.py:7
 msgid "Syllabuses"
-msgstr ""
+msgstr "Đề Cương"
 
 #: syllabus/models.py:7
 msgid "PDF"
@@ -207,36 +207,36 @@ msgstr ""
 
 #: syllabus/models.py:18
 msgid "Syllabus's title"
-msgstr ""
+msgstr "Tên Đề Cương"
 
 #: syllabus/models.py:19
 msgid "Syllabus's content"
-msgstr ""
+msgstr "Nội Dung Đề Cương"
 
 #: syllabus/models.py:21
 msgid "Week"
-msgstr ""
+msgstr "Tuần"
 
 #: syllabus/models.py:48
 msgid "Material's Name"
-msgstr ""
+msgstr "Tên Tài Liệu"
 
 #: syllabus/models.py:50
 msgid "Material's Type"
-msgstr ""
+msgstr "Loại Tài Liệu"
 
 #: syllabus/models.py:56
 msgid "Material"
-msgstr ""
+msgstr "Tài Liệu"
 
 #: syllabus/models.py:57
 msgid "Materials"
-msgstr ""
+msgstr "Tài Liệu"
 
 #: syllabus/models.py:79
 msgid "Syllabus Template"
-msgstr ""
+msgstr "Mẫu Đề Cương"
 
 #: syllabus/models.py:80
 msgid "Syllabus Templates"
-msgstr ""
+msgstr "Mẫu Đề Cương"
