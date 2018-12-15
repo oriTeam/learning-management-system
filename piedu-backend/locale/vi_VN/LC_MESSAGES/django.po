@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-15 10:46+0700\n"
+"POT-Creation-Date: 2018-12-15 11:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,11 +161,11 @@ msgstr "Sinh Viên"
 
 #: course/models.py:173
 msgid "Class - Student"
-msgstr "Học Phần - Giảng Viên"
+msgstr "Học Phần - Sinh Viên"
 
 #: course/models.py:174
 msgid "Classes - Students"
-msgstr "Học Phần - Giảng Viên"
+msgstr "Học Phần - Sinh Viên"
 
 #: course/models.py:188
 msgid "Enroll Request"
@@ -239,3 +239,144 @@ msgstr "Mẫu Đề Cương"
 #: syllabus/models.py:80
 msgid "Syllabus Templates"
 msgstr "Mẫu Đề Cương"
+
+#: templates/admin/app_index.html:9
+#: templates/admin/auth/user/change_password.html:13
+#: templates/admin/base.html:61 templates/admin/change_form.html:18
+msgid "Home"
+msgstr ""
+
+#: templates/admin/auth/user/add_form.html:6
+msgid ""
+"First, enter a username and password. Then, you'll be able to edit more user "
+"options."
+msgstr ""
+
+#: templates/admin/auth/user/add_form.html:8
+msgid "Enter a username and password."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:17
+#: templates/admin/auth/user/change_password.html:55
+#: templates/admin/base.html:49
+msgid "Change password"
+msgstr "Thay đổi mật khẩu "
+
+#: templates/admin/auth/user/change_password.html:28
+#: templates/admin/change_form.html:47
+msgid "Please correct the error below."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:28
+#: templates/admin/change_form.html:47
+msgid "Please correct the errors below."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:32
+#, python-format
+msgid "Enter a new password for the user <strong>%(username)s</strong>."
+msgstr ""
+
+#: templates/admin/base.html:35
+msgid "Welcome,"
+msgstr ""
+
+#: templates/admin/base.html:40
+msgid "View site"
+msgstr "Đi tới trang web"
+
+#: templates/admin/base.html:45
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/base.html:51
+msgid "Log out"
+msgstr "Đăng xuất"
+
+#: templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+#: templates/admin/base_site.html:6
+msgid "PIEdu administration"
+msgstr "Quản lý PIEdu"
+
+#: templates/admin/change_form.html:21
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: templates/admin/change_form.html:33
+msgid "History"
+msgstr ""
+
+#: templates/admin/change_form.html:35
+#: templates/admin/edit_inline/stacked.html:14
+#: templates/admin/edit_inline/tabular.html:36
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:12
+#: templates/admin/edit_inline/tabular.html:34 templates/admin/index.html:37
+#: templates/admin/widgets/related_widget_wrapper.html:10
+msgid "Change"
+msgstr "Thay đổi"
+
+#: templates/admin/edit_inline/tabular.html:20
+msgid "Delete?"
+msgstr ""
+
+#: templates/admin/includes/object_delete_summary.html:2
+msgid "Summary"
+msgstr ""
+
+#: templates/admin/index.html:20
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr ""
+
+#: templates/admin/index.html:31
+#: templates/admin/widgets/related_widget_wrapper.html:17
+#, fuzzy
+#| msgid "Address"
+msgid "Add"
+msgstr "Thêm"
+
+#: templates/admin/index.html:47
+msgid "You don't have permission to edit anything."
+msgstr ""
+
+#: templates/admin/index.html:55
+msgid "Recent actions"
+msgstr ""
+
+#: templates/admin/index.html:56
+msgid "My actions"
+msgstr ""
+
+#: templates/admin/index.html:60
+msgid "None available"
+msgstr ""
+
+#: templates/admin/index.html:74
+msgid "Unknown content"
+msgstr ""
+
+#: templates/admin/widgets/related_widget_wrapper.html:9
+#, python-format
+msgid "Change selected %(model)s"
+msgstr ""
+
+#: templates/admin/widgets/related_widget_wrapper.html:16
+#, python-format
+msgid "Add another %(model)s"
+msgstr ""
+
+#: templates/admin/widgets/related_widget_wrapper.html:23
+#, python-format
+msgid "Delete selected %(model)s"
+msgstr ""
+
+#: templates/admin/widgets/related_widget_wrapper.html:24
+msgid "Delete"
+msgstr ""
