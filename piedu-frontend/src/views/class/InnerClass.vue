@@ -50,15 +50,19 @@
                             <v-icon>toc</v-icon>
                         </v-tab>
 
-                        <v-tab-item>
-                            <v-card flat>
+                        <v-tab-item >
+                            <v-card flat v-if="this.status == 1">
                                 <!--<v-card-text>Thời gian biểu</v-card-text>-->
                                 <time-line :own_lecturers="this.lecturer"></time-line>
                             </v-card>
+                            <div v-else class="w-100 my-3 mx-0 alert alert-info"
+                                         key="emptyFutureClass">
+                                        <strong>Bạn chưa enroll </strong>
+                                    </div>
                         </v-tab-item>
 
                         <v-tab-item>
-                            <v-card flat>
+                            <v-card flat v-if="this.status == 1">
                                 <section v-if="students_list.body.length == 0">
                                     <div class="w-100 my-3 mx-0 alert alert-warning"
                                          key="emptyFutureClass">
@@ -106,9 +110,13 @@
                                     </template>
                                 </v-data-table>
                             </v-card>
+                            <div v-else class="w-100 my-3 mx-0 alert alert-info"
+                                         key="emptyFutureClass">
+                                        <strong>Bạn chưa enroll </strong>
+                                    </div>
                         </v-tab-item>
                         <v-tab-item>
-                            <v-card flat>
+                            <v-card flat v-if="this.status == 1">
                                 <section v-if="enroll_request_list.body.length == 0">
                                     <div class="w-100 my-3 mx-0 alert alert-warning"
                                          key="emptyFutureClass">
@@ -155,6 +163,10 @@
                                 </v-data-table>
 
                             </v-card>
+                            <div v-else class="w-100 my-3 mx-0 alert alert-info"
+                                         key="emptyFutureClass">
+                                        <strong>Bạn chưa enroll </strong>
+                                    </div>
                         </v-tab-item>
 
                     </v-tabs>
@@ -210,7 +222,8 @@
                 },
                 preloader: true,
                 classDetail: Object,
-                lecturer: []
+                lecturer: [],
+                status: Number,
             }
         },
         components: {
@@ -404,7 +417,25 @@
                     }
 
                 }
-            }
+            },
+            check_status: function () {
+                let self = this;
+                let token = self.$ls.get('token');
+                let config = {
+                    headers: {
+                        "Authorization": "Token " + token.toString()
+                    }
+                };
+                let data = {
+                    'own_class': self.classId,
+                    'student': self.$ls.get('user'),
+                    'token': self.$ls.get('token'),
+                    'format': "json"
+                };
+                this.axios.get(BACKEND_URL + '/api/class/student_status', {params: data}, config).then((res) => {
+                    self.status = res.data.code;
+                })
+            },
         }
     }
 </script>

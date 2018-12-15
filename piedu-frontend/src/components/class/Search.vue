@@ -163,9 +163,10 @@
             },
             redirect: function () {
                 let self = this;
-
                 if (self.basic.selected_type == "class") {
-                    self.$router.push(`/class/${self.basic.selected}`);
+                    window.location.href = `http://127.0.0.1:8080/class/${self.basic.selected}`;
+                    // self.$router.replace(`/class/${self.basic.selected}`);
+                    // self.$router.replace({ path: `/class/${self.basic.selected}`});
                 }
                 else {
                     self.$router.push(`/user/${self.basic.selected}`);

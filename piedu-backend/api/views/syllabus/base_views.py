@@ -68,8 +68,8 @@ def get_class_syllabus(request,id):
         return Response(result) 
 			
 
-        serializers = SyllabusSerializer(all_syllabus,many=True)
-        return Response(serializers.data)                        
+        # serializers = SyllabusSerializer(all_syllabus,many=True)
+        # return Response(serializers.data)
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))

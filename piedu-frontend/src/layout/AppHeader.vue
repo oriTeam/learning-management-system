@@ -97,9 +97,8 @@
                                  :to="{ name: 'profile', params: { id: this.$ls.get('user') }}">Trang
                         cá nhân
                     </router-link>
-                    <router-link v-if="this.$ls.get('group') == 'admin_group'" class="dropdown-item"
-                                 :to="{ name: 'dashboard' }">Quản lý PIEdu
-                    </router-link>
+                    <a v-if="this.$ls.get('group') == 'admin_group'" class="dropdown-item" href="http://127.0.0.1:8000/admin">Quản lý PIEdu
+                    </a>
                     <a class="dropdown-item" @click="this.logout" href="#">Đăng xuất</a>
                 </base-dropdown>
             </ul>
@@ -113,6 +112,7 @@
     import BaseDropdown from "@/components/BaseDropdown";
     import CloseButton from "@/components/CloseButton";
     import auth from "@/auth"
+
 
     export default {
         data() {
