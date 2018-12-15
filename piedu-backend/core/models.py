@@ -39,6 +39,13 @@ class User(AbstractUser):
             user_group = 'Admin'
         return "{}: {}".format(user_group, self.username)
 
+    def save(self):
+        # Save the provided password in hashed format
+        user = super(User, self)
+        user.set_password(self.password)
+        user.save()
+        return user
+        
     def get_name_and_id(self):
         data ={
             "id" : self.id,

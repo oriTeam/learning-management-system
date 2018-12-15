@@ -12,6 +12,7 @@ from api.functions import get_token_from_request, get_user_from_token
 from api.permission import  IsAuthenticated, IsAdmin,IsLecturer,IsMyOwnOrAdmin,IsStudent,IsAdminOrLecturer
 from django.contrib.auth.models import Group
 from course.models import Class,ClassStudent,ClassLecturer
+from django.contrib.auth import authenticate
 
 @api_view(['GET','POST'])
 @permission_classes((permissions.IsAuthenticated,))
@@ -36,7 +37,7 @@ def get_user_detail_view(request):
             # return Response(serializer.data)
 
 @api_view(['GET','POST'])
-@permission_classes((IsMyOwnOrAdmin,))
+@permission_classes((IsAuthenticated,))
 def change_password(request):
     # try :
     #     user = User.objects.get(pk=id)
@@ -49,20 +50,31 @@ def change_password(request):
     # else:
     token = get_token_from_request(request)
     user = get_user_from_token(token)
-    new_password = request.data.get("new_password")
-    if user is not None:
-        user.set_password(str(new_password))
-        data = {
-                "success" : True,
-                "message" : "Done!"
-        }
+    old_password = request.data.get("old_password")
+    validated = authenticate(username=user.username,password=old_password)
+    if validated :
+        new_password = request.data.get("new_password")
+        if user is not None:
+            user.set_password(str(new_password))
+            user.save()
+        
+            data = {
+                    "success" : True,
+                    "message" : "Done!"
+            }
+            return Response(data)
+        else :
+            data = {
+                    "success" : False,
+                    "message" : "User is invalid"
+            }
         return Response(data)
     else :
-        data = {
-                "success" : False,
-                "message" : "User is invalid"
+        data ={
+            "success" : False,
+            "message" : "Current Password is invalid"
         }
-    return Response(data)
+        return Response(data)
 
 @api_view(['GET','POST'])
 @permission_classes((IsAdmin,))
