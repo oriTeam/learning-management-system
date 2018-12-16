@@ -1,4 +1,4 @@
-# Learning Managenment System
+﻿# Learning Managenment System
 
 > Hệ thống quản lý môn học 
 
@@ -31,18 +31,18 @@
     $ cd ../piedu-frontend    
     $ npm run serve
     
-## Contributors
+## Contributors: 6
 
-   1. vantrong291
-   2. chikyuu29198
-   3. tuanhah
-   4. LeCongThuong
-   5. lethithanhhoa
-   6. bogianoithonda
+   1. Phạm Văn Trọng: @vantrong291
+   2. Vũ Ngọc Chi: @chikyuu29198
+   3. Hoàng Anh Tuấn: @tuanhah, @Ryuzaki98
+   4. Lê Công Thương: @LeCongThuong
+   5. Lê Thị Thanh Hoa: @lethithanhhoa
+   6. Trần Hữu Tuân: @bogianoithonda
    
 ## Công nghệ sử dụng
 
-   1. Backend: Django, Mysql, ...
-   2. Frontend: VueJs, Bootstrapv4, ...    
+   1. Backend: Django, DjangoREST, Mysql, ...
+   2. Frontend: VueJs, Vuetify, Bootstrapv4, ...    
 
 [Django]: <https://docs.djangoproject.com/en/2.1/>
