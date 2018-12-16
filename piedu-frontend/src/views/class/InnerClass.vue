@@ -233,6 +233,7 @@
         },
         created() {
             this.getData();
+            this.check_status();
         },
         methods: {
             getData: function () {
@@ -419,22 +420,27 @@
                 }
             },
             check_status: function () {
-                let self = this;
-                let token = self.$ls.get('token');
-                let config = {
-                    headers: {
-                        "Authorization": "Token " + token.toString()
-                    }
-                };
-                let data = {
-                    'own_class': self.classId,
-                    'student': self.$ls.get('user'),
-                    'token': self.$ls.get('token'),
-                    'format': "json"
-                };
-                this.axios.get(BACKEND_URL + '/api/class/student_status', {params: data}, config).then((res) => {
-                    self.status = res.data.code;
-                })
+                if(this.$ls.get('group') == 'lecturer_group' || this.$ls.get('group') == 'admin_group') {
+                    this.status = 1;
+                }
+                else {
+                    let self = this;
+                    let token = self.$ls.get('token');
+                    let config = {
+                        headers: {
+                            "Authorization": "Token " + token.toString()
+                        }
+                    };
+                    let data = {
+                        'own_class': self.classId,
+                        'student': self.$ls.get('user'),
+                        'token': self.$ls.get('token'),
+                        'format': "json"
+                    };
+                    this.axios.get(BACKEND_URL + '/api/class/student_status', {params: data}, config).then((res) => {
+                        self.status = res.data.code;
+                    })
+                }
             },
         }
     }

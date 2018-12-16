@@ -574,20 +574,20 @@ def check_validate(request):
             # class_lecturers = ClassLecturer.objects.filter(lecturer__id= id).select_related('own_class').filter(own_class__time_start__lte= now,own_class__time_end__gte=now)
             class_lecturers = ClassLecturer.objects.filter(lecturer__id=user.id).select_related('own_class').exclude(
                 Q(own_class__time_start__gte=time_end) | Q(own_class__time_end__lte=time_start))
-            if len(class_lecturers) == 0:
-                data = {
-                    "success": False,
-                    "errors": "Class is invalid"
-                }
-                return Response(data)
-            else:
-                all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
-                if len(all_class) == 0:
-                    data = {
-                        "success": False,
-                        "errors": "Class is invalid"
-                    }
-                    return Response(data)
+            # if len(class_lecturers) == 0:
+            #     data = {
+            #         "success": False,
+            #         "errors": "Class is invalid"
+            #     }
+            #     return Response(data)
+            # else:
+            all_class = [item.own_class for item in class_lecturers if item.own_class is not None]
+                # if len(all_class) == 0:
+                #     data = {
+                #         "success": False,
+                #         "errors": "Class is invalid"
+                #     }
+                #     return Response(data)
 
             schedules = []
             info_all_schedule = ClassSession()
